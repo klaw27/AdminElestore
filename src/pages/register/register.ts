@@ -85,6 +85,10 @@ export class RegisterPage {
                   data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
                                             data.toString();
 
+        let loader = this.loadingCtrl.create({
+          content: 'Iniciando sesion...'
+        });
+
         let alert = this.alertCtrl.create({
           title: title,
           subTitle: subTitle,
@@ -93,10 +97,7 @@ export class RegisterPage {
             handler: () => {
                 if(data !== null)
                 {
-                  let loader = this.loadingCtrl.create({
-                    content: 'Iniciando sesion...'
-                  });
-                  loader.present().then(() => {
+                    loader.present().then(() => {
                     loader.dismiss();
                     this.navCtrl.push(InicioPage, {item:this.userModel});
                   });

@@ -67,6 +67,7 @@ export class NegocioAgregarProductoPage {
       closeButtonText: 'Done'
     });
 
+    debugger
     let alert = this.alertCtrl.create({
       title: 'Producto Agregado',
       subTitle: 'Producto Agregado correctamente!',

@@ -54,8 +54,25 @@ export class NegociosPage {
 
   negocioDetalle(biz)
   {
+      if(biz.clientid !== '')  
+      {
+        this.navCtrl.push(NegocioDetallePage, {item:biz})
+      }
+      else{
+        const toast = this.toastController.create({
+          message: 'Agrega un negocio!',
+          showCloseButton: true,
+          position: 'bottom',
+          closeButtonText: 'Ok'
+        });
 
-      this.navCtrl.push(NegocioDetallePage, {item:biz})
+        toast.onDidDismiss(() => {
+          
+        });
+        toast.present().then(() => {
+            
+          });
+      }
   }
 
   getNegocios()
@@ -67,19 +84,20 @@ export class NegociosPage {
       message: 'Connection error...',
       showCloseButton: true,
       position: 'bottom',
-      closeButtonText: 'Ok'
+      closeButtonText: 'Ok',
     });
 
     loader.present().then(() => {
       this.api.obtenerNegocio(this.clientid).subscribe(
         (data: Negocio[]) => {
-          if(data !== null)
+          if(data[0] !== null && data[0] !== undefined)
           {
             this.negocioModel = data[0];
 
             this.imgSourceNeg = data[0].fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
-                this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-                + data[0].fotografia): this.imgSourceNeg;
+            this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+            + data[0].fotografia): this.imgSourceNeg;
+              
 
               if(data.length == 0)
               {
@@ -93,9 +111,9 @@ export class NegociosPage {
           }
           else
           {
-              toast.present().then(() => {
-                toast.dismiss();
-              });
+              // toast.present().then(() => {
+              //   toast.dismiss();
+              // });
           }
         },
          (error: any) =>  {
