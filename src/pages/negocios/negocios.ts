@@ -37,7 +37,6 @@ export class NegociosPage {
               private _sanitizer: DomSanitizer)
   {
     this.userModel =  navParams.get('item');
-    this.clientid = this.userModel.clientid;
   }
 
   ionViewDidLoad() {}
@@ -88,7 +87,7 @@ export class NegociosPage {
     });
 
     loader.present().then(() => {
-      this.api.obtenerNegocio(this.clientid).subscribe(
+      this.api.obtenerNegocio(this.userModel.clientid).subscribe(
         (data: Negocio[]) => {
           if(data[0] !== null && data[0] !== undefined)
           {

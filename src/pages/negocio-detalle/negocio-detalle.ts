@@ -20,8 +20,8 @@ export class NegocioDetallePage {
 
   imgSourceProd:any  = '/assets/imgs/user.png';
 
-  imgSourceBanner:any  = '/assets/imgs/banner.jpg';
-  imgSourceLogo:any  = '/assets/imgs/toks.png';
+  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
+  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
 
   mostrarDiv: boolean = false;
   productos: Producto[];
@@ -36,10 +36,15 @@ export class NegocioDetallePage {
 
       this.negocioModel =  navParams.get('item');
 
-      debugger
-      // this.imgSourceProd = this.negocioModel.fotografia !=='/assets/imgs/user.png' ? 
-      //                   this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-      //                   + this.negocioModel.fotografia): this.imgSourceProd;
+      this.imgSourceBanner = this.negocioModel.fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
+                        this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+                        + this.negocioModel.fotografia): this.imgSourceBanner;
+
+      this.imgSourceLogo = this.negocioModel.fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
+      this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+      + this.negocioModel.fotografia): this.imgSourceLogo;
+
+
       console.log(this.negocioModel);
   }
 
@@ -93,14 +98,13 @@ export class NegocioDetallePage {
   {
     this.api.borrarProducto(prod).subscribe(
       (data: Producto[]) => {
-        debugger
+ 
         if(data !== null)
         {
           this.productos = data;
         }
         else
         {
-          debugger
             // toast.present().then(() => {
             //   toast.dismiss();
             // });

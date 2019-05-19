@@ -20,7 +20,7 @@ export class NuevonegocioPage {
   subcatnegocio: SubCatNegocio[];
 
   imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
-  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
+  imgSourceLogo:any   =  '/assets/imgs/tienda-online-icono-png.png';
 
   cameraImgLogo:any = null;
   cameraImgBanner:any = null;
@@ -93,6 +93,9 @@ export class NuevonegocioPage {
   {
     this.negocio = biz;
     this.negocio.clientid = this.userModel.clientid;
+
+    this.negocio.fotografia = this.cameraImgBanner !== null ?  this.cameraImgBanner: this.imgSourceBanner;
+    this.negocio.fotografia2 = this.cameraImgLogo !== null ? this.cameraImgLogo: this.imgSourceLogo;
 
     let message:string = "Agregando negocio..";
     let loader = this.loadingCtrl.create({

@@ -244,7 +244,7 @@ export class ElstorapiProvider {
     agregarProducto(prod: Producto): Observable<Producto>
     {
       let prodModel =  JSON.stringify(prod);
-      debugger;
+      
       return this.http.post<Producto>(baseurlProductoAgregar, prodModel, httpOptions)
       .pipe(
         tap((data: any) => {
@@ -261,7 +261,7 @@ export class ElstorapiProvider {
     borrarProducto(prod: Producto): Observable<Producto[]>
     {
       let prodModel =  JSON.stringify(prod);
-      debugger;
+      
       return this.http.post<Producto>(baseurlProductoBorrar, prodModel, httpOptions)
       .pipe(
         tap((data: any) => {

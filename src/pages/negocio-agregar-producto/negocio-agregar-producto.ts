@@ -67,26 +67,24 @@ export class NegocioAgregarProductoPage {
       closeButtonText: 'Done'
     });
 
-    debugger
     let alert = this.alertCtrl.create({
       title: 'Producto Agregado',
       subTitle: 'Producto Agregado correctamente!',
       buttons: [{
         text: 'Ok',
       handler: () => {
-        toast.dismiss();
         this.navCtrl.push(NegocioDetallePage, {item:this.negocioModel});
       }
     }]
     });
-debugger;
+
     // console.log(prod,biz)
     this.api.agregarProducto(prod).subscribe(
       (data: Producto) => {
       if(data !== null)
         {
             alert.present().then(() => {
-
+             
             });
 
         }
