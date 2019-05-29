@@ -102,7 +102,6 @@ export class NegocioDetalleEditarPage {
   ionViewWillEnter(){
     this.getCatNegocio();
 
-    this.getSubCatNegocio();
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -262,8 +261,10 @@ export class NegocioDetalleEditarPage {
     });
   }
 
-  getSubCatNegocio()
+  getSubCatNegocio($event, cat)
   {
+    let id_CatNegocio = cat.id_catNegocio;
+    
     let loader = this.loadingCtrl.create({
       content: ''
     });
@@ -276,7 +277,7 @@ export class NegocioDetalleEditarPage {
     });
 
     loader.present().then(() => {
-      this.api.getSubCatNegocio(1).subscribe(
+      this.api.getSubCatNegocio(id_CatNegocio).subscribe(
         (data: SubCatNegocio[]) => {
         if(data !== null)
           {

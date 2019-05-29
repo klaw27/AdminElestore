@@ -65,7 +65,7 @@
                         </ion-item>
 
                         <ion-item class="campo">
-                          <ion-input p class="entrada"laceholder="Codigo Postal"  type="text" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>
+                          <ion-input class="entrada" placeholder="Codigo Postal"  type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>
                         </ion-item>
                         <ion-item *ngIf="(codigopostal.hasError('required') && codigopostal.touched) || (codigopostal.hasError('maxLength'))">
                           <p>
@@ -90,8 +90,9 @@
                                   </ion-item>
                                   <ion-item class="campo">
                                     <ion-label>Categoria</ion-label>
-                                    <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria">
-                                      <ion-option value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>
+                                    <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria"
+                                    onchange="getSubCatNegocio($event, cat)">
+                                      <ion-option (ionSelect)="getSubCatNegocio(this, cat)" value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>
                                     </ion-select>
                                   </ion-item>
                             <!-- <ion-item>

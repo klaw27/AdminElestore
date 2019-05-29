@@ -32,6 +32,7 @@ export class Negocio
     horaapertura:string = "";
     horacierre:string = "";
     categoria:string = "";
+    subcategoria:string = "";
     FK_subcategoria:number = -1;
     descripcion:string = "";
     latitud:string = "";
@@ -64,6 +65,7 @@ export class SubCatNegocio
    nombre:string = "";
    descripcion: string = "";
    fK_CATNEGOCIO:number = -1;
+   id_catNegocio:number = -1;
 
    constructor()
   {
@@ -82,5 +84,6 @@ export class Producto
   cantidad: number = null;
   precio: number = null;
   negocioid: string =  null;
+  complemento: string = null;
 }
 

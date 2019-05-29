@@ -83,8 +83,6 @@ export class NuevonegocioPage {
   ionViewDidLoad() {}
   ionViewWillEnter(){
     this.getCatNegocio();
-
-    this.getSubCatNegocio();
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -128,8 +126,8 @@ export class NuevonegocioPage {
         this.negocio.longitud = resp.coords.longitude.toString();
 
         this.api.agregarNegocio(this.negocio).subscribe(
-          (data: Negocio) => {
-          if(data !== null)
+          (data: any) => {
+          if(data !== null || data === 1)
             {
                 alert.present().then(() => {
 
@@ -192,8 +190,10 @@ export class NuevonegocioPage {
     });
   }
 
-  getSubCatNegocio()
+  getSubCatNegocio($event, cat)
   {
+    let id_CatNegocio = cat.id_catNegocio;
+    
     let loader = this.loadingCtrl.create({
       content: ''
     });
@@ -206,7 +206,7 @@ export class NuevonegocioPage {
     });
 
     loader.present().then(() => {
-      this.api.getSubCatNegocio(1).subscribe(
+      this.api.getSubCatNegocio(id_CatNegocio).subscribe(
         (data: SubCatNegocio[]) => {
         if(data !== null)
           {

@@ -31,21 +31,21 @@
                   </p>
                   </ion-item>
                   <ion-item class="campo"> 
-                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="text"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>
+                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>
                     </ion-item>
                     <ion-item *ngIf="precio.hasError('required') && precio.touched">
                     <p>
                 *Falta Precio
                     </p>
                     </ion-item>
-                    <ion-item class="campo"> 
-                        <ion-input class="entrada" placeholder="Cantidad" [disabled]="editar" type="text"  [(ngModel)]="producto.cantidad" formControlName="cantidad"></ion-input>
+                    <!-- <ion-item class="campo"> 
+                        <ion-input class="entrada" placeholder="Cantidad" [disabled]="editar" type="number"  [(ngModel)]="producto.cantidad" formControlName="cantidad"></ion-input>
                       </ion-item>
                       <ion-item *ngIf="precio.hasError('required') && cantidad.touched">
                       <p>
                   *Falta Cantidad
                       </p>
-                      </ion-item>
+                      </ion-item> -->
                     <ion-item class="campo">
                         <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>
                       </ion-item>
@@ -54,6 +54,9 @@
                     *Falta Descripcion
                         </p>
                         </ion-item>
+                        <ion-item class="campo">
+                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>
+                      </ion-item>
             </ion-list>
           </form>
 

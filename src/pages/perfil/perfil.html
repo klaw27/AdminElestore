@@ -74,7 +74,7 @@
                                     </ion-item>
 
       <ion-item class="campo">
-        <ion-input class="entrada" placeholder="Correo" type="email" [disabled]="isDisabled" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>
+        <ion-input class="entrada" placeholder="Correo" type="email" disabled="true" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>
       </ion-item>
         <ion-item *ngIf="(email.hasError('required') && email.touched)">
         <p>
@@ -83,7 +83,7 @@
         </ion-item>
 
         <ion-item class="campo">
-            <ion-input class="entrada" placeholder="Numero Telefonico" type="number" [disabled]="isDisabled" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>
+            <ion-input class="entrada" placeholder="Numero Telefonico" type="number" disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>
           </ion-item>
             <ion-item *ngIf="numeroTelefonico.hasError('required') && numeroTelefonico.touched ">
             <p>
