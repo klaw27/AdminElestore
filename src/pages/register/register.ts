@@ -75,13 +75,14 @@ export class RegisterPage {
     
     this.api.registrarUsuario(usr).subscribe(
       
-      (data: User) => {
+      (data: any) => {
         
-        title = data !== null? 'Usuario Creado':
+        title = data !== null? 'Confirmar correo':
                 data === null? 'El correo ya esta registrado':
                                           'Ocurrio un error';
 
-        subTitle = data !== null? 'Usuario registrado correctamente!':
+        subTitle = data !== null? `Necesitas confirmar tu correo! 
+                                  Se ha enviado un mensaje al correo que registraste`:
                   data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
                                             data.toString();
 
@@ -95,12 +96,12 @@ export class RegisterPage {
           buttons: [{
               text: 'Ok',
             handler: () => {
-                if(data !== null)
+                if(data === 1)
                 {
-                    loader.present().then(() => {
-                    loader.dismiss();
-                    this.navCtrl.push(InicioPage, {item:this.userModel});
-                  });
+                  //   loader.present().then(() => {
+                  //   loader.dismiss();
+                  //   this.navCtrl.push(InicioPage, {item:this.userModel});
+                  // });
                 }
             }
           }]
