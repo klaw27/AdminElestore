@@ -9,39 +9,25 @@ import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
 import { AngularFireDatabase } from '@angular/fire/database';
 
+// const url = 'ec2-13-57-42-231.us-west-1.compute.amazonaws.com';
+const url = 'https://localhost:5001';
 
 // local
+ const baseurlRegistro: string = url + "/api/registro/usuario";
+ const baseurlActualizar: string = url + "/api/cuenta/actualizar";
+ const baseurlLogin: string = url + "/api/usuario/inicio";
+ const baseurlRecuperar: string = url + "/api/cuenta/recuperar";
 
- const baseurlRegistro: string = "https://localhost:5001/api/registro/usuario";
- const baseurlActualizar: string = "https://localhost:5001/api/cuenta/actualizar";
- const baseurlLogin: string = "https://localhost:5001/api/usuario/inicio";
- const baseurlRecuperar: string = "https://localhost:5001/api/cuenta/recuperar";
+ const baseurlNegocio: string = url + "/api/negocio/agregar";
+ const baseurlNegocioEditar: string = url + "/api/negocio/editar";
+ const baseurlNegocioObtener: string = url + "/api/negocio/obtener";
+ const baseurlCatNegocio: string = url + "/api/negocio/catnegocio";
+ const baseurlSubCatNegocio: string = url + "/api/negocio/subcatnegocio";
 
- const baseurlNegocio: string = "https://localhost:5001/api/negocio/agregar";
- const baseurlNegocioEditar: string = "https://localhost:5001/api/negocio/editar";
- const baseurlNegocioObtener: string = "https://localhost:5001/api/negocio/obtener";
- const baseurlCatNegocio: string = "https://localhost:5001/api/negocio/catnegocio";
- const baseurlSubCatNegocio: string = "https://localhost:5001/api/negocio/subcatnegocio";
+ const baseurlProductoObtener: string = url + "/api/negocio/producto/obtener";
+ const baseurlProductoAgregar: string = url + "/api/negocio/producto/agregar";
 
- const baseurlProductoObtener: string = "https://localhost:5001/api/negocio/producto/obtener";
- const baseurlProductoAgregar: string = "https://localhost:5001/api/negocio/producto/agregar";
-
- const baseurlProductoBorrar: string = "https://localhost:5001/api/negocio/producto/borrar";
-
-// aws
-
-// const baseurlRegistro: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/registro/usuario";
-// const baseurlActualizar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/cuenta/actualizar";
-// const baseurlLogin: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/usuario/inicio";
-// const baseurlRecuperar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/cuenta/recuperar";
-// const baseurlNegocioEditar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/editar";
-// const baseurlNegocio: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/agregar";
-// const baseurlNegocioObtener: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/obtener";
-// const baseurlCatNegocio: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/catnegocio";
-// const baseurlSubCatNegocio: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/subcatnegocio";
-
-// const baseurlProductoObtener: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/producto/obtener";
-// const baseurlProductoAgregar: string = "http://ec2-18-144-23-36.us-west-1.compute.amazonaws.com:5000/api/negocio/producto/agregar";
+ const baseurlProductoBorrar: string = url + "/api/negocio/producto/borrar";
 
 
 const httpOptions = {
