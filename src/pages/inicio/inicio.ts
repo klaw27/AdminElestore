@@ -1,12 +1,12 @@
-import { User } from './../../models/model';
-import { NegociosPage } from './../negocios/negocios';
-import { PedidosPage } from './../pedidos/pedidos';
-import { PerfilPage } from './../perfil/perfil';
+import { User } from '../../models/model';
+import { NegociosPage } from '../negocios/negocios';
+import { PedidosPage } from '../pedidos/pedidos';
+import { PerfilPage } from '../perfil/perfil';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-inicio',
   templateUrl: 'inicio.html',

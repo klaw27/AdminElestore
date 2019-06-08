@@ -5,7 +5,7 @@ import { NegocioAgregarProductoPage } from './../pages/negocio-agregar-producto/
 import { NegocioDetallePage } from './../pages/negocio-detalle/negocio-detalle';
 import { NuevonegocioPage } from './../pages/nuevonegocio/nuevonegocio';
 import { NegociosPage } from './../pages/negocios/negocios';
-import { InicioPage } from './../pages/inicio/inicio';
+import { InicioPage } from '../pages/inicio/inicio';
 import {  HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';

@@ -9,8 +9,9 @@ import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
 import { AngularFireDatabase } from '@angular/fire/database';
 
-// const url = 'ec2-13-57-42-231.us-west-1.compute.amazonaws.com';
-const url = 'https://localhost:5001';
+const url = 'https://ec2-13-57-42-231.us-west-1.compute.amazonaws.com:5001';
+// const url = 'https://localhost:5001';
+
 
 // local
  const baseurlRegistro: string = url + "/api/registro/usuario";

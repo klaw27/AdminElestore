@@ -9,7 +9,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-negocio-detalle-editar',
   templateUrl: 'negocio-detalle-editar.html',

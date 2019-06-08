@@ -9,7 +9,7 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Geolocation } from '@ionic-native/geolocation';
 import { convertFormatToKey } from 'ionic-angular/umd/util/datetime-util';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-nuevonegocio',
   templateUrl: 'nuevonegocio.html',

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Observable } from 'rxjs';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-pedidos-todos',
   templateUrl: 'pedidos-todos.html',

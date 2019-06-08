@@ -7,7 +7,7 @@ import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/fo
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-negocio-agregar-producto',
   templateUrl: 'negocio-agregar-producto.html',

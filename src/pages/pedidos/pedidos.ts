@@ -5,7 +5,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/model';
 import { PedidosTodosPage } from '../pedidos-todos/pedidos-todos';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-pedidos',
   templateUrl: 'pedidos.html',

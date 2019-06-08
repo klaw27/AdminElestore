@@ -6,7 +6,7 @@ import { User } from '../../models/model';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { urlToNavGroupStrings } from 'ionic-angular/umd/navigation/url-serializer';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-recuperarcuenta',
   templateUrl: 'recuperarcuenta.html',

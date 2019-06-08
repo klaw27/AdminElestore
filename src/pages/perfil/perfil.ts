@@ -6,7 +6,7 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-perfil',
   templateUrl: 'perfil.html',

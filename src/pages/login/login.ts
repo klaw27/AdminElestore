@@ -2,12 +2,12 @@ import { RecuperarcuentaPage } from './../recuperarcuenta/recuperarcuenta';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms'
-import { InicioPage } from './../inicio/inicio';
+import { InicioPage } from '../inicio/inicio';
 import { User } from '../../models/model';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { timeInterval } from 'rxjs/operators';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

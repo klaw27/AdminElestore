@@ -8,7 +8,7 @@ import { t } from '@angular/core/src/render3';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-negocios',
   templateUrl: 'negocios.html',

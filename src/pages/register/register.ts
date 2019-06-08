@@ -1,4 +1,4 @@
-import { InicioPage } from './../inicio/inicio';
+import { InicioPage } from '../inicio/inicio';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Toast, ToastController, LoadingController } from 'ionic-angular';
 import { User } from '../../models/model';
@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/fo
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Camera , CameraOptions} from '@ionic-native/camera';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',

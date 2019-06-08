@@ -9,7 +9,7 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgForOf } from '@angular/common';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-negocio-detalle',
   templateUrl: 'negocio-detalle.html',
