@@ -4,14 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import AuthProvider = firebase.auth.AuthProvider;
-import { AngularFireDatabase } from '@angular/fire/database';
 
 const url = 'https://ec2-13-57-42-231.us-west-1.compute.amazonaws.com:5001';
 // const url = 'https://localhost:5001';
-
 
 // local
  const baseurlRegistro: string = url + "/api/registro/usuario";
@@ -43,32 +38,25 @@ export class ElstorapiProvider {
   private user: firebase.User;
   items: Observable<any[]>;
 
-  constructor(public http: HttpClient,
-    public afAuth: AngularFireAuth,
-    public afDB: AngularFireDatabase) {
+  constructor(public http: HttpClient) {
       
-
-      afAuth.authState.subscribe(user => {
-        this.user = user;
-      });
-
   }
 
-  obtenerPedidos():Observable<any[]>
-  {
-     this.items = this.afDB.list('/pedidos').valueChanges();
+  // obtenerPedidos():Observable<any[]>
+  // {
+  //    this.items = this.afDB.list('/pedidos').valueChanges();
 
-     return this.items.pipe(
-      tap((data: any) => {
+  //    return this.items.pipe(
+  //     tap((data: any) => {
 
-      //console.log(data);
-  }),
-  catchError((err) => {
+  //     //console.log(data);
+  // }),
+  // catchError((err) => {
 
-    throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
-        })
-  );;
-  }
+  //   throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+  //       })
+  // );;
+  // }
 
   registrarUsuario(usr: User): Observable<User>
   {

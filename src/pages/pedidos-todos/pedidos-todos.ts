@@ -17,8 +17,8 @@ export class PedidosTodosPage {
     public api: ElstorapiProvider) {
   }
 
-  ionViewDidLoad() {
-    this.items = this.api.obtenerPedidos();
-  }
+  // ionViewDidLoad() {
+  //   this.items = this.api.obtenerPedidos();
+  // }
 
 }

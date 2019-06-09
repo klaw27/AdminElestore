@@ -5,6 +5,9 @@ import { PerfilPage } from '../perfil/perfil';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { ModalController } from 'ionic-angular';
+import { ModalPedidoPage } from '../modal-pedido/modal-pedido';
 
 // @IonicPage()
 @Component({
@@ -17,7 +20,9 @@ export class InicioPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private _sanitizer: DomSanitizer)
+    private _sanitizer: DomSanitizer,
+    private afdb: AngularFireDatabase,
+    public modalCtrl: ModalController)
   {
       this.userModel = navParams.get('item');
 
@@ -28,6 +33,24 @@ export class InicioPage {
       // this.userModel.fotografia = this.userModel.fotografia !== ""? 'data:image/jpeg;base64,' + this.userModel.fotografia: this.userModel.fotografia; 
       // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
       console.log(this.userModel);
+
+      this.afdb.list("pedidos/53").snapshotChanges().subscribe(data=>{
+        data.map(data=>{
+          let info = data.payload.val();
+          this.presentModal(info);
+        });
+      });
+  }
+
+  presentModal(data) {
+    const modal = this.modalCtrl.create(ModalPedidoPage,{
+      data: data
+    },
+    {
+      cssClass: 'loading',
+      showBackdrop: true
+      });
+    modal.present();
   }
 
 

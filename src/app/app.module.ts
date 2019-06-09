@@ -5,7 +5,7 @@ import { NegocioAgregarProductoPage } from './../pages/negocio-agregar-producto/
 import { NegocioDetallePage } from './../pages/negocio-detalle/negocio-detalle';
 import { NuevonegocioPage } from './../pages/nuevonegocio/nuevonegocio';
 import { NegociosPage } from './../pages/negocios/negocios';
-import { InicioPage } from '../pages/inicio/inicio';
+import { InicioPage } from './../pages/inicio/inicio';
 import {  HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
@@ -27,11 +27,12 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PedidosTodosPage } from '../pages/pedidos-todos/pedidos-todos';
 import { PedidosEntregadosPage } from '../pages/pedidos-entregados/pedidos-entregados';
+import { ModalPedidoPage } from '../pages/modal-pedido/modal-pedido';
 
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { fireBaseConfig } from '../config';
 
 
@@ -55,13 +56,15 @@ import { fireBaseConfig } from '../config';
     PedidosTodosPage,
     PedidosEntregadosPage,
     PedidosNoEntregadosPage,
+    ModalPedidoPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({apiKey : 'AIzaSyC49V2M_OYaf8GfKsXN6_Nk-pf50Y5ulcA'}),
-    AngularFireModule.initializeApp(fireBaseConfig.fire)
+    AngularFireModule.initializeApp(fireBaseConfig.fire),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -81,7 +84,8 @@ import { fireBaseConfig } from '../config';
     NegocioDetalleEditarPage,
     PedidosTodosPage,
     PedidosEntregadosPage,
-    PedidosNoEntregadosPage
+    PedidosNoEntregadosPage,
+    ModalPedidoPage
   ],
   providers: [
     StatusBar,
@@ -90,7 +94,6 @@ import { fireBaseConfig } from '../config';
     ElstorapiProvider,
     Geolocation,
     Camera,
-    AngularFireAuth,
     AngularFireDatabase
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

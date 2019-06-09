@@ -1,0 +1,38 @@
+page-modal-pedido {
+
+    .titulo{
+        margin-bottom: 15px;
+    }
+
+    .titulo2{
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+
+    .parrafo{
+        font-size: 1.7rem;
+    }
+
+    .opcion{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 35px;
+    }
+
+    .mensaje{
+        text-align: center;
+        margin-top: 35px;
+    }
+
+    .enviar{
+        margin: 35px auto 0 auto;
+        display: block;
+
+    }
+
+    
+}
+
+.loading{
+    background-color: rgba(0, 0, 0, 0.7);
+}
