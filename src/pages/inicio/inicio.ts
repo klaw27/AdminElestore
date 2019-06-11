@@ -8,6 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ModalController } from 'ionic-angular';
 import { ModalPedidoPage } from '../modal-pedido/modal-pedido';
+import { Storage } from '@ionic/storage';
+
 
 // @IonicPage()
 @Component({
@@ -22,7 +24,8 @@ export class InicioPage {
     public navParams: NavParams,
     private _sanitizer: DomSanitizer,
     private afdb: AngularFireDatabase,
-    public modalCtrl: ModalController)
+    public modalCtrl: ModalController,
+    public storage: Storage)
   {
       this.userModel = navParams.get('item');
 
@@ -56,7 +59,7 @@ export class InicioPage {
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
-
+ 
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -75,4 +78,5 @@ export class InicioPage {
   {
     this.navCtrl.push(NegociosPage,{item:this.userModel});
   }
+
 }

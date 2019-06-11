@@ -1,10 +1,13 @@
+import { InicioPage } from './../inicio/inicio';
 import { RegisterPage } from '../register/register';
 import { LoginPage } from '../login/login';
 
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { User } from '../../models/model';
 
-
+var usuario;
 
 @Component({
   selector: 'page-home',
@@ -12,9 +15,20 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  usuario:User = new User();
+
+  constructor(public navCtrl: NavController,
+    public storage: Storage) {
 
   }
+
+  ionViewDidLoad() {
+  }
+  ionViewWillEnter(){
+    this.get('usuario'); 
+  }
+  ionViewWillLeave(){}
+  ionViewWillUnload(){}
   goToLoginPage()
   {
     this.navCtrl.push(LoginPage);
@@ -22,5 +36,15 @@ export class HomePage {
   goToRegisterPage()
   {
     this.navCtrl.push(RegisterPage)
+  }
+
+  public async get(settingName){
+    return await this.storage.get(`setting:${ settingName }`).then((value) =>{
+      usuario = value;
+      if(usuario != null)
+      {
+        this.navCtrl.push(InicioPage, {item:usuario});
+      }
+    });;
   }
 }

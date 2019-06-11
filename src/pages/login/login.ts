@@ -6,6 +6,7 @@ import { InicioPage } from '../inicio/inicio';
 import { User } from '../../models/model';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { timeInterval } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 
 // @IonicPage()
 @Component({
@@ -27,7 +28,8 @@ export class LoginPage {
               public api: ElstorapiProvider,
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
-              public toastController: ToastController) {
+              public toastController: ToastController,
+              public storage: Storage) {
 
                 this.formGroup = formBuilder.group({
                   email: ['',[Validators.required, Validators.email]],
@@ -76,6 +78,8 @@ export class LoginPage {
             handler: () => {
                 if(data !== null && data[0] !== undefined)
                 {
+                  this.set('usuario',data[0]);
+
                   let loader = this.loadingCtrl.create({
                     content: 'Iniciando sesion...'
                   });
@@ -108,5 +112,7 @@ export class LoginPage {
     this.navCtrl.push(RecuperarcuentaPage)
   }
 
-
+  public set(settingName,value){
+    return this.storage.set(`setting:${ settingName }`,value);
+  }
 }

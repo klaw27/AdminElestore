@@ -34,6 +34,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { fireBaseConfig } from '../config';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { fireBaseConfig } from '../config';
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({apiKey : 'AIzaSyC49V2M_OYaf8GfKsXN6_Nk-pf50Y5ulcA'}),
     AngularFireModule.initializeApp(fireBaseConfig.fire),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
