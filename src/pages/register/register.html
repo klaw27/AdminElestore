@@ -1,15 +1,15 @@
 <ion-header>
-    <ion-toolbar color="secondary">
-      <ion-navbar>
-        <ion-title primary>Pagina de Registro</ion-title>
-          </ion-navbar>
-    </ion-toolbar>
+  <ion-navbar>
+    <ion-title>Pagina de Registro</ion-title>
+  </ion-navbar>
 </ion-header>
+
+
 
 <ion-content padding>
     <div class="user">
         <img class="imgUser" [src]="imgSource">
-        <button color="light" class="camara" ion-button icon-only (click)="capturarFoto()">
+        <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">
             <ion-icon class="icono" name="camera"></ion-icon>
         </button>
     </div>

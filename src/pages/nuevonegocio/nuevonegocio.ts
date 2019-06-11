@@ -2,7 +2,7 @@ import { NegociosPage } from './../negocios/negocios';
 import { CatNegocio, SubCatNegocio } from './../../models/model';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
+import { ActionSheetController, NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { User, Negocio } from '../../models/model';
 import { FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
@@ -18,6 +18,8 @@ export class NuevonegocioPage {
   userModel: User = new User();
   catnegocio: CatNegocio[];
   subcatnegocio: SubCatNegocio[];
+
+  base64:any = 'data:image/jpeg;base64,';
 
   imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
   imgSourceLogo:any   =  '/assets/imgs/tienda-online-icono-png.png';
@@ -47,7 +49,8 @@ export class NuevonegocioPage {
               public loadingCtrl: LoadingController,
               public toastController: ToastController,
               private geolocation: Geolocation,
-              private camera: Camera) {
+              private camera: Camera,
+              public actionSheetCtrl: ActionSheetController) {
 
     this.formGroup = formBuilder.group({
       nombre: ['',[Validators.required]],
@@ -234,7 +237,7 @@ export class NuevonegocioPage {
 
   }
 
-  capturarFotoLogo()
+  capturarFotoLogo(source:any)
   {
     const options: CameraOptions = {
       quality: 100,
@@ -242,15 +245,15 @@ export class NuevonegocioPage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: false,
-      targetHeight: 500,
-      targetWidth: 500
+      sourceType:source
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.cameraImgLogo = 'data:image/jpeg;base64,' + imageData;;
-      if(this.cameraImgLogo !== null)
+      
+      if(imageData !== null)
       {
-        this.imgSourceLogo = this.cameraImgLogo;
+        this.cameraImgLogo =  imageData;
+        this.imgSourceLogo = this.base64 + imageData;
       }
      }, (err) => {
       // Handle error
@@ -258,28 +261,79 @@ export class NuevonegocioPage {
 
   }
 
-  capturarFotoBanner()
+  capturarFotoBanner(source:any)
   {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: false,
-      targetHeight: 500,
-      targetWidth: 500
+      sourceType:source
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.cameraImgBanner = 'data:image/jpeg;base64,' + imageData;;
+      this.cameraImgBanner =  imageData;;
+      
       if(this.cameraImgBanner !== null)
       {
-        this.imgSourceBanner = this.cameraImgBanner;
+        this.cameraImgBanner = this.base64 +imageData;;
+        this.imgSourceBanner =  this.base64 + imageData;
       }
+    
      }, (err) => {
       // Handle error
      });
 
   }
 
+  public presentActionSheetBanner() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select image source',
+      buttons: [
+        {
+          text: 'Abrir galeria',
+          handler: () => {
+            this.capturarFotoBanner(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar Camera',
+          handler: () => {
+            this.capturarFotoBanner(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  public presentActionSheetLogo() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select image source',
+      buttons: [
+        {
+          text: 'Abrir galeria',
+          handler: () => {
+            this.capturarFotoLogo(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar Camera',
+          handler: () => {
+            this.capturarFotoLogo(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 }

@@ -16,8 +16,8 @@
             <form [formGroup]="formGroup">
                 
                 <div class="producto">
-                    <img class="imgPro" src="/assets/imgs/producto.png">
-                    <button color="light" class="camara" ion-button icon-only (click)="capturarFotoProducto()">
+                    <img class="imgPro" [src]="imgSource">
+                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">
                         <ion-icon class="icono" name="camera"></ion-icon>
                     </button>
                 </div>

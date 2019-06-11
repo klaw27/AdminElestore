@@ -1,7 +1,7 @@
 import { NegocioDetallePage } from './../negocio-detalle/negocio-detalle';
 import { Producto } from './../../models/model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
+import { ActionSheetController, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { Negocio } from '../../models/model';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -16,7 +16,7 @@ export class NegocioAgregarProductoPage {
 
   public negocioModel: Negocio = new Negocio();
   public producto: Producto = new  Producto();
-  imgSource:any  = '/assets/imgs/user.png';
+  imgSource:any  = '/assets/imgs/producto.png';
   formGroup: FormGroup;
 
   platillo:AbstractControl;
@@ -26,6 +26,8 @@ export class NegocioAgregarProductoPage {
   cantidad: AbstractControl;
 
   editar: boolean = false;
+  cameraImg:any = null;
+  base64:any = 'data:image/jpeg;base64,'; 
 
   constructor(public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
@@ -34,7 +36,8 @@ export class NegocioAgregarProductoPage {
     public api: ElstorapiProvider,
     public camera: Camera,
     public navParams: NavParams,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    public actionSheetCtrl: ActionSheetController) {
 
       this.formGroup = formBuilder.group({
         platillo: ['',[Validators.required]],
@@ -103,25 +106,56 @@ export class NegocioAgregarProductoPage {
     this.navCtrl.pop();
   }
 
-  capturarFotoProducto()
+  capturarFotoProducto(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
+      sourceType:source,
       targetHeight: 500,
       targetWidth: 500
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.imgSource = imageData;
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.cameraImg =  imageData;;
+      
+      if(this.cameraImg !== null)
+      {
+        this.imgSource = this.base64 + this.cameraImg;
+        this.cameraImg = this.base64 + this.cameraImg;
+      }
      }, (err) => {
       // Handle error
      });
 
+  }
+
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select image source',
+      buttons: [
+        {
+          text: 'Abrir galeria',
+          handler: () => {
+            this.capturarFotoProducto(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar Camera',
+          handler: () => {
+            this.capturarFotoProducto(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }

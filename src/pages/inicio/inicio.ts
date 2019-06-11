@@ -34,24 +34,24 @@ export class InicioPage {
       // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
       console.log(this.userModel);
 
-      this.afdb.list("pedidos/53").snapshotChanges().subscribe(data=>{
-        data.map(data=>{
-          let info = data.payload.val();
-          this.presentModal(info);
-        });
-      });
+      // this.afdb.list("pedidos/53").snapshotChanges().subscribe(data=>{
+      //   data.map(data=>{
+      //     let info = data.payload.val();
+      //     this.presentModal(info);
+      //   });
+      // });
   }
 
-  presentModal(data) {
-    const modal = this.modalCtrl.create(ModalPedidoPage,{
-      data: data
-    },
-    {
-      cssClass: 'loading',
-      showBackdrop: true
-      });
-    modal.present();
-  }
+  // presentModal(data) {
+  //   const modal = this.modalCtrl.create(ModalPedidoPage,{
+  //     data: data
+  //   },
+  //   {
+  //     cssClass: 'loading',
+  //     showBackdrop: true
+  //     });
+  //   modal.present();
+  // }
 
 
   ionViewDidLoad() {}

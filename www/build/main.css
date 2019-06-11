@@ -25973,6 +25973,8 @@ page-negocio-detalle-editar .logo {
   right: 0;
   width: 35%;
   margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 page-negocio-detalle-editar .contLogo {

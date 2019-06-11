@@ -1,6 +1,6 @@
 import { InicioPage } from '../inicio/inicio';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Toast, ToastController, LoadingController } from 'ionic-angular';
+import {  NavController,ActionSheetController, NavParams, AlertController, Toast, ToastController, LoadingController } from 'ionic-angular';
 import { User } from '../../models/model';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
@@ -25,6 +25,7 @@ export class RegisterPage {
   numeroTelefonico:AbstractControl;
 
   imgSource:any  = '/assets/imgs/user.png';
+  base64:any = 'data:image/jpeg;base64,'; 
   cameraImg:any = null;
 
 
@@ -35,7 +36,8 @@ export class RegisterPage {
     public alertCtrl: AlertController,
     public toastController: ToastController,
     public loadingCtrl: LoadingController,
-    public camera: Camera)
+    public camera: Camera,
+    public actionSheetCtrl: ActionSheetController)
     {
       this.formGroup = formBuilder.group({
         email: ['',[Validators.required, Validators.email]],
@@ -71,18 +73,28 @@ export class RegisterPage {
     let title = '';
     let subTitle = '';
     this.userModel = usr;
-    this.userModel.fotografia = this.imgSource;
+    this.userModel.fotografia = this.cameraImg;
     
     this.api.registrarUsuario(usr).subscribe(
       
       (data: any) => {
         
-        title = data !== null? 'Confirmar correo':
+        // title = data !== null? 'Confirmar correo':
+        //         data === null? 'El correo ya esta registrado':
+        //                                   'Ocurrio un error';
+
+        // subTitle = data !== null? `Necesitas confirmar tu correo! 
+        //                           Se ha enviado un mensaje al correo que registraste`:
+        //           data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
+        //                                     data.toString();
+
+             
+        title = data !== null? 'Correo registrado exitosamente!':
                 data === null? 'El correo ya esta registrado':
                                           'Ocurrio un error';
 
-        subTitle = data !== null? `Necesitas confirmar tu correo! 
-                                  Se ha enviado un mensaje al correo que registraste`:
+        subTitle = data !== null? `'Correo registrado exitosamente! 
+                                  Bienvenido`:
                   data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
                                             data.toString();
 
@@ -96,12 +108,13 @@ export class RegisterPage {
           buttons: [{
               text: 'Ok',
             handler: () => {
-                if(data === 1)
+              debugger;
+                if(data === true)
                 {
-                  //   loader.present().then(() => {
-                  //   loader.dismiss();
-                  //   this.navCtrl.push(InicioPage, {item:this.userModel});
-                  // });
+                    loader.present().then(() => {
+                    loader.dismiss();
+                    this.navCtrl.push(InicioPage, {item:this.userModel});
+                  });
                 }
             }
           }]
@@ -122,28 +135,57 @@ export class RegisterPage {
     this.navCtrl.pop();
   }
 
-  capturarFoto()
+  capturarFoto(source:any)
   {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      // saveToPhotoAlbum: true,
-      // targetHeight: 500,
-      // targetWidth: 500
+      sourceType:source,
+      targetHeight: 500,
+      targetWidth: 500
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.cameraImg = 'data:image/jpeg;base64,' + imageData;;
+
+      this.cameraImg =  imageData;;
+      
       if(this.cameraImg !== null)
       {
-        this.imgSource = this.cameraImg;
+        this.imgSource = this.base64 + this.cameraImg;
+        this.cameraImg = this.base64 + this.cameraImg;
       }
-     // let base64Image = 'data:image/jpeg;base64,' + imageData;
+      
      }, (err) => {
       // Handle error
      });
 
+  }
+
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select image source',
+      buttons: [
+        {
+          text: 'Abrir galeria',
+          handler: () => {
+            this.capturarFoto(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar Camera',
+          handler: () => {
+            this.capturarFoto(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

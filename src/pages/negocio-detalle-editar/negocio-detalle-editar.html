@@ -7,12 +7,12 @@
   <ion-content>
       <div class="contBanner">
           <img class=banner [src]="imgSourceBanner" alt="">
-           <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="capturarFotoPortada()">
+           <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">
             <ion-icon class="icono" name="camera"></ion-icon>
           </button>
           <div class="contLogo">
             <img class=logo [src]="imgSourceLogo" alt="">
-            <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="capturarFotoPerfil()">
+            <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">
                 <ion-icon class="icono" name="camera"></ion-icon>
             </button>
           </div>

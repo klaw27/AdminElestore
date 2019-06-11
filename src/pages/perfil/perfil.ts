@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ToastController } from 'ionic-angular';
 import { User } from '../../models/model';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
@@ -25,6 +25,7 @@ export class PerfilPage {
   numeroTelefonico:AbstractControl;
   isDisabled: boolean = true;
 
+  base64:any ='data:image/jpeg;base64,' ;
   imgSource:any  = '/assets/imgs/user.png';
   cameraImg:any = null;
 
@@ -36,7 +37,8 @@ export class PerfilPage {
     public api: ElstorapiProvider,
     public toastController: ToastController,
     public camera: Camera,
-    private _sanitizer: DomSanitizer)
+    private _sanitizer: DomSanitizer,
+    public actionSheetCtrl: ActionSheetController)
     {
       this.formGroup = formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
@@ -117,28 +119,56 @@ export class PerfilPage {
       this.navCtrl.pop();
   }
 
-  capturarFoto()
+  capturarFoto(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: false,
+      sourceType:source,
       targetHeight: 500,
       targetWidth: 500
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.cameraImg = 'data:image/jpeg;base64,' + imageData;;
+      
+      this.cameraImg =  imageData;;
+      
       if(this.cameraImg !== null)
       {
-        this.imgSource = this.cameraImg;
+        this.imgSource = this.base64 + imageData;
+        this.cameraImg =  this.base64 + imageData;
       }
      }, (err) => {
       // Handle error
      });
 
   }
-
+  
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select image source',
+      buttons: [
+        {
+          text: 'Abrir galeria',
+          handler: () => {
+            this.capturarFoto(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar Camera',
+          handler: () => {
+            this.capturarFoto(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 }
