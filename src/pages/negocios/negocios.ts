@@ -86,6 +86,17 @@ export class NegociosPage {
       closeButtonText: 'Ok',
     });
 
+    let alert = this.alertCtrl.create({
+      title: 'Agrega un negocio!',
+      subTitle: `Aun no tienes ninguno negocio registrado!`,
+      buttons: [{
+        text: 'Ok',
+      handler: () => {
+        
+          }
+       }]
+    });
+
     loader.present().then(() => {
       this.api.obtenerNegocio(this.userModel.clientid).subscribe(
         (data: Negocio[]) => {
@@ -94,14 +105,11 @@ export class NegociosPage {
             this.negocioModel = data[0];
 
             this.imgSourceNeg = data[0].fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
-            this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-            + data[0].fotografia): this.imgSourceNeg;
+            this._sanitizer.bypassSecurityTrustResourceUrl(data[0].fotografia): this.imgSourceNeg;
               
-
               if(data.length == 0)
               {
                 this.enableButton = true;
-                console.log(data);
               }
               else
               {
@@ -110,9 +118,9 @@ export class NegociosPage {
           }
           else
           {
-              // toast.present().then(() => {
-              //   toast.dismiss();
-              // });
+            alert.present().then(() => {
+                  
+            });
           }
         },
          (error: any) =>  {
@@ -120,13 +128,10 @@ export class NegociosPage {
           });
          loader.dismiss();
     });
-
-   
   }
 
   borrar(bzz)
   {
 
   }
-
 }

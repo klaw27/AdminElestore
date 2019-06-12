@@ -90,13 +90,11 @@ export class NegocioDetalleEditarPage {
 
       //Banner
       this.negocio.fotografia =   this.negocio.fotografia !== '/assets/imgs/banner.jpg' ? 
-      this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-      +   this.negocio.fotografia): this.imgSourceBanner;
+      this._sanitizer.bypassSecurityTrustResourceUrl(this.negocio.fotografia): this.imgSourceBanner;
 
         //Logo
         this.negocio.fotografia2 =   this.negocio.fotografia2 !== '/assets/imgs/toks.png' ? 
-        this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-        +   this.negocio.fotografia2): this.imgSourceLogo;
+        this._sanitizer.bypassSecurityTrustResourceUrl(this.negocio.fotografia2): this.imgSourceLogo;
 
   }
 

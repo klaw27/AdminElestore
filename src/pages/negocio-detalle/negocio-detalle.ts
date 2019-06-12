@@ -37,12 +37,10 @@ export class NegocioDetallePage {
       this.negocioModel =  navParams.get('item');
 
       this.imgSourceBanner = this.negocioModel.fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
-                        this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-                        + this.negocioModel.fotografia): this.imgSourceBanner;
+                        this._sanitizer.bypassSecurityTrustResourceUrl(this.negocioModel.fotografia): this.imgSourceBanner;
 
       this.imgSourceLogo = this.negocioModel.fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
-      this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-      + this.negocioModel.fotografia): this.imgSourceLogo;
+      this._sanitizer.bypassSecurityTrustResourceUrl(this.negocioModel.fotografia): this.imgSourceLogo;
 
 
       console.log(this.negocioModel);

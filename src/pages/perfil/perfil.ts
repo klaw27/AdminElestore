@@ -63,8 +63,7 @@ export class PerfilPage {
       this.userModel =  navParams.get('item');
 
       this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
-                          this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-                          + this.userModel.fotografia): this.imgSource;
+                          this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.fotografia): this.imgSource;
   }
 
   ionViewDidLoad() {}
