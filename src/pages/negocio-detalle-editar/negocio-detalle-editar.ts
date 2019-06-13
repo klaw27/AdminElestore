@@ -111,9 +111,11 @@ export class NegocioDetalleEditarPage {
     let strclientid = this.negocio.clientid;
     this.negocio = biz;
     this.negocio.clientid = strclientid;
+    this.negocio.fotografia = this.imgSourceBanner;
+    this.negocio.fotografia2 = this.imgSourceLogo;
 
 
-    let message:string = "Agregando negocio..";
+    let message:string = "Editando negocio..";
     let loader = this.loadingCtrl.create({
       content: message
     });
@@ -184,13 +186,15 @@ export class NegocioDetalleEditarPage {
 
     this.camera.getPicture(options).then((imageData) => {
 
-      this.cameraImgLogo = imageData;
+      this.imgSourceLogo = this.base64 + imageData;
+      this.cameraImgLogo = this.base64 + imageData;
+      // this.cameraImgLogo = imageData;
 
-      if(this.cameraImgLogo !== null)
-      {
-        this.imgSourceLogo = this.base64 + imageData;
-        this.cameraImgLogo = this.base64 + imageData;
-      }
+      // if(this.cameraImgLogo !== null)
+      // {
+      //   this.imgSourceLogo = this.base64 + imageData;
+      //   this.cameraImgLogo = this.base64 + imageData;
+      // }
      }, (err) => {
       // Handle error
      });
@@ -209,14 +213,16 @@ export class NegocioDetalleEditarPage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
+
+      this.imgSourceBanner = this.base64 + imageData;
+      this.cameraImgBanner =  this.base64 + imageData;;
+      // this.cameraImgBanner =  imageData;;
       
-      this.cameraImgBanner =  imageData;;
-      
-      if(this.cameraImgBanner !== null)
-      {
-        this.imgSourceBanner = this.base64 + imageData;
-        this.cameraImgBanner =  this.base64 + imageData;;
-      }
+      // if(this.cameraImgBanner !== null)
+      // {
+      //   this.imgSourceBanner = this.base64 + imageData;
+      //   this.cameraImgBanner =  this.base64 + imageData;;
+      // }
 
      }, (err) => {
       // Handle error
@@ -350,5 +356,9 @@ export class NegocioDetalleEditarPage {
       ]
     });
     actionSheet.present();
+  }
+
+  someFunc(e, $event){
+    debugger;
   }
 }

@@ -1,4 +1,4 @@
-import { NegociosPage } from './../negocios/negocios';
+import { NegociosPage } from '../negocios/negocios';
 import { CatNegocio, SubCatNegocio } from './../../models/model';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Component } from '@angular/core';
@@ -95,8 +95,10 @@ export class NuevonegocioPage {
     this.negocio = biz;
     this.negocio.clientid = this.userModel.clientid;
 
-    this.negocio.fotografia = this.cameraImgBanner !== null ?  this.cameraImgBanner: this.imgSourceBanner;
-    this.negocio.fotografia2 = this.cameraImgLogo !== null ? this.cameraImgLogo: this.imgSourceLogo;
+    this.negocio.fotografia = this.imgSourceBanner;
+    this.negocio.fotografia2 = this.imgSourceLogo;
+
+    console.log(this.negocio);
 
     let message:string = "Agregando negocio..";
     let loader = this.loadingCtrl.create({
@@ -109,6 +111,7 @@ export class NuevonegocioPage {
       position: 'bottom',
       closeButtonText: 'Done'
     });
+    
 
     let alert = this.alertCtrl.create({
       title: 'Negocio Agregado',
@@ -127,6 +130,7 @@ export class NuevonegocioPage {
       this.geolocation.getCurrentPosition().then((resp) => {
         this.negocio.latitud = resp.coords.latitude.toString();
         this.negocio.longitud = resp.coords.longitude.toString();
+
 
         this.api.agregarNegocio(this.negocio).subscribe(
           (data: any) => {
@@ -241,7 +245,7 @@ export class NuevonegocioPage {
   {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: false,
@@ -249,12 +253,14 @@ export class NuevonegocioPage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      
-      if(imageData !== null)
-      {
-        this.cameraImgLogo =  imageData;
-        this.imgSourceLogo = this.base64 + imageData;
-      }
+      this.cameraImgLogo =  this.base64 +imageData;
+      this.imgSourceLogo = this.base64 + imageData;
+
+      // if(imageData !== null)
+      // {
+      //   this.cameraImgLogo =  this.base64 +imageData;
+      //   this.imgSourceLogo = this.base64 + imageData;
+      // }
      }, (err) => {
       // Handle error
      });
@@ -273,13 +279,14 @@ export class NuevonegocioPage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.cameraImgBanner =  imageData;;
+      this.cameraImgBanner = this.base64 +imageData;;
+      this.imgSourceBanner =  this.base64 + imageData;
       
-      if(this.cameraImgBanner !== null)
-      {
-        this.cameraImgBanner = this.base64 +imageData;;
-        this.imgSourceBanner =  this.base64 + imageData;
-      }
+      // if(this.cameraImgBanner !== null)
+      // {
+      //   this.cameraImgBanner = this.base64 +imageData;;
+      //   this.imgSourceBanner =  this.base64 + imageData;
+      // }
     
      }, (err) => {
       // Handle error

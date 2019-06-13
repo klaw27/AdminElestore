@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
-const url = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com:5000';
-// const url = 'https://localhost:5001';
+//const url = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com:5000';
+const url = 'https://localhost:5001';
 
 // local
  const baseurlRegistro: string = url + "/api/registro/usuario";
@@ -68,7 +68,7 @@ export class ElstorapiProvider {
       //console.log(data);
   }),
   catchError((err) => {
-
+  console.log(err); 
     throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
         })
   );
@@ -85,7 +85,7 @@ export class ElstorapiProvider {
         //console.log(data);
     }),
     catchError((err) => {
-
+      console.log(err); 
       throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
           })
    );
@@ -101,7 +101,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
             })
           );
@@ -117,7 +117,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
             })
         );
@@ -133,7 +133,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
             })
         );
@@ -149,7 +149,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
             })
         );
@@ -165,7 +165,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
           })
         );
@@ -180,7 +180,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
           })
         );
@@ -195,7 +195,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
           })
         );
@@ -210,7 +210,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
           })
         );
@@ -227,7 +227,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+        console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
             })
         );
@@ -244,7 +244,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-
+    console.log(err); 
         throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
             })
         );

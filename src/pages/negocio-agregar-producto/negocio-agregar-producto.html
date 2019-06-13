@@ -78,7 +78,8 @@
         <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >
           Guardar  Negocio
         </button> -->
-            <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >
+            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->
+                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >
               Guardar Producto
             </button>
         </ion-row>

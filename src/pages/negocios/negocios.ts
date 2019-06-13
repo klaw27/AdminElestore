@@ -1,4 +1,4 @@
-import { NuevonegocioPage } from './../nuevonegocio/nuevonegocio';
+import { NuevonegocioPage } from '../nuevonegocio/nuevonegocio';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { User, Negocio } from '../../models/model';
@@ -106,6 +106,9 @@ export class NegociosPage {
 
             this.imgSourceNeg = data[0].fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
             this._sanitizer.bypassSecurityTrustResourceUrl(data[0].fotografia): this.imgSourceNeg;
+
+            this.imgSource = data[0].fotografia2 !=='/assets/imgs/tienda-online-icono-png.png' ? 
+            this._sanitizer.bypassSecurityTrustResourceUrl(data[0].fotografia2): this.imgSource;
               
               if(data.length == 0)
               {

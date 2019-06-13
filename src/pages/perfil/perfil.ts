@@ -1,10 +1,12 @@
+import { InicioPage } from './../inicio/inicio';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ActionSheetController, ToastController, LoadingController } from 'ionic-angular';
 import { User } from '../../models/model';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Storage } from '@ionic/storage';
 
 // @IonicPage()
 @Component({
@@ -38,7 +40,9 @@ export class PerfilPage {
     public toastController: ToastController,
     public camera: Camera,
     private _sanitizer: DomSanitizer,
-    public actionSheetCtrl: ActionSheetController)
+    public actionSheetCtrl: ActionSheetController,
+    public storage: Storage,
+    public loadingCtrl: LoadingController)
     {
       this.formGroup = formBuilder.group({
       email: ['',[Validators.required, Validators.email]],
@@ -80,6 +84,8 @@ export class PerfilPage {
 
   guardarCambios($event, usr)
   {
+    this.userModel = usr;
+    this.userModel.fotografia = this.imgSource;
 
     const toast = this.toastController.create({
       message: 'Connection error...',
@@ -94,22 +100,38 @@ export class PerfilPage {
       buttons: ['Dismiss']
     });
 
-    this.api.actualizarCuenta(usr).subscribe(
-      (data: User) => {
-         if(data.toString()=== '0')
-         {
-            toast.present().then(() =>{
-              toast.dismiss();
-            });
-         }
-         if(data.toString() === '1')
-         {
-          alert.present().then(() => {
 
-          });
-         }
-      },
-       (error: any) => console.log(error));
+
+    let loader = this.loadingCtrl.create({
+      content: 'Actualizando perfil...'
+    });
+
+
+    loader.present().then(() => {
+      this.api.actualizarCuenta(this.userModel).subscribe(
+        (data: User) => {
+           if(data.toString()=== '0')
+           {
+              toast.present().then(() =>{
+                toast.dismiss();
+                loader.dismiss();
+              });
+           }
+           if(data.toString() === '1')
+           {
+            alert.present().then(() => {
+                this.navCtrl.push(InicioPage, {item:this.userModel})
+                this.remove('usuario').then(() => {
+                    this.set('usuario', this.userModel).then(() => {});
+                    loader.dismiss();
+                });
+            });
+           }
+        },
+         (error: any) => console.log(error));
+         loader.dismiss();
+    });
+ 
 
   }
 
@@ -121,25 +143,24 @@ export class PerfilPage {
   capturarFoto(source:any)
   {
     const options: CameraOptions = {
-      quality: 50,
+      quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: false,
-      sourceType:source,
-      targetHeight: 500,
-      targetWidth: 500
+      sourceType:source
     }
 
     this.camera.getPicture(options).then((imageData) => {
       
-      this.cameraImg =  imageData;;
+      this.imgSource = this.base64 + imageData;
+      this.cameraImg =  this.base64 + imageData;
       
-      if(this.cameraImg !== null)
-      {
-        this.imgSource = this.base64 + imageData;
-        this.cameraImg =  this.base64 + imageData;
-      }
+      // if(this.cameraImg !== null)
+      // {
+      //   this.imgSource = this.base64 + imageData;
+      //   this.cameraImg =  this.base64 + imageData;
+      // }
      }, (err) => {
       // Handle error
      });
@@ -169,5 +190,12 @@ export class PerfilPage {
       ]
     });
     actionSheet.present();
+  }
+
+  public async remove(settingName){
+    return await this.storage.remove(`setting:${ settingName }`);
+  }
+  public set(settingName,value){
+    return this.storage.set(`setting:${ settingName }`,value);
   }
 }

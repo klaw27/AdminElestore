@@ -63,6 +63,9 @@ export class NegocioAgregarProductoPage {
 
   agregarProducto(prod, biz, $event)
   {
+    this.producto = prod;
+    this.producto.fotografia = this.imgSource;
+
     const toast = this.toastController.create({
       message: 'Ocurrio un error...',
       showCloseButton: true,
@@ -82,7 +85,7 @@ export class NegocioAgregarProductoPage {
     });
 
     // console.log(prod,biz)
-    this.api.agregarProducto(prod).subscribe(
+    this.api.agregarProducto(this.producto).subscribe(
       (data: Producto) => {
       if(data !== null)
         {
@@ -123,8 +126,8 @@ export class NegocioAgregarProductoPage {
       
       if(this.cameraImg !== null)
       {
-        this.imgSource = this.base64 + this.cameraImg;
-        this.cameraImg = this.base64 + this.cameraImg;
+        this.imgSource = this.base64 + imageData;
+        this.cameraImg = this.base64 + imageData;
       }
      }, (err) => {
       // Handle error

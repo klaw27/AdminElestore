@@ -1,7 +1,7 @@
 {
-    "WebKit.framework": 1,
-    "CoreLocation.framework": 2,
     "ImageIO.framework": 1,
+    "CoreLocation.framework": 2,
     "AVFoundation.framework": 2,
-    "QuartzCore.framework": 1
+    "QuartzCore.framework": 1,
+    "WebKit.framework": 1
 }

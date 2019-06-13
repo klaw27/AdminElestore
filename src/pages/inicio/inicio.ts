@@ -1,9 +1,10 @@
+import { LoginPage } from './../login/login';
 import { User } from '../../models/model';
 import { NegociosPage } from '../negocios/negocios';
 import { PedidosPage } from '../pedidos/pedidos';
 import { PerfilPage } from '../perfil/perfil';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {  NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ModalController } from 'ionic-angular';
@@ -58,7 +59,7 @@ export class InicioPage {
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
- 
+    
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -78,4 +79,12 @@ export class InicioPage {
     this.navCtrl.push(NegociosPage,{item:this.userModel});
   }
 
+  cerrarSesion($event){
+    this.remove('usuario');
+    this.navCtrl.push(LoginPage);
+  }
+
+  public async remove(settingName){
+    return await this.storage.remove(`setting:${ settingName }`);
+  }
 }

@@ -74,60 +74,77 @@ export class RegisterPage {
     let subTitle = '';
     this.userModel = usr;
     this.userModel.fotografia = this.cameraImg;
-    
-    this.api.registrarUsuario(usr).subscribe(
+
+
+    let loaderReg = this.loadingCtrl.create({
+      content: 'Registrando usuario...'
+    });
+
+    loaderReg.present().then(() => {
+      this.api.registrarUsuario(usr).subscribe(
       
-      (data: any) => {
-        
-        // title = data !== null? 'Confirmar correo':
-        //         data === null? 'El correo ya esta registrado':
-        //                                   'Ocurrio un error';
+        (data: any) => {
+          
+          loaderReg.dismiss();
+          
+          // title = data !== null? 'Confirmar correo':
+          //         data === null? 'El correo ya esta registrado':
+          //                                   'Ocurrio un error';
+  
+          // subTitle = data !== null? `Necesitas confirmar tu correo! 
+          //                           Se ha enviado un mensaje al correo que registraste`:
+          //           data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
+          //                                     data.toString();
+  
+               
+          title = data !== null? 'Correo registrado exitosamente!':
+                  data === null? 'El correo ya esta registrado':
+                                            'Ocurrio un error';
+  
+          subTitle = data !== null? `'Correo registrado exitosamente! 
+                                    Bienvenido`:
+                    data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
+                                              data.toString();
+  
+          let loader = this.loadingCtrl.create({
+            content: 'Iniciando sesion...'
+          });
+  
+  
+          let alert = this.alertCtrl.create({
+            title: title,
+            subTitle: subTitle,
+            buttons: [{
+                text: 'Ok',
+              handler: () => {
+                debugger;
+                  if(data === true)
+                  {
+                    debugger
+                      loader.present().then(() => {
+                      loader.dismiss();
+                      this.navCtrl.push(InicioPage, {item:this.userModel});
+                    });
+                  }
+              }
+            }]
+          });
+  
+          alert.present().then(() => {
+  
+          });
+        },
+         (error: any) => {
+           <any>error
+          }
+        );
 
-        // subTitle = data !== null? `Necesitas confirmar tu correo! 
-        //                           Se ha enviado un mensaje al correo que registraste`:
-        //           data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
-        //                                     data.toString();
+    
+    });
 
-             
-        title = data !== null? 'Correo registrado exitosamente!':
-                data === null? 'El correo ya esta registrado':
-                                          'Ocurrio un error';
-
-        subTitle = data !== null? `'Correo registrado exitosamente! 
-                                  Bienvenido`:
-                  data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
-                                            data.toString();
-
-        let loader = this.loadingCtrl.create({
-          content: 'Iniciando sesion...'
-        });
-
-        let alert = this.alertCtrl.create({
-          title: title,
-          subTitle: subTitle,
-          buttons: [{
-              text: 'Ok',
-            handler: () => {
-              debugger;
-                if(data === true)
-                {
-                    loader.present().then(() => {
-                    loader.dismiss();
-                    this.navCtrl.push(InicioPage, {item:this.userModel});
-                  });
-                }
-            }
-          }]
-        });
-
-        alert.present().then(() => {
-
-        });
-      },
-       (error: any) => {
-         <any>error
-        }
-      );
+   
+    
+  
   }
 
   cancelar()
@@ -142,20 +159,19 @@ export class RegisterPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType:source,
-      targetHeight: 500,
-      targetWidth: 500
+      sourceType:source
     }
 
     this.camera.getPicture(options).then((imageData) => {
 
-      this.cameraImg =  imageData;;
+      this.imgSource = this.base64 + imageData;
+      this.cameraImg = this.base64 + imageData;
       
-      if(this.cameraImg !== null)
-      {
-        this.imgSource = this.base64 + this.cameraImg;
-        this.cameraImg = this.base64 + this.cameraImg;
-      }
+      // if(this.cameraImg !== null)
+      // {
+      //   this.imgSource = this.base64 + imageData;
+      //   this.cameraImg = this.base64 + imageData;
+      // }
       
      }, (err) => {
       // Handle error

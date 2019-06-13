@@ -11,7 +11,7 @@ export class User
   email : string = "";
   numeroTelefonico:string = "";
   negocio: Negocio[];
-  fotografia: string = "";
+  fotografia: any;
 
   constructor()
   {
@@ -38,8 +38,8 @@ export class Negocio
     latitud:string = "";
     longitud:string = "";
     active:number = 1;
-    fotografia:string = "";
-    fotografia2:string = "";
+    fotografia:any;
+    fotografia2:any;
     id_negocio:number = 0;
 
     constructor()
@@ -80,8 +80,7 @@ export class Producto
   descripcion: string = "";
   clave:string = "";
   estatus: number = 1;
-  fotografia: string = "";
-  cantidad: number = null;
+  fotografia:any;
   precio: number = null;
   negocioid: string =  null;
   complemento: string = null;

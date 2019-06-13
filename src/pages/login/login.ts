@@ -63,11 +63,11 @@ export class LoginPage {
       this.api.inicarSesion(usr).subscribe(
         (data: User) => {
 
-          title = data !== null && data[0] !== undefined ? 'Bienvenido':
-                    data === null || data[0] === undefined ? 'Ocurrio un error':
+          title = data !== null ? 'Bienvenido':
+                    data === null ? 'Ocurrio un error':
                     'Usuario/password incorrecto';
-          subTitle = data !== null && data[0] !== undefined ? 'Bienvenido ' + data[0].nombreUsuario:
-                      data === null || data[0] === undefined ? 'Ocurrio un error al tratar de iniciar sesion':
+          subTitle = data !== null ? 'Bienvenido ' + data.nombreUsuario:
+                      data === null ? 'Ocurrio un error al tratar de iniciar sesion':
                       'Usuario/password incorrecto';
 
           let alert = this.alertCtrl.create({
@@ -76,15 +76,15 @@ export class LoginPage {
             buttons: [{
               text: 'Ok',
             handler: () => {
-                if(data !== null && data[0] !== undefined)
+                if(data !== null)
                 {
-                  this.set('usuario',data[0]);
+                  this.set('usuario',data);
 
                   let loader = this.loadingCtrl.create({
                     content: 'Iniciando sesion...'
                   });
                   loader.present().then(() => {
-                    this.navCtrl.push(InicioPage, {item:data[0]});
+                    this.navCtrl.push(InicioPage, {item:data});
                     loader.dismiss();
                   });
                 }
