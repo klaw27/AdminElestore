@@ -565,8 +565,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//const url = 'http://ec2-13-57-42-231.us-west-1.compute.amazonaws.com:5000';
-var url = 'https://localhost:5001';
+var url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
+// const url = 'https://localhost:5001';
 // local
 var baseurlRegistro = url + "/api/registro/usuario";
 var baseurlActualizar = url + "/api/cuenta/actualizar";
@@ -718,9 +718,10 @@ var ElstorapiProvider = /** @class */ (function () {
             throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
         }));
     };
+    var _a;
     ElstorapiProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" ? _a : Object])
     ], ElstorapiProvider);
     return ElstorapiProvider;
 }());
