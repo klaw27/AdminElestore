@@ -257,8 +257,8 @@ export class NegocioDetalleEditarPage {
         (data: CatNegocio[]) => {
         if(data !== null)
           {
-            //
              this.catnegocio = data;
+             loader.dismiss();
           }
         else
         {
@@ -268,7 +268,6 @@ export class NegocioDetalleEditarPage {
         }
         },
          (error: any) => console.log(error));
-         loader.dismiss();
     });
   }
 

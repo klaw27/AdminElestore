@@ -122,10 +122,11 @@ export class RegisterPage {
                   {
                     debugger
                       loader.present().then(() => {
-                      loader.dismiss();
                       this.navCtrl.push(InicioPage, {item:this.userModel});
+                      loader.dismiss();
                     });
                   }
+                  loader.dismiss();
               }
             }]
           });
@@ -138,13 +139,7 @@ export class RegisterPage {
            <any>error
           }
         );
-
-    
     });
-
-   
-    
-  
   }
 
   cancelar()

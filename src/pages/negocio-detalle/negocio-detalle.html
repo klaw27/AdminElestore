@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{negocioModel.nombre}}</ion-title>
+    <ion-title>{{userModel.negocio[0] !== undefined ? userModel.negocio[0].nombre: ''}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
         </div>
       </div>
 
-    <button ion-button clear (click)="verMapa(negocioModel)" >Ubicación y Horario</button>
+    <button ion-button clear (click)="verMapa(userModel.negocio[0])" >Ubicación y Horario</button>
     <h2 class="titNeg">Mis Productos</h2> 
     <ion-list>
       <ion-item-sliding *ngFor="let prod of productos" class="contNeg">
@@ -36,11 +36,11 @@
     </ion-list>
 
 <ion-item-divider >
-    <button ion-button full color="light" (click)="editarNegocio(negocioModel)" >
+    <button ion-button full color="light" (click)="editarNegocio(userModel.negocio[0])" >
         Editar Perfil del Negocio
       </button>
   </ion-item-divider>
-  <ion-fab right bottom (click)="agregarProducto(negocioModel)">
+  <ion-fab right bottom (click)="agregarProducto(userModel.negocio[0])">
       <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>
   </ion-fab> 
 

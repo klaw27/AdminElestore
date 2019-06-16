@@ -1,4 +1,3 @@
-import { NegociosPage } from '../negocios/negocios';
 import { CatNegocio, SubCatNegocio } from './../../models/model';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Component } from '@angular/core';
@@ -8,6 +7,7 @@ import { FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/fo
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Geolocation } from '@ionic-native/geolocation';
 import { convertFormatToKey } from 'ionic-angular/umd/util/datetime-util';
+import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 
 // @IonicPage()
 @Component({
@@ -119,8 +119,8 @@ export class NuevonegocioPage {
       buttons: [{
         text: 'Ok',
       handler: () => {
-
-        this.navCtrl.push(NegociosPage,{item:this.negocio});
+        this.userModel.negocio.push(this.negocio);
+        this.navCtrl.push(NegocioDetallePage,{item:this.userModel});
       }
     }]
     });

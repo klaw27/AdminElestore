@@ -63,12 +63,35 @@ export class LoginPage {
       this.api.inicarSesion(usr).subscribe(
         (data: User) => {
 
-          title = data !== null ? 'Bienvenido':
-                    data === null ? 'Ocurrio un error':
-                    'Usuario/password incorrecto';
-          subTitle = data !== null ? 'Bienvenido ' + data.nombreUsuario:
-                      data === null ? 'Ocurrio un error al tratar de iniciar sesion':
-                      'Usuario/password incorrecto';
+          switch(data)
+          {
+            case undefined:
+              title = 'Ocurrio un error';
+              subTitle = 'Usuario/password incorrecto';
+              break;
+              case null:
+                  title = 'Ocurrio un error';
+                  subTitle = 'Revise su conexion a internet!';
+                break;
+                default:
+                  if(data[0] === undefined)
+                  {
+                    title = 'Ocurrio un error';
+                    subTitle = 'Usuario no registrado!';
+                  }
+                  else{
+                    title = 'Bienvenido';
+                    subTitle = 'Bienvenido ' + data[0].nombreUsuario;
+                  }
+                break;
+          }
+
+          // title = data[0] !== undefined ? 'Bienvenido':
+          //           data[0] !== undefined ? 'Ocurrio un error':
+          //           'Usuario/password incorrecto';
+          // subTitle = data[0] !== undefined ? 'Bienvenido ' + data[0].nombreUsuario:
+          //             data[0] !== undefined ? 'Ocurrio un error al tratar de iniciar sesion':
+          //             'Usuario/password incorrecto';
 
           let alert = this.alertCtrl.create({
             title: title,
@@ -76,24 +99,30 @@ export class LoginPage {
             buttons: [{
               text: 'Ok',
             handler: () => {
-                if(data !== null)
+                if(data[0] !== undefined &&
+                  data !== null &&
+                  data !== undefined)
                 {
-                  this.set('usuario',data);
+                  this.set('usuario',data[0]);
 
                   let loader = this.loadingCtrl.create({
                     content: 'Iniciando sesion...'
                   });
                   loader.present().then(() => {
-                    this.navCtrl.push(InicioPage, {item:data});
                     loader.dismiss();
+                    this.navCtrl.push(InicioPage, {item:data[0]});
                   });
+                }
+                else
+                {
+                  loader.dismiss();
                 }
             }
           }]
           });
 
             alert.present().then(() => {
-
+              loader.dismiss();
             });
         },
          (error: any) => {
@@ -101,10 +130,8 @@ export class LoginPage {
           subTitle = error
           }
           );
-         loader.dismiss();
+         //loader.dismiss();
     });
-        // loader.dismiss();
-        // toast.dismiss();
   }
 
   recuperarCuenta()

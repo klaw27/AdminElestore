@@ -114,7 +114,6 @@ export class PerfilPage {
            {
               toast.present().then(() =>{
                 toast.dismiss();
-                loader.dismiss();
               });
            }
            if(data.toString() === '1')
@@ -122,17 +121,18 @@ export class PerfilPage {
             alert.present().then(() => {
                 this.navCtrl.push(InicioPage, {item:this.userModel})
                 this.remove('usuario').then(() => {
-                    this.set('usuario', this.userModel).then(() => {});
-                    loader.dismiss();
+                    this.set('usuario', this.userModel).then(() => {
+                      this.navCtrl.push(InicioPage,{item:this.userModel})
+                      loader.dismiss();
+                    });
+                    
                 });
             });
            }
+           loader.dismiss();
         },
-         (error: any) => console.log(error));
-         loader.dismiss();
+         (error: any) => console.log(error));  
     });
- 
-
   }
 
   cancelar()

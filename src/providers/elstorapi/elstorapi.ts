@@ -5,8 +5,12 @@ import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
-const url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
-// const url = 'https://localhost:5001';
+// const url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
+
+const url = 'https://localhost:5001';
+
+// const url = 'http://192.168.0.15:5000';
+            
 
 // local
  const baseurlRegistro: string = url + "/api/registro/usuario";
@@ -58,10 +62,10 @@ export class ElstorapiProvider {
   // );;
   // }
 
-  registrarUsuario(usr: User): Observable<User>
+  registrarUsuario(usr: User): Observable<any>
   {
     let userModel =  JSON.stringify(usr);
-    return this.http.post<User>(baseurlRegistro, userModel, httpOptions)
+    return this.http.post<any>(baseurlRegistro, userModel, httpOptions)
     .pipe(
       tap((data: any) => {
 
@@ -75,10 +79,10 @@ export class ElstorapiProvider {
   }
 
 
-  actualizarCuenta(usr: User): Observable<User>
+  actualizarCuenta(usr: User): Observable<any>
   {
     let userModel =  JSON.stringify(usr);
-    return this.http.post<User>(baseurlActualizar, userModel, httpOptions)
+    return this.http.post<any>(baseurlActualizar, userModel, httpOptions)
     .pipe(
       tap((data: any) => {
 
@@ -91,10 +95,10 @@ export class ElstorapiProvider {
    );
 
   }
-    recuperarCuenta(usr: User): Observable<User>
+    recuperarCuenta(usr: User): Observable<any>
     {
       let userModel =  JSON.stringify(usr);
-      return this.http.post<User>(baseurlRecuperar, userModel, httpOptions)
+      return this.http.post<any>(baseurlRecuperar, userModel, httpOptions)
       .pipe(
         tap((data: any) => {
 
@@ -107,10 +111,10 @@ export class ElstorapiProvider {
           );
     }
 
-    inicarSesion(usr: User): Observable<User>
+    inicarSesion(usr: User): Observable<any>
     {
       let userModel =  JSON.stringify(usr);
-      return this.http.post<User>(baseurlLogin, userModel, httpOptions)
+      return this.http.post<any>(baseurlLogin, userModel, httpOptions)
       .pipe(
         tap((data: any) => {
 
@@ -123,10 +127,10 @@ export class ElstorapiProvider {
         );
     }
 
-    agregarNegocio(biz: Negocio): Observable<Negocio>
+    agregarNegocio(biz: Negocio): Observable<any>
     {
       let negocioModel =  JSON.stringify(biz);
-      return this.http.post<Negocio>(baseurlNegocio, negocioModel, httpOptions)
+      return this.http.post<any>(baseurlNegocio, negocioModel, httpOptions)
       .pipe(
         tap((data: any) => {
 
@@ -139,10 +143,10 @@ export class ElstorapiProvider {
         );
     }
 
-    editarNegocio(biz: Negocio): Observable<Negocio>
+    editarNegocio(biz: Negocio): Observable<any>
     {
       let negocioModel =  JSON.stringify(biz);
-      return this.http.post<Negocio>(baseurlNegocioEditar, negocioModel, httpOptions)
+      return this.http.post<any>(baseurlNegocioEditar, negocioModel, httpOptions)
       .pipe(
         tap((data: any) => {
 
@@ -155,10 +159,10 @@ export class ElstorapiProvider {
         );
     }
 
-    obtenerNegocio(clientid: string): Observable<Negocio[]>
+    obtenerNegocio(clientid: any): Observable<any>
     {
       let id =  JSON.stringify(clientid);
-      return this.http.post<Negocio[]>(baseurlNegocioObtener, id, httpOptions)
+      return this.http.post<any>(baseurlNegocioObtener, id, httpOptions)
       .pipe(
         tap((data: any) => {
 
@@ -201,9 +205,9 @@ export class ElstorapiProvider {
         );
     }
 
-    getProductos(negocio: Negocio) : Observable<Producto[]>
+    getProductos(negocio: Negocio) : Observable<any>
     {
-      return this.http.post<Producto[]>(baseurlProductoObtener, negocio, httpOptions)
+      return this.http.post<any>(baseurlProductoObtener, negocio, httpOptions)
       .pipe(
         tap((data: any) => {
 
@@ -216,11 +220,11 @@ export class ElstorapiProvider {
         );
     }
 
-    agregarProducto(prod: Producto): Observable<Producto>
+    agregarProducto(prod: Producto): Observable<any>
     {
       let prodModel =  JSON.stringify(prod);
       
-      return this.http.post<Producto>(baseurlProductoAgregar, prodModel, httpOptions)
+      return this.http.post<any>(baseurlProductoAgregar, prodModel, httpOptions)
       .pipe(
         tap((data: any) => {
 

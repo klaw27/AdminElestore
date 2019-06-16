@@ -1,6 +1,5 @@
-import { LoginPage } from './../login/login';
+import { HomePage } from './../home/home';
 import { User } from '../../models/model';
-import { NegociosPage } from '../negocios/negocios';
 import { PedidosPage } from '../pedidos/pedidos';
 import { PerfilPage } from '../perfil/perfil';
 import { Component } from '@angular/core';
@@ -8,8 +7,8 @@ import {  NavController, NavParams } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ModalController } from 'ionic-angular';
-import { ModalPedidoPage } from '../modal-pedido/modal-pedido';
 import { Storage } from '@ionic/storage';
+import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 
 
 // @IonicPage()
@@ -76,12 +75,12 @@ export class InicioPage {
 
   verNegocios($event)
   {
-    this.navCtrl.push(NegociosPage,{item:this.userModel});
+    this.navCtrl.push(NegocioDetallePage,{item:this.userModel});
   }
 
   cerrarSesion($event){
     this.remove('usuario');
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push(HomePage);
   }
 
   public async remove(settingName){

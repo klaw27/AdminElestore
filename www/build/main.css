@@ -25779,6 +25779,11 @@ page-login .text-input {
   text-align: center;
 }
 
+page-map .titNeg {
+  padding: 0 0 10px 20px;
+  margin: 5px 0 10px 0;
+}
+
 agm-map {
   width: 50%;
   height: 50%;
@@ -25892,6 +25897,10 @@ page-negocio-agregar-producto .entrada {
 
 page-negocio-agregar-producto .text-input {
   text-align: center;
+}
+
+page-negocio-agregar-producto .logo {
+  margin-top: 10%;
 }
 
 page-negocio-detalle .contBanner {
