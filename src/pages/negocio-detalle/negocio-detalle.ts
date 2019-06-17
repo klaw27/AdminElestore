@@ -87,7 +87,7 @@ export class NegocioDetallePage {
 
   agregarProducto(biz)
   {
-    this.navCtrl.push(NegocioAgregarProductoPage, {item:biz});
+    this.navCtrl.push(NegocioAgregarProductoPage, {item:this.userModel});
   }
 
   verMapa(biz)
@@ -98,7 +98,7 @@ export class NegocioDetallePage {
 
   editarNegocio($event, bz)
   {
-    this.navCtrl.push(NegocioDetalleEditarPage, {item:this.userModel.negocio})
+    this.navCtrl.push(NegocioDetalleEditarPage, {item:this.userModel.negocio[0]})
   }
 
   cargarProducto()

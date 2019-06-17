@@ -1,5 +1,5 @@
 import { NegocioDetallePage } from './../negocio-detalle/negocio-detalle';
-import { Producto } from './../../models/model';
+import { Producto, User } from './../../models/model';
 import { Component } from '@angular/core';
 import { ActionSheetController, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { Negocio } from '../../models/model';
@@ -14,7 +14,7 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 })
 export class NegocioAgregarProductoPage {
 
-  public negocioModel: Negocio = new Negocio();
+  public userModel: User = new User();
   public producto: Producto = new  Producto();
   imgSource:any  = '/assets/imgs/producto.png';
   formGroup: FormGroup;
@@ -50,8 +50,9 @@ export class NegocioAgregarProductoPage {
         this.precio = this.formGroup.controls['precio'];
         this.cantidad = this.formGroup.controls['cantidad'];
 
-      this.negocioModel =  navParams.get('item');
-      this.producto.negocioid = this.negocioModel.clientid;
+      this.userModel =  navParams.get('item');
+
+      this.producto.negocioid = this.userModel.clientid;
   }
 
   ionViewDidLoad() {}
@@ -79,7 +80,7 @@ export class NegocioAgregarProductoPage {
       buttons: [{
         text: 'Ok',
       handler: () => {
-        this.navCtrl.push(NegocioDetallePage, {item:this.negocioModel});
+        this.navCtrl.push(NegocioDetallePage, {item:this.userModel});
       }
     }]
     });
