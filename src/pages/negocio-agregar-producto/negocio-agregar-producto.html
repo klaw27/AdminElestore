@@ -22,7 +22,7 @@
                   <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>
                 </ion-item>
                 <ion-item *ngIf="platillo.hasError('required') && platillo.touched">
-                  <p>
+                  <p style="color:red">
               *Falta Nombre del platillo
                   </p>
                   </ion-item>
@@ -30,28 +30,28 @@
                       <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>
                     </ion-item>
                     <ion-item *ngIf="precio.hasError('required') && precio.touched">
-                    <p>
+                      <p style="color:red">
                 *Falta Precio
                     </p>
                     </ion-item>
-                    <!-- <ion-item class="campo"> 
-                        <ion-input class="entrada" placeholder="Cantidad" [disabled]="editar" type="number"  [(ngModel)]="producto.cantidad" formControlName="cantidad"></ion-input>
-                      </ion-item>
-                      <ion-item *ngIf="precio.hasError('required') && cantidad.touched">
-                      <p>
-                  *Falta Cantidad
-                      </p>
-                      </ion-item> -->
                     <ion-item class="campo">
                         <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>
                       </ion-item>
                       <ion-item *ngIf="descripcion.hasError('required') && descripcion.touched">
-                        <p>
+                        <p style="color:red">
                     *Falta Descripcion
                         </p>
                         </ion-item>
                         <ion-item class="campo">
                         <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>
+                      </ion-item>
+                        <ion-item class="campo"> 
+                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>
+                      </ion-item>
+                      <ion-item *ngIf="tiempopreparacion.hasError('required') && tiempopreparacion.touched">
+                      <p style="color:red">
+                  *Falta Cantidad
+                      </p>
                       </ion-item>
             </ion-list>
           </form>

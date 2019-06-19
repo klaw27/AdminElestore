@@ -84,5 +84,6 @@ export class Producto
   precio: number = null;
   negocioid: string =  null;
   complemento: string = null;
+  tiempopreparacion:number = 0;
 }
 
