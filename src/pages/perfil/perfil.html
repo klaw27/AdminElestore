@@ -18,7 +18,7 @@
         <ion-input class="entrada" placeholder="Nombre" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>
       </ion-item>
             <ion-item *ngIf="nombre.hasError('required') && nombre.touched ">
-            <p>
+              <p style="color:red">
       *Valid Name is required
             </p>
             </ion-item>
@@ -27,7 +27,7 @@
                 <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>
               </ion-item>
                 <ion-item *ngIf="apellidoPaterno.hasError('required') && apellidoPaterno.touched ">
-                <p>
+                  <p style="color:red">
           *Valid Name is required
                 </p>
                 </ion-item>
@@ -36,7 +36,7 @@
                     <ion-input class="entrada" placeholder="Apellido Materno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>
                   </ion-item>
                     <ion-item *ngIf="apellidoMaterno.hasError('required') && apellidoMaterno.touched ">
-                    <p>
+                      <p style="color:red">
               *Valid Name is required
                     </p>
                     </ion-item>
@@ -45,7 +45,7 @@
                         <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>
                       </ion-item>
                         <ion-item *ngIf="nombreUsuario.hasError('required') && nombreUsuario.touched ">
-                        <p>
+                          <p style="color:red">
                   *Valid User Name is required
                         </p>
                         </ion-item>
@@ -54,7 +54,7 @@
                             <ion-input class="entrada" placeholder="Contraseña" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.password" formControlName="password"></ion-input>
                           </ion-item>
                           <ion-item *ngIf="password.hasError('required') && password.touched">
-                            <p>
+                            <p style="color:red">
                         *Type a valid password
                             </p>
                             </ion-item>
@@ -63,12 +63,12 @@
                                 <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>
                               </ion-item>
                               <ion-item *ngIf="confirmPassword.hasError('required') && confirmPassword.touched">
-                                <p>
+                                <p style="color:red">
                             *Type a valid password
                                 </p>
                                 </ion-item>
                                 <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">
-                                    <p>
+                                  <p style="color:red">
                                 *Passwords does not match
                                     </p>
                                     </ion-item>
@@ -77,7 +77,7 @@
         <ion-input class="entrada" placeholder="Correo" type="email" disabled="true" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>
       </ion-item>
         <ion-item *ngIf="(email.hasError('required') && email.touched)">
-        <p>
+          <p style="color:red">
   *Valid email is required
         </p>
         </ion-item>
@@ -86,7 +86,7 @@
             <ion-input class="entrada" placeholder="Numero Telefonico" type="number" disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>
           </ion-item>
             <ion-item *ngIf="numeroTelefonico.hasError('required') && numeroTelefonico.touched ">
-            <p>
+              <p style="color:red">
       *Valid phone number is required
             </p>
             </ion-item>

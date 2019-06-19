@@ -23,7 +23,7 @@
         <ion-input class="entrada" placeholder="Nombre del negocio"  type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>
       </ion-item>
         <ion-item *ngIf="nombre.hasError('required') && nombre.touched ">
-        <p>
+          <p style="color:red">
         *Nombre del negocio es obligatorio
         </p>
         </ion-item>
@@ -32,7 +32,7 @@
             <ion-input class="entrada" placeholder="Calle y Numero"  type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>
           </ion-item>
             <ion-item *ngIf="callenumero.hasError('required') && callenumero.touched ">
-            <p>
+              <p style="color:red">
       *Calle y numero es obligatorio
             </p>
             </ion-item>
@@ -41,7 +41,7 @@
                 <ion-input class="entrada" placeholder="Colonia"  type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>
               </ion-item>
                 <ion-item *ngIf="colonia.hasError('required') && colonia.touched ">
-                <p>
+                  <p style="color:red">
           *Colonia es obligatorio
                 </p>
                 </ion-item>
@@ -50,7 +50,7 @@
                     <ion-input class="entrada" placeholder="Ciudad"  type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>
                   </ion-item>
                     <ion-item *ngIf="ciudad.hasError('required') && ciudad.touched ">
-                    <p>
+                      <p style="color:red">
               *Ciudad es obligatorio
                     </p>
                     </ion-item>
@@ -59,7 +59,7 @@
                         <ion-input class="entrada" placeholder="Estado"  type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>
                       </ion-item>
                       <ion-item *ngIf="estado.hasError('required') && estado.touched">
-                        <p>
+                        <p style="color:red">
                     *Estado es obligatorio
                         </p>
                         </ion-item>
@@ -68,7 +68,7 @@
                           <ion-input class="entrada" placeholder="Codigo Postal"  type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>
                         </ion-item>
                         <ion-item *ngIf="(codigopostal.hasError('required') && codigopostal.touched) || (codigopostal.hasError('maxLength'))">
-                          <p>
+                          <p style="color:red">
                       *Codigo Postal es obligatorio / Maximo 5 digitos
                           </p>
                           </ion-item>
@@ -78,7 +78,7 @@
                               <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->
                             </ion-item>
                             <ion-item *ngIf="horaapertura.hasError('required') && horaapertura.touched">
-                              <p>
+                              <p style="color:red">
                           *Hora Apertura es obligatorio
                               </p>
                               </ion-item>
@@ -88,7 +88,7 @@
                                   <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre"></ion-input>
                                 </ion-item>
                                 <ion-item *ngIf="horacierre.hasError('required') && horacierre.touched">
-                                  <p>
+                                  <p style="color:red">
                               *Hora Cierre es obligatorio
                                   </p>
                                   </ion-item>
@@ -106,7 +106,7 @@
                               <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>
                             </ion-item> -->
                             <!-- <ion-item *ngIf="categoria.hasError('required') && categoria.touched">
-                              <p>
+                              <p style="color:red">
                           *Categoria es obligatorio
                               </p>
                               </ion-item> -->
@@ -120,7 +120,7 @@
                                     </ion-select>
                                 </ion-item>
                                 <!-- <ion-item *ngIf="subcategoria.hasError('required') && subcategoria.touched">
-                                  <p>
+                                  <p style="color:red">
                               *Subcategoria es obligatorio
                                   </p>
                                   </ion-item> -->
@@ -129,7 +129,7 @@
                                       <ion-input class="entrada" placeholder="Descripcion"  type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>
                                     </ion-item>
                                     <ion-item *ngIf="descripcion.hasError('required') && descripcion.touched">
-                                      <p>
+                                      <p style="color:red">
                                   *Descripcion es obligatorio
                                       </p>
                                       </ion-item>
