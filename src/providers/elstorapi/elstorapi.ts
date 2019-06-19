@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { User, Negocio, CatNegocio, SubCatNegocio, Producto } from './../../models/model';
+import { User, Negocio, CatNegocio, SubCatNegocio, Producto, CatProducto } from './../../models/model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -28,6 +28,8 @@ const url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
  const baseurlProductoAgregar: string = url + "/api/negocio/producto/agregar";
 
  const baseurlProductoBorrar: string = url + "/api/negocio/producto/borrar";
+
+ const baseurlCatProductoPorIdCatNegocio: string = url + "/api/negocio/producto/obtenercatprod";
 
 
 const httpOptions = {
@@ -242,6 +244,22 @@ export class ElstorapiProvider {
       let prodModel =  JSON.stringify(prod);
       
       return this.http.post<Producto>(baseurlProductoBorrar, prodModel, httpOptions)
+      .pipe(
+        tap((data: any) => {
+
+          //console.log(data);
+      }),
+      catchError((err) => {
+    console.log(err); 
+        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            })
+        );
+    }
+
+    obtnerCatProductoPorIdCatNegocio(negocio: Negocio): Observable<CatProducto[]>
+    {
+      let cat =  JSON.stringify(negocio.categoria);
+      return this.http.post<CatProducto[]>(baseurlCatProductoPorIdCatNegocio, cat, httpOptions)
       .pipe(
         tap((data: any) => {
 

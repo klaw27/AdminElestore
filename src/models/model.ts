@@ -84,6 +84,15 @@ export class Producto
   precio: number = null;
   negocioid: string =  null;
   complemento: string = null;
-  tiempopreparacion:number = 0;
+  tiempopreparacion:number;
+}
+
+export class CatProducto
+{
+  id_catProducto:number = 0;
+  nombre:string = "";
+  descripcion:string = "";
+  clave:number = 0;
+  estatus:number = 0;
 }
 

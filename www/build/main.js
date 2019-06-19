@@ -637,6 +637,7 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
 /* unused harmony export CatNegocio */
 /* unused harmony export SubCatNegocio */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Producto; });
+/* unused harmony export CatProducto */
 var User = /** @class */ (function () {
     function User() {
         this.clientid = "";
@@ -705,9 +706,19 @@ var Producto = /** @class */ (function () {
         this.precio = null;
         this.negocioid = null;
         this.complemento = null;
-        this.tiempopreparacion = 0;
     }
     return Producto;
+}());
+
+var CatProducto = /** @class */ (function () {
+    function CatProducto() {
+        this.id_catProducto = 0;
+        this.nombre = "";
+        this.descripcion = "";
+        this.clave = 0;
+        this.estatus = 0;
+    }
+    return CatProducto;
 }());
 
 //# sourceMappingURL=model.js.map
@@ -775,6 +786,7 @@ var baseurlSubCatNegocio = url + "/api/negocio/subcatnegocio";
 var baseurlProductoObtener = url + "/api/negocio/producto/obtener";
 var baseurlProductoAgregar = url + "/api/negocio/producto/agregar";
 var baseurlProductoBorrar = url + "/api/negocio/producto/borrar";
+var baseurlCatProductoPorIdCatNegocio = url + "/api/negocio/producto/catprod";
 var httpOptions = {
     headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({
         'Content-Type': 'application/json'
@@ -906,6 +918,16 @@ var ElstorapiProvider = /** @class */ (function () {
     ElstorapiProvider.prototype.borrarProducto = function (prod) {
         var prodModel = JSON.stringify(prod);
         return this.http.post(baseurlProductoBorrar, prodModel, httpOptions)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
+            //console.log(data);
+        }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
+            console.log(err);
+            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        }));
+    };
+    ElstorapiProvider.prototype.obtnerCatProductoPorIdCatNegocio = function (negocio) {
+        var cat = JSON.stringify(negocio.categoria);
+        return this.http.post(baseurlCatProductoPorIdCatNegocio, cat, httpOptions)
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
@@ -2186,17 +2208,30 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
             platillo: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
             descripcion: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
             precio: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            cantidad: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
+            cantidad: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            tiempopreparacion: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            catproducto: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
         });
         this.platillo = this.formGroup.controls['platillo'];
         this.descripcion = this.formGroup.controls['descripcion'];
         this.precio = this.formGroup.controls['precio'];
         this.cantidad = this.formGroup.controls['cantidad'];
+        this.tiempopreparacion = this.formGroup.controls['tiempopreparacion'];
+        this.catproducto = this.formGroup.controls['catproducto'];
         this.userModel = navParams.get('item');
         this.producto.negocioid = this.userModel.clientid;
     }
     NegocioAgregarProductoPage.prototype.ionViewDidLoad = function () { };
     NegocioAgregarProductoPage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        this.api.obtnerCatProductoPorIdCatNegocio(this.userModel.negocio[0]).subscribe(function (data) {
+            debugger;
+            if (data !== null) {
+                _this.catProd = data;
+            }
+            else {
+            }
+        }, function (error) { return console.log(error); });
     };
     NegocioAgregarProductoPage.prototype.ionViewWillLeave = function () { };
     NegocioAgregarProductoPage.prototype.ionViewWillUnload = function () { };
@@ -2285,7 +2320,7 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
     };
     NegocioAgregarProductoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
-            selector: 'page-negocio-agregar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Agrega un producto</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="imgSource">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Cantidad\n                      </p>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/,
+            selector: 'page-negocio-agregar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Agrega un producto</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="imgSource">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <!-- <ion-select [(ngModel)]="cat.clave" formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select> -->\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */],

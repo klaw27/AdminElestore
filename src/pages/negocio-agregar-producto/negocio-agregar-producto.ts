@@ -1,5 +1,5 @@
 import { NegocioDetallePage } from './../negocio-detalle/negocio-detalle';
-import { Producto, User } from './../../models/model';
+import { Producto, User, CatNegocio, CatProducto } from './../../models/model';
 import { Component } from '@angular/core';
 import { ActionSheetController, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { Negocio } from '../../models/model';
@@ -16,6 +16,8 @@ export class NegocioAgregarProductoPage {
 
   public userModel: User = new User();
   public producto: Producto = new  Producto();
+  public catProd: CatProducto[];
+
   imgSource:any  = '/assets/imgs/producto.png';
   formGroup: FormGroup;
 
@@ -24,6 +26,8 @@ export class NegocioAgregarProductoPage {
   descripcion: AbstractControl;
   foto:AbstractControl;
   cantidad: AbstractControl;
+  tiempopreparacion: AbstractControl;
+  catproducto: AbstractControl;
 
   editar: boolean = false;
   cameraImg:any = null;
@@ -43,12 +47,16 @@ export class NegocioAgregarProductoPage {
         platillo: ['',[Validators.required]],
         descripcion:['', [Validators.required]],
         precio:['', [Validators.required]],
-        cantidad:['', [Validators.required]]
+        cantidad:['', [Validators.required]],
+        tiempopreparacion:['', [Validators.required]],
+        catproducto:['',[Validators.required]]
         });
         this.platillo = this.formGroup.controls['platillo'];
         this.descripcion = this.formGroup.controls['descripcion'];
         this.precio = this.formGroup.controls['precio'];
         this.cantidad = this.formGroup.controls['cantidad'];
+        this.tiempopreparacion = this.formGroup.controls['tiempopreparacion'];
+        this.catproducto = this.formGroup.controls['catproducto'];
 
       this.userModel =  navParams.get('item');
 
@@ -57,7 +65,7 @@ export class NegocioAgregarProductoPage {
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
-    
+    this.obtnerCatProductoPorIdCatNegocio();
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -162,4 +170,21 @@ export class NegocioAgregarProductoPage {
     actionSheet.present();
   }
 
+  obtnerCatProductoPorIdCatNegocio(){
+
+  this.api.obtnerCatProductoPorIdCatNegocio(this.userModel.negocio[0]).subscribe(
+    (data: CatProducto[]) => {
+
+      debugger;
+      if(data !== null)
+        {
+          this.catProd = data;
+        }
+      else
+      {
+        
+      }
+      },
+       (error: any) => console.log(error));
+  }
 }

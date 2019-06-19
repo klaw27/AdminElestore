@@ -50,8 +50,16 @@
                       </ion-item>
                       <ion-item *ngIf="tiempopreparacion.hasError('required') && tiempopreparacion.touched">
                       <p style="color:red">
-                  *Falta Cantidad
+                  *Falta Tiempo de Preparacion
                       </p>
+                      </ion-item>
+                      <ion-item class="campo">
+                        <ion-label>
+                          Categoria del Producto
+                        </ion-label>
+                        <!-- <ion-select [(ngModel)]="cat.clave" formControlName="catproducto" placeholder="Selecciona una Categoria">
+                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>
+                          </ion-select> -->
                       </ion-item>
             </ion-list>
           </form>
