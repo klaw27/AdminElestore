@@ -72,6 +72,12 @@ export class NegocioAgregarProductoPage {
 
   agregarProducto(prod, biz, $event)
   {
+
+    debugger;
+    if(prod)
+    {
+
+    }
     this.producto = prod;
     this.producto.fotografia = this.imgSource;
 
