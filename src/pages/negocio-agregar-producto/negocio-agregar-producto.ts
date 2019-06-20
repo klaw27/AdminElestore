@@ -170,21 +170,43 @@ export class NegocioAgregarProductoPage {
     actionSheet.present();
   }
 
-  obtnerCatProductoPorIdCatNegocio(){
+  obtnerCatProductoPorIdCatNegocio()
+  {
 
-  this.api.obtnerCatProductoPorIdCatNegocio(this.userModel.negocio[0]).subscribe(
-    (data: CatProducto[]) => {
+    let loader = this.loadingCtrl.create({
+      content: ''
+    });
 
-      debugger;
-      if(data !== null)
-        {
-          this.catProd = data;
-        }
-      else
-      {
-        
-      }
-      },
-       (error: any) => console.log(error));
+    const toast = this.toastController.create({
+      message: 'Error obteniendo categorias...',
+      showCloseButton: true,
+      position: 'bottom',
+      closeButtonText: 'Done'
+    });
+
+    loader.present().then(() => {
+
+    this.api.obtnerCatProductoPorIdCatNegocio(this.userModel.negocio[0]).subscribe(
+        (data: CatProducto[]) => {
+
+          debugger;
+          if(data !== null)
+            {
+              this.catProd = data;
+              loader.dismiss();
+            }
+          else
+          {
+            toast.present().then(() => {
+               toast.dismiss();
+               loader.dismiss();
+           });
+            
+          }
+          },
+          (error: any) => console.log(error));
+          loader.dismiss();
+        });
   }
+  
 }

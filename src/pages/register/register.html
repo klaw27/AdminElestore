@@ -57,18 +57,24 @@
                         </ion-item>
                         <ion-item *ngIf="password.hasError('required') && password.touched">
                             <p style="color:red">
-                      *Contraseña invalida
+                          *Contraseña invalida
+                          </p>
+                          <p *ngIf="(password.touched && userModel?.password?.length < 8)" style="color:red">
+                            *Contraseña debe tener por lo menos 8 caracteres
                           </p>
                           </ion-item>
 
                           <ion-item class="campo">
                               <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>
                             </ion-item>
-                            <ion-item *ngIf="confirmPassword.hasError('required') && confirmPassword.touched">
+                            <ion-item *ngIf="(confirmPassword.hasError('required') && confirmPassword.touched)">
                                 <p style="color:red">
-                          *Contraseña invalida
+                            *Contraseña invalida
                               </p>
-                              </ion-item>
+                              <p *ngIf="(confirmPassword.touched && userModel?.confirmPassword?.length < 8)" style="color:red">
+                                *Contraseña debe tener por lo menos 8 caracteres
+                              </p>
+                            </ion-item>
                               <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">
                                   <p style="color:red">
                               *Contraseñas no son iguales
@@ -80,7 +86,7 @@
     </ion-item>
       <ion-item *ngIf="(email.hasError('required') && email.touched)">
           <p style="color:red">
-*Correo es requerido
+          *Correo es requerido
       </p>
       </ion-item>
 

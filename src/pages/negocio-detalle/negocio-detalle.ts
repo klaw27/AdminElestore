@@ -143,4 +143,9 @@ export class NegocioDetallePage {
          console.log(error)
         });
   }
+
+  editarProducto(prod)
+  {
+    
+  }
 }

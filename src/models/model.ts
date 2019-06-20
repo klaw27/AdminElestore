@@ -85,6 +85,7 @@ export class Producto
   negocioid: string =  null;
   complemento: string = null;
   tiempopreparacion:number;
+  id_catProducto:number;
 }
 
 export class CatProducto
