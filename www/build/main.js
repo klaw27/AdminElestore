@@ -2745,12 +2745,20 @@ var NegocioEditarProductoPage = /** @class */ (function () {
             loader.dismiss();
         });
     };
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     NegocioEditarProductoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-negocio-editar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Editar Producto</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="imgSource">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="complemento"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <ion-select [(ngModel)]="producto.id_catProducto " formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Otra Categoria\n                        </ion-label>\n                        <ion-input class="entrada" placeholder="Otra Categoria" [disabled]="editar" type="text"  [(ngModel)]="producto.otracategoria" formControlName="otracategoria"></ion-input>\n                      </ion-item>\n                         <ion-item *ngIf="otracategoria.hasError(\'required\') && otracategoria.touched">\n                      <p style="color:red">\n                      *Falta Otra Categoria\n                      </p>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" ? _g : Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]) === "function" ? _h : Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" ? _j : Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" ? _k : Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]])
     ], NegocioEditarProductoPage);
     return NegocioEditarProductoPage;
 }());
@@ -3234,7 +3242,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 // @IonicPage()
 var NegocioDetallePage = /** @class */ (function () {
     //producto model
-    function NegocioDetallePage(navCtrl, navParams, geolocation, api, _sanitizer, alertCtrl, toastController) {
+    function NegocioDetallePage(navCtrl, navParams, geolocation, api, _sanitizer, alertCtrl, toastController, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.geolocation = geolocation;
@@ -3242,6 +3250,7 @@ var NegocioDetallePage = /** @class */ (function () {
         this._sanitizer = _sanitizer;
         this.alertCtrl = alertCtrl;
         this.toastController = toastController;
+        this.loadingCtrl = loadingCtrl;
         this.userModel = new __WEBPACK_IMPORTED_MODULE_4__models_model__["c" /* User */]();
         this.imgSourceProd = '/assets/imgs/user.png';
         this.imgSourceBanner = '/assets/imgs/tienda-online-icono-png.png';
@@ -3299,15 +3308,72 @@ var NegocioDetallePage = /** @class */ (function () {
     };
     NegocioDetallePage.prototype.cargarProducto = function () {
         var _this = this;
+        var message = "Obteniendo Productos..";
+        var loader = this.loadingCtrl.create({
+            content: message
+        });
         try {
-            this.api.getProductos(this.userModel.negocio[0]).subscribe(function (data) {
+            loader.present().then(function () {
+                _this.api.getProductos(_this.userModel.negocio[0]).subscribe(function (data) {
+                    if (data !== null) {
+                        loader.dismiss();
+                        _this.productos = data;
+                    }
+                    else {
+                        loader.dismiss();
+                        _this.toast = _this.toastController.create({
+                            message: 'Ocurrio un error obteniendo productos..',
+                            showCloseButton: true,
+                            position: 'bottom',
+                            closeButtonText: 'Ok'
+                        });
+                        _this.toast.onDidDismiss(function () {
+                        });
+                        _this.toast.present().then(function () {
+                        });
+                    }
+                }, function (error) {
+                    _this.toast = _this.toastController.create({
+                        message: error,
+                        showCloseButton: true,
+                        position: 'bottom',
+                        closeButtonText: 'Ok'
+                    });
+                    _this.toast.onDidDismiss(function () {
+                    });
+                    _this.toast.present().then(function () {
+                    });
+                });
+            });
+        }
+        catch (error) {
+            debugger;
+        }
+    };
+    NegocioDetallePage.prototype.borrarProducto = function (prod) {
+        var _this = this;
+        var message = "Borrando Producto..";
+        var loader = this.loadingCtrl.create({
+            content: message
+        });
+        loader.present().then(function () {
+            _this.api.borrarProducto(prod).subscribe(function (data) {
                 if (data !== null) {
                     _this.productos = data;
+                    loader.dismiss();
                 }
                 else {
-                    // toast.present().then(() => {
-                    //   toast.dismiss();
-                    // });
+                    loader.dismiss();
+                    _this.toast = _this.toastController.create({
+                        message: 'Ocurrio un error borrando el producto...',
+                        showCloseButton: true,
+                        position: 'bottom',
+                        closeButtonText: 'Ok'
+                    });
+                    _this.toast.onDidDismiss(function () {
+                    });
+                    _this.toast.present().then(function () {
+                    });
                 }
             }, function (error) {
                 _this.toast = _this.toastController.create({
@@ -3320,33 +3386,6 @@ var NegocioDetallePage = /** @class */ (function () {
                 });
                 _this.toast.present().then(function () {
                 });
-            });
-        }
-        catch (error) {
-            debugger;
-        }
-    };
-    NegocioDetallePage.prototype.borrarProducto = function (prod) {
-        var _this = this;
-        this.api.borrarProducto(prod).subscribe(function (data) {
-            if (data !== null) {
-                _this.productos = data;
-            }
-            else {
-                // toast.present().then(() => {
-                //   toast.dismiss();
-                // });
-            }
-        }, function (error) {
-            _this.toast = _this.toastController.create({
-                message: error,
-                showCloseButton: true,
-                position: 'bottom',
-                closeButtonText: 'Ok'
-            });
-            _this.toast.onDidDismiss(function () {
-            });
-            _this.toast.present().then(function () {
             });
         });
     };
@@ -3363,7 +3402,8 @@ var NegocioDetallePage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_9__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser__["c" /* DomSanitizer */],
             __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["l" /* ToastController */]])
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["g" /* LoadingController */]])
     ], NegocioDetallePage);
     return NegocioDetallePage;
 }());

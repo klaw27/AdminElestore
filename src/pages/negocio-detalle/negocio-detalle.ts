@@ -4,7 +4,7 @@ import { NegocioDetalleEditarPage } from './../negocio-detalle-editar/negocio-de
 import { MapPage } from './../map/map';
 import { Negocio, Producto, User } from './../../models/model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { NegocioAgregarProductoPage } from '../negocio-agregar-producto/negocio-agregar-producto';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
@@ -40,7 +40,8 @@ export class NegocioDetallePage {
     public api: ElstorapiProvider,
     private _sanitizer: DomSanitizer,
     private alertCtrl: AlertController,
-    public toastController: ToastController) {
+    public toastController: ToastController,
+    public loadingCtrl: LoadingController) {
 
       this.userModel =  navParams.get('item');
       this.userModel === undefined ? this.userModel = new User(): this.userModel;
@@ -108,20 +109,99 @@ export class NegocioDetallePage {
 
   cargarProducto()
   {
+    let message:string = "Obteniendo Productos..";
+    let loader = this.loadingCtrl.create({
+      content: message
+    });
+  
     try {
-      this.api.getProductos(this.userModel.negocio[0]).subscribe(
+      loader.present().then(() =>{
+        this.api.getProductos(this.userModel.negocio[0]).subscribe(
+          (data: Producto[]) => {
+            if(data !== null)
+            {
+              loader.dismiss();
+              this.productos = data;
+            }
+            else
+            {
+              loader.dismiss();
+
+              this.toast = this.toastController.create({
+                message: 'Ocurrio un error obteniendo productos..',
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+              });
+               
+                  
+                this.toast.onDidDismiss(() => {
+                  
+                });
+                this.toast.present().then(() => {
+                    
+                  });
+            }
+          },
+           (error: any) =>  {
+            this.toast = this.toastController.create({
+              message: error,
+              showCloseButton: true,
+              position: 'bottom',
+              closeButtonText: 'Ok'
+            });
+             
+                
+              this.toast.onDidDismiss(() => {
+                
+              });
+              this.toast.present().then(() => {
+                  
+                });
+            });
+      });
+  
+
+      
+    } catch (error) {
+      debugger
+    }
+    
+  }
+
+  borrarProducto(prod)
+  {
+    let message:string = "Borrando Producto..";
+    let loader = this.loadingCtrl.create({
+      content: message
+    });
+
+    loader.present().then(() =>{
+      this.api.borrarProducto(prod).subscribe(
         (data: Producto[]) => {
+   
           if(data !== null)
           {
-           
-          
             this.productos = data;
+            loader.dismiss();
           }
           else
           {
-              // toast.present().then(() => {
-              //   toast.dismiss();
-              // });
+            loader.dismiss();
+            this.toast = this.toastController.create({
+              message: 'Ocurrio un error borrando el producto...',
+              showCloseButton: true,
+              position: 'bottom',
+              closeButtonText: 'Ok'
+            });
+             
+                
+              this.toast.onDidDismiss(() => {
+                
+              });
+              this.toast.present().then(() => {
+                  
+                });
           }
         },
          (error: any) =>  {
@@ -140,45 +220,8 @@ export class NegocioDetallePage {
                 
               });
           });
-      
-    } catch (error) {
-      debugger
-    }
+    }); 
     
-  }
-
-  borrarProducto(prod)
-  {
-    this.api.borrarProducto(prod).subscribe(
-      (data: Producto[]) => {
- 
-        if(data !== null)
-        {
-          this.productos = data;
-        }
-        else
-        {
-            // toast.present().then(() => {
-            //   toast.dismiss();
-            // });
-        }
-      },
-       (error: any) =>  {
-        this.toast = this.toastController.create({
-          message: error,
-          showCloseButton: true,
-          position: 'bottom',
-          closeButtonText: 'Ok'
-        });
-         
-            
-          this.toast.onDidDismiss(() => {
-            
-          });
-          this.toast.present().then(() => {
-              
-            });
-        });
   }
 
   editarProducto(prod)
