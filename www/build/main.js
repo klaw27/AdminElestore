@@ -5,14 +5,14 @@ webpackJsonp([1],{
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NuevonegocioPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_detalle_negocio_detalle__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_detalle_negocio_detalle__ = __webpack_require__(66);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -93,7 +93,7 @@ var NuevonegocioPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: message
         });
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Connection error...',
             showCloseButton: true,
             position: 'bottom',
@@ -120,8 +120,8 @@ var NuevonegocioPage = /** @class */ (function () {
                         });
                     }
                     else {
-                        toast.present().then(function () {
-                            toast.dismiss();
+                        _this.toast.present().then(function () {
+                            _this.toast.dismiss();
                         });
                     }
                 }, function (error) { return console.log(error); });
@@ -140,7 +140,7 @@ var NuevonegocioPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: ''
         });
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Error obteniendo categorias...',
             showCloseButton: true,
             position: 'bottom',
@@ -153,11 +153,22 @@ var NuevonegocioPage = /** @class */ (function () {
                     _this.catnegocio = data;
                 }
                 else {
-                    toast.present().then(function () {
-                        toast.dismiss();
+                    _this.toast.present().then(function () {
+                        _this.toast.dismiss();
                     });
                 }
-            }, function (error) { return console.log(error); });
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
             loader.dismiss();
         });
     };
@@ -167,7 +178,7 @@ var NuevonegocioPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: ''
         });
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Error obteniendo subcategorias...',
             showCloseButton: true,
             position: 'bottom',
@@ -180,12 +191,23 @@ var NuevonegocioPage = /** @class */ (function () {
                     _this.subcatnegocio = data;
                 }
                 else {
-                    toast.present().then(function () {
-                        toast.dismiss();
+                    _this.toast.present().then(function () {
+                        _this.toast.dismiss();
                     });
                 }
-            }, function (error) { return console.log(error); });
-            loader.dismiss();
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                loader.dismiss();
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
         });
     };
     NuevonegocioPage.prototype.subCatChange = function ($event, cat) {
@@ -205,13 +227,17 @@ var NuevonegocioPage = /** @class */ (function () {
         this.camera.getPicture(options).then(function (imageData) {
             _this.cameraImgLogo = _this.base64 + imageData;
             _this.imgSourceLogo = _this.base64 + imageData;
-            // if(imageData !== null)
-            // {
-            //   this.cameraImgLogo =  this.base64 +imageData;
-            //   this.imgSourceLogo = this.base64 + imageData;
-            // }
         }, function (err) {
-            // Handle error
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
         });
     };
     NuevonegocioPage.prototype.capturarFotoBanner = function (source) {
@@ -228,13 +254,17 @@ var NuevonegocioPage = /** @class */ (function () {
             _this.cameraImgBanner = _this.base64 + imageData;
             ;
             _this.imgSourceBanner = _this.base64 + imageData;
-            // if(this.cameraImgBanner !== null)
-            // {
-            //   this.cameraImgBanner = this.base64 +imageData;;
-            //   this.imgSourceBanner =  this.base64 + imageData;
-            // }
         }, function (err) {
-            // Handle error
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
         });
     };
     NuevonegocioPage.prototype.presentActionSheetBanner = function () {
@@ -313,13 +343,13 @@ var NuevonegocioPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__register_register__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_model__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_model__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -429,10 +459,10 @@ var HomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recuperarcuenta_recuperarcuenta__ = __webpack_require__(358);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__inicio_inicio__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__inicio_inicio__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(91);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -628,7 +658,7 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 27:
+/***/ 26:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -698,14 +728,15 @@ var SubCatNegocio = /** @class */ (function () {
 
 var Producto = /** @class */ (function () {
     function Producto() {
-        this.id_producto = 0;
-        this.nombre = "";
-        this.descripcion = "";
         this.clave = "";
+        this.complemento = "";
+        this.descripcion = "";
         this.estatus = 1;
-        this.precio = null;
-        this.negocioid = null;
-        this.complemento = null;
+        this.id_producto = 0;
+        this.negocioid = "";
+        this.nombre = "";
+        this.otracategoria = "";
+        this.precio = 0;
     }
     return Producto;
 }());
@@ -725,39 +756,14 @@ var CatProducto = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 290:
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"../pages/modal-pedido/modal-pedido.module": [
-		654,
-		0
-	]
-};
-function webpackAsyncContext(req) {
-	var ids = map[req];
-	if(!ids)
-		return Promise.reject(new Error("Cannot find module '" + req + "'."));
-	return __webpack_require__.e(ids[1]).then(function() {
-		return __webpack_require__(ids[0]);
-	});
-};
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = 290;
-module.exports = webpackAsyncContext;
-
-/***/ }),
-
-/***/ 30:
+/***/ 28:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ElstorapiProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(355);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_operators__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_operators__ = __webpack_require__(27);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -787,6 +793,7 @@ var baseurlProductoObtener = url + "/api/negocio/producto/obtener";
 var baseurlProductoAgregar = url + "/api/negocio/producto/agregar";
 var baseurlProductoBorrar = url + "/api/negocio/producto/borrar";
 var baseurlCatProductoPorIdCatNegocio = url + "/api/negocio/producto/obtenercatprod";
+var baseurlProductoEditar = url + "/api/negocio/producto/editar";
 var httpOptions = {
     headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({
         'Content-Type': 'application/json'
@@ -814,8 +821,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.actualizarCuenta = function (usr) {
@@ -825,7 +831,7 @@ var ElstorapiProvider = /** @class */ (function () {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
             console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.recuperarCuenta = function (usr) {
@@ -834,8 +840,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.inicarSesion = function (usr) {
@@ -844,8 +849,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.agregarNegocio = function (biz) {
@@ -854,8 +858,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.editarNegocio = function (biz) {
@@ -864,8 +867,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.obtenerNegocio = function (clientid) {
@@ -874,8 +876,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.getCatNegocio = function () {
@@ -883,8 +884,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.getSubCatNegocio = function (id) {
@@ -892,8 +892,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.getProductos = function (negocio) {
@@ -901,8 +900,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.agregarProducto = function (prod) {
@@ -911,8 +909,16 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
+        }));
+    };
+    ElstorapiProvider.prototype.editarProducto = function (prod) {
+        var prodModel = JSON.stringify(prod);
+        return this.http.post(baseurlProductoEditar, prodModel, httpOptions)
+            .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
+            //console.log(data);
+        }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.borrarProducto = function (prod) {
@@ -921,8 +927,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider.prototype.obtnerCatProductoPorIdCatNegocio = function (negocio) {
@@ -931,8 +936,7 @@ var ElstorapiProvider = /** @class */ (function () {
             .pipe(Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["tap"])(function (data) {
             //console.log(data);
         }), Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_operators__["catchError"])(function (err) {
-            console.log(err);
-            throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+            throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         }));
     };
     ElstorapiProvider = __decorate([
@@ -946,20 +950,45 @@ var ElstorapiProvider = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 290:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"../pages/modal-pedido/modal-pedido.module": [
+		655,
+		0
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 290;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
 /***/ 353:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioDetalleEditarPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__negocios_negocios__ = __webpack_require__(356);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_geolocation__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_geolocation__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_platform_browser__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1051,7 +1080,7 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: message
         });
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Connection error...',
             showCloseButton: true,
             position: 'bottom',
@@ -1077,15 +1106,35 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
                         });
                     }
                     else {
-                        toast.present().then(function () {
-                            toast.dismiss();
+                        _this.toast.present().then(function () {
+                            _this.toast.dismiss();
                         });
                     }
-                }, function (error) { return console.log(error); });
+                }, function (error) {
+                    _this.toast = _this.toastController.create({
+                        message: error,
+                        showCloseButton: true,
+                        position: 'bottom',
+                        closeButtonText: 'Ok'
+                    });
+                    _this.toast.onDidDismiss(function () {
+                    });
+                    _this.toast.present().then(function () {
+                    });
+                });
                 loader.dismiss();
             }).catch(function (error) {
-                console.log('Error getting location', error);
                 loader.dismiss();
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
             });
         });
     };
@@ -1102,14 +1151,17 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
         this.camera.getPicture(options).then(function (imageData) {
             _this.imgSourceLogo = _this.base64 + imageData;
             _this.cameraImgLogo = _this.base64 + imageData;
-            // this.cameraImgLogo = imageData;
-            // if(this.cameraImgLogo !== null)
-            // {
-            //   this.imgSourceLogo = this.base64 + imageData;
-            //   this.cameraImgLogo = this.base64 + imageData;
-            // }
         }, function (err) {
-            // Handle error
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
         });
     };
     NegocioDetalleEditarPage.prototype.capturarFotoBanner = function (source) {
@@ -1125,15 +1177,17 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
         this.camera.getPicture(options).then(function (imageData) {
             _this.imgSourceBanner = _this.base64 + imageData;
             _this.cameraImgBanner = _this.base64 + imageData;
-            ;
-            // this.cameraImgBanner =  imageData;;
-            // if(this.cameraImgBanner !== null)
-            // {
-            //   this.imgSourceBanner = this.base64 + imageData;
-            //   this.cameraImgBanner =  this.base64 + imageData;;
-            // }
         }, function (err) {
-            // Handle error
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
         });
     };
     NegocioDetalleEditarPage.prototype.editarNegocio = function () {
@@ -1147,7 +1201,7 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: ''
         });
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Error obteniendo categorias...',
             showCloseButton: true,
             position: 'bottom',
@@ -1160,11 +1214,22 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
                     loader.dismiss();
                 }
                 else {
-                    toast.present().then(function () {
-                        toast.dismiss();
+                    _this.toast.present().then(function () {
+                        _this.toast.dismiss();
                     });
                 }
-            }, function (error) { return console.log(error); });
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
         });
     };
     NegocioDetalleEditarPage.prototype.getSubCatNegocio = function ($event, cat) {
@@ -1173,7 +1238,7 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: ''
         });
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Error obteniendo subcategorias...',
             showCloseButton: true,
             position: 'bottom',
@@ -1186,11 +1251,22 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
                     _this.subcatnegocio = data;
                 }
                 else {
-                    toast.present().then(function () {
-                        toast.dismiss();
+                    _this.toast.present().then(function () {
+                        _this.toast.dismiss();
                     });
                 }
-            }, function (error) { return console.log(error); });
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
             loader.dismiss();
         });
     };
@@ -1277,10 +1353,10 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nuevonegocio_nuevonegocio__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_elstorapi_elstorapi__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__negocio_detalle_negocio_detalle__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_elstorapi_elstorapi__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__negocio_detalle_negocio_detalle__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(30);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1414,13 +1490,13 @@ var NegociosPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(56);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1608,9 +1684,9 @@ var RegisterPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__login_login__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1677,7 +1753,16 @@ var RecuperarcuentaPage = /** @class */ (function () {
             alert.present().then(function () {
             });
         }, function (error) {
-            error;
+            _this.toast = _this.toastController.create({
+                message: error,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
         });
     };
     RecuperarcuentaPage.prototype.cancelar = function () {
@@ -1711,7 +1796,7 @@ var RecuperarcuentaPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pedidos_todos_pedidos_todos__ = __webpack_require__(362);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1812,7 +1897,7 @@ var PedidosEntregadosPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosTodosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_elstorapi_elstorapi__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_elstorapi_elstorapi__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1852,14 +1937,14 @@ var PedidosTodosPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PerfilPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(91);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1967,7 +2052,7 @@ var PerfilPage = /** @class */ (function () {
         var _this = this;
         this.userModel = usr;
         this.userModel.fotografia = this.imgSource;
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Connection error...',
             showCloseButton: true,
             position: 'bottom',
@@ -1984,8 +2069,8 @@ var PerfilPage = /** @class */ (function () {
         loader.present().then(function () {
             _this.api.actualizarCuenta(_this.userModel).subscribe(function (data) {
                 if (data.toString() === '0') {
-                    toast.present().then(function () {
-                        toast.dismiss();
+                    _this.toast.present().then(function () {
+                        _this.toast.dismiss();
                     });
                 }
                 if (data.toString() === '1') {
@@ -2000,7 +2085,18 @@ var PerfilPage = /** @class */ (function () {
                     });
                 }
                 loader.dismiss();
-            }, function (error) { return console.log(error); });
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
         });
     };
     PerfilPage.prototype.cancelar = function () {
@@ -2025,7 +2121,16 @@ var PerfilPage = /** @class */ (function () {
             //   this.cameraImg =  this.base64 + imageData;
             // }
         }, function (err) {
-            // Handle error
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
         });
     };
     PerfilPage.prototype.presentActionSheet = function () {
@@ -2094,11 +2199,11 @@ var PerfilPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_elstorapi_elstorapi__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_elstorapi_elstorapi__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(90);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2163,13 +2268,13 @@ var MapPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioAgregarProductoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__negocio_detalle_negocio_detalle__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_model__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__negocio_detalle_negocio_detalle__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_model__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2210,7 +2315,8 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
             precio: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
             cantidad: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
             tiempopreparacion: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            catproducto: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
+            catproducto: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            otracategoria: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
         });
         this.platillo = this.formGroup.controls['platillo'];
         this.descripcion = this.formGroup.controls['descripcion'];
@@ -2218,6 +2324,7 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
         this.cantidad = this.formGroup.controls['cantidad'];
         this.tiempopreparacion = this.formGroup.controls['tiempopreparacion'];
         this.catproducto = this.formGroup.controls['catproducto'];
+        this.otracategoria = this.formGroup.controls['otracategoria'];
         this.userModel = navParams.get('item');
         this.producto.negocioid = this.userModel.clientid;
     }
@@ -2229,12 +2336,21 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
     NegocioAgregarProductoPage.prototype.ionViewWillUnload = function () { };
     NegocioAgregarProductoPage.prototype.agregarProducto = function (prod, biz, $event) {
         var _this = this;
-        debugger;
-        if (prod) {
+        if (prod.id_catProducto === undefined
+            || (prod.complemento === null || prod.complemento.replace(/ /g, "").toLowerCase() == "")
+            || (prod.descripcion === null || prod.descripcion.replace(/ /g, "").toLowerCase() == "")) {
+            this.toast = this.toastController.create({
+                message: 'Todos los campos son obligatorios!',
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Done'
+            });
+            this.toast.present();
+            return;
         }
         this.producto = prod;
         this.producto.fotografia = this.imgSource;
-        var toast = this.toastController.create({
+        this.toast = this.toastController.create({
             message: 'Ocurrio un error...',
             showCloseButton: true,
             position: 'bottom',
@@ -2257,11 +2373,22 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
                 });
             }
             else {
-                toast.present().then(function () {
-                    toast.dismiss();
+                _this.toast.present().then(function () {
+                    _this.toast.dismiss();
                 });
             }
-        }, function (error) { return console.log(error); });
+        }, function (error) {
+            _this.toast = _this.toastController.create({
+                message: error,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
+        });
     };
     NegocioAgregarProductoPage.prototype.cancelar = function () {
         this.navCtrl.pop();
@@ -2269,13 +2396,11 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
     NegocioAgregarProductoPage.prototype.capturarFotoProducto = function (source) {
         var _this = this;
         var options = {
-            quality: 50,
+            quality: 100,
             destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
-            sourceType: source,
-            targetHeight: 500,
-            targetWidth: 500
+            sourceType: source
         };
         this.camera.getPicture(options).then(function (imageData) {
             _this.cameraImg = imageData;
@@ -2285,7 +2410,16 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
                 _this.cameraImg = _this.base64 + imageData;
             }
         }, function (err) {
-            // Handle error
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
         });
     };
     NegocioAgregarProductoPage.prototype.presentActionSheet = function () {
@@ -2337,13 +2471,24 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
                         loader.dismiss();
                     });
                 }
-            }, function (error) { return console.log(error); });
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
             loader.dismiss();
         });
     };
     NegocioAgregarProductoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
-            selector: 'page-negocio-agregar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Agrega un producto</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="imgSource">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <ion-select [(ngModel)]="producto.id_catProducto " formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/,
+            selector: 'page-negocio-agregar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Agrega un producto</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="imgSource">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <ion-select [(ngModel)]="producto.id_catProducto " formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Otra Categoria\n                        </ion-label>\n                        <ion-input class="entrada" placeholder="Otra Categoria" [disabled]="editar" type="text"  [(ngModel)]="producto.otracategoria" formControlName="otracategoria"></ion-input>\n                      </ion-item>\n                         <ion-item *ngIf="otracategoria.hasError(\'required\') && otracategoria.touched">\n                      <p style="color:red">\n                      *Falta Otra Categoria\n                      </p>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */],
@@ -2362,7 +2507,259 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 378:
+/***/ 366:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioEditarProductoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__negocio_detalle_negocio_detalle__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(30);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var NegocioEditarProductoPage = /** @class */ (function () {
+    function NegocioEditarProductoPage(formBuilder, loadingCtrl, toastController, alertCtrl, api, camera, navParams, _sanitizer, navCtrl, actionSheetCtrl) {
+        this.formBuilder = formBuilder;
+        this.loadingCtrl = loadingCtrl;
+        this.toastController = toastController;
+        this.alertCtrl = alertCtrl;
+        this.api = api;
+        this.camera = camera;
+        this.navParams = navParams;
+        this._sanitizer = _sanitizer;
+        this.navCtrl = navCtrl;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_2__models_model__["c" /* User */]();
+        this.producto = new __WEBPACK_IMPORTED_MODULE_2__models_model__["b" /* Producto */]();
+        this.imgSource = '/assets/imgs/producto.png';
+        this.editar = false;
+        this.cameraImg = null;
+        this.base64 = 'data:image/jpeg;base64,';
+        this.formGroup = formBuilder.group({
+            platillo: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]],
+            descripcion: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]],
+            precio: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]],
+            cantidad: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]],
+            tiempopreparacion: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]],
+            catproducto: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]],
+            otracategoria: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]],
+            complemento: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required]]
+        });
+        this.platillo = this.formGroup.controls['platillo'];
+        this.descripcion = this.formGroup.controls['descripcion'];
+        this.precio = this.formGroup.controls['precio'];
+        this.cantidad = this.formGroup.controls['cantidad'];
+        this.tiempopreparacion = this.formGroup.controls['tiempopreparacion'];
+        this.catproducto = this.formGroup.controls['catproducto'];
+        this.otracategoria = this.formGroup.controls['otracategoria'];
+        this.complemento = this.formGroup.controls['complemento'];
+        this.userModel = navParams.get('item');
+        this.producto = navParams.get('item2');
+        this.imgSource = this.producto.fotografia !== '/assets/imgs/producto.png' ?
+            this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia) : this.imgSource;
+        debugger;
+    }
+    NegocioEditarProductoPage.prototype.ionViewDidLoad = function () { };
+    NegocioEditarProductoPage.prototype.ionViewWillEnter = function () {
+        this.obtnerCatProductoPorIdCatNegocio();
+    };
+    NegocioEditarProductoPage.prototype.ionViewWillLeave = function () { };
+    NegocioEditarProductoPage.prototype.ionViewWillUnload = function () { };
+    NegocioEditarProductoPage.prototype.agregarProducto = function (prod, biz, $event) {
+        var _this = this;
+        if (prod.id_catProducto === undefined
+            || (prod.complemento === null || prod.complemento.replace(/ /g, "").toLowerCase() == "")
+            || (prod.descripcion === null || prod.descripcion.replace(/ /g, "").toLowerCase() == "")) {
+            this.toast = this.toastController.create({
+                message: 'Todos los campos son obligatorios!',
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Done'
+            });
+            this.toast.present();
+            return;
+        }
+        var message = "Editando producto...";
+        var loader = this.loadingCtrl.create({
+            content: message
+        });
+        this.producto = prod;
+        this.producto.fotografia = this.imgSource;
+        this.toast = this.toastController.create({
+            message: 'Ocurrio un error...',
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Done'
+        });
+        var alert = this.alertCtrl.create({
+            title: 'Producto Editado',
+            subTitle: 'Producto Editado correctamente!',
+            buttons: [{
+                    text: 'Ok',
+                    handler: function () {
+                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__negocio_detalle_negocio_detalle__["a" /* NegocioDetallePage */], { item: _this.userModel });
+                    }
+                }]
+        });
+        loader.present().then(function () {
+            _this.api.editarProducto(_this.producto).subscribe(function (data) {
+                if (data !== null) {
+                    alert.present().then(function () {
+                        loader.dismiss();
+                    });
+                }
+                else {
+                    _this.toast.present().then(function () {
+                        loader.dismiss();
+                        _this.toast.dismiss();
+                    });
+                }
+            }, function (error) {
+                loader.dismiss();
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
+        });
+    };
+    NegocioEditarProductoPage.prototype.cancelar = function () {
+        this.navCtrl.pop();
+    };
+    NegocioEditarProductoPage.prototype.capturarFotoProducto = function (source) {
+        var _this = this;
+        var options = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            sourceType: source
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            _this.cameraImg = imageData;
+            ;
+            if (_this.cameraImg !== null) {
+                _this.imgSource = _this.base64 + imageData;
+                _this.cameraImg = _this.base64 + imageData;
+            }
+        }, function (err) {
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
+        });
+    };
+    NegocioEditarProductoPage.prototype.presentActionSheet = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: 'Select image source',
+            buttons: [
+                {
+                    text: 'Abrir galeria',
+                    handler: function () {
+                        _this.capturarFotoProducto(_this.camera.PictureSourceType.PHOTOLIBRARY);
+                    }
+                },
+                {
+                    text: 'Usar Camera',
+                    handler: function () {
+                        _this.capturarFotoProducto(_this.camera.PictureSourceType.CAMERA);
+                    }
+                },
+                {
+                    text: 'Cancelar',
+                    role: 'cancel'
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+    NegocioEditarProductoPage.prototype.obtnerCatProductoPorIdCatNegocio = function () {
+        var _this = this;
+        var loader = this.loadingCtrl.create({
+            content: ''
+        });
+        var toast = this.toastController.create({
+            message: 'Error obteniendo categorias...',
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Done'
+        });
+        loader.present().then(function () {
+            _this.api.obtnerCatProductoPorIdCatNegocio(_this.userModel.negocio[0]).subscribe(function (data) {
+                debugger;
+                if (data !== null) {
+                    _this.catProd = data;
+                    loader.dismiss();
+                }
+                else {
+                    toast.present().then(function () {
+                        toast.dismiss();
+                        loader.dismiss();
+                    });
+                }
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
+            loader.dismiss();
+        });
+    };
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    NegocioEditarProductoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-negocio-editar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Editar Producto</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="imgSource">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="complemento"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <ion-select [(ngModel)]="producto.id_catProducto " formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Otra Categoria\n                        </ion-label>\n                        <ion-input class="entrada" placeholder="Otra Categoria" [disabled]="editar" type="text"  [(ngModel)]="producto.otracategoria" formControlName="otracategoria"></ion-input>\n                      </ion-item>\n                         <ion-item *ngIf="otracategoria.hasError(\'required\') && otracategoria.touched">\n                      <p style="color:red">\n                      *Falta Otra Categoria\n                      </p>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" ? _g : Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]) === "function" ? _h : Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" ? _j : Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" ? _k : Object])
+    ], NegocioEditarProductoPage);
+    return NegocioEditarProductoPage;
+}());
+
+//# sourceMappingURL=negocio-editar-producto.js.map
+
+/***/ }),
+
+/***/ 379:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2505,13 +2902,13 @@ var ModalPedidoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 379:
+/***/ 380:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(380);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(506);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -2519,7 +2916,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 505:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2528,41 +2925,43 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_map_map__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(365);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_negocio_detalle_negocio_detalle__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_negocio_detalle_negocio_detalle__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_nuevonegocio_nuevonegocio__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_negocios_negocios__ = __webpack_require__(356);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_inicio_inicio__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_inicio_inicio__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common_http__ = __webpack_require__(355);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(366);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__ = __webpack_require__(367);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__agm_core__ = __webpack_require__(646);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(367);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__ = __webpack_require__(368);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__agm_core__ = __webpack_require__(647);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(652);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_home_home__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_login_login__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_register_register__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_recuperarcuenta_recuperarcuenta__ = __webpack_require__(358);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_elstorapi_elstorapi__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_password_validator__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_elstorapi_elstorapi__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_password_validator__ = __webpack_require__(653);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_perfil_perfil__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_pedidos_pedidos__ = __webpack_require__(360);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_camera__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_camera__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_pedidos_todos_pedidos_todos__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_pedidos_entregados_pedidos_entregados__ = __webpack_require__(361);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__ = __webpack_require__(379);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_fire__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_fire_database__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__config__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__config__ = __webpack_require__(654);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_storage__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_negocio_editar_producto_negocio_editar_producto__ = __webpack_require__(366);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2620,7 +3019,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_26__pages_pedidos_todos_pedidos_todos__["a" /* PedidosTodosPage */],
                 __WEBPACK_IMPORTED_MODULE_27__pages_pedidos_entregados_pedidos_entregados__["a" /* PedidosEntregadosPage */],
                 __WEBPACK_IMPORTED_MODULE_0__pages_pedidos_no_entregados_pedidos_no_entregados__["a" /* PedidosNoEntregadosPage */],
-                __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__["a" /* ModalPedidoPage */]
+                __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__["a" /* ModalPedidoPage */],
+                __WEBPACK_IMPORTED_MODULE_33__pages_negocio_editar_producto_negocio_editar_producto__["a" /* NegocioEditarProductoPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__["a" /* BrowserModule */],
@@ -2654,7 +3054,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_26__pages_pedidos_todos_pedidos_todos__["a" /* PedidosTodosPage */],
                 __WEBPACK_IMPORTED_MODULE_27__pages_pedidos_entregados_pedidos_entregados__["a" /* PedidosEntregadosPage */],
                 __WEBPACK_IMPORTED_MODULE_0__pages_pedidos_no_entregados_pedidos_no_entregados__["a" /* PedidosNoEntregadosPage */],
-                __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__["a" /* ModalPedidoPage */]
+                __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__["a" /* ModalPedidoPage */],
+                __WEBPACK_IMPORTED_MODULE_33__pages_negocio_editar_producto_negocio_editar_producto__["a" /* NegocioEditarProductoPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__["a" /* StatusBar */],
@@ -2675,15 +3076,15 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 651:
+/***/ 652:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(367);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(366);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(368);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(367);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(207);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2721,12 +3122,12 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 652:
+/***/ 653:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConfirmEqualValidatorDirective; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_forms__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2772,7 +3173,7 @@ var ConfirmEqualValidatorDirective = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 653:
+/***/ 654:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2796,17 +3197,196 @@ var fireBaseConfig = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioDetallePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nuevonegocio_nuevonegocio__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__map_map__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_elstorapi_elstorapi__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__negocio_editar_producto_negocio_editar_producto__ = __webpack_require__(366);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+// @IonicPage()
+var NegocioDetallePage = /** @class */ (function () {
+    //producto model
+    function NegocioDetallePage(navCtrl, navParams, geolocation, api, _sanitizer, alertCtrl, toastController) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.geolocation = geolocation;
+        this.api = api;
+        this._sanitizer = _sanitizer;
+        this.alertCtrl = alertCtrl;
+        this.toastController = toastController;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_4__models_model__["c" /* User */]();
+        this.imgSourceProd = '/assets/imgs/user.png';
+        this.imgSourceBanner = '/assets/imgs/tienda-online-icono-png.png';
+        this.imgSourceLogo = '/assets/imgs/tienda-online-icono-png.png';
+        this.mostrarDiv = false;
+        this.userModel = navParams.get('item');
+        this.userModel === undefined ? this.userModel = new __WEBPACK_IMPORTED_MODULE_4__models_model__["c" /* User */]() : this.userModel;
+    }
+    NegocioDetallePage.prototype.ionViewDidLoad = function () { };
+    NegocioDetallePage.prototype.ionViewWillEnter = function () {
+        var _this = this;
+        if (this.userModel.negocio[0] !== undefined) {
+            this.imgSourceBanner = this.userModel.negocio[0].fotografia !== '/assets/imgs/tienda-online-icono-png.png' ?
+                this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia) : this.imgSourceBanner;
+            this.imgSourceLogo = this.userModel.negocio[0].fotografia2 !== '/assets/imgs/tienda-online-icono-png.png' ?
+                this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia2) : this.imgSourceLogo;
+            this.cargarProducto();
+        }
+        else {
+            var alert_1 = this.alertCtrl.create({
+                title: 'Agrega un negocio',
+                subTitle: "Aun no tienes ninguno negocio registrado!",
+                buttons: [
+                    {
+                        text: 'Ok',
+                        handler: function () {
+                            alert_1.dismiss();
+                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_1__nuevonegocio_nuevonegocio__["a" /* NuevonegocioPage */], { item: _this.userModel });
+                        },
+                    },
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        handler: function () {
+                            alert_1.dismiss();
+                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
+                        }
+                    }
+                ]
+            });
+            alert_1.present().then(function () {
+            });
+        }
+    };
+    NegocioDetallePage.prototype.ionViewWillLeave = function () { };
+    NegocioDetallePage.prototype.ionViewWillUnload = function () { };
+    NegocioDetallePage.prototype.agregarProducto = function (biz) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__negocio_agregar_producto_negocio_agregar_producto__["a" /* NegocioAgregarProductoPage */], { item: this.userModel });
+    };
+    NegocioDetallePage.prototype.verMapa = function (biz) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__map_map__["a" /* MapPage */], { item: biz });
+    };
+    NegocioDetallePage.prototype.editarNegocio = function ($event, bz) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__negocio_detalle_editar_negocio_detalle_editar__["a" /* NegocioDetalleEditarPage */], { item: this.userModel.negocio[0] });
+    };
+    NegocioDetallePage.prototype.cargarProducto = function () {
+        var _this = this;
+        try {
+            this.api.getProductos(this.userModel.negocio[0]).subscribe(function (data) {
+                if (data !== null) {
+                    _this.productos = data;
+                }
+                else {
+                    // toast.present().then(() => {
+                    //   toast.dismiss();
+                    // });
+                }
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
+        }
+        catch (error) {
+            debugger;
+        }
+    };
+    NegocioDetallePage.prototype.borrarProducto = function (prod) {
+        var _this = this;
+        this.api.borrarProducto(prod).subscribe(function (data) {
+            if (data !== null) {
+                _this.productos = data;
+            }
+            else {
+                // toast.present().then(() => {
+                //   toast.dismiss();
+                // });
+            }
+        }, function (error) {
+            _this.toast = _this.toastController.create({
+                message: error,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
+        });
+    };
+    NegocioDetallePage.prototype.editarProducto = function (prod) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_11__negocio_editar_producto_negocio_editar_producto__["a" /* NegocioEditarProductoPage */], { item: this.userModel, item2: prod });
+    };
+    NegocioDetallePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_5__angular_core__["n" /* Component */])({
+            selector: 'page-negocio-detalle',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle/negocio-detalle.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>{{userModel.negocio[0] !== undefined ? userModel.negocio[0].nombre: \'\'}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div class="contBanner">\n        <img class=banner [src]="imgSourceBanner" alt="">\n        <div class="contLogo">\n          <img class=logo [src]="imgSourceLogo" alt="">\n        </div>\n      </div>\n\n    <button ion-button clear (click)="verMapa(userModel.negocio[0])" >Ubicación y Horario</button>\n    <h2 class="titNeg">Mis Productos</h2> \n    <ion-list>\n      <ion-item-sliding *ngFor="let prod of productos" class="contNeg">\n          <ion-item>\n            <ion-thumbnail item-start class="logoProd">\n              <img [src]=" prod.fotografia !== \'\'? prod.fotografia: imgSourceProd" class="logimg">\n            </ion-thumbnail>\n            <h2 class="nombreNeg">{{prod.nombre}}</h2>\n            <div class="contenedorEstrellas">\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n              </div>\n          </ion-item>\n            <ion-item-options>\n              <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>\n              <button ion-button color="gray" (click)="editarProducto(prod)" > Editar</button>\n          </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n\n<ion-item-divider >\n    <button ion-button full color="light" (click)="editarNegocio(userModel.negocio[0])" >\n        Editar Perfil del Negocio\n      </button>\n  </ion-item-divider>\n  <ion-fab right bottom (click)="agregarProducto(userModel.negocio[0])">\n      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle/negocio-detalle.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_9__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
+            __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser__["c" /* DomSanitizer */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["l" /* ToastController */]])
+    ], NegocioDetallePage);
+    return NegocioDetallePage;
+}());
+
+//# sourceMappingURL=negocio-detalle.js.map
+
+/***/ }),
+
+/***/ 67:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InicioPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_model__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_model__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pedidos_pedidos__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__perfil_perfil__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__negocio_detalle_negocio_detalle__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__negocio_detalle_negocio_detalle__ = __webpack_require__(66);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2940,158 +3520,7 @@ var InicioPage = /** @class */ (function () {
 
 //# sourceMappingURL=inicio.js.map
 
-/***/ }),
-
-/***/ 90:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioDetallePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nuevonegocio_nuevonegocio__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(353);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__map_map__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(365);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_elstorapi_elstorapi__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser__ = __webpack_require__(31);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-
-// @IonicPage()
-var NegocioDetallePage = /** @class */ (function () {
-    //producto model
-    function NegocioDetallePage(navCtrl, navParams, geolocation, api, _sanitizer, alertCtrl) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.geolocation = geolocation;
-        this.api = api;
-        this._sanitizer = _sanitizer;
-        this.alertCtrl = alertCtrl;
-        this.userModel = new __WEBPACK_IMPORTED_MODULE_4__models_model__["c" /* User */]();
-        this.imgSourceProd = '/assets/imgs/user.png';
-        this.imgSourceBanner = '/assets/imgs/tienda-online-icono-png.png';
-        this.imgSourceLogo = '/assets/imgs/tienda-online-icono-png.png';
-        this.mostrarDiv = false;
-        this.userModel = navParams.get('item');
-        this.userModel === undefined ? this.userModel = new __WEBPACK_IMPORTED_MODULE_4__models_model__["c" /* User */]() : this.userModel;
-    }
-    NegocioDetallePage.prototype.ionViewDidLoad = function () { };
-    NegocioDetallePage.prototype.ionViewWillEnter = function () {
-        var _this = this;
-        if (this.userModel.negocio[0] !== undefined) {
-            this.imgSourceBanner = this.userModel.negocio[0].fotografia !== '/assets/imgs/tienda-online-icono-png.png' ?
-                this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia) : this.imgSourceBanner;
-            this.imgSourceLogo = this.userModel.negocio[0].fotografia2 !== '/assets/imgs/tienda-online-icono-png.png' ?
-                this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia2) : this.imgSourceLogo;
-            this.cargarProducto();
-        }
-        else {
-            var alert_1 = this.alertCtrl.create({
-                title: 'Agrega un negocio',
-                subTitle: "Aun no tienes ninguno negocio registrado!",
-                buttons: [
-                    {
-                        text: 'Ok',
-                        handler: function () {
-                            alert_1.dismiss();
-                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_1__nuevonegocio_nuevonegocio__["a" /* NuevonegocioPage */], { item: _this.userModel });
-                        },
-                    },
-                    {
-                        text: 'Cancelar',
-                        role: 'cancel',
-                        handler: function () {
-                            alert_1.dismiss();
-                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
-                        }
-                    }
-                ]
-            });
-            alert_1.present().then(function () {
-            });
-        }
-    };
-    NegocioDetallePage.prototype.ionViewWillLeave = function () { };
-    NegocioDetallePage.prototype.ionViewWillUnload = function () { };
-    NegocioDetallePage.prototype.agregarProducto = function (biz) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__negocio_agregar_producto_negocio_agregar_producto__["a" /* NegocioAgregarProductoPage */], { item: this.userModel });
-    };
-    NegocioDetallePage.prototype.verMapa = function (biz) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__map_map__["a" /* MapPage */], { item: biz });
-    };
-    NegocioDetallePage.prototype.editarNegocio = function ($event, bz) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__negocio_detalle_editar_negocio_detalle_editar__["a" /* NegocioDetalleEditarPage */], { item: this.userModel.negocio[0] });
-    };
-    NegocioDetallePage.prototype.cargarProducto = function () {
-        var _this = this;
-        this.api.getProductos(this.userModel.negocio[0]).subscribe(function (data) {
-            if (data !== null) {
-                _this.productos = data;
-            }
-            else {
-                // toast.present().then(() => {
-                //   toast.dismiss();
-                // });
-            }
-        }, function (error) {
-            console.log(error);
-        });
-    };
-    NegocioDetallePage.prototype.borrarProducto = function (prod) {
-        var _this = this;
-        this.api.borrarProducto(prod).subscribe(function (data) {
-            if (data !== null) {
-                _this.productos = data;
-            }
-            else {
-                // toast.present().then(() => {
-                //   toast.dismiss();
-                // });
-            }
-        }, function (error) {
-            console.log(error);
-        });
-    };
-    NegocioDetallePage.prototype.editarProducto = function (prod) {
-    };
-    NegocioDetallePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_5__angular_core__["n" /* Component */])({
-            selector: 'page-negocio-detalle',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle/negocio-detalle.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>{{userModel.negocio[0] !== undefined ? userModel.negocio[0].nombre: \'\'}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <div class="contBanner">\n        <img class=banner [src]="imgSourceBanner" alt="">\n        <div class="contLogo">\n          <img class=logo [src]="imgSourceLogo" alt="">\n        </div>\n      </div>\n\n    <button ion-button clear (click)="verMapa(userModel.negocio[0])" >Ubicación y Horario</button>\n    <h2 class="titNeg">Mis Productos</h2> \n    <ion-list>\n      <ion-item-sliding *ngFor="let prod of productos" class="contNeg">\n          <ion-item>\n            <ion-thumbnail item-start class="logoProd">\n              <img [src]=" prod.fotografia !== \'\'? prod.fotografia: imgSourceProd" class="logimg">\n            </ion-thumbnail>\n            <h2 class="nombreNeg">{{prod.nombre}}</h2>\n            <div class="contenedorEstrellas">\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n              </div>\n          </ion-item>\n            <ion-item-options>\n              <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>\n              <button ion-button color="gray" (click)="editarProducto(prod)" > Editar</button>\n          </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n\n<ion-item-divider >\n    <button ion-button full color="light" (click)="editarNegocio(userModel.negocio[0])" >\n        Editar Perfil del Negocio\n      </button>\n  </ion-item-divider>\n  <ion-fab right bottom (click)="agregarProducto(userModel.negocio[0])">\n      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle/negocio-detalle.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_9__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
-            __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser__["c" /* DomSanitizer */],
-            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["b" /* AlertController */]])
-    ], NegocioDetallePage);
-    return NegocioDetallePage;
-}());
-
-//# sourceMappingURL=negocio-detalle.js.map
-
 /***/ })
 
-},[379]);
+},[380]);
 //# sourceMappingURL=main.js.map

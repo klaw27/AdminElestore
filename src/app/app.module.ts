@@ -35,6 +35,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/da
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { fireBaseConfig } from '../config';
 import { IonicStorageModule } from '@ionic/storage';
+import { NegocioEditarProductoPage } from '../pages/negocio-editar-producto/negocio-editar-producto';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { IonicStorageModule } from '@ionic/storage';
     PedidosTodosPage,
     PedidosEntregadosPage,
     PedidosNoEntregadosPage,
-    ModalPedidoPage
+    ModalPedidoPage,
+    NegocioEditarProductoPage
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { IonicStorageModule } from '@ionic/storage';
     PedidosTodosPage,
     PedidosEntregadosPage,
     PedidosNoEntregadosPage,
-    ModalPedidoPage
+    ModalPedidoPage,
+    NegocioEditarProductoPage
   ],
   providers: [
     StatusBar,

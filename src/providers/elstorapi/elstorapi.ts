@@ -31,6 +31,7 @@ const url = 'https://localhost:5001';
 
  const baseurlCatProductoPorIdCatNegocio: string = url + "/api/negocio/producto/obtenercatprod";
 
+ const baseurlProductoEditar: string = url + "/api/negocio/producto/editar";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -74,8 +75,8 @@ export class ElstorapiProvider {
       //console.log(data);
   }),
   catchError((err) => {
-  console.log(err); 
-    throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+  
+  throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
         })
   );
   }
@@ -92,7 +93,7 @@ export class ElstorapiProvider {
     }),
     catchError((err) => {
       console.log(err); 
-      throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+      throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
           })
    );
 
@@ -107,8 +108,7 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
             })
           );
     }
@@ -123,8 +123,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
             })
         );
     }
@@ -139,8 +139,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
             })
         );
     }
@@ -155,8 +155,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
             })
         );
     }
@@ -171,8 +171,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
           })
         );
     }
@@ -186,8 +186,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
           })
         );
     }
@@ -201,8 +201,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
           })
         );
     }
@@ -216,8 +216,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
           })
         );
     }
@@ -233,8 +233,25 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-        console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
+            })
+        );
+    }
+
+    editarProducto(prod: Producto): Observable<any>
+    {
+      let prodModel =  JSON.stringify(prod);
+      
+      return this.http.post<any>(baseurlProductoEditar, prodModel, httpOptions)
+      .pipe(
+        tap((data: any) => {
+
+          //console.log(data);
+      }),
+      catchError((err) => {
+        
+        throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
             })
         );
     }
@@ -250,8 +267,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-    console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+    
+      throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
             })
         );
     }
@@ -266,8 +283,8 @@ export class ElstorapiProvider {
           //console.log(data);
       }),
       catchError((err) => {
-    console.log(err); 
-        throw 'Error in source. Details: ' + err; // Use console.log(err) for detail
+    
+      throw 'Error in source. Details: ' + err.name; // Use console.log(err) for detail
             })
         );
     }

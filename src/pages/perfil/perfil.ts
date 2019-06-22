@@ -31,6 +31,7 @@ export class PerfilPage {
   imgSource:any  = '/assets/imgs/user.png';
   cameraImg:any = null;
 
+  toast:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -87,7 +88,7 @@ export class PerfilPage {
     this.userModel = usr;
     this.userModel.fotografia = this.imgSource;
 
-    const toast = this.toastController.create({
+    this.toast = this.toastController.create({
       message: 'Connection error...',
       showCloseButton: true,
       position: 'bottom',
@@ -112,8 +113,8 @@ export class PerfilPage {
         (data: User) => {
            if(data.toString()=== '0')
            {
-              toast.present().then(() =>{
-                toast.dismiss();
+              this.toast.present().then(() =>{
+                this.toast.dismiss();
               });
            }
            if(data.toString() === '1')
@@ -131,7 +132,22 @@ export class PerfilPage {
            }
            loader.dismiss();
         },
-         (error: any) => console.log(error));  
+         (error: any) => {
+          this.toast = this.toastController.create({
+            message: error,
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
+           
+              
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
+         });  
     });
   }
 
@@ -162,7 +178,20 @@ export class PerfilPage {
       //   this.cameraImg =  this.base64 + imageData;
       // }
      }, (err) => {
-      // Handle error
+      this.toast = this.toastController.create({
+        message: err,
+        showCloseButton: true,
+        position: 'bottom',
+        closeButtonText: 'Ok'
+      });
+       
+          
+        this.toast.onDidDismiss(() => {
+          
+        });
+        this.toast.present().then(() => {
+            
+          });
      });
 
   }

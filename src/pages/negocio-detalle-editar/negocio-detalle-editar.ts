@@ -46,6 +46,8 @@ export class NegocioDetalleEditarPage {
 
   editar: boolean = true;
 
+  toast:any;
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -120,7 +122,7 @@ export class NegocioDetalleEditarPage {
       content: message
     });
 
-    const toast = this.toastController.create({
+    this.toast = this.toastController.create({
       message: 'Connection error...',
       showCloseButton: true,
       position: 'bottom',
@@ -156,17 +158,47 @@ export class NegocioDetalleEditarPage {
             }
           else
           {
-              toast.present().then(() => {
-                  toast.dismiss();
+              this.toast.present().then(() => {
+                  this.toast.dismiss();
               });
           }
           },
-           (error: any) => console.log(error));
+           (error: any) => {
+            this.toast = this.toastController.create({
+              message: error,
+              showCloseButton: true,
+              position: 'bottom',
+              closeButtonText: 'Ok'
+            });
+             
+                
+              this.toast.onDidDismiss(() => {
+                
+              });
+              this.toast.present().then(() => {
+                  
+                });
+           });
            loader.dismiss();
 
        }).catch((error) => {
-         console.log('Error getting location', error);
+         
          loader.dismiss();
+
+         this.toast = this.toastController.create({
+          message: error,
+          showCloseButton: true,
+          position: 'bottom',
+          closeButtonText: 'Ok'
+        });
+         
+            
+          this.toast.onDidDismiss(() => {
+            
+          });
+          this.toast.present().then(() => {
+              
+            });
        });
 
     });
@@ -188,15 +220,22 @@ export class NegocioDetalleEditarPage {
 
       this.imgSourceLogo = this.base64 + imageData;
       this.cameraImgLogo = this.base64 + imageData;
-      // this.cameraImgLogo = imageData;
-
-      // if(this.cameraImgLogo !== null)
-      // {
-      //   this.imgSourceLogo = this.base64 + imageData;
-      //   this.cameraImgLogo = this.base64 + imageData;
-      // }
+    
      }, (err) => {
-      // Handle error
+      this.toast = this.toastController.create({
+        message: err,
+        showCloseButton: true,
+        position: 'bottom',
+        closeButtonText: 'Ok'
+      });
+       
+          
+        this.toast.onDidDismiss(() => {
+          
+        });
+        this.toast.present().then(() => {
+            
+          });
      });
 
   }
@@ -215,17 +254,23 @@ export class NegocioDetalleEditarPage {
     this.camera.getPicture(options).then((imageData) => {
 
       this.imgSourceBanner = this.base64 + imageData;
-      this.cameraImgBanner =  this.base64 + imageData;;
-      // this.cameraImgBanner =  imageData;;
-      
-      // if(this.cameraImgBanner !== null)
-      // {
-      //   this.imgSourceBanner = this.base64 + imageData;
-      //   this.cameraImgBanner =  this.base64 + imageData;;
-      // }
+      this.cameraImgBanner =  this.base64 + imageData;
 
      }, (err) => {
-      // Handle error
+      this.toast = this.toastController.create({
+        message: err,
+        showCloseButton: true,
+        position: 'bottom',
+        closeButtonText: 'Ok'
+      });
+       
+          
+        this.toast.onDidDismiss(() => {
+          
+        });
+        this.toast.present().then(() => {
+            
+          });
      });
 
   }
@@ -245,7 +290,7 @@ export class NegocioDetalleEditarPage {
       content: ''
     });
 
-    const toast = this.toastController.create({
+     this.toast = this.toastController.create({
       message: 'Error obteniendo categorias...',
       showCloseButton: true,
       position: 'bottom',
@@ -262,12 +307,27 @@ export class NegocioDetalleEditarPage {
           }
         else
         {
-            toast.present().then(() => {
-                toast.dismiss();
+            this.toast.present().then(() => {
+                this.toast.dismiss();
             });
         }
         },
-         (error: any) => console.log(error));
+         (error: any) => {
+          this.toast = this.toastController.create({
+            message: error,
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
+           
+              
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
+         });
     });
   }
 
@@ -279,7 +339,7 @@ export class NegocioDetalleEditarPage {
       content: ''
     });
 
-    const toast = this.toastController.create({
+     this.toast = this.toastController.create({
       message: 'Error obteniendo subcategorias...',
       showCloseButton: true,
       position: 'bottom',
@@ -296,12 +356,27 @@ export class NegocioDetalleEditarPage {
           }
         else
         {
-            toast.present().then(() => {
-                toast.dismiss();
+            this.toast.present().then(() => {
+                this.toast.dismiss();
             });
         }
         },
-         (error: any) => console.log(error));
+         (error: any) => {
+          this.toast = this.toastController.create({
+            message: error,
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
+           
+              
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
+         });
          loader.dismiss();
     });
   }

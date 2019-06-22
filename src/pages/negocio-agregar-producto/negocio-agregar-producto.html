@@ -61,6 +61,17 @@
                             <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>
                           </ion-select>
                       </ion-item>
+                      <ion-item class="campo">
+                        <ion-label>
+                          Otra Categoria
+                        </ion-label>
+                        <ion-input class="entrada" placeholder="Otra Categoria" [disabled]="editar" type="text"  [(ngModel)]="producto.otracategoria" formControlName="otracategoria"></ion-input>
+                      </ion-item>
+                         <ion-item *ngIf="otracategoria.hasError('required') && otracategoria.touched">
+                      <p style="color:red">
+                      *Falta Otra Categoria
+                      </p>
+                      </ion-item>
             </ion-list>
           </form>
 

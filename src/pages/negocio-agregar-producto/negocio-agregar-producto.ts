@@ -28,10 +28,13 @@ export class NegocioAgregarProductoPage {
   cantidad: AbstractControl;
   tiempopreparacion: AbstractControl;
   catproducto: AbstractControl;
+  otracategoria:AbstractControl;
 
   editar: boolean = false;
   cameraImg:any = null;
   base64:any = 'data:image/jpeg;base64,'; 
+
+  toast:any;
 
   constructor(public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
@@ -49,7 +52,8 @@ export class NegocioAgregarProductoPage {
         precio:['', [Validators.required]],
         cantidad:['', [Validators.required]],
         tiempopreparacion:['', [Validators.required]],
-        catproducto:['',[Validators.required]]
+        catproducto:['',[Validators.required]],
+        otracategoria:['',[Validators.required]]
         });
         this.platillo = this.formGroup.controls['platillo'];
         this.descripcion = this.formGroup.controls['descripcion'];
@@ -57,6 +61,7 @@ export class NegocioAgregarProductoPage {
         this.cantidad = this.formGroup.controls['cantidad'];
         this.tiempopreparacion = this.formGroup.controls['tiempopreparacion'];
         this.catproducto = this.formGroup.controls['catproducto'];
+        this.otracategoria = this.formGroup.controls['otracategoria'];
 
       this.userModel =  navParams.get('item');
 
@@ -72,16 +77,26 @@ export class NegocioAgregarProductoPage {
 
   agregarProducto(prod, biz, $event)
   {
-
-    debugger;
-    if(prod)
+    if(prod.id_catProducto === undefined 
+      || (prod.complemento === null || prod.complemento.replace(/ /g, "").toLowerCase() == "")
+      || (prod.descripcion === null || prod.descripcion.replace(/ /g, "").toLowerCase()== ""))
     {
+      this.toast = this.toastController.create({
+        message: 'Todos los campos son obligatorios!',
+        showCloseButton: true,
+        position: 'bottom',
+        closeButtonText: 'Done'
+      });
 
+        this.toast.present(); 
+        
+        return;
     }
+
     this.producto = prod;
     this.producto.fotografia = this.imgSource;
 
-    const toast = this.toastController.create({
+     this.toast = this.toastController.create({
       message: 'Ocurrio un error...',
       showCloseButton: true,
       position: 'bottom',
@@ -111,12 +126,27 @@ export class NegocioAgregarProductoPage {
         }
       else
       {
-          toast.present().then(() => {
-              toast.dismiss();
+          this.toast.present().then(() => {
+              this.toast.dismiss();
           });
       }
       },
-       (error: any) => console.log(error));
+       (error: any) => {
+        this.toast = this.toastController.create({
+          message: error,
+          showCloseButton: true,
+          position: 'bottom',
+          closeButtonText: 'Ok'
+        });
+         
+            
+          this.toast.onDidDismiss(() => {
+            
+          });
+          this.toast.present().then(() => {
+              
+            });
+       });
   }
 
   cancelar()
@@ -127,13 +157,11 @@ export class NegocioAgregarProductoPage {
   capturarFotoProducto(source:any)
   {
     const options: CameraOptions = {
-      quality: 50,
+      quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType:source,
-      targetHeight: 500,
-      targetWidth: 500
+      sourceType:source
     }
 
     this.camera.getPicture(options).then((imageData) => {
@@ -145,7 +173,20 @@ export class NegocioAgregarProductoPage {
         this.cameraImg = this.base64 + imageData;
       }
      }, (err) => {
-      // Handle error
+      this.toast = this.toastController.create({
+        message: err,
+        showCloseButton: true,
+        position: 'bottom',
+        closeButtonText: 'Ok'
+      });
+       
+          
+        this.toast.onDidDismiss(() => {
+          
+        });
+        this.toast.present().then(() => {
+            
+          });
      });
 
   }
@@ -210,7 +251,22 @@ export class NegocioAgregarProductoPage {
             
           }
           },
-          (error: any) => console.log(error));
+          (error: any) => {
+            this.toast = this.toastController.create({
+              message: error,
+              showCloseButton: true,
+              position: 'bottom',
+              closeButtonText: 'Ok'
+            });
+             
+                
+              this.toast.onDidDismiss(() => {
+                
+              });
+              this.toast.present().then(() => {
+                  
+                });
+          });
           loader.dismiss();
         });
   }

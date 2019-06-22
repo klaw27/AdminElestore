@@ -75,17 +75,18 @@ export class SubCatNegocio
 
 export class Producto
 {
-  id_producto:number = 0;
-  nombre: string = "";
-  descripcion: string = "";
   clave:string = "";
+  complemento: string = "";
+  descripcion: string = "";
   estatus: number = 1;
   fotografia:any;
-  precio: number = null;
-  negocioid: string =  null;
-  complemento: string = null;
-  tiempopreparacion:number;
-  id_catProducto:number;
+  id_catProducto:"";
+  id_producto:number = 0;
+  negocioid: string =  "";
+  nombre: string = "";
+  otracategoria:string = "";
+  precio: number = 0;
+  tiempopreparacion:number; 
 }
 
 export class CatProducto

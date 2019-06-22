@@ -4,12 +4,14 @@ import { NegocioDetalleEditarPage } from './../negocio-detalle-editar/negocio-de
 import { MapPage } from './../map/map';
 import { Negocio, Producto, User } from './../../models/model';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { NegocioAgregarProductoPage } from '../negocio-agregar-producto/negocio-agregar-producto';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgForOf } from '@angular/common';
+import { NegocioEditarProductoPage } from '../negocio-editar-producto/negocio-editar-producto';
+
 
 // @IonicPage()
 @Component({
@@ -27,15 +29,18 @@ export class NegocioDetallePage {
 
   mostrarDiv: boolean = false;
   productos: Producto[];
-  //producto model
 
+  toast:any;
+  //producto model
+ 
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public geolocation: Geolocation,
     public api: ElstorapiProvider,
     private _sanitizer: DomSanitizer,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    public toastController: ToastController) {
 
       this.userModel =  navParams.get('item');
       this.userModel === undefined ? this.userModel = new User(): this.userModel;
@@ -103,24 +108,43 @@ export class NegocioDetallePage {
 
   cargarProducto()
   {
-    this.api.getProductos(this.userModel.negocio[0]).subscribe(
-      (data: Producto[]) => {
-        if(data !== null)
-        {
-         
-        
-          this.productos = data;
-        }
-        else
-        {
-            // toast.present().then(() => {
-            //   toast.dismiss();
-            // });
-        }
-      },
-       (error: any) =>  {
-         console.log(error)
-        });
+    try {
+      this.api.getProductos(this.userModel.negocio[0]).subscribe(
+        (data: Producto[]) => {
+          if(data !== null)
+          {
+           
+          
+            this.productos = data;
+          }
+          else
+          {
+              // toast.present().then(() => {
+              //   toast.dismiss();
+              // });
+          }
+        },
+         (error: any) =>  {
+          this.toast = this.toastController.create({
+            message: error,
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
+           
+              
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
+          });
+      
+    } catch (error) {
+      debugger
+    }
+    
   }
 
   borrarProducto(prod)
@@ -140,12 +164,25 @@ export class NegocioDetallePage {
         }
       },
        (error: any) =>  {
-         console.log(error)
+        this.toast = this.toastController.create({
+          message: error,
+          showCloseButton: true,
+          position: 'bottom',
+          closeButtonText: 'Ok'
+        });
+         
+            
+          this.toast.onDidDismiss(() => {
+            
+          });
+          this.toast.present().then(() => {
+              
+            });
         });
   }
 
   editarProducto(prod)
   {
-    
+    this.navCtrl.push(NegocioEditarProductoPage,{item:this.userModel, item2:prod})
   }
 }

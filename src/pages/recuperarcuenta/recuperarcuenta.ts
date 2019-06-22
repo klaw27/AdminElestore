@@ -18,6 +18,8 @@ export class RecuperarcuentaPage {
   password:AbstractControl;
   confirmPassword:AbstractControl;
 
+  toast:any;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
@@ -80,7 +82,20 @@ export class RecuperarcuentaPage {
         });
       },
        (error: any) => {
-         <any>error
+        this.toast = this.toastController.create({
+          message: error,
+          showCloseButton: true,
+          position: 'bottom',
+          closeButtonText: 'Ok'
+        });
+         
+            
+          this.toast.onDidDismiss(() => {
+            
+          });
+          this.toast.present().then(() => {
+              
+            });
         }
        );
   }

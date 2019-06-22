@@ -19,6 +19,8 @@ export class NuevonegocioPage {
   catnegocio: CatNegocio[];
   subcatnegocio: SubCatNegocio[];
 
+  toast:any;
+
   base64:any = 'data:image/jpeg;base64,';
 
   imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
@@ -105,7 +107,7 @@ export class NuevonegocioPage {
       content: message
     });
 
-    const toast = this.toastController.create({
+    this.toast = this.toastController.create({
       message: 'Connection error...',
       showCloseButton: true,
       position: 'bottom',
@@ -143,8 +145,8 @@ export class NuevonegocioPage {
             }
           else
           {
-              toast.present().then(() => {
-                  toast.dismiss();
+              this.toast.present().then(() => {
+                  this.toast.dismiss();
               });
           }
           },
@@ -170,7 +172,7 @@ export class NuevonegocioPage {
       content: ''
     });
 
-    const toast = this.toastController.create({
+    this.toast = this.toastController.create({
       message: 'Error obteniendo categorias...',
       showCloseButton: true,
       position: 'bottom',
@@ -187,12 +189,27 @@ export class NuevonegocioPage {
           }
         else
         {
-            toast.present().then(() => {
-                toast.dismiss();
+            this.toast.present().then(() => {
+                this.toast.dismiss();
             });
         }
         },
-         (error: any) => console.log(error));
+         (error: any) => {
+          this.toast = this.toastController.create({
+            message: error,
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
+           
+              
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
+         });
          loader.dismiss();
     });
   }
@@ -205,7 +222,7 @@ export class NuevonegocioPage {
       content: ''
     });
 
-    const toast = this.toastController.create({
+     this.toast = this.toastController.create({
       message: 'Error obteniendo subcategorias...',
       showCloseButton: true,
       position: 'bottom',
@@ -222,13 +239,28 @@ export class NuevonegocioPage {
           }
         else
         {
-            toast.present().then(() => {
-                toast.dismiss();
+            this.toast.present().then(() => {
+                this.toast.dismiss();
             });
         }
         },
-         (error: any) => console.log(error));
-         loader.dismiss();
+         (error: any) => {
+          this.toast = this.toastController.create({
+            message: error,
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
+           loader.dismiss();
+              
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
+         });
+         
     });
   }
   subCatChange($event, cat)
@@ -256,13 +288,20 @@ export class NuevonegocioPage {
       this.cameraImgLogo =  this.base64 +imageData;
       this.imgSourceLogo = this.base64 + imageData;
 
-      // if(imageData !== null)
-      // {
-      //   this.cameraImgLogo =  this.base64 +imageData;
-      //   this.imgSourceLogo = this.base64 + imageData;
-      // }
      }, (err) => {
-      // Handle error
+      this.toast = this.toastController.create({
+        message: err,
+        showCloseButton: true,
+        position: 'bottom',
+        closeButtonText: 'Ok'
+      });
+       
+        this.toast.onDidDismiss(() => {
+          
+        });
+        this.toast.present().then(() => {
+            
+          });
      });
 
   }
@@ -281,15 +320,22 @@ export class NuevonegocioPage {
     this.camera.getPicture(options).then((imageData) => {
       this.cameraImgBanner = this.base64 +imageData;;
       this.imgSourceBanner =  this.base64 + imageData;
-      
-      // if(this.cameraImgBanner !== null)
-      // {
-      //   this.cameraImgBanner = this.base64 +imageData;;
-      //   this.imgSourceBanner =  this.base64 + imageData;
-      // }
     
      }, (err) => {
-      // Handle error
+      this.toast = this.toastController.create({
+        message: err,
+        showCloseButton: true,
+        position: 'bottom',
+        closeButtonText: 'Ok'
+      });
+       
+          
+        this.toast.onDidDismiss(() => {
+          
+        });
+        this.toast.present().then(() => {
+            
+          });
      });
 
   }
