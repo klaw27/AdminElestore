@@ -4,15 +4,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 declare var google;
 
-
-
-/**
- * Generated class for the ModalPedidoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-modal-pedido',
