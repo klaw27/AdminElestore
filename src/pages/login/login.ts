@@ -85,14 +85,7 @@ export class LoginPage {
                   }
                 break;
           }
-
-          // title = data[0] !== undefined ? 'Bienvenido':
-          //           data[0] !== undefined ? 'Ocurrio un error':
-          //           'Usuario/password incorrecto';
-          // subTitle = data[0] !== undefined ? 'Bienvenido ' + data[0].nombreUsuario:
-          //             data[0] !== undefined ? 'Ocurrio un error al tratar de iniciar sesion':
-          //             'Usuario/password incorrecto';
-
+          
           let alert = this.alertCtrl.create({
             title: title,
             subTitle: subTitle,

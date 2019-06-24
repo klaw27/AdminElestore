@@ -86,25 +86,25 @@ export class RegisterPage {
         (data: any) => {
           
           loaderReg.dismiss();
-          
-          // title = data !== null? 'Confirmar correo':
-          //         data === null? 'El correo ya esta registrado':
-          //                                   'Ocurrio un error';
+
   
-          // subTitle = data !== null? `Necesitas confirmar tu correo! 
-          //                           Se ha enviado un mensaje al correo que registraste`:
-          //           data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
-          //                                     data.toString();
-  
-               
-          title = data !== null? 'Correo registrado exitosamente!':
-                  data === null? 'El correo ya esta registrado':
-                                            'Ocurrio un error';
-  
-          subTitle = data !== null? `'Correo registrado exitosamente! 
-                                    Bienvenido`:
-                    data === null? 'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email :
-                                              data.toString();
+               switch(data){
+                 case true:
+                  title = 'Correo registrado exitosamente!'
+                  subTitle = 'Bienvenido'
+                   break;
+                   case false:
+                     title =  'Ocurrio un error'
+                     subTitle =  'Ocurrio un error'
+                     break;
+                     default:
+                       if(data === null){
+                        title =  'Ocurrio un error'
+                        subTitle =  'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email
+                       }
+                       break;
+               }
+
   
           let loader = this.loadingCtrl.create({
             content: 'Iniciando sesion...'
@@ -117,16 +117,18 @@ export class RegisterPage {
             buttons: [{
                 text: 'Ok',
               handler: () => {
-                debugger;
+                
                   if(data === true)
                   {
-                    debugger
                       loader.present().then(() => {
+                        loader.dismiss();
                       this.navCtrl.push(InicioPage, {item:this.userModel});
-                      loader.dismiss();
+                      
                     });
                   }
-                  loader.dismiss();
+                  else{
+                    loader.dismiss();
+                  }
               }
             }]
           });
@@ -136,7 +138,7 @@ export class RegisterPage {
           });
         },
          (error: any) => {
-           <any>error
+           
           }
         );
     });

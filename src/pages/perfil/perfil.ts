@@ -67,7 +67,7 @@ export class PerfilPage {
 
       this.userModel =  navParams.get('item');
 
-      this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
+      this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' && this.userModel.fotografia !== ''  ? 
                           this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.fotografia): this.imgSource;
   }
 

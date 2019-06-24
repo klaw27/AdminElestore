@@ -8,6 +8,7 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Geolocation } from '@ionic-native/geolocation';
 import { convertFormatToKey } from 'ionic-angular/umd/util/datetime-util';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
+import { Storage } from '@ionic/storage';
 
 // @IonicPage()
 @Component({
@@ -52,7 +53,8 @@ export class NuevonegocioPage {
               public toastController: ToastController,
               private geolocation: Geolocation,
               private camera: Camera,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController,
+              private storage: Storage) {
 
     this.formGroup = formBuilder.group({
       nombre: ['',[Validators.required]],
@@ -100,8 +102,6 @@ export class NuevonegocioPage {
     this.negocio.fotografia = this.imgSourceBanner;
     this.negocio.fotografia2 = this.imgSourceLogo;
 
-    console.log(this.negocio);
-
     let message:string = "Agregando negocio..";
     let loader = this.loadingCtrl.create({
       content: message
@@ -122,6 +122,10 @@ export class NuevonegocioPage {
         text: 'Ok',
       handler: () => {
         this.userModel.negocio.push(this.negocio);
+
+        this.storage.remove('usuario');
+        this.storage.set('usuario',this.userModel);
+
         this.navCtrl.push(NegocioDetallePage,{item:this.userModel});
       }
     }]
@@ -139,7 +143,7 @@ export class NuevonegocioPage {
           if(data !== null || data === 1)
             {
                 alert.present().then(() => {
-
+                  loader.dismiss();
                 });
 
             }
@@ -147,11 +151,14 @@ export class NuevonegocioPage {
           {
               this.toast.present().then(() => {
                   this.toast.dismiss();
+                  loader.dismiss();
               });
           }
           },
-           (error: any) => console.log(error));
-           loader.dismiss();
+           (error: any) => {
+            loader.dismiss();
+           });
+           
 
        }).catch((error) => {
          console.log('Error getting location', error);
@@ -169,7 +176,7 @@ export class NuevonegocioPage {
   getCatNegocio()
   {
     let loader = this.loadingCtrl.create({
-      content: ''
+      content: 'Obteniendo categorias...'
     });
 
     this.toast = this.toastController.create({
@@ -186,11 +193,13 @@ export class NuevonegocioPage {
           {
             //
              this.catnegocio = data;
+             loader.dismiss();
           }
         else
         {
             this.toast.present().then(() => {
                 this.toast.dismiss();
+                loader.dismiss();
             });
         }
         },
@@ -202,7 +211,7 @@ export class NuevonegocioPage {
             closeButtonText: 'Ok'
           });
            
-              
+          loader.dismiss();
             this.toast.onDidDismiss(() => {
               
             });
@@ -210,7 +219,7 @@ export class NuevonegocioPage {
                 
               });
          });
-         loader.dismiss();
+       
     });
   }
 
@@ -219,7 +228,7 @@ export class NuevonegocioPage {
     let id_CatNegocio = cat.id_catNegocio;
     
     let loader = this.loadingCtrl.create({
-      content: ''
+      content: 'Obteniendo subcategorias...'
     });
 
      this.toast = this.toastController.create({
@@ -234,13 +243,14 @@ export class NuevonegocioPage {
         (data: SubCatNegocio[]) => {
         if(data !== null)
           {
-            //
+            loader.dismiss();
             this.subcatnegocio = data;
           }
         else
         {
             this.toast.present().then(() => {
                 this.toast.dismiss();
+                loader.dismiss();
             });
         }
         },
@@ -388,5 +398,13 @@ export class NuevonegocioPage {
       ]
     });
     actionSheet.present();
+  }
+
+  public set(settingName,value){
+    return this.storage.set(`setting:${ settingName }`,value);
+  }
+
+  public async remove(settingName){
+    return await this.storage.remove(`setting:${ settingName }`);
   }
 }

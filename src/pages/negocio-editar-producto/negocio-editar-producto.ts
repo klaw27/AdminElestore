@@ -71,7 +71,7 @@ export class NegocioEditarProductoPage {
 
       this.imgSource = this.producto.fotografia !== '/assets/imgs/producto.png' ? 
       this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
-      debugger;
+      
   }
 
   ionViewDidLoad() {}
@@ -252,7 +252,6 @@ export class NegocioEditarProductoPage {
     this.api.obtnerCatProductoPorIdCatNegocio(this.userModel.negocio[0]).subscribe(
         (data: CatProducto[]) => {
 
-          debugger;
           if(data !== null)
             {
               this.catProd = data;

@@ -69,7 +69,7 @@ export class NegocioDetallePage {
           {
           text: 'Ok',
           handler: () => {
-            alert.dismiss();
+            
             this.navCtrl.push(NuevonegocioPage,{item:this.userModel});
             },
          },
@@ -77,7 +77,7 @@ export class NegocioDetallePage {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            alert.dismiss();
+            
             this.navCtrl.push(InicioPage, {item:this.userModel});
           }
          }
@@ -104,7 +104,7 @@ export class NegocioDetallePage {
 
   editarNegocio($event, bz)
   {
-    this.navCtrl.push(NegocioDetalleEditarPage, {item:this.userModel.negocio[0]})
+    this.navCtrl.push(NegocioDetalleEditarPage, {item:this.userModel})
   }
 
   cargarProducto()
@@ -164,7 +164,7 @@ export class NegocioDetallePage {
 
       
     } catch (error) {
-      debugger
+      
     }
     
   }

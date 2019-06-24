@@ -221,7 +221,7 @@ export class NegocioAgregarProductoPage {
   {
 
     let loader = this.loadingCtrl.create({
-      content: ''
+      content: 'Obteniendo categorias para el producto...'
     });
 
     const toast = this.toastController.create({
@@ -236,7 +236,6 @@ export class NegocioAgregarProductoPage {
     this.api.obtnerCatProductoPorIdCatNegocio(this.userModel.negocio[0]).subscribe(
         (data: CatProducto[]) => {
 
-          debugger;
           if(data !== null)
             {
               this.catProd = data;
@@ -267,7 +266,6 @@ export class NegocioAgregarProductoPage {
                   
                 });
           });
-          loader.dismiss();
         });
   }
   

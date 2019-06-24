@@ -115,8 +115,8 @@
                                   <ion-label>
                                     Subcategoria
                                   </ion-label>
-                                  <ion-select [disabled]="editar" [(ngModel)]="negocio.FK_subcategoria" formControlName="FK_subcategoria" placeholder="Selecciona una subcagetoria">
-                                      <ion-option value="{{subcat.fK_CATNEGOCIO}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>
+                                  <ion-select [disabled]="editar" [(ngModel)]="negocio.subcategoria" formControlName="subcategoria" placeholder="Selecciona una subcategoria">
+                                      <ion-option value="{{subcat.nombre}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>
                                     </ion-select>
                                 </ion-item>
                                 <!-- <ion-item *ngIf="subcategoria.hasError('required') && subcategoria.touched">

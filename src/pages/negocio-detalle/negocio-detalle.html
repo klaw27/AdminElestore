@@ -10,12 +10,17 @@
         <div class="contLogo">
           <img class=logo [src]="imgSourceLogo" alt="">
         </div>
-      </div>
+    </div>
+      <ion-item-divider >
+        <button ion-button full color="light" (click)="editarNegocio(userModel.negocio[0])" >
+            Editar Perfil del Negocio
+          </button>
+      </ion-item-divider>
 
     <button ion-button clear (click)="verMapa(userModel.negocio[0])" >Ubicación y Horario</button>
     <h2 class="titNeg">Mis Productos</h2> 
-    <ion-list>
-      <ion-item-sliding *ngFor="let prod of productos" class="contNeg">
+    <ion-list [virtualScroll]="productos" [approxItemHeight]="'132px'">
+      <ion-item-sliding *virtualItem="let prod " class="contNeg">
           <ion-item>
             <ion-thumbnail item-start class="logoProd">
               <img [src]=" prod.fotografia !== ''? prod.fotografia: imgSourceProd" class="logimg">
@@ -36,11 +41,6 @@
         </ion-item-sliding>
     </ion-list>
 
-<ion-item-divider >
-    <button ion-button full color="light" (click)="editarNegocio(userModel.negocio[0])" >
-        Editar Perfil del Negocio
-      </button>
-  </ion-item-divider>
   <ion-fab right bottom (click)="agregarProducto(userModel.negocio[0])">
       <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>
   </ion-fab> 

@@ -7,6 +7,8 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { NegociosPage } from '../negocios/negocios';
 import { Geolocation } from '@ionic-native/geolocation';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
+import { Storage } from '@ionic/storage';
 
 
 // @IonicPage()
@@ -31,14 +33,14 @@ export class NegocioDetalleEditarPage {
   horaapertura:AbstractControl;
   horacierre:AbstractControl;
   categoria:AbstractControl;
-  FK_subcategoria:AbstractControl;
+  subcategoria:AbstractControl;
   descripcion:AbstractControl;
 
   // imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
   // imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
 
-  imgSourceBanner:any  = '/assets/imgs/banner.jpg';
-  imgSourceLogo:any  = '/assets/imgs/toks.png';
+  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
+  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
 
   base64:string = 'data:image/jpeg;base64,';
   cameraImgLogo:any = null;
@@ -59,7 +61,8 @@ export class NegocioDetalleEditarPage {
     public geolocation: Geolocation,
     public camera: Camera,
     private _sanitizer: DomSanitizer,
-    private actionSheetCtrl: ActionSheetController) {
+    private actionSheetCtrl: ActionSheetController,
+    private storage: Storage) {
 
     this.formGroup = formBuilder.group({
       nombre: ['',[Validators.required]],
@@ -71,7 +74,7 @@ export class NegocioDetalleEditarPage {
       horaapertura:['', [Validators.required]],
       horacierre:['', [Validators.required]],
       categoria:['', [Validators.required]],
-      FK_subcategoria:['', [Validators.required]],
+      subcategoria:['', [Validators.required]],
       descripcion:['', [Validators.required]]
       });
 
@@ -84,26 +87,27 @@ export class NegocioDetalleEditarPage {
       this.horaapertura = this.formGroup.controls['horaapertura'];
       this.horacierre = this.formGroup.controls['horacierre'];
       this.categoria = this.formGroup.controls['categoria'];
-      this.FK_subcategoria = this.formGroup.controls['FK_subcategoria'];
+      this.subcategoria = this.formGroup.controls['subcategoria'];
       this.descripcion = this.formGroup.controls['descripcion'];
 
 
-      this.negocio =  navParams.get('item');
+      this.userModel =  navParams.get('item');
+
+      this.negocio =  this.userModel.negocio[0];
 
       //Banner
-      this.negocio.fotografia =   this.negocio.fotografia !== '/assets/imgs/banner.jpg' ? 
-      this._sanitizer.bypassSecurityTrustResourceUrl(this.negocio.fotografia): this.imgSourceBanner;
+      this.userModel.negocio[0].fotografia =   this.userModel.negocio[0].fotografia !== '/assets/imgs/tienda-online-icono-png.png' ? 
+      this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia): this.imgSourceBanner;
 
         //Logo
-        this.negocio.fotografia2 =   this.negocio.fotografia2 !== '/assets/imgs/toks.png' ? 
-        this._sanitizer.bypassSecurityTrustResourceUrl(this.negocio.fotografia2): this.imgSourceLogo;
+        this.userModel.negocio[0].fotografia2 =   this.userModel.negocio[0].fotografia2 !== '/assets/imgs/tienda-online-icono-png.png' ? 
+        this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia2): this.imgSourceLogo;
 
   }
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
     this.getCatNegocio();
-
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -135,8 +139,13 @@ export class NegocioDetalleEditarPage {
       buttons: [{
         text: 'Ok',
       handler: () => {
+        
+        this.userModel.negocio[0] = this.negocio;
+        this.remove('usuario').then(() =>{
+          this.set('usuario',this.userModel);
+        });
 
-        this.navCtrl.push(NegociosPage, {item:this.negocio});
+        this.navCtrl.push(NegocioDetallePage, {item:this.userModel});
       }
     }]
     });
@@ -287,7 +296,7 @@ export class NegocioDetalleEditarPage {
   getCatNegocio()
   {
     let loader = this.loadingCtrl.create({
-      content: ''
+      content: 'Obteniendo categorias...'
     });
 
      this.toast = this.toastController.create({
@@ -336,7 +345,7 @@ export class NegocioDetalleEditarPage {
     let id_CatNegocio = cat.id_catNegocio;
     
     let loader = this.loadingCtrl.create({
-      content: ''
+      content: 'Obteniendo subcategorias...'
     });
 
      this.toast = this.toastController.create({
@@ -433,6 +442,14 @@ export class NegocioDetalleEditarPage {
   }
 
   someFunc(e, $event){
-    debugger;
+    
+  }
+
+  public set(settingName,value){
+    return this.storage.set(`setting:${ settingName }`,value);
+  }
+
+  public async remove(settingName){
+    return await this.storage.remove(`setting:${ settingName }`);
   }
 }
