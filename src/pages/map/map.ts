@@ -43,8 +43,15 @@ export class MapPage {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         markerLabel: this.negocioModel.callenumero
       }
+    
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+      let marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: latLng
+      });
 
     }, (err) => {
       console.log(err);

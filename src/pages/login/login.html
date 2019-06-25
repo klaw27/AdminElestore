@@ -15,7 +15,7 @@
         <ion-input class="correo-input" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>
       </ion-item>
         <ion-item *ngIf="email.hasError('required') && email.touched ">
-        <p>
+        <p style="color:red">
 *Valid email is required
         </p>
         </ion-item>
@@ -23,7 +23,7 @@
         <ion-input class="contraseña-input" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>
       </ion-item>
       <ion-item *ngIf="password.hasError('required') && password.touched">
-        <p>
+        <p style="color:red">
     *Type a valid password
         </p>
         </ion-item>

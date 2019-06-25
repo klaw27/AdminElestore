@@ -4,7 +4,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollEvents]="true">
+
     <div class="contBanner">
         <img class=banner [src]="imgSourceBanner" alt="">
         <div class="contLogo">
@@ -19,6 +20,7 @@
 
     <button ion-button clear (click)="verMapa(userModel.negocio[0])" >Ubicación y Horario</button>
     <h2 class="titNeg">Mis Productos</h2> 
+  
     <ion-list [virtualScroll]="productos" [approxItemHeight]="'132px'">
       <ion-item-sliding *virtualItem="let prod " class="contNeg">
           <ion-item>

@@ -92,6 +92,11 @@ export class NegocioAgregarProductoPage {
         
         return;
     }
+    let message:string = "Agregando Producto..";
+    let loader = this.loadingCtrl.create({
+      content: message
+    });
+  
 
     this.producto = prod;
     this.producto.fotografia = this.imgSource;
@@ -114,39 +119,45 @@ export class NegocioAgregarProductoPage {
     }]
     });
 
-    // console.log(prod,biz)
-    this.api.agregarProducto(this.producto).subscribe(
-      (data: Producto) => {
-      if(data !== null)
-        {
-            alert.present().then(() => {
-             
-            });
+    loader.present().then(() => {
 
+      this.api.agregarProducto(this.producto).subscribe(
+        (data: Producto) => {
+        if(data !== null)
+          {
+              alert.present().then(() => {
+               loader.dismiss();
+              });
+  
+          }
+        else
+        {
+            this.toast.present().then(() => {
+                this.toast.dismiss();
+                loader.dismiss();
+            });
         }
-      else
-      {
-          this.toast.present().then(() => {
-              this.toast.dismiss();
+        },
+         (error: any) => {
+          this.toast = this.toastController.create({
+            message: error,
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
           });
-      }
-      },
-       (error: any) => {
-        this.toast = this.toastController.create({
-          message: error,
-          showCloseButton: true,
-          position: 'bottom',
-          closeButtonText: 'Ok'
-        });
-         
-            
-          this.toast.onDidDismiss(() => {
-            
-          });
-          this.toast.present().then(() => {
+           
+          loader.dismiss();
+          
+            this.toast.onDidDismiss(() => {
               
             });
-       });
+            this.toast.present().then(() => {
+                
+              });
+         });
+    });
+    // console.log(prod,biz)
+   
   }
 
   cancelar()

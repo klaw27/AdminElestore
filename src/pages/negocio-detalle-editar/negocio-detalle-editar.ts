@@ -161,13 +161,14 @@ export class NegocioDetalleEditarPage {
           if(data.toString() ==="1")
             {
                 alert.present().then(() => {
-
+                    loader.dismiss();
                 });
 
             }
           else
           {
               this.toast.present().then(() => {
+                loader.dismiss();
                   this.toast.dismiss();
               });
           }
@@ -180,7 +181,7 @@ export class NegocioDetalleEditarPage {
               closeButtonText: 'Ok'
             });
              
-                
+            loader.dismiss();
               this.toast.onDidDismiss(() => {
                 
               });
@@ -188,7 +189,6 @@ export class NegocioDetalleEditarPage {
                   
                 });
            });
-           loader.dismiss();
 
        }).catch((error) => {
          
