@@ -7,6 +7,8 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 import { DomSanitizer } from '@angular/platform-browser';
 
+declare function escape(s:string): string;
+
 @Component({
   selector: 'page-negocio-editar-producto',
   templateUrl: 'negocio-editar-producto.html',
@@ -35,6 +37,8 @@ export class NegocioEditarProductoPage {
   base64:any = 'data:image/jpeg;base64,'; 
 
   toast:any;
+
+  fotografia:any;
 
   constructor(public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
@@ -69,14 +73,24 @@ export class NegocioEditarProductoPage {
       this.userModel =  navParams.get('item');
       this.producto = navParams.get('item2');
 
-      this.imgSource = this.producto.fotografia !== '/assets/imgs/producto.png' ? 
-      this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
+      // // this.imgSource = this.producto.fotografia !== '/assets/imgs/producto.png' ? 
+      // // this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
+
+      // if(this.producto.fotografia !== '/assets/imgs/producto.png')
+      // {
+      //   this.imgSource = this.producto.fotografia;
+      //   this._sanitizer.bypassSecurityTrustResourceUrl(this.imgSource);
+      // }
+
+      // // this.producto.fotografia !== '/assets/imgs/producto.png' ? 
+      // // this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
       
   }
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
     this.obtnerCatProductoPorIdCatNegocio();
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia}`);
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -173,21 +187,23 @@ export class NegocioEditarProductoPage {
   capturarFotoProducto(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true,
       sourceType:source
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.cameraImg =  imageData;;
-      
-      if(this.cameraImg !== null)
+    this.camera.getPicture(options)
+      .then((imageData) => 
       {
-        this.imgSource = this.base64 + imageData;
-        this.cameraImg = this.base64 + imageData;
-      }
+        imageData = escape(imageData);
+      this.producto.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia}`);
+  
      }, (err) => {
       this.toast = this.toastController.create({
         message: err,

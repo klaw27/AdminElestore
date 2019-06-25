@@ -6,6 +6,9 @@ import { Negocio } from '../../models/model';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
+import { DomSanitizer } from '@angular/platform-browser';
+
+declare function escape(s:string): string;
 
 // @IonicPage()
 @Component({
@@ -36,6 +39,8 @@ export class NegocioAgregarProductoPage {
 
   toast:any;
 
+  fotografia:any;
+
   constructor(public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
     public toastController: ToastController,
@@ -44,7 +49,8 @@ export class NegocioAgregarProductoPage {
     public camera: Camera,
     public navParams: NavParams,
     public navCtrl: NavController,
-    public actionSheetCtrl: ActionSheetController) {
+    public actionSheetCtrl: ActionSheetController,
+    private _sanitizer: DomSanitizer) {
 
       this.formGroup = formBuilder.group({
         platillo: ['',[Validators.required]],
@@ -71,6 +77,8 @@ export class NegocioAgregarProductoPage {
   ionViewDidLoad() {}
   ionViewWillEnter(){
     this.obtnerCatProductoPorIdCatNegocio();
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia}`);
+
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -99,7 +107,7 @@ export class NegocioAgregarProductoPage {
   
 
     this.producto = prod;
-    this.producto.fotografia = this.imgSource;
+    // this.producto.fotografia = this.imgSource;
 
      this.toast = this.toastController.create({
       message: 'Ocurrio un error...',
@@ -147,7 +155,7 @@ export class NegocioAgregarProductoPage {
           });
            
           loader.dismiss();
-          
+
             this.toast.onDidDismiss(() => {
               
             });
@@ -168,21 +176,23 @@ export class NegocioAgregarProductoPage {
   capturarFotoProducto(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true,
       sourceType:source
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.cameraImg =  imageData;;
-      
-      if(this.cameraImg !== null)
-      {
-        this.imgSource = this.base64 + imageData;
-        this.cameraImg = this.base64 + imageData;
-      }
+    this.camera.getPicture(options)
+    .then((imageData) => 
+    {
+      imageData = escape(imageData);
+      this.producto.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.fotografia  = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia }`);
+ 
      }, (err) => {
       this.toast = this.toastController.create({
         message: err,
