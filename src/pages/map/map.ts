@@ -50,7 +50,8 @@ export class MapPage {
       let marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
-        position: latLng
+        position: latLng,
+        title: this.negocioModel.nombre
       });
 
     }, (err) => {

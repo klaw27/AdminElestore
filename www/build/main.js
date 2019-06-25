@@ -2216,7 +2216,8 @@ var MapPage = /** @class */ (function () {
             var marker = new google.maps.Marker({
                 map: _this.map,
                 animation: google.maps.Animation.DROP,
-                position: latLng
+                position: latLng,
+                title: _this.negocioModel.nombre
             });
         }, function (err) {
             console.log(err);
