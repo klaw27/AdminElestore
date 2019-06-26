@@ -8,6 +8,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Storage } from '@ionic/storage';
 
+declare function escape(s:string): string;
+
 // @IonicPage()
 @Component({
   selector: 'page-perfil',
@@ -27,9 +29,11 @@ export class PerfilPage {
   numeroTelefonico:AbstractControl;
   isDisabled: boolean = true;
 
-  base64:any ='data:image/jpeg;base64,' ;
-  imgSource:any  = '/assets/imgs/user.png';
-  cameraImg:any = null;
+  // base64:any ='data:image/jpeg;base64,' ;
+  // imgSource:any  = '/assets/imgs/user.png';
+  // cameraImg:any = null;
+
+  fotografia:any;
 
   toast:any;
 
@@ -67,13 +71,11 @@ export class PerfilPage {
 
       this.userModel =  navParams.get('item');
 
-      this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' && this.userModel.fotografia !== ''  ? 
-                          this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.fotografia): this.imgSource;
   }
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
-
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -86,7 +88,7 @@ export class PerfilPage {
   guardarCambios($event, usr)
   {
     this.userModel = usr;
-    this.userModel.fotografia = this.imgSource;
+    // this.userModel.fotografia = this.imgSource;
 
     this.toast = this.toastController.create({
       message: 'Connection error...',
@@ -159,24 +161,23 @@ export class PerfilPage {
   capturarFoto(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      sourceType : source,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      sourceType:source
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      
-      this.imgSource = this.base64 + imageData;
-      this.cameraImg =  this.base64 + imageData;
-      
-      // if(this.cameraImg !== null)
-      // {
-      //   this.imgSource = this.base64 + imageData;
-      //   this.cameraImg =  this.base64 + imageData;
-      // }
+    this.camera.getPicture(options)
+    .then((imageData) => 
+    {
+      imageData = escape(imageData);
+      this.userModel.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
+
      }, (err) => {
       this.toast = this.toastController.create({
         message: err,

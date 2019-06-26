@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NgForOf } from '@angular/common';
 import { NegocioEditarProductoPage } from '../negocio-editar-producto/negocio-editar-producto';
 
+declare function escape(s:string): string;
 
 // @IonicPage()
 @Component({
@@ -22,16 +23,13 @@ export class NegocioDetallePage {
 
   userModel: User = new User();
 
-  imgSourceProd:any  = '/assets/imgs/user.png';
-
-  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
-  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
-
   mostrarDiv: boolean = false;
   productos: Producto[];
 
   toast:any;
-  //producto model
+
+  fotografia:any;
+  fotografia2:any;
  
 
   constructor(public navCtrl: NavController,
@@ -53,11 +51,9 @@ export class NegocioDetallePage {
     
     if(this.userModel.negocio[0] !== undefined)
     {
-      this.imgSourceBanner = this.userModel.negocio[0].fotografia !=='/assets/imgs/tienda-online-icono-png.png' ? 
-                        this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia): this.imgSourceBanner;
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
 
-      this.imgSourceLogo = this.userModel.negocio[0].fotografia2 !=='/assets/imgs/tienda-online-icono-png.png' ? 
-      this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia2): this.imgSourceLogo;
+      this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia2}`);
 
       this.cargarProducto();
     }

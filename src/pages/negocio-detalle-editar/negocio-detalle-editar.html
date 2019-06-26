@@ -7,12 +7,12 @@
   <ion-content [scrollEvents]="true">
     <ion-item-group>
         <div class="contBanner">
-            <img class=banner [src]="imgSourceBanner" alt="">
+            <img class=banner [src]="fotografia" alt="" onError= "this.src='/assets/imgs/tienda-online-icono-png.png'">
              <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">
               <ion-icon class="icono" name="camera"></ion-icon>
             </button>
             <div class="contLogo">
-              <img class=logo [src]="imgSourceLogo" alt="">
+              <img class=logo [src]="fotografia2" alt="" onError= "this.src='/assets/imgs/tienda-online-icono-png.png'">
               <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">
                   <ion-icon class="icono" name="camera"></ion-icon>
               </button>

@@ -8,7 +8,7 @@
 
 <ion-content padding>
     <div class="user">
-        <img class="imgUser" [src]="imgSource">
+        <img class="imgUser" [src]="fotografia" onError= "this.src='/assets/imgs/user.png'" >
         <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">
             <ion-icon class="icono" name="camera"></ion-icon>
         </button>

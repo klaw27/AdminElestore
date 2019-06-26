@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 import { Storage } from '@ionic/storage';
 
+declare function escape(s:string): string;
 
 // @IonicPage()
 @Component({
@@ -36,15 +37,9 @@ export class NegocioDetalleEditarPage {
   subcategoria:AbstractControl;
   descripcion:AbstractControl;
 
-  // imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
-  // imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
-
-  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
-  imgSourceLogo:any  = '/assets/imgs/tienda-online-icono-png.png';
-
-  base64:string = 'data:image/jpeg;base64,';
-  cameraImgLogo:any = null;
-  cameraImgBanner:any = null;
+  fotografia:any;
+  fotografia2:any;
+  
 
   editar: boolean = true;
 
@@ -95,18 +90,14 @@ export class NegocioDetalleEditarPage {
 
       this.negocio =  this.userModel.negocio[0];
 
-      //Banner
-      this.userModel.negocio[0].fotografia =   this.userModel.negocio[0].fotografia !== '/assets/imgs/tienda-online-icono-png.png' ? 
-      this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia): this.imgSourceBanner;
-
-        //Logo
-        this.userModel.negocio[0].fotografia2 =   this.userModel.negocio[0].fotografia2 !== '/assets/imgs/tienda-online-icono-png.png' ? 
-        this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.negocio[0].fotografia2): this.imgSourceLogo;
-
   }
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
+
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
+    this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia2}`);
+
     this.getCatNegocio();
   }
   ionViewWillLeave(){}
@@ -117,8 +108,9 @@ export class NegocioDetalleEditarPage {
     let strclientid = this.negocio.clientid;
     this.negocio = biz;
     this.negocio.clientid = strclientid;
-    this.negocio.fotografia = this.imgSourceBanner;
-    this.negocio.fotografia2 = this.imgSourceLogo;
+    
+    // this.negocio.fotografia = this.fotografia;
+    // this.negocio.fotografia2 = this.fotografia2;
 
 
     let message:string = "Editando negocio..";
@@ -217,18 +209,22 @@ export class NegocioDetalleEditarPage {
   capturarFotoLogo(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      sourceType : source,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      sourceType:source
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-
-      this.imgSourceLogo = this.base64 + imageData;
-      this.cameraImgLogo = this.base64 + imageData;
+    this.camera.getPicture(options)
+    .then((imageData) => 
+    {
+      imageData = escape(imageData);
+      this.negocio.fotografia2 = 'data:image/jpg;base64,'+imageData;
+      this.fotografia2 = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia2}`);
     
      }, (err) => {
       this.toast = this.toastController.create({
@@ -252,18 +248,23 @@ export class NegocioDetalleEditarPage {
   capturarFotoBanner(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      sourceType : source,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      sourceType:source,
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options)
+    .then((imageData) => {
 
-      this.imgSourceBanner = this.base64 + imageData;
-      this.cameraImgBanner =  this.base64 + imageData;
+      imageData = escape(imageData);
+      this.negocio.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.fotografia = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia}`);
+    
 
      }, (err) => {
       this.toast = this.toastController.create({

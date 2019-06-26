@@ -9,6 +9,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { convertFormatToKey } from 'ionic-angular/umd/util/datetime-util';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 import { Storage } from '@ionic/storage';
+import { DomSanitizer } from '@angular/platform-browser';
+
+declare function escape(s:string): string;
 
 // @IonicPage()
 @Component({
@@ -22,13 +25,10 @@ export class NuevonegocioPage {
 
   toast:any;
 
-  base64:any = 'data:image/jpeg;base64,';
+  // bypassSecurityTrustResourceUrl
 
-  imgSourceBanner:any  = '/assets/imgs/tienda-online-icono-png.png';
-  imgSourceLogo:any   =  '/assets/imgs/tienda-online-icono-png.png';
-
-  cameraImgLogo:any = null;
-  cameraImgBanner:any = null;
+  fotografia:any;
+  fotografia2:any;
 
   negocio: Negocio = new Negocio();
   formGroup: FormGroup;
@@ -54,7 +54,8 @@ export class NuevonegocioPage {
               private geolocation: Geolocation,
               private camera: Camera,
               public actionSheetCtrl: ActionSheetController,
-              private storage: Storage) {
+              private storage: Storage,
+              private _sanitizer: DomSanitizer) {
 
     this.formGroup = formBuilder.group({
       nombre: ['',[Validators.required]],
@@ -99,8 +100,8 @@ export class NuevonegocioPage {
     this.negocio = biz;
     this.negocio.clientid = this.userModel.clientid;
 
-    this.negocio.fotografia = this.imgSourceBanner;
-    this.negocio.fotografia2 = this.imgSourceLogo;
+    // this.negocio.fotografia = this.imgSourceBanner;
+    // this.negocio.fotografia2 = this.imgSourceLogo;
 
     let message:string = "Agregando negocio..";
     let loader = this.loadingCtrl.create({
@@ -286,17 +287,22 @@ export class NuevonegocioPage {
   capturarFotoLogo(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      sourceType : source,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      sourceType:source
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.cameraImgLogo =  this.base64 +imageData;
-      this.imgSourceLogo = this.base64 + imageData;
+    this.camera.getPicture(options).
+    then((imageData) => 
+    {
+      imageData = escape(imageData);
+      this.negocio.fotografia2 = 'data:image/jpg;base64,'+imageData;
+      this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.negocio.fotografia2}`);
 
      }, (err) => {
       this.toast = this.toastController.create({
@@ -319,17 +325,22 @@ export class NuevonegocioPage {
   capturarFotoBanner(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      sourceType : source,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum: false,
-      sourceType:source
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.cameraImgBanner = this.base64 +imageData;;
-      this.imgSourceBanner =  this.base64 + imageData;
+    this.camera.getPicture(options)
+    .then((imageData) => {
+      
+      imageData = escape(imageData);
+      this.negocio.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.negocio.fotografia}`);
     
      }, (err) => {
       this.toast = this.toastController.create({

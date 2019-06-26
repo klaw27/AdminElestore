@@ -7,9 +7,9 @@
 <ion-content [scrollEvents]="true">
 
     <div class="contBanner">
-        <img class=banner [src]="imgSourceBanner" alt="">
+        <img class=banner [src]="fotografia" alt="" onError="this.src='/assets/imgs/tienda-online-icono-png.png'">
         <div class="contLogo">
-          <img class=logo [src]="imgSourceLogo" alt="">
+          <img class=logo [src]="fotografia2" alt="" onError="this.src='/assets/imgs/tienda-online-icono-png.png'">
         </div>
     </div>
       <ion-item-divider >
@@ -25,7 +25,7 @@
       <ion-item-sliding *virtualItem="let prod " class="contNeg">
           <ion-item>
             <ion-thumbnail item-start class="logoProd">
-              <img [src]=" prod.fotografia !== ''? prod.fotografia: imgSourceProd" class="logimg">
+              <img [src]="prod.fotografia" onError="this.src='/assets/imgs/producto.png'" class="logimg">
             </ion-thumbnail>
             <h2 class="nombreNeg">{{prod.nombre}}</h2>
             <div class="contenedorEstrellas">

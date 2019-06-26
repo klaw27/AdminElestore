@@ -5,6 +5,9 @@ import { User } from '../../models/model';
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { Camera , CameraOptions} from '@ionic-native/camera';
+import { DomSanitizer } from '@angular/platform-browser';
+
+declare function escape(s:string): string;
 
 // @IonicPage()
 @Component({
@@ -24,10 +27,7 @@ export class RegisterPage {
   confirmPassword:AbstractControl;
   numeroTelefonico:AbstractControl;
 
-  imgSource:any  = '/assets/imgs/user.png';
-  base64:any = 'data:image/jpeg;base64,'; 
-  cameraImg:any = null;
-
+  fotografia:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,7 +37,8 @@ export class RegisterPage {
     public toastController: ToastController,
     public loadingCtrl: LoadingController,
     public camera: Camera,
-    public actionSheetCtrl: ActionSheetController)
+    public actionSheetCtrl: ActionSheetController,
+    private _sanitizer: DomSanitizer)
     {
       this.formGroup = formBuilder.group({
         email: ['',[Validators.required, Validators.email]],
@@ -73,7 +74,7 @@ export class RegisterPage {
     let title = '';
     let subTitle = '';
     this.userModel = usr;
-    this.userModel.fotografia = this.cameraImg;
+    // this.userModel.fotografia = this.cameraImg;
 
 
     let loaderReg = this.loadingCtrl.create({
@@ -152,24 +153,22 @@ export class RegisterPage {
   capturarFoto(source:any)
   {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality : 100,
+      destinationType : this.camera.DestinationType.DATA_URL,
+      sourceType : source,
+      allowEdit : true,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType:source
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-
-      this.imgSource = this.base64 + imageData;
-      this.cameraImg = this.base64 + imageData;
-      
-      // if(this.cameraImg !== null)
-      // {
-      //   this.imgSource = this.base64 + imageData;
-      //   this.cameraImg = this.base64 + imageData;
-      // }
-      
+    this.camera.getPicture(options)
+    .then((imageData) => 
+    {
+      imageData = escape(imageData);
+      this.userModel.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
      }, (err) => {
       // Handle error
      });
