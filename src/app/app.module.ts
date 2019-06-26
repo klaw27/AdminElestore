@@ -59,7 +59,8 @@ import { NegocioEditarProductoPage } from '../pages/negocio-editar-producto/nego
     PedidosEntregadosPage,
     PedidosNoEntregadosPage,
     ModalPedidoPage,
-    NegocioEditarProductoPage
+    NegocioEditarProductoPage,
+    
   ],
   imports: [
     BrowserModule,

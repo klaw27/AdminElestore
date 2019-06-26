@@ -301,7 +301,7 @@ export class NuevonegocioPage {
     then((imageData) => 
     {
       imageData = escape(imageData);
-      this.negocio.fotografia2 = 'data:image/jpg;base64,'+imageData;
+      this.negocio.fotografia2 = 'data:image/jpeg;base64,'+imageData;
       this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.negocio.fotografia2}`);
 
      }, (err) => {
@@ -339,7 +339,7 @@ export class NuevonegocioPage {
     .then((imageData) => {
       
       imageData = escape(imageData);
-      this.negocio.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.negocio.fotografia = 'data:image/jpeg;base64,'+imageData;
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.negocio.fotografia}`);
     
      }, (err) => {

@@ -70,12 +70,13 @@ export class PerfilPage {
       this.numeroTelefonico = this.formGroup.controls['numeroTelefonico'];
 
       this.userModel =  navParams.get('item');
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
 
   }
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
-    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
+    
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -175,7 +176,7 @@ export class PerfilPage {
     .then((imageData) => 
     {
       imageData = escape(imageData);
-      this.userModel.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.userModel.fotografia = 'data:image/jpeg;base64,'+imageData;
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
 
      }, (err) => {

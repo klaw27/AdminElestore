@@ -11,6 +11,8 @@ import { Storage } from '@ionic/storage';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 
 
+declare function escape(s:string): string;
+
 // @IonicPage()
 @Component({
   selector: 'page-inicio',
@@ -18,7 +20,8 @@ import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 })
 export class InicioPage {
   public userModel: User = new User();
-  imgSource:any  = '/assets/imgs/user.png';
+  // imgSource:any  = '/assets/imgs/user.png';
+  fotografia:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,12 +32,12 @@ export class InicioPage {
   {
       this.userModel = navParams.get('item');
 
-      this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
-                        this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.fotografia): this.imgSource;
+      // this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
+      //                   this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.fotografia): this.imgSource;
 
-      // this.userModel.fotografia = this.userModel.fotografia !== ""? 'data:image/jpeg;base64,' + this.userModel.fotografia: this.userModel.fotografia; 
-      // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
-      console.log(this.userModel);
+      // // this.userModel.fotografia = this.userModel.fotografia !== ""? 'data:image/jpeg;base64,' + this.userModel.fotografia: this.userModel.fotografia; 
+      // // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
+      // console.log(this.userModel);
 
       // this.afdb.list("pedidos/53").snapshotChanges().subscribe(data=>{
       //   data.map(data=>{
@@ -58,7 +61,7 @@ export class InicioPage {
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
-    
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}

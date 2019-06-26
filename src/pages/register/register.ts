@@ -167,7 +167,7 @@ export class RegisterPage {
     .then((imageData) => 
     {
       imageData = escape(imageData);
-      this.userModel.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.userModel.fotografia = 'data:image/jpeg;base64,'+imageData;
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
      }, (err) => {
       // Handle error

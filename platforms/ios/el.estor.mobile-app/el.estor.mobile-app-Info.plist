@@ -56,6 +56,10 @@
     <string>CDVLaunchScreen</string>
     <key>NSCameraUsageDescription</key>
     <string>You can take photos</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Necesitamos usar el acceso a la libreria de fotos para escoger una foto de perfil</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Necesitamos usar el acceso a la libreria de fotos para escoger una foto de perfil</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>We use your location for full functionality of certain app features.</string>
   </dict>

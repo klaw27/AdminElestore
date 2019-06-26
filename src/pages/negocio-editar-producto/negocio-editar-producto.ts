@@ -119,7 +119,6 @@ export class NegocioEditarProductoPage {
     });
 
     this.producto = prod;
-    this.producto.fotografia = this.imgSource;
 
      this.toast = this.toastController.create({
       message: 'Ocurrio un error...',
@@ -201,7 +200,7 @@ export class NegocioEditarProductoPage {
       .then((imageData) => 
       {
         imageData = escape(imageData);
-      this.producto.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.producto.fotografia = 'data:image/jpeg;base64,'+imageData;
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia}`);
   
      }, (err) => {

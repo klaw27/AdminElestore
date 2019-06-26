@@ -190,7 +190,7 @@ export class NegocioAgregarProductoPage {
     .then((imageData) => 
     {
       imageData = escape(imageData);
-      this.producto.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.producto.fotografia = 'data:image/jpeg;base64,'+imageData;
       this.fotografia  = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia }`);
  
      }, (err) => {

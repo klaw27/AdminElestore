@@ -7,14 +7,14 @@
 
 <ion-content padding>
     <div class="user">
-        <img class="imgUser" [src]="imgSource">
+        <img class="imgUser" [src]="fotografia" onError="this.src='/assets/imgs/user.png'">
         <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>
       </div>
 <h2>Opciones del Menú</h2>
   <ion-list>
       <ion-item class="opcion" (click)="verPerfil($event)">
           <ion-thumbnail item-start>
-            <img [src]="imgSource">
+            <img  class="imgUser" [src]="fotografia" >
           </ion-thumbnail>
           <h2>Mi Perfil</h2>
         </ion-item>

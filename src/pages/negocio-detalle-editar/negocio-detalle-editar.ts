@@ -223,7 +223,7 @@ export class NegocioDetalleEditarPage {
     .then((imageData) => 
     {
       imageData = escape(imageData);
-      this.negocio.fotografia2 = 'data:image/jpg;base64,'+imageData;
+      this.negocio.fotografia2 = 'data:image/jpeg;base64,'+imageData;
       this.fotografia2 = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia2}`);
     
      }, (err) => {
@@ -262,7 +262,7 @@ export class NegocioDetalleEditarPage {
     .then((imageData) => {
 
       imageData = escape(imageData);
-      this.negocio.fotografia = 'data:image/jpg;base64,'+imageData;
+      this.negocio.fotografia = 'data:image/jpeg;base64,'+imageData;
       this.fotografia = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia}`);
     
 

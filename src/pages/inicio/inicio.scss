@@ -5,9 +5,12 @@ page-inicio {
     }
 
     .imgUser{
-        width: 40%;
-        height: 40%;
-        margin: 35px auto 30px auto;
+        margin: 0 auto;
+        width: 150px;
+        height: 150px;
+        display: block;
+        position: relative;
+        border-radius: 50%;
     }
 
     .nomCliente{
