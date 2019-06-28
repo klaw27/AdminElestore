@@ -92,7 +92,7 @@ export class LoginPage {
             buttons: [{
               text: 'Ok',
             handler: () => {
-                if(data[0] !== undefined &&
+                if(
                   data !== null &&
                   data !== undefined)
                 {

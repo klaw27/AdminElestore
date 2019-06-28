@@ -90,7 +90,7 @@ export class NegocioEditarProductoPage {
   ionViewDidLoad() {}
   ionViewWillEnter(){
     this.obtnerCatProductoPorIdCatNegocio();
-    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia}`);
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.producto.fotografia}`);
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}

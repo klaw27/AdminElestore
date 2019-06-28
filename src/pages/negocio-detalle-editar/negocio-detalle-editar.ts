@@ -95,8 +95,8 @@ export class NegocioDetalleEditarPage {
   ionViewDidLoad() {}
   ionViewWillEnter(){
 
-    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
-    this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia2}`);
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.userModel.negocio[0].fotografia}`);
+    this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.userModel.negocio[0].fotografia2}`);
 
     this.getCatNegocio();
   }
@@ -225,7 +225,6 @@ export class NegocioDetalleEditarPage {
       imageData = escape(imageData);
       this.negocio.fotografia2 = 'data:image/jpeg;base64,'+imageData;
       this.fotografia2 = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia2}`);
-    
      }, (err) => {
       this.toast = this.toastController.create({
         message: err,
@@ -260,12 +259,9 @@ export class NegocioDetalleEditarPage {
 
     this.camera.getPicture(options)
     .then((imageData) => {
-
       imageData = escape(imageData);
-      this.negocio.fotografia = 'data:image/jpeg;base64,'+imageData;
+      this.negocio.fotografia = 'data:image/jpeg;base64,'+ imageData;
       this.fotografia = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia}`);
-    
-
      }, (err) => {
       this.toast = this.toastController.create({
         message: err,
