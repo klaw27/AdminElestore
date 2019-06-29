@@ -8,6 +8,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Storage } from '@ionic/storage';
 
+import { normalizeURL} from 'ionic-angular';
+
+
 declare function escape(s:string): string;
 
 // @IonicPage()
@@ -36,6 +39,8 @@ export class PerfilPage {
   fotografia:any;
 
   toast:any;
+
+  photo:any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -88,9 +93,8 @@ export class PerfilPage {
 
   guardarCambios($event, usr)
   {
-    this.userModel = usr;
-    // this.userModel.fotografia = this.fotografia;
-
+    debugger
+    
     this.toast = this.toastController.create({
       message: 'Connection error...',
       showCloseButton: true,
@@ -112,28 +116,27 @@ export class PerfilPage {
 
 
     loader.present().then(() => {
-      this.api.actualizarCuenta(this.userModel).subscribe(
+      this.api.actualizarCuenta(usr).subscribe(
         (data: User) => {
            if(data.toString()=== '0')
            {
               this.toast.present().then(() =>{
                 this.toast.dismiss();
+                loader.dismiss();
+                
               });
            }
            if(data.toString() === '1')
            {
             alert.present().then(() => {
-                this.navCtrl.push(InicioPage, {item:this.userModel})
                 this.remove('usuario').then(() => {
                     this.set('usuario', this.userModel).then(() => {
                       this.navCtrl.push(InicioPage,{item:this.userModel})
                       loader.dismiss();
-                    });
-                    
+                    }); 
                 });
             });
            }
-           loader.dismiss();
         },
          (error: any) => {
           this.toast = this.toastController.create({
@@ -143,7 +146,7 @@ export class PerfilPage {
             closeButtonText: 'Ok'
           });
            
-              
+          loader.dismiss();
             this.toast.onDidDismiss(() => {
               
             });
@@ -177,6 +180,7 @@ export class PerfilPage {
     {
       console.log(imageData);
       imageData = escape(imageData);
+
       this.userModel.fotografia = 'data:image/jpeg;base64,'+ imageData;
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.fotografia}`);
 
@@ -199,29 +203,32 @@ export class PerfilPage {
 
   }
   
-  public presentActionSheet() {
+  public async presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select image source',
       buttons: [
         {
           text: 'Abrir galeria',
+          icon: 'images',
           handler: () => {
             this.capturarFoto(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: 'Usar Camera',
+          icon: 'camera',
           handler: () => {
             this.capturarFoto(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
           text: 'Cancelar',
-          role: 'cancel'
+          role: 'cancel',
+          icon: 'close',
         }
       ]
     });
-    actionSheet.present();
+    await actionSheet.present();
   }
 
   public async remove(settingName){

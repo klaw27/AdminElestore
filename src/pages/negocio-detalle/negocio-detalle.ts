@@ -51,9 +51,9 @@ export class NegocioDetallePage {
     
     if(this.userModel.negocio[0] !== undefined)
     {
-      this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.userModel.negocio[0].fotografia}`);
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
 
-      this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.userModel.negocio[0].fotografia2}`);
+      this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia2}`);
 
       this.cargarProducto();
     }

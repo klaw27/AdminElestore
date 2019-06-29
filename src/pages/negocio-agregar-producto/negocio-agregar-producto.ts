@@ -106,8 +106,11 @@ export class NegocioAgregarProductoPage {
     });
   
 
-    this.producto = prod;
+    // this.producto = prod;
     // this.producto.fotografia = this.imgSource;
+
+    prod = this.producto;
+    // prod.fotografia = this.fotografia;
 
      this.toast = this.toastController.create({
       message: 'Ocurrio un error...',

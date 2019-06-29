@@ -95,8 +95,8 @@ export class NegocioDetalleEditarPage {
   ionViewDidLoad() {}
   ionViewWillEnter(){
 
-    this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.userModel.negocio[0].fotografia}`);
-    this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.userModel.negocio[0].fotografia2}`);
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
+    this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia2}`);
 
     this.getCatNegocio();
   }
@@ -106,12 +106,13 @@ export class NegocioDetalleEditarPage {
   guardarNegocio($event, biz, clientid)
   {
     let strclientid = this.negocio.clientid;
-    this.negocio = biz;
-    this.negocio.clientid = strclientid;
-    
-    // this.negocio.fotografia = this.fotografia;
-    // this.negocio.fotografia2 = this.fotografia2;
+    // this.negocio = biz;
+    // this.negocio.clientid = strclientid;
 
+    biz.clientid = strclientid;
+    biz.fotografia = this.negocio.fotografia;
+    biz.fotografia2 = this.negocio.fotografia2;
+    debugger
 
     let message:string = "Editando negocio..";
     let loader = this.loadingCtrl.create({
@@ -132,7 +133,7 @@ export class NegocioDetalleEditarPage {
         text: 'Ok',
       handler: () => {
         
-        this.userModel.negocio[0] = this.negocio;
+        this.userModel.negocio[0] = biz;
         this.remove('usuario').then(() =>{
           this.set('usuario',this.userModel);
         });
@@ -224,7 +225,7 @@ export class NegocioDetalleEditarPage {
     {
       imageData = escape(imageData);
       this.negocio.fotografia2 = 'data:image/jpeg;base64,'+imageData;
-      this.fotografia2 = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia2}`);
+      this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia2}`);
      }, (err) => {
       this.toast = this.toastController.create({
         message: err,
@@ -261,7 +262,7 @@ export class NegocioDetalleEditarPage {
     .then((imageData) => {
       imageData = escape(imageData);
       this.negocio.fotografia = 'data:image/jpeg;base64,'+ imageData;
-      this.fotografia = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.userModel.negocio[0].fotografia}`);
+      this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
      }, (err) => {
       this.toast = this.toastController.create({
         message: err,

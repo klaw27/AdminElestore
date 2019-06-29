@@ -73,7 +73,9 @@ export class RegisterPage {
   {
     let title = '';
     let subTitle = '';
-    this.userModel = usr;
+    usr.fotografia = this.userModel.fotografia;
+    debugger
+    // this.userModel = usr;
     // this.userModel.fotografia = this.cameraImg;
 
 

@@ -376,11 +376,12 @@ var NuevonegocioPage = /** @class */ (function () {
     NuevonegocioPage.prototype.ionViewWillLeave = function () { };
     NuevonegocioPage.prototype.ionViewWillUnload = function () { };
     NuevonegocioPage.prototype.agregarNegocio = function ($event, biz, clientid) {
+        // this.negocio = biz;
+        // this.negocio.clientid = this.userModel.clientid;
         var _this = this;
-        this.negocio = biz;
-        this.negocio.clientid = this.userModel.clientid;
-        // this.negocio.fotografia = this.imgSourceBanner;
-        // this.negocio.fotografia2 = this.imgSourceLogo;
+        biz.fotografia = this.negocio.fotografia;
+        biz.fotografia2 = this.negocio.fotografia2;
+        debugger;
         var message = "Agregando negocio..";
         var loader = this.loadingCtrl.create({
             content: message
@@ -408,7 +409,7 @@ var NuevonegocioPage = /** @class */ (function () {
             _this.geolocation.getCurrentPosition().then(function (resp) {
                 _this.negocio.latitud = resp.coords.latitude.toString();
                 _this.negocio.longitud = resp.coords.longitude.toString();
-                _this.api.agregarNegocio(_this.negocio).subscribe(function (data) {
+                _this.api.agregarNegocio(biz).subscribe(function (data) {
                     if (data !== null || data === 1) {
                         alert.present().then(function () {
                             loader.dismiss();
@@ -529,8 +530,8 @@ var NuevonegocioPage = /** @class */ (function () {
         this.camera.getPicture(options).
             then(function (imageData) {
             imageData = escape(imageData);
-            _this.negocio.fotografia2 = imageData;
-            _this.fotografia2 = _this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + _this.negocio.fotografia2));
+            _this.negocio.fotografia2 = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia2 = _this._sanitizer.bypassSecurityTrustUrl("" + _this.negocio.fotografia2);
         }, function (err) {
             _this.toast = _this.toastController.create({
                 message: err,
@@ -559,8 +560,8 @@ var NuevonegocioPage = /** @class */ (function () {
         this.camera.getPicture(options)
             .then(function (imageData) {
             imageData = escape(imageData);
-            _this.negocio.fotografia = imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + _this.negocio.fotografia));
+            _this.negocio.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.negocio.fotografia);
         }, function (err) {
             _this.toast = _this.toastController.create({
                 message: err,
@@ -834,9 +835,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
+// const url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
 //  const url = 'https://localhost:5001';
 // const url = 'http://192.168.0.15:5000';
+var url = 'http://192.168.100.46:5000';
 // local
 var baseurlRegistro = url + "/api/registro/usuario";
 var baseurlActualizar = url + "/api/cuenta/actualizar";
@@ -1149,8 +1151,8 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
     }
     NegocioDetalleEditarPage.prototype.ionViewDidLoad = function () { };
     NegocioDetalleEditarPage.prototype.ionViewWillEnter = function () {
-        this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.userModel.negocio[0].fotografia));
-        this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.userModel.negocio[0].fotografia2));
+        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.negocio[0].fotografia);
+        this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.negocio[0].fotografia2);
         this.getCatNegocio();
     };
     NegocioDetalleEditarPage.prototype.ionViewWillLeave = function () { };
@@ -1158,10 +1160,12 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
     NegocioDetalleEditarPage.prototype.guardarNegocio = function ($event, biz, clientid) {
         var _this = this;
         var strclientid = this.negocio.clientid;
-        this.negocio = biz;
-        this.negocio.clientid = strclientid;
-        // this.negocio.fotografia = this.fotografia;
-        // this.negocio.fotografia2 = this.fotografia2;
+        // this.negocio = biz;
+        // this.negocio.clientid = strclientid;
+        biz.clientid = strclientid;
+        biz.fotografia = this.negocio.fotografia;
+        biz.fotografia2 = this.negocio.fotografia2;
+        debugger;
         var message = "Editando negocio..";
         var loader = this.loadingCtrl.create({
             content: message
@@ -1178,7 +1182,7 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
             buttons: [{
                     text: 'Ok',
                     handler: function () {
-                        _this.userModel.negocio[0] = _this.negocio;
+                        _this.userModel.negocio[0] = biz;
                         _this.remove('usuario').then(function () {
                             _this.set('usuario', _this.userModel);
                         });
@@ -1245,8 +1249,8 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
         this.camera.getPicture(options)
             .then(function (imageData) {
             imageData = escape(imageData);
-            _this.negocio.fotografia2 = imageData;
-            _this.fotografia2 = _this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + ("" + _this.userModel.negocio[0].fotografia2));
+            _this.negocio.fotografia2 = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia2 = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.negocio[0].fotografia2);
         }, function (err) {
             _this.toast = _this.toastController.create({
                 message: err,
@@ -1275,8 +1279,8 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
         this.camera.getPicture(options)
             .then(function (imageData) {
             imageData = escape(imageData);
-            _this.negocio.fotografia = imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64,' + ("" + _this.userModel.negocio[0].fotografia));
+            _this.negocio.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.negocio[0].fotografia);
         }, function (err) {
             _this.toast = _this.toastController.create({
                 message: err,
@@ -1437,7 +1441,7 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
     };
     NegocioDetalleEditarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-negocio-detalle-editar',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/'<ion-header>\n    <ion-navbar>\n      <ion-title>Editar Negocio</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n  <ion-content [scrollEvents]="true">\n    <ion-item-group>\n        <div class="contBanner">\n            <img class=banner [src]="\'url(\'+fotografia+\')\'" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n             <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">\n              <ion-icon class="icono" name="camera"></ion-icon>\n            </button>\n            <div class="contLogo">\n              <img class=logo [src]="fotografia2" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n              <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">\n                  <ion-icon class="icono" name="camera"></ion-icon>\n              </button>\n            </div>\n        </div>\n    </ion-item-group>\n  <ion-item-group>\n    \n      <form [formGroup]="formGroup">\n          <ion-list>\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Nombre del negocio" [disabled]="editar" type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n            *Nombre del negocio es obligatorio\n            </p>\n            </ion-item>\n    \n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Calle y Numero" [disabled]="editar" type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="callenumero.hasError(\'required\') && callenumero.touched ">\n                  <p style="color:red">\n          *Calle y numero es obligatorio\n                </p>\n                </ion-item>\n    \n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Colonia" [disabled]="editar" type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="colonia.hasError(\'required\') && colonia.touched ">\n                      <p style="color:red">\n              *Colonia es obligatorio\n                    </p>\n                    </ion-item>\n    \n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Ciudad" [disabled]="editar" type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="ciudad.hasError(\'required\') && ciudad.touched ">\n                          <p style="color:red">\n                  *Ciudad es obligatorio\n                        </p>\n                        </ion-item>\n    \n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Estado" [disabled]="editar" type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="estado.hasError(\'required\') && estado.touched">\n                            <p style="color:red">\n                        *Estado es obligatorio\n                            </p>\n                            </ion-item>\n    \n                            <ion-item class="campo">\n                              <ion-input p class="entrada" placeholder="Codigo Postal" [disabled]="editar" type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>\n                            </ion-item>\n                                <ion-item *ngIf="(codigopostal.hasError(\'required\') && codigopostal.touched) || (codigopostal.hasError(\'maxLength\'))">\n                                  <p style="color:red">\n                          *Codigo Postal es obligatorio\n                              </p>\n                              </ion-item>\n                              <ion-item class="campo">\n                                  <ion-label>Hora Apertura</ion-label>\n                                  <ion-input class="entrada" placeholder="Hora Apertura" type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura"></ion-input>\n                                  <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->\n                                </ion-item>\n                                <ion-item *ngIf="horaapertura.hasError(\'required\') && horaapertura.touched">\n                                  <p style="color:red">\n                              *Hora Apertura es obligatorio\n                                  </p>\n                                  </ion-item>\n                                  <ion-item class="campo">\n                                      <ion-label>Hora Cierre</ion-label>\n                                      <!-- <ion-datetime display-format="HH:mm" formControlName="horacierre"></ion-datetime> -->\n                                      <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre"></ion-input>\n                                    </ion-item>\n                                    <ion-item *ngIf="horacierre.hasError(\'required\') && horacierre.touched">\n                                      <p style="color:red">\n                                  *Hora Cierre es obligatorio\n                                      </p>\n                                      </ion-item>\n                                      <ion-item class="campo">\n                                        <ion-label>Categoria</ion-label>\n                                        <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria"\n                                        onchange="getSubCatNegocio($event, cat)">\n                                          <ion-option (ionSelect)="getSubCatNegocio(this, cat)" value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>\n                                        </ion-select>\n                                      </ion-item>\n                                <!-- <ion-item>\n                                  <ion-label>\n                                    Categoria\n                                  </ion-label>\n                                  <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>\n                                </ion-item> -->\n                                <!-- <ion-item *ngIf="categoria.hasError(\'required\') && categoria.touched">\n                                  <p>\n                              *Categoria es obligatorio\n                                  </p>\n                                  </ion-item> -->\n    \n                                  <ion-item class="campo">\n                                      <ion-label>\n                                        Subcategoria\n                                      </ion-label>\n                                      <ion-select [disabled]="editar" [(ngModel)]="negocio.subcategoria" formControlName="subcategoria" placeholder="Selecciona una subcategoria">\n                                          <ion-option value="{{subcat.nombre}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>\n                                        </ion-select>\n                                    </ion-item>\n                                    <!-- <ion-item *ngIf="subcategoria.hasError(\'required\') && subcategoria.touched">\n                                      <p>\n                                  *Subcategoria es obligatorio\n                                      </p>\n                                      </ion-item> -->\n    \n                                      <ion-item class="campo">\n                                          <ion-input class="entrada" placeholder="Descripcion" [disabled]="editar" type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>\n                                        </ion-item>\n                                        <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                                          <p style="color:red">\n                                      *Descripcion es obligatorio\n                                          </p>\n                                          </ion-item>\n    \n    \n    \n    \n    \n          </ion-list>\n        <ion-grid>\n          <ion-row>\n                   <!-- [disabledd]="formGroup.invalid" -->\n            <button type="submit"  ion-button full color="light" (click)="editarNegocio($event, negocio)" >\n              Editar Negocio\n            </button>\n          </ion-row>\n        <ion-row>\n            <!-- [disabledd]="formGroup.invalid" -->\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button>\n        </ion-row>\n    \n        </ion-grid>\n    \n        </form>\n  </ion-item-group>  \n  \n\n    </ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/,
+            selector: 'page-negocio-detalle-editar',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/'<ion-header>\n    <ion-navbar>\n      <ion-title>Editar Negocio</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n  <ion-content [scrollEvents]="true">\n    <ion-item-group>\n        <div class="contBanner">\n            <img class=banner [src]="fotografia" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n             <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">\n              <ion-icon class="icono" name="camera"></ion-icon>\n            </button>\n            <div class="contLogo">\n              <img class=logo [src]="fotografia2" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n              <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">\n                  <ion-icon class="icono" name="camera"></ion-icon>\n              </button>\n            </div>\n        </div>\n    </ion-item-group>\n  <ion-item-group>\n    \n      <form [formGroup]="formGroup">\n          <ion-list>\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Nombre del negocio" [disabled]="editar" type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n            *Nombre del negocio es obligatorio\n            </p>\n            </ion-item>\n    \n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Calle y Numero" [disabled]="editar" type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="callenumero.hasError(\'required\') && callenumero.touched ">\n                  <p style="color:red">\n          *Calle y numero es obligatorio\n                </p>\n                </ion-item>\n    \n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Colonia" [disabled]="editar" type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="colonia.hasError(\'required\') && colonia.touched ">\n                      <p style="color:red">\n              *Colonia es obligatorio\n                    </p>\n                    </ion-item>\n    \n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Ciudad" [disabled]="editar" type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="ciudad.hasError(\'required\') && ciudad.touched ">\n                          <p style="color:red">\n                  *Ciudad es obligatorio\n                        </p>\n                        </ion-item>\n    \n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Estado" [disabled]="editar" type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="estado.hasError(\'required\') && estado.touched">\n                            <p style="color:red">\n                        *Estado es obligatorio\n                            </p>\n                            </ion-item>\n    \n                            <ion-item class="campo">\n                              <ion-input p class="entrada" placeholder="Codigo Postal" [disabled]="editar" type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>\n                            </ion-item>\n                                <ion-item *ngIf="(codigopostal.hasError(\'required\') && codigopostal.touched) || (codigopostal.hasError(\'maxLength\'))">\n                                  <p style="color:red">\n                          *Codigo Postal es obligatorio\n                              </p>\n                              </ion-item>\n                              <ion-item class="campo">\n                                  <ion-label>Hora Apertura</ion-label>\n                                  <ion-input class="entrada" placeholder="Hora Apertura" type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura"></ion-input>\n                                  <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->\n                                </ion-item>\n                                <ion-item *ngIf="horaapertura.hasError(\'required\') && horaapertura.touched">\n                                  <p style="color:red">\n                              *Hora Apertura es obligatorio\n                                  </p>\n                                  </ion-item>\n                                  <ion-item class="campo">\n                                      <ion-label>Hora Cierre</ion-label>\n                                      <!-- <ion-datetime display-format="HH:mm" formControlName="horacierre"></ion-datetime> -->\n                                      <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre"></ion-input>\n                                    </ion-item>\n                                    <ion-item *ngIf="horacierre.hasError(\'required\') && horacierre.touched">\n                                      <p style="color:red">\n                                  *Hora Cierre es obligatorio\n                                      </p>\n                                      </ion-item>\n                                      <ion-item class="campo">\n                                        <ion-label>Categoria</ion-label>\n                                        <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria"\n                                        onchange="getSubCatNegocio($event, cat)">\n                                          <ion-option (ionSelect)="getSubCatNegocio(this, cat)" value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>\n                                        </ion-select>\n                                      </ion-item>\n                                <!-- <ion-item>\n                                  <ion-label>\n                                    Categoria\n                                  </ion-label>\n                                  <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>\n                                </ion-item> -->\n                                <!-- <ion-item *ngIf="categoria.hasError(\'required\') && categoria.touched">\n                                  <p>\n                              *Categoria es obligatorio\n                                  </p>\n                                  </ion-item> -->\n    \n                                  <ion-item class="campo">\n                                      <ion-label>\n                                        Subcategoria\n                                      </ion-label>\n                                      <ion-select [disabled]="editar" [(ngModel)]="negocio.subcategoria" formControlName="subcategoria" placeholder="Selecciona una subcategoria">\n                                          <ion-option value="{{subcat.nombre}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>\n                                        </ion-select>\n                                    </ion-item>\n                                    <!-- <ion-item *ngIf="subcategoria.hasError(\'required\') && subcategoria.touched">\n                                      <p>\n                                  *Subcategoria es obligatorio\n                                      </p>\n                                      </ion-item> -->\n    \n                                      <ion-item class="campo">\n                                          <ion-input class="entrada" placeholder="Descripcion" [disabled]="editar" type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>\n                                        </ion-item>\n                                        <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                                          <p style="color:red">\n                                      *Descripcion es obligatorio\n                                          </p>\n                                          </ion-item>\n    \n    \n    \n    \n    \n          </ion-list>\n        <ion-grid>\n          <ion-row>\n                   <!-- [disabledd]="formGroup.invalid" -->\n            <button type="submit"  ion-button full color="light" (click)="editarNegocio($event, negocio)" >\n              Editar Negocio\n            </button>\n          </ion-row>\n        <ion-row>\n            <!-- [disabledd]="formGroup.invalid" -->\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button>\n        </ion-row>\n    \n        </ion-grid>\n    \n        </form>\n  </ion-item-group>  \n  \n\n    </ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
@@ -1530,7 +1534,9 @@ var RegisterPage = /** @class */ (function () {
         var _this = this;
         var title = '';
         var subTitle = '';
-        this.userModel = usr;
+        usr.fotografia = this.userModel.fotografia;
+        debugger;
+        // this.userModel = usr;
         // this.userModel.fotografia = this.cameraImg;
         var loaderReg = this.loadingCtrl.create({
             content: 'Registrando usuario...'
@@ -1599,8 +1605,8 @@ var RegisterPage = /** @class */ (function () {
         this.camera.getPicture(options)
             .then(function (imageData) {
             imageData = escape(imageData);
-            _this.userModel.fotografia = imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + _this.userModel.fotografia));
+            _this.userModel.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.fotografia);
         }, function (err) {
             // Handle error
         });
@@ -1632,7 +1638,7 @@ var RegisterPage = /** @class */ (function () {
     };
     RegisterPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-register',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Pagina de Registro</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="\'data:image/jpeg;base64,\'+fotografia" onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n\n<form [formGroup]="formGroup">\n  <ion-list>\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Nombre" type="text" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n        </ion-item>\n          <ion-item  *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n          <p style="color:red">\n          *Nombre es requerido\n          </p>\n          </ion-item>\n\n          <ion-item class="campo">\n              <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n            </ion-item>\n              <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n            *Apellido Paterno es requerido\n              </p>\n              </ion-item>\n\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Apeliido Materno" type="text" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                </ion-item>\n                  <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n            *Apellido Materno es requerido\n                  </p>\n                  </ion-item>\n\n                  <ion-item class="campo">\n                      <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                    </ion-item>\n                      <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                *Nombre de Usuario es requerido\n                      </p>\n                      </ion-item>\n\n                      <ion-item class="campo">\n                          <ion-input class="entrada" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                          *Contraseña invalida\n                          </p>\n                          <p *ngIf="(password.touched && userModel?.password?.length < 8)" style="color:red">\n                            *Contraseña debe tener por lo menos 8 caracteres\n                          </p>\n                          </ion-item>\n\n                          <ion-item class="campo">\n                              <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                            </ion-item>\n                            <ion-item *ngIf="(confirmPassword.hasError(\'required\') && confirmPassword.touched)">\n                                <p style="color:red">\n                            *Contraseña invalida\n                              </p>\n                              <p *ngIf="(confirmPassword.touched && userModel?.confirmPassword?.length < 8)" style="color:red">\n                                *Contraseña debe tener por lo menos 8 caracteres\n                              </p>\n                            </ion-item>\n                              <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                              *Contraseñas no son iguales\n                                  </p>\n                                  </ion-item>\n\n    <ion-item class="campo">\n      <ion-input class="entrada" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n    </ion-item>\n      <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n          *Correo es requerido\n      </p>\n      </ion-item>\n\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Número Telefonico" type="number" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n        </ion-item>\n          <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n    *Telefono es requerido\n          </p>\n          </ion-item>\n\n  </ion-list>\n<ion-grid>\n<ion-row>\n<button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="crearCuenta($event, userModel)" >\n  Crear Cuenta\n</button>\n</ion-row>\n</ion-grid>\n\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/,
+            selector: 'page-register',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Pagina de Registro</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia" onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n\n<form [formGroup]="formGroup">\n  <ion-list>\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Nombre" type="text" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n        </ion-item>\n          <ion-item  *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n          <p style="color:red">\n          *Nombre es requerido\n          </p>\n          </ion-item>\n\n          <ion-item class="campo">\n              <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n            </ion-item>\n              <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n            *Apellido Paterno es requerido\n              </p>\n              </ion-item>\n\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Apeliido Materno" type="text" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                </ion-item>\n                  <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n            *Apellido Materno es requerido\n                  </p>\n                  </ion-item>\n\n                  <ion-item class="campo">\n                      <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                    </ion-item>\n                      <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                *Nombre de Usuario es requerido\n                      </p>\n                      </ion-item>\n\n                      <ion-item class="campo">\n                          <ion-input class="entrada" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                          *Contraseña invalida\n                          </p>\n                          <p *ngIf="(password.touched && userModel?.password?.length < 8)" style="color:red">\n                            *Contraseña debe tener por lo menos 8 caracteres\n                          </p>\n                          </ion-item>\n\n                          <ion-item class="campo">\n                              <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                            </ion-item>\n                            <ion-item *ngIf="(confirmPassword.hasError(\'required\') && confirmPassword.touched)">\n                                <p style="color:red">\n                            *Contraseña invalida\n                              </p>\n                              <p *ngIf="(confirmPassword.touched && userModel?.confirmPassword?.length < 8)" style="color:red">\n                                *Contraseña debe tener por lo menos 8 caracteres\n                              </p>\n                            </ion-item>\n                              <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                              *Contraseñas no son iguales\n                                  </p>\n                                  </ion-item>\n\n    <ion-item class="campo">\n      <ion-input class="entrada" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n    </ion-item>\n      <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n          *Correo es requerido\n      </p>\n      </ion-item>\n\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Número Telefonico" type="number" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n        </ion-item>\n          <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n    *Telefono es requerido\n          </p>\n          </ion-item>\n\n  </ion-list>\n<ion-grid>\n<ion-row>\n<button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="crearCuenta($event, userModel)" >\n  Crear Cuenta\n</button>\n</ion-row>\n</ion-grid>\n\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
@@ -2013,7 +2019,7 @@ var PerfilPage = /** @class */ (function () {
     }
     PerfilPage.prototype.ionViewDidLoad = function () { };
     PerfilPage.prototype.ionViewWillEnter = function () {
-        this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.userModel.fotografia));
+        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.fotografia);
     };
     PerfilPage.prototype.ionViewWillLeave = function () { };
     PerfilPage.prototype.ionViewWillUnload = function () { };
@@ -2022,8 +2028,7 @@ var PerfilPage = /** @class */ (function () {
     };
     PerfilPage.prototype.guardarCambios = function ($event, usr) {
         var _this = this;
-        this.userModel = usr;
-        // this.userModel.fotografia = this.fotografia;
+        debugger;
         this.toast = this.toastController.create({
             message: 'Connection error...',
             showCloseButton: true,
@@ -2039,15 +2044,15 @@ var PerfilPage = /** @class */ (function () {
             content: 'Actualizando perfil...'
         });
         loader.present().then(function () {
-            _this.api.actualizarCuenta(_this.userModel).subscribe(function (data) {
+            _this.api.actualizarCuenta(usr).subscribe(function (data) {
                 if (data.toString() === '0') {
                     _this.toast.present().then(function () {
                         _this.toast.dismiss();
+                        loader.dismiss();
                     });
                 }
                 if (data.toString() === '1') {
                     alert.present().then(function () {
-                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
                         _this.remove('usuario').then(function () {
                             _this.set('usuario', _this.userModel).then(function () {
                                 _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
@@ -2056,7 +2061,6 @@ var PerfilPage = /** @class */ (function () {
                         });
                     });
                 }
-                loader.dismiss();
             }, function (error) {
                 _this.toast = _this.toastController.create({
                     message: error,
@@ -2064,6 +2068,7 @@ var PerfilPage = /** @class */ (function () {
                     position: 'bottom',
                     closeButtonText: 'Ok'
                 });
+                loader.dismiss();
                 _this.toast.onDidDismiss(function () {
                 });
                 _this.toast.present().then(function () {
@@ -2090,8 +2095,8 @@ var PerfilPage = /** @class */ (function () {
             .then(function (imageData) {
             console.log(imageData);
             imageData = escape(imageData);
-            _this.userModel.fotografia = imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + _this.userModel.fotografia));
+            _this.userModel.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.fotografia);
         }, function (err) {
             _this.toast = _this.toastController.create({
                 message: err,
@@ -2106,29 +2111,43 @@ var PerfilPage = /** @class */ (function () {
         });
     };
     PerfilPage.prototype.presentActionSheet = function () {
-        var _this = this;
-        var actionSheet = this.actionSheetCtrl.create({
-            title: 'Select image source',
-            buttons: [
-                {
-                    text: 'Abrir galeria',
-                    handler: function () {
-                        _this.capturarFoto(_this.camera.PictureSourceType.PHOTOLIBRARY);
-                    }
-                },
-                {
-                    text: 'Usar Camera',
-                    handler: function () {
-                        _this.capturarFoto(_this.camera.PictureSourceType.CAMERA);
-                    }
-                },
-                {
-                    text: 'Cancelar',
-                    role: 'cancel'
+        return __awaiter(this, void 0, void 0, function () {
+            var actionSheet;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        actionSheet = this.actionSheetCtrl.create({
+                            title: 'Select image source',
+                            buttons: [
+                                {
+                                    text: 'Abrir galeria',
+                                    icon: 'images',
+                                    handler: function () {
+                                        _this.capturarFoto(_this.camera.PictureSourceType.PHOTOLIBRARY);
+                                    }
+                                },
+                                {
+                                    text: 'Usar Camera',
+                                    icon: 'camera',
+                                    handler: function () {
+                                        _this.capturarFoto(_this.camera.PictureSourceType.CAMERA);
+                                    }
+                                },
+                                {
+                                    text: 'Cancelar',
+                                    role: 'cancel',
+                                    icon: 'close',
+                                }
+                            ]
+                        });
+                        return [4 /*yield*/, actionSheet.present()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
-            ]
+            });
         });
-        actionSheet.present();
     };
     PerfilPage.prototype.remove = function (settingName) {
         return __awaiter(this, void 0, void 0, function () {
@@ -2143,12 +2162,21 @@ var PerfilPage = /** @class */ (function () {
     PerfilPage.prototype.set = function (settingName, value) {
         return this.storage.set("setting:" + settingName, value);
     };
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
     PerfilPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-perfil',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Editar Perfil</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="\'data:image/jpeg;base64,\'+fotografia"  onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" [disabled]="isDisabled" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="lista">\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Nombre" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n      </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n      *Valid Name is required\n            </p>\n            </ion-item>\n\n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n          *Valid Name is required\n                </p>\n                </ion-item>\n\n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Apellido Materno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n              *Valid Name is required\n                    </p>\n                    </ion-item>\n\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                  *Valid User Name is required\n                        </p>\n                        </ion-item>\n\n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Contraseña" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                        *Type a valid password\n                            </p>\n                            </ion-item>\n\n                            <ion-item class="campo">\n                                <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                              </ion-item>\n                              <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n                                <p style="color:red">\n                            *Type a valid password\n                                </p>\n                                </ion-item>\n                                <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                                *Passwords does not match\n                                    </p>\n                                    </ion-item>\n\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Correo" type="email" disabled="true" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n  *Valid email is required\n        </p>\n        </ion-item>\n\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Numero Telefonico" type="number" disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n      *Valid phone number is required\n            </p>\n            </ion-item>\n            <br/>\n    </ion-list>\n  <ion-grid>\n    <ion-row>\n        <button ion-button full color="light" (click)="editarPerfil()" >\n            Editar Perfil\n        </button>\n    </ion-row>\n  <ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="guardarCambios($event, userModel)" >\n    Guardar cambios\n  </button>\n  </ion-row>\n  </ion-grid>\n\n  </form>\n\n  </ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/,
+            selector: 'page-perfil',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Editar Perfil</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia"  onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" [disabled]="isDisabled" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="lista">\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Nombre" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n      </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n      *Valid Name is required\n            </p>\n            </ion-item>\n\n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n          *Valid Name is required\n                </p>\n                </ion-item>\n\n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Apellido Materno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n              *Valid Name is required\n                    </p>\n                    </ion-item>\n\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                  *Valid User Name is required\n                        </p>\n                        </ion-item>\n\n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Contraseña" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                        *Type a valid password\n                            </p>\n                            </ion-item>\n\n                            <ion-item class="campo">\n                                <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                              </ion-item>\n                              <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n                                <p style="color:red">\n                            *Type a valid password\n                                </p>\n                                </ion-item>\n                                <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                                *Passwords does not match\n                                    </p>\n                                    </ion-item>\n\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Correo" type="email" disabled="true" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n  *Valid email is required\n        </p>\n        </ion-item>\n\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Numero Telefonico" type="number" disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n      *Valid phone number is required\n            </p>\n            </ion-item>\n            <br/>\n    </ion-list>\n  <ion-grid>\n    <ion-row>\n        <button ion-button full color="light" (click)="editarPerfil()" >\n            Editar Perfil\n        </button>\n    </ion-row>\n  <ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="guardarCambios($event, userModel)" >\n    Guardar cambios\n  </button>\n  </ion-row>\n  </ion-grid>\n\n  </form>\n\n  </ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */]) === "function" ? _g : Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]) === "function" ? _h : Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */]) === "function" ? _j : Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]) === "function" ? _k : Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */]) === "function" ? _l : Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */]])
     ], PerfilPage);
     return PerfilPage;
 }());
@@ -2303,7 +2331,7 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
     NegocioAgregarProductoPage.prototype.ionViewDidLoad = function () { };
     NegocioAgregarProductoPage.prototype.ionViewWillEnter = function () {
         this.obtnerCatProductoPorIdCatNegocio();
-        this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.producto.fotografia));
+        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.producto.fotografia);
     };
     NegocioAgregarProductoPage.prototype.ionViewWillLeave = function () { };
     NegocioAgregarProductoPage.prototype.ionViewWillUnload = function () { };
@@ -2325,8 +2353,10 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: message
         });
-        this.producto = prod;
+        // this.producto = prod;
         // this.producto.fotografia = this.imgSource;
+        prod = this.producto;
+        // prod.fotografia = this.fotografia;
         this.toast = this.toastController.create({
             message: 'Ocurrio un error...',
             showCloseButton: true,
@@ -2390,8 +2420,8 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
         this.camera.getPicture(options)
             .then(function (imageData) {
             imageData = escape(imageData);
-            _this.producto.fotografia = imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + _this.producto.fotografia));
+            _this.producto.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.producto.fotografia);
         }, function (err) {
             _this.toast = _this.toastController.create({
                 message: err,
@@ -2557,20 +2587,11 @@ var NegocioEditarProductoPage = /** @class */ (function () {
         this.complemento = this.formGroup.controls['complemento'];
         this.userModel = navParams.get('item');
         this.producto = navParams.get('item2');
-        // // this.imgSource = this.producto.fotografia !== '/assets/imgs/producto.png' ? 
-        // // this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
-        // if(this.producto.fotografia !== '/assets/imgs/producto.png')
-        // {
-        //   this.imgSource = this.producto.fotografia;
-        //   this._sanitizer.bypassSecurityTrustResourceUrl(this.imgSource);
-        // }
-        // // this.producto.fotografia !== '/assets/imgs/producto.png' ? 
-        // // this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
     }
     NegocioEditarProductoPage.prototype.ionViewDidLoad = function () { };
     NegocioEditarProductoPage.prototype.ionViewWillEnter = function () {
         this.obtnerCatProductoPorIdCatNegocio();
-        this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.producto.fotografia));
+        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.producto.fotografia);
     };
     NegocioEditarProductoPage.prototype.ionViewWillLeave = function () { };
     NegocioEditarProductoPage.prototype.ionViewWillUnload = function () { };
@@ -2592,7 +2613,8 @@ var NegocioEditarProductoPage = /** @class */ (function () {
         var loader = this.loadingCtrl.create({
             content: message
         });
-        this.producto = prod;
+        // this.producto = prod;
+        prod.fotografia = this.producto.fotografia;
         this.toast = this.toastController.create({
             message: 'Ocurrio un error...',
             showCloseButton: true,
@@ -2610,7 +2632,7 @@ var NegocioEditarProductoPage = /** @class */ (function () {
                 }]
         });
         loader.present().then(function () {
-            _this.api.editarProducto(_this.producto).subscribe(function (data) {
+            _this.api.editarProducto(prod).subscribe(function (data) {
                 if (data !== null) {
                     alert.present().then(function () {
                         loader.dismiss();
@@ -2655,8 +2677,8 @@ var NegocioEditarProductoPage = /** @class */ (function () {
         this.camera.getPicture(options)
             .then(function (imageData) {
             imageData = escape(imageData);
-            _this.producto.fotografia = imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + _this.producto.fotografia));
+            _this.producto.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.producto.fotografia);
         }, function (err) {
             _this.toast = _this.toastController.create({
                 message: err,
@@ -3124,8 +3146,8 @@ var NegocioDetallePage = /** @class */ (function () {
     NegocioDetallePage.prototype.ionViewWillEnter = function () {
         var _this = this;
         if (this.userModel.negocio[0] !== undefined) {
-            this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.userModel.negocio[0].fotografia));
-            this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.userModel.negocio[0].fotografia2));
+            this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.negocio[0].fotografia);
+            this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.negocio[0].fotografia2);
             this.cargarProducto();
         }
         else {
@@ -3630,7 +3652,7 @@ var InicioPage = /** @class */ (function () {
     // }
     InicioPage.prototype.ionViewDidLoad = function () { };
     InicioPage.prototype.ionViewWillEnter = function () {
-        this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + ("" + this.userModel.fotografia));
+        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.fotografia);
     };
     InicioPage.prototype.ionViewWillLeave = function () { };
     InicioPage.prototype.ionViewWillUnload = function () { };

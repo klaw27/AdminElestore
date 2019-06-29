@@ -97,12 +97,13 @@ export class NuevonegocioPage {
 
   agregarNegocio($event, biz, clientid)
   {
-    this.negocio = biz;
-    this.negocio.clientid = this.userModel.clientid;
+    // this.negocio = biz;
+    // this.negocio.clientid = this.userModel.clientid;
 
-    // this.negocio.fotografia = this.imgSourceBanner;
-    // this.negocio.fotografia2 = this.imgSourceLogo;
+    biz.fotografia= this.negocio.fotografia;
+    biz.fotografia2 = this.negocio.fotografia2;
 
+    debugger
     let message:string = "Agregando negocio..";
     let loader = this.loadingCtrl.create({
       content: message
@@ -139,7 +140,7 @@ export class NuevonegocioPage {
         this.negocio.longitud = resp.coords.longitude.toString();
 
 
-        this.api.agregarNegocio(this.negocio).subscribe(
+        this.api.agregarNegocio(biz).subscribe(
           (data: any) => {
           if(data !== null || data === 1)
             {

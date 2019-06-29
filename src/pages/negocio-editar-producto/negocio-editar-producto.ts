@@ -72,25 +72,12 @@ export class NegocioEditarProductoPage {
 
       this.userModel =  navParams.get('item');
       this.producto = navParams.get('item2');
-
-      // // this.imgSource = this.producto.fotografia !== '/assets/imgs/producto.png' ? 
-      // // this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
-
-      // if(this.producto.fotografia !== '/assets/imgs/producto.png')
-      // {
-      //   this.imgSource = this.producto.fotografia;
-      //   this._sanitizer.bypassSecurityTrustResourceUrl(this.imgSource);
-      // }
-
-      // // this.producto.fotografia !== '/assets/imgs/producto.png' ? 
-      // // this._sanitizer.bypassSecurityTrustResourceUrl(this.producto.fotografia): this.imgSource;
-      
   }
 
   ionViewDidLoad() {}
   ionViewWillEnter(){
     this.obtnerCatProductoPorIdCatNegocio();
-    this.fotografia = this._sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,'+`${this.producto.fotografia}`);
+    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia}`);
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -118,7 +105,10 @@ export class NegocioEditarProductoPage {
       content: message
     });
 
-    this.producto = prod;
+    // this.producto = prod;
+
+    prod.fotografia = this.producto.fotografia;
+    
 
      this.toast = this.toastController.create({
       message: 'Ocurrio un error...',
@@ -139,7 +129,7 @@ export class NegocioEditarProductoPage {
     });
 
    loader.present().then(() => {
-    this.api.editarProducto(this.producto).subscribe(
+    this.api.editarProducto(prod).subscribe(
       (data: Producto) => {
       if(data !== null)
         {
