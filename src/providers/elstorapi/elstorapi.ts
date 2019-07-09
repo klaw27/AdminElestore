@@ -5,13 +5,13 @@ import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
-// const url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
+const url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
 
 //  const url = 'https://localhost:5001';
 
 // const url = 'http://192.168.0.15:5000';
 
-const url = 'http://192.168.100.46:5000'
+// const url = 'http://192.168.100.46:5000'
             
 
 // local

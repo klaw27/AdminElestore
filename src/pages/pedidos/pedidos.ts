@@ -5,6 +5,9 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { User } from '../../models/model';
 import { PedidosTodosPage } from '../pedidos-todos/pedidos-todos';
+import { Storage } from '@ionic/storage';
+import { DefaultKeyValueDiffer } from '@angular/core/src/change_detection/differs/default_keyvalue_differ';
+import { InicioPage } from '../inicio/inicio';
 
 // @IonicPage()
 @Component({
@@ -13,6 +16,7 @@ import { PedidosTodosPage } from '../pedidos-todos/pedidos-todos';
 })
 export class PedidosPage {
   userModel: User = new User();
+  pedidos:any;
 
   public pedidosTodos = PedidosTodosPage;
   public pedidosEntregados = PedidosEntregadosPage;
@@ -20,7 +24,8 @@ export class PedidosPage {
 
   constructor(public navCtrl: NavController,
             public navParams: NavParams,
-            private afdb: AngularFireDatabase,)
+            private afdb: AngularFireDatabase,
+            public storage: Storage)
   {
     this.userModel =  navParams.get('item');
   }
@@ -29,14 +34,28 @@ export class PedidosPage {
   ionViewDidLoad() {}
   ionViewWillEnter()
   {
-    this.afdb.list("pedidos/53").snapshotChanges().subscribe(data=>{
-        data.map(data=>{
-          let info = data.payload.val();
-
-        });
-      });
+    this.get('usuario');
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
 
+  public async get(settingName)
+  {
+    return await this.storage.get(`setting:${ settingName }`).then((value) =>
+    {
+      this.pedidos =value;
+      this.afdb.list("pedidos/" + `${this.pedidos.clientid}`).snapshotChanges().subscribe((data) =>
+      {
+        data.map((data) =>
+        {
+          let info = data.payload.val();
+          debugger;
+        });
+      });
+    });;
+  }
+
+  back(){
+    this.navCtrl.push(InicioPage, {item:this.userModel});
+  }
 }

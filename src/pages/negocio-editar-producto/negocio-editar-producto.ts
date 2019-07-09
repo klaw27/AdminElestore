@@ -77,7 +77,9 @@ export class NegocioEditarProductoPage {
   ionViewDidLoad() {}
   ionViewWillEnter(){
     this.obtnerCatProductoPorIdCatNegocio();
-    this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.producto.fotografia}`);
+    this.fotografia = this
+                    ._sanitizer
+                    .bypassSecurityTrustUrl(`${this.producto.fotografia.changingThisBreaksApplicationSecurity}`);
   }
   ionViewWillLeave(){}
   ionViewWillUnload(){}
@@ -104,11 +106,18 @@ export class NegocioEditarProductoPage {
     let loader = this.loadingCtrl.create({
       content: message
     });
-
+debugger
     // this.producto = prod;
+      if(this.producto.fotografia.changingThisBreaksApplicationSecurity !== null 
+        && this.producto.fotografia.changingThisBreaksApplicationSecurity !== undefined
+        && this.producto.fotografia.changingThisBreaksApplicationSecurity !== '')
+        {
+          prod.fotografia = this
+          .producto
+          .fotografia
+          .changingThisBreaksApplicationSecurity;
+        }
 
-    prod.fotografia = this.producto.fotografia;
-    
 
      this.toast = this.toastController.create({
       message: 'Ocurrio un error...',
@@ -278,7 +287,8 @@ export class NegocioEditarProductoPage {
               position: 'bottom',
               closeButtonText: 'Ok'
             });
-             
+
+            loader.dismiss();
                 
               this.toast.onDidDismiss(() => {
                 
@@ -287,8 +297,11 @@ export class NegocioEditarProductoPage {
                   
                 });
           });
-          loader.dismiss();
+          
         });
   }
-
+  back()
+  {
+    this.navCtrl.push(NegocioDetallePage, {item:this.userModel});
+  }
 }

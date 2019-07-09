@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Listado de pedidos : {{userModel.nombreUsuario}}</ion-title>
-  </ion-navbar>
+    <ion-title style="text-align: center">
+      Listado de pedidos : {{userModel.nombreUsuario}}
+    </ion-title>
 </ion-header>
 
 <ion-tabs>
@@ -15,3 +15,6 @@
 
   </ion-tab>
 </ion-tabs>
+<ion-fab left bottom (click)="back()">
+  <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>
+</ion-fab> 

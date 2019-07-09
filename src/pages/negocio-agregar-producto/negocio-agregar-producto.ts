@@ -292,5 +292,8 @@ export class NegocioAgregarProductoPage {
           });
         });
   }
-  
+    back()
+    {
+      this.navCtrl.push(NegocioDetallePage, {item: this.userModel});
+    } 
 }

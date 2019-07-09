@@ -2,29 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b85214e8-79f3-4d1f-b25c-7793178a4e87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.sourcemaps/12.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../.sourcemaps/12.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.sourcemaps/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../.sourcemaps/main.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/pages/inicio/inicio.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/inicio/inicio.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/pages/login/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/login/login.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/pages/login/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/login/login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/pages/register/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/register/register.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/providers/elstorapi/elstorapi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/providers/elstorapi/elstorapi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/1.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/10.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/10.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/11.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/11.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/12.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/12.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/12.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/12.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/13.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/13.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/2.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/3.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/4.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/6.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/6.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/7.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/7.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../www/build/9.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/9.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../platforms/ios/el.estor.mobile-app.xcodeproj/project.xcworkspace/xcuserdata/miguelvazquez.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/../../platforms/ios/el.estor.mobile-app.xcodeproj/project.xcworkspace/xcuserdata/miguelvazquez.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/negocio-detalle/negocio-detalle.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/negocio-detalle/negocio-detalle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/negocio-detalle/negocio-detalle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/negocio-detalle/negocio-detalle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/negocio-editar-producto/negocio-editar-producto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/negocio-editar-producto/negocio-editar-producto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/nuevonegocio/nuevonegocio.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/nuevonegocio/nuevonegocio.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/pedidos-entregados/pedidos-entregados.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/pedidos-entregados/pedidos-entregados.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/pedidos-no-entregados/pedidos-no-entregados.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/pedidos-no-entregados/pedidos-no-entregados.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/pedidos-todos/pedidos-todos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/pedidos-todos/pedidos-todos.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/pages/pedidos/pedidos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pages/pedidos/pedidos.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/build/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/build/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/main.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/build/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/build/vendor.js" afterDir="false" />
@@ -40,10 +28,10 @@
     <session id="-232921308">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.3" value="1" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.3" value="3" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -63,16 +51,15 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1607" />
-    <option name="y" value="-9" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="797" />
+    <option name="height" value="807" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -141,10 +128,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1607" y="-9" width="1440" height="797" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="807" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.329105" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.32840028" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -167,9 +154,7 @@
     <entry file="file://$PROJECT_DIR$/.idea/android.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../platforms/android/gradlew">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../platforms/android/gradlew" />
     <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">

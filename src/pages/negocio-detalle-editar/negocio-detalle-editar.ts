@@ -450,4 +450,9 @@ export class NegocioDetalleEditarPage {
   public async remove(settingName){
     return await this.storage.remove(`setting:${ settingName }`);
   }
+
+  back()
+  {
+    this.navCtrl.push(NegocioDetallePage, {item:this.userModel})
+  }
 }

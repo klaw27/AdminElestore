@@ -10,6 +10,7 @@ import { convertFormatToKey } from 'ionic-angular/umd/util/datetime-util';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 import { Storage } from '@ionic/storage';
 import { DomSanitizer } from '@angular/platform-browser';
+import { InicioPage } from '../inicio/inicio';
 
 declare function escape(s:string): string;
 
@@ -97,11 +98,9 @@ export class NuevonegocioPage {
 
   agregarNegocio($event, biz, clientid)
   {
-    // this.negocio = biz;
-    // this.negocio.clientid = this.userModel.clientid;
-
     biz.fotografia= this.negocio.fotografia;
     biz.fotografia2 = this.negocio.fotografia2;
+    biz.clientid = this.userModel.clientid;
 
     debugger
     let message:string = "Agregando negocio..";
@@ -123,7 +122,8 @@ export class NuevonegocioPage {
       buttons: [{
         text: 'Ok',
       handler: () => {
-        this.userModel.negocio.push(this.negocio);
+
+        this.userModel.negocio.push(biz);
 
         this.storage.remove('usuario');
         this.storage.set('usuario',this.userModel);
@@ -418,5 +418,9 @@ export class NuevonegocioPage {
 
   public async remove(settingName){
     return await this.storage.remove(`setting:${ settingName }`);
+  }
+  back()
+  {
+    this.navCtrl.push(InicioPage, {item:this.userModel});
   }
 }

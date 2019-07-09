@@ -237,4 +237,9 @@ export class PerfilPage {
   public set(settingName,value){
     return this.storage.set(`setting:${ settingName }`,value);
   }
+
+  back()
+  {
+    this.navCtrl.push(InicioPage, {item:this.userModel});
+  }
 }

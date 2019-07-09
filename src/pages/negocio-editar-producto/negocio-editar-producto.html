@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Editar Producto</ion-title>
-  </ion-navbar>
+    <ion-title style="text-align: center">
+      Editar Producto
+    </ion-title>
 </ion-header>
 
 <ion-content >
@@ -99,4 +99,8 @@
             </button>
         </ion-row>
       </ion-grid>
+
+      <ion-fab left bottom (click)="back()">
+        <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>
+      </ion-fab> 
 </ion-content>

@@ -1,7 +1,5 @@
-<ion-header>
-    <ion-navbar>
-      <ion-title>Editar Negocio</ion-title>
-    </ion-navbar>
+<ion-header>    
+      <ion-title style="text-align: center">Editar Negocio</ion-title>
   </ion-header>
 
   <ion-content [scrollEvents]="true">
@@ -161,6 +159,8 @@
     
         </form>
   </ion-item-group>  
-  
+  <ion-fab left bottom (click)="back()">
+    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>
+</ion-fab> 
 
     </ion-content>

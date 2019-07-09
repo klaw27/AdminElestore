@@ -11,6 +11,8 @@ import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgForOf } from '@angular/common';
 import { NegocioEditarProductoPage } from '../negocio-editar-producto/negocio-editar-producto';
+import { p } from '@angular/core/src/render3';
+
 
 declare function escape(s:string): string;
 
@@ -46,10 +48,13 @@ export class NegocioDetallePage {
   }
 
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() {
+    
+  }
+  
   ionViewWillEnter(){ 
     
-    if(this.userModel.negocio[0] !== undefined)
+    if(this.userModel.negocio.length !== 0)
     {
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
 
@@ -117,7 +122,13 @@ export class NegocioDetallePage {
             if(data !== null)
             {
               loader.dismiss();
+
               this.productos = data;
+              
+              this.productos.forEach((p) =>{
+                p.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${p.fotografia}`);
+              });
+
             }
             else
             {
@@ -172,6 +183,8 @@ export class NegocioDetallePage {
       content: message
     });
 
+    prod.fotografia = prod.fotografia.changingThisBreaksApplicationSecurity;
+
     loader.present().then(() =>{
       this.api.borrarProducto(prod).subscribe(
         (data: Producto[]) => {
@@ -179,6 +192,13 @@ export class NegocioDetallePage {
           if(data !== null)
           {
             this.productos = data;
+            
+            if(this.productos[0].fotografia.changingThisBreaksApplicationSecurity !== undefined){
+              this.productos.forEach((p) => {
+                p.fotografia = this._sanitizer.bypassSecurityTrustUrl(p.fotografia);
+              });
+            }
+    
             loader.dismiss();
           }
           else
@@ -223,5 +243,10 @@ export class NegocioDetallePage {
   editarProducto(prod)
   {
     this.navCtrl.push(NegocioEditarProductoPage,{item:this.userModel, item2:prod})
+  }
+
+  back()
+  {
+    this.navCtrl.push(InicioPage, {item:this.userModel});
   }
 }

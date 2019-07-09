@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{userModel.negocio[0] !== undefined ? userModel.negocio[0].nombre: ''}}</ion-title>
-  </ion-navbar>
+  <ion-title style="text-align: center">
+    {{userModel.negocio[0] !== undefined ? userModel.negocio[0].nombre: ''}}
+  </ion-title>
 </ion-header>
 
 <ion-content [scrollEvents]="true">
@@ -25,7 +25,7 @@
       <ion-item-sliding *virtualItem="let prod " class="contNeg">
           <ion-item>
             <ion-thumbnail item-start class="logoProd">
-              <img [src]="'data:image/jpeg;base64,'+prod.fotografia" onError="this.src='/assets/imgs/producto.png'" class="logimg">
+              <img [src]="prod.fotografia" onError="this.src='/assets/imgs/producto.png'" class="logimg">
             </ion-thumbnail>
             <h2 class="nombreNeg">{{prod.nombre}}</h2>
             <div class="contenedorEstrellas">
@@ -46,5 +46,8 @@
   <ion-fab right bottom (click)="agregarProducto(userModel.negocio[0])">
       <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>
   </ion-fab> 
+  <ion-fab left bottom (click)="back()">
+    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>
+</ion-fab> 
 
 </ion-content>
