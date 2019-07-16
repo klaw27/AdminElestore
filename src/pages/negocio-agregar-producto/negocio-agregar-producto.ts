@@ -222,12 +222,14 @@ export class NegocioAgregarProductoPage {
       buttons: [
         {
           text: 'Abrir galeria',
+          icon: 'images',
           handler: () => {
             this.capturarFotoProducto(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: 'Usar Camera',
+          icon: 'camera',
           handler: () => {
             this.capturarFotoProducto(this.camera.PictureSourceType.CAMERA);
           }

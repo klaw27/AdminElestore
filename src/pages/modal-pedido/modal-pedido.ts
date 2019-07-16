@@ -4,7 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 declare var google;
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-modal-pedido',
   templateUrl: 'modal-pedido.html',

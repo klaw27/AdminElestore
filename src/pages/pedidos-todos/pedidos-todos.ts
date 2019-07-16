@@ -15,6 +15,8 @@ export class PedidosTodosPage {
   public items: Observable<any[]>;
   pedidos:any;
 
+  objPedidosTodos:any;;
+
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
     public api: ElstorapiProvider,
@@ -34,7 +36,8 @@ export class PedidosTodosPage {
       this.afdb.list("pedidos/" + `${this.pedidos.clientid}`).snapshotChanges().subscribe(data=>{
         data.map(data=>{
           let info = data.payload.val();
-          debugger;
+          this.objPedidosTodos = info;
+          debugger
         });
       });
     });;

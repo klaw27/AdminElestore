@@ -18,6 +18,9 @@ export class PedidosPage {
   userModel: User = new User();
   pedidos:any;
 
+  objPedidosTodos:any;
+
+
   public pedidosTodos = PedidosTodosPage;
   public pedidosEntregados = PedidosEntregadosPage;
   public pedidosNoEntregados = PedidosNoEntregadosPage;
@@ -44,12 +47,12 @@ export class PedidosPage {
     return await this.storage.get(`setting:${ settingName }`).then((value) =>
     {
       this.pedidos =value;
-      this.afdb.list("pedidos/" + `${this.pedidos.clientid}`).snapshotChanges().subscribe((data) =>
+      this.afdb.list("pedidos/" + `${this.pedidos.negocio[0].id_negocio}`).snapshotChanges().subscribe((data) =>
       {
         data.map((data) =>
         {
           let info = data.payload.val();
-          debugger;
+          this.objPedidosTodos = info;
         });
       });
     });;
@@ -58,4 +61,5 @@ export class PedidosPage {
   back(){
     this.navCtrl.push(InicioPage, {item:this.userModel});
   }
+
 }

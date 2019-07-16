@@ -29,6 +29,8 @@ export class RegisterPage {
 
   fotografia:any;
 
+  toast:any;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
@@ -83,6 +85,11 @@ export class RegisterPage {
       content: 'Registrando usuario...'
     });
 
+    let loader = this.loadingCtrl.create({
+      content: 'Iniciando sesion...'
+    });
+
+
     loaderReg.present().then(() => {
       this.api.registrarUsuario(usr).subscribe(
       
@@ -97,8 +104,8 @@ export class RegisterPage {
                   subTitle = 'Bienvenido'
                    break;
                    case false:
-                     title =  'Ocurrio un error'
-                     subTitle =  'Ocurrio un error'
+                    title =  'Ocurrio un error'
+                    subTitle =  'Ya existe una cuenta asociada al correo electrònico ' + this.userModel.email
                      break;
                      default:
                        if(data === null){
@@ -109,10 +116,7 @@ export class RegisterPage {
                }
 
   
-          let loader = this.loadingCtrl.create({
-            content: 'Iniciando sesion...'
-          });
-  
+         
   
           let alert = this.alertCtrl.create({
             title: title,
@@ -141,7 +145,21 @@ export class RegisterPage {
           });
         },
          (error: any) => {
+          this.toast = this.toastController.create({
+            message: 'Revise su conexion a internet.',
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
            
+            loader.dismiss();
+
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
           }
         );
     });

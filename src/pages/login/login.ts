@@ -20,6 +20,8 @@ export class LoginPage {
   email:AbstractControl;
   password:AbstractControl;
 
+  toast:any;
+
   imgSource:any  = '/assets/imgs/user.png';
 
   constructor(public navCtrl: NavController,
@@ -29,7 +31,7 @@ export class LoginPage {
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
               public toastController: ToastController,
-              public storage: Storage) {
+              public storage: Storage,) {
 
                 this.formGroup = formBuilder.group({
                   email: ['',[Validators.required, Validators.email]],
@@ -61,7 +63,7 @@ export class LoginPage {
     loader.present().then(() => {
 
       this.api.inicarSesion(usr).subscribe(
-        (data: User) => {
+        (data: any) => {
 
           switch(data)
           {
@@ -74,10 +76,15 @@ export class LoginPage {
                   subTitle = 'Revise su conexion a internet!';
                 break;
                 default:
-                  if(data[0] === undefined)
+                  // if(data[0] === undefined)
+                  // {
+                  //   title = 'Ocurrio un error';
+                  //   subTitle = 'Usuario no registrado!';
+                  // }
+                  if(data.length === 0)
                   {
                     title = 'Ocurrio un error';
-                    subTitle = 'Usuario no registrado!';
+                    subTitle = 'Usuario no registrado/Password incorrectos';
                   }
                   else{
                     title = 'Bienvenido';
@@ -92,9 +99,7 @@ export class LoginPage {
             buttons: [{
               text: 'Ok',
             handler: () => {
-                if(
-                  data !== null &&
-                  data !== undefined)
+                if(data.length > 0)
                 {
                   this.set('usuario',data[0]);
 
@@ -119,10 +124,22 @@ export class LoginPage {
             });
         },
          (error: any) => {
-          title = 'Ocurrio un Error'
-          subTitle = error
-          }
-          );
+          this.toast = this.toastController.create({
+            message: 'Revise su conexion a internet.',
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Ok'
+          });
+           
+            loader.dismiss();
+
+            this.toast.onDidDismiss(() => {
+              
+            });
+            this.toast.present().then(() => {
+                
+              });
+          });
          //loader.dismiss();
     });
   }

@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CurrencyPipe } from '@angular/common';
 
 declare function escape(s:string): string;
 
@@ -49,7 +50,8 @@ export class NegocioEditarProductoPage {
     public navParams: NavParams,
     private _sanitizer: DomSanitizer,
     public navCtrl: NavController,
-    public actionSheetCtrl: ActionSheetController) {
+    public actionSheetCtrl: ActionSheetController,
+    private currencyPipe: CurrencyPipe) {
 
       this.formGroup = formBuilder.group({
         platillo: ['',[Validators.required]],
@@ -228,12 +230,14 @@ debugger
       buttons: [
         {
           text: 'Abrir galeria',
+          icon: 'images',
           handler: () => {
             this.capturarFotoProducto(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: 'Usar Camera',
+          icon: 'camera',
           handler: () => {
             this.capturarFotoProducto(this.camera.PictureSourceType.CAMERA);
           }

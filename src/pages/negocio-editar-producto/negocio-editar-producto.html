@@ -27,7 +27,9 @@
                   </p>
                   </ion-item>
                   <ion-item class="campo"> 
-                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>
+                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar"  type="number" [(ngModel)]="producto.precio" formControlName="precio">
+                         
+                      </ion-input>
                     </ion-item>
                     <ion-item *ngIf="precio.hasError('required') && precio.touched">
                       <p style="color:red">

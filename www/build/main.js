@@ -1,11 +1,11 @@
-webpackJsonp([1],{
+webpackJsonp([0],{
 
 /***/ 206:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__register_register__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
@@ -103,7 +103,7 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["n" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/home/home.html"*/'\n<ion-content padding>\n\n    <img class="logo" src="/assets/imgs/ElEstorLogoCuadroyAza.png" >\n\n<ion-grid>\n<ion-row>\n    <p >\n        Bienvenido, desde aqui podras administrar tu negocio\n    </p>\n</ion-row>\n<ion-row>\n  <ion-col >\n      <button clear ion-button full (click)="goToLoginPage()">\n          Inciar Sesion\n        </button>\n  </ion-col>\n  <ion-col>\n      <button ion-button full (click)="goToRegisterPage()">\n          Registrarse\n        </button>\n    </ion-col>\n</ion-row>\n<ion-row>\n    <ion-footer>\n      <!-- <p text-center>Powered by</p>\n      <p text-center>Lex Software S.A. de C.V. All Rights Reserved 2019</p> -->\n    </ion-footer>\n</ion-row>\n\n</ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]])
     ], HomePage);
     return HomePage;
@@ -122,7 +122,7 @@ var HomePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__inicio_inicio__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(35);
@@ -188,9 +188,14 @@ var LoginPage = /** @class */ (function () {
                         subTitle = 'Revise su conexion a internet!';
                         break;
                     default:
-                        if (data[0] === undefined) {
+                        // if(data[0] === undefined)
+                        // {
+                        //   title = 'Ocurrio un error';
+                        //   subTitle = 'Usuario no registrado!';
+                        // }
+                        if (data.length === 0) {
                             title = 'Ocurrio un error';
-                            subTitle = 'Usuario no registrado!';
+                            subTitle = 'Usuario no registrado/Password incorrectos';
                         }
                         else {
                             title = 'Bienvenido';
@@ -204,8 +209,7 @@ var LoginPage = /** @class */ (function () {
                     buttons: [{
                             text: 'Ok',
                             handler: function () {
-                                if (data !== null &&
-                                    data !== undefined) {
+                                if (data.length > 0) {
                                     _this.set('usuario', data[0]);
                                     var loader_1 = _this.loadingCtrl.create({
                                         content: 'Iniciando sesion...'
@@ -225,8 +229,17 @@ var LoginPage = /** @class */ (function () {
                     loader.dismiss();
                 });
             }, function (error) {
-                title = 'Ocurrio un Error';
-                subTitle = error;
+                _this.toast = _this.toastController.create({
+                    message: 'Revise su conexion a internet.',
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                loader.dismiss();
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
             });
             //loader.dismiss();
         });
@@ -241,13 +254,13 @@ var LoginPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'page-login',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Inicio de Sesion</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n      <img class="imgUser" [src]="imgSource">\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="list">\n      <ion-item class="correo">\n        <ion-input class="correo-input" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="email.hasError(\'required\') && email.touched ">\n        <p style="color:red">\n*Valid email is required\n        </p>\n        </ion-item>\n      <ion-item class="contraseña">\n        <ion-input class="contraseña-input" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n      </ion-item>\n      <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n        <p style="color:red">\n    *Type a valid password\n        </p>\n        </ion-item>\n\n    </ion-list>\n<ion-grid>\n<ion-row>\n  <button clear  type="submit"  [disabled]="formGroup.invalid" ion-button full (click)="iniciarSesion($event, userModel)" >\n    Iniciar Sesion\n</button>\n</ion-row>\n<ion-row>\n  <button clear ion-button full color="danger" (click)="recuperarCuenta()" >\n    Olvide Mi Contrasenia\n</button>\n</ion-row>\n</ion-grid>\n\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/login/login.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]])
     ], LoginPage);
     return LoginPage;
@@ -262,17 +275,17 @@ var LoginPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NuevonegocioPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__inicio_inicio__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -583,12 +596,14 @@ var NuevonegocioPage = /** @class */ (function () {
             buttons: [
                 {
                     text: 'Abrir galeria',
+                    icon: 'images',
                     handler: function () {
                         _this.capturarFotoBanner(_this.camera.PictureSourceType.PHOTOLIBRARY);
                     }
                 },
                 {
                     text: 'Usar Camera',
+                    icon: 'camera',
                     handler: function () {
                         _this.capturarFotoBanner(_this.camera.PictureSourceType.CAMERA);
                     }
@@ -644,14 +659,14 @@ var NuevonegocioPage = /** @class */ (function () {
     };
     NuevonegocioPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-nuevonegocio',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/nuevonegocio/nuevonegocio.html"*/'<ion-header>\n      <ion-title style="text-align: center">Agregar Negocio</ion-title>\n  </ion-header>\n\n  <ion-content>\n    <ion-item-group>\n        <div class="contBanner">\n            <img class=banner [src]="fotografia" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'" >\n             <button  color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">\n              <ion-icon class="icono" name="camera"></ion-icon>\n            </button>\n            <div class="contLogo">\n              <img class=logo [src]="fotografia2" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'" >\n              <button  color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">\n                  <ion-icon class="icono" name="camera"></ion-icon>\n              </button>\n            </div>\n        </div>\n    </ion-item-group>\n<ion-item-group>\n    <form [formGroup]="formGroup">\n        <ion-list>\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Nombre del negocio"  type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>\n        </ion-item>\n          <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n            <p style="color:red">\n          *Nombre del negocio es obligatorio\n          </p>\n          </ion-item>\n  \n          <ion-item class="campo">\n              <ion-input class="entrada" placeholder="Calle y Numero"  type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>\n            </ion-item>\n              <ion-item *ngIf="callenumero.hasError(\'required\') && callenumero.touched ">\n                <p style="color:red">\n        *Calle y numero es obligatorio\n              </p>\n              </ion-item>\n  \n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Colonia"  type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>\n                </ion-item>\n                  <ion-item *ngIf="colonia.hasError(\'required\') && colonia.touched ">\n                    <p style="color:red">\n            *Colonia es obligatorio\n                  </p>\n                  </ion-item>\n  \n                  <ion-item class="campo">\n                      <ion-input class="entrada" placeholder="Ciudad"  type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>\n                    </ion-item>\n                      <ion-item *ngIf="ciudad.hasError(\'required\') && ciudad.touched ">\n                        <p style="color:red">\n                *Ciudad es obligatorio\n                      </p>\n                      </ion-item>\n  \n                      <ion-item class="campo">\n                          <ion-input class="entrada" placeholder="Estado"  type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="estado.hasError(\'required\') && estado.touched">\n                          <p style="color:red">\n                      *Estado es obligatorio\n                          </p>\n                          </ion-item>\n  \n                          <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Codigo Postal"  type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="(codigopostal.hasError(\'required\') && codigopostal.touched) || (codigopostal.hasError(\'maxLength\'))">\n                            <p style="color:red">\n                        *Codigo Postal es obligatorio / Maximo 5 digitos\n                            </p>\n                            </ion-item>\n                            <ion-item class="campo">\n                                <ion-label>Hora Apertura</ion-label>\n                                <ion-input class="entrada" placeholder="Hora Apertura"  type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura"></ion-input>\n                                <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->\n                              </ion-item>\n                              <ion-item *ngIf="horaapertura.hasError(\'required\') && horaapertura.touched">\n                                <p style="color:red">\n                            *Hora Apertura es obligatorio\n                                </p>\n                                </ion-item>\n                                <ion-item class="campo">\n                                    <ion-label>Hora Cierre</ion-label>\n                                    <!-- <ion-datetime display-format="HH:mm" formControlName="horacierre"></ion-datetime> -->\n                                    <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre"></ion-input>\n                                  </ion-item>\n                                  <ion-item *ngIf="horacierre.hasError(\'required\') && horacierre.touched">\n                                    <p style="color:red">\n                                *Hora Cierre es obligatorio\n                                    </p>\n                                    </ion-item>\n                                    <ion-item class="campo">\n                                      <ion-label>Categoria</ion-label>\n                                      <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria"\n                                      onchange="getSubCatNegocio($event, cat)">\n                                        <ion-option (ionSelect)="getSubCatNegocio(this, cat)" value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>\n                                      </ion-select>\n                                    </ion-item>\n                              <!-- <ion-item>\n                                <ion-label>\n                                  Categoria\n                                </ion-label>\n                                <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>\n                              </ion-item> -->\n                              <!-- <ion-item *ngIf="categoria.hasError(\'required\') && categoria.touched">\n                                <p style="color:red">\n                            *Categoria es obligatorio\n                                </p>\n                                </ion-item> -->\n  \n                                <ion-item class="campo">\n                                    <ion-label>\n                                      Subcategoria\n                                    </ion-label>\n                                    <ion-select  [(ngModel)]="negocio.FK_subcategoria" formControlName="FK_subcategoria" placeholder="Selecciona una subcagetoria">\n                                        <ion-option value="{{subcat.fK_CATNEGOCIO}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>\n                                      </ion-select>\n                                  </ion-item>\n                                  <!-- <ion-item *ngIf="subcategoria.hasError(\'required\') && subcategoria.touched">\n                                    <p style="color:red">\n                                *Subcategoria es obligatorio\n                                    </p>\n                                    </ion-item> -->\n  \n                                    <ion-item class="campo">\n                                        <ion-input class="entrada" placeholder="Descripcion"  type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>\n                                      </ion-item>\n                                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                                        <p style="color:red">\n                                    *Descripcion es obligatorio\n                                        </p>\n                                        </ion-item>\n  \n\n        </ion-list>\n    <ion-grid>\n    <ion-col>\n  \n    </ion-col>\n    <ion-col>\n    <ion-row>\n        <!-- [disabled]="formGroup.invalid" -->\n    <button type="submit"  ion-button full color="light" (click)="agregarNegocio($event, negocio)" >\n      Agregar Negocio\n    </button>\n    </ion-row>\n    <ion-row>\n    <button ion-button full color="danger" (click)="cancelar()" >\n      Cancelar\n    </button>\n    </ion-row>\n    </ion-col>\n    <ion-col>\n  \n    </ion-col>\n    </ion-grid>\n  \n    </form>\n  \n</ion-item-group>\n<ion-fab left bottom (click)="back()">\n  <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n  </ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/nuevonegocio/nuevonegocio.html"*/,
+            selector: 'page-nuevonegocio',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/nuevonegocio/nuevonegocio.html"*/'<ion-header>\n      <ion-title style="text-align: center">Agregar Negocio</ion-title>\n  </ion-header>\n\n  <ion-content>\n    <ion-item-group>\n        <div class="contBanner">\n            <img class=banner [src]="fotografia" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'" >\n             <button  color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">\n              <ion-icon class="icono" name="camera"></ion-icon>\n            </button>\n            <div class="contLogo">\n              <img class=logo [src]="fotografia2" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'" >\n              <button  color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">\n                  <ion-icon class="icono" name="camera"></ion-icon>\n              </button>\n            </div>\n        </div>\n    </ion-item-group>\n<ion-item-group>\n    <form [formGroup]="formGroup">\n        <ion-list>\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Nombre del negocio"  type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>\n        </ion-item>\n          <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n            <p style="color:red">\n          *Nombre del negocio es obligatorio\n          </p>\n          </ion-item>\n          <ion-item class="campo">\n              <ion-input class="entrada" placeholder="Calle y Numero"  type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>\n            </ion-item>\n              <ion-item *ngIf="callenumero.hasError(\'required\') && callenumero.touched ">\n                <p style="color:red">\n        *Calle y numero es obligatorio\n              </p>\n              </ion-item>\n  \n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Colonia"  type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>\n                </ion-item>\n                  <ion-item *ngIf="colonia.hasError(\'required\') && colonia.touched ">\n                    <p style="color:red">\n            *Colonia es obligatorio\n                  </p>\n                  </ion-item>\n  \n                  <ion-item class="campo">\n                      <ion-input class="entrada" placeholder="Ciudad"  type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>\n                    </ion-item>\n                      <ion-item *ngIf="ciudad.hasError(\'required\') && ciudad.touched ">\n                        <p style="color:red">\n                *Ciudad es obligatorio\n                      </p>\n                      </ion-item>\n  \n                      <ion-item class="campo">\n                          <ion-input class="entrada" placeholder="Estado"  type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="estado.hasError(\'required\') && estado.touched">\n                          <p style="color:red">\n                      *Estado es obligatorio\n                          </p>\n                          </ion-item>\n  \n                          <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Codigo Postal"  type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="(codigopostal.hasError(\'required\') && codigopostal.touched) || (codigopostal.hasError(\'maxLength\'))">\n                            <p style="color:red">\n                        *Codigo Postal es obligatorio / Maximo 5 digitos\n                            </p>\n                            </ion-item>\n                            <ion-item class="campo">\n                                <ion-label>Hora Apertura</ion-label>\n                                <ion-input class="entrada" placeholder="Hora Apertura"  type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura">\n                                  0:00:00\n                                </ion-input>\n                                <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->\n                              </ion-item>\n                              <ion-item *ngIf="horaapertura.hasError(\'required\') && horaapertura.touched">\n                                <p style="color:red">\n                            *Hora Apertura es obligatorio\n                                </p>\n                                </ion-item>\n                                <ion-item class="campo">\n                                    <ion-label>Hora Cierre</ion-label>\n                                    <!-- <ion-datetime display-format="HH:mm" formControlName="horacierre"></ion-datetime> -->\n                                    <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre">\n                                      0:00:00\n                                    </ion-input>\n                                  </ion-item>\n                                  <ion-item *ngIf="horacierre.hasError(\'required\') && horacierre.touched">\n                                    <p style="color:red">\n                                *Hora Cierre es obligatorio\n                                    </p>\n                                    </ion-item>\n                                    <ion-item class="campo">\n                                      <ion-label>Categoria</ion-label>\n                                      <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria"\n                                      onchange="getSubCatNegocio($event, cat)">\n                                        <ion-option (ionSelect)="getSubCatNegocio(this, cat)" value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>\n                                      </ion-select>\n                                    </ion-item>\n                              <!-- <ion-item>\n                                <ion-label>\n                                  Categoria\n                                </ion-label>\n                                <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>\n                              </ion-item> -->\n                              <!-- <ion-item *ngIf="categoria.hasError(\'required\') && categoria.touched">\n                                <p style="color:red">\n                            *Categoria es obligatorio\n                                </p>\n                                </ion-item> -->\n  \n                                <ion-item class="campo">\n                                    <ion-label>\n                                      Subcategoria\n                                    </ion-label>\n                                    <ion-select  [(ngModel)]="negocio.FK_subcategoria" formControlName="FK_subcategoria" placeholder="Selecciona una subcagetoria">\n                                        <ion-option value="{{subcat.fK_CATNEGOCIO}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>\n                                      </ion-select>\n                                  </ion-item>\n                                  <!-- <ion-item *ngIf="subcategoria.hasError(\'required\') && subcategoria.touched">\n                                    <p style="color:red">\n                                *Subcategoria es obligatorio\n                                    </p>\n                                    </ion-item> -->\n  \n                                    <ion-item class="campo">\n                                        <ion-input class="entrada" placeholder="Descripcion"  type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>\n                                      </ion-item>\n                                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                                        <p style="color:red">\n                                    *Descripcion es obligatorio\n                                        </p>\n                                        </ion-item>\n  \n\n        </ion-list>\n    <ion-grid>\n    <ion-col>\n  \n    </ion-col>\n    <ion-col>\n    <ion-row>\n        <!-- [disabled]="formGroup.invalid" -->\n    <button type="submit"  ion-button full color="light" (click)="agregarNegocio($event, negocio)" >\n      Agregar Negocio\n    </button>\n    </ion-row>\n    <ion-row>\n    <button ion-button full color="danger" (click)="cancelar()" >\n      Cancelar\n    </button>\n    </ion-row>\n    </ion-col>\n    <ion-col>\n  \n    </ion-col>\n    </ion-grid>\n  \n    </form>\n  \n</ion-item-group>\n<ion-fab left bottom (click)="back()">\n  <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n  </ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/nuevonegocio/nuevonegocio.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
             __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__["a" /* Camera */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
@@ -689,7 +704,7 @@ webpackEmptyAsyncContext.id = 247;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosNoEntregadosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -759,10 +774,11 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
                             _this.pedidos = value;
-                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.clientid)).snapshotChanges().subscribe(function (data) {
+                            debugger;
+                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
                                 data.map(function (data) {
                                     var info = data.payload.val();
-                                    debugger;
+                                    _this.objPedidosNoEntregados = info;
                                 });
                             });
                         })];
@@ -775,8 +791,8 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-pedidos-no-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-no-entregados/pedidos-no-entregados.html"*/'<ion-content padding>\n  <ion-item-divider>\n    <ion-list>\n      <ion-item>\n          <label style="text-align: center">\n            Pedidos no entregados\n          </label>\n      </ion-item>\n      <ion-item>\n        \n      </ion-item>\n    </ion-list>\n  </ion-item-divider>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-no-entregados/pedidos-no-entregados.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
     ], PedidosNoEntregadosPage);
@@ -1081,27 +1097,19 @@ var ElstorapiProvider = /** @class */ (function () {
 /***/ }),
 
 /***/ 290:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var map = {
-	"../pages/modal-pedido/modal-pedido.module": [
-		655,
-		0
-	]
-};
-function webpackAsyncContext(req) {
-	var ids = map[req];
-	if(!ids)
-		return Promise.reject(new Error("Cannot find module '" + req + "'."));
-	return __webpack_require__.e(ids[1]).then(function() {
-		return __webpack_require__(ids[0]);
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
 	});
-};
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = 290;
-module.exports = webpackAsyncContext;
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 290;
 
 /***/ }),
 
@@ -1110,7 +1118,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioDetalleEditarPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
@@ -1118,7 +1126,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(35);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1476,12 +1484,14 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
             buttons: [
                 {
                     text: 'Abrir galeria',
+                    icon: 'images',
                     handler: function () {
                         _this.capturarFotoLogo(_this.camera.PictureSourceType.PHOTOLIBRARY);
                     }
                 },
                 {
                     text: 'Usar Camera',
+                    icon: 'camera',
                     handler: function () {
                         _this.capturarFotoLogo(_this.camera.PictureSourceType.CAMERA);
                     }
@@ -1514,12 +1524,12 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
     };
     NegocioDetalleEditarPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-negocio-detalle-editar',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/'<ion-header>    \n      <ion-title style="text-align: center">Editar Negocio</ion-title>\n  </ion-header>\n\n  <ion-content [scrollEvents]="true">\n    <ion-item-group>\n        <div class="contBanner">\n            <img class=banner [src]="fotografia" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n             <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">\n              <ion-icon class="icono" name="camera"></ion-icon>\n            </button>\n            <div class="contLogo">\n              <img class=logo [src]="fotografia2" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n              <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">\n                  <ion-icon class="icono" name="camera"></ion-icon>\n              </button>\n            </div>\n        </div>\n    </ion-item-group>\n  <ion-item-group>\n    \n      <form [formGroup]="formGroup">\n          <ion-list>\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Nombre del negocio" [disabled]="editar" type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n            *Nombre del negocio es obligatorio\n            </p>\n            </ion-item>\n    \n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Calle y Numero" [disabled]="editar" type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="callenumero.hasError(\'required\') && callenumero.touched ">\n                  <p style="color:red">\n          *Calle y numero es obligatorio\n                </p>\n                </ion-item>\n    \n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Colonia" [disabled]="editar" type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="colonia.hasError(\'required\') && colonia.touched ">\n                      <p style="color:red">\n              *Colonia es obligatorio\n                    </p>\n                    </ion-item>\n    \n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Ciudad" [disabled]="editar" type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="ciudad.hasError(\'required\') && ciudad.touched ">\n                          <p style="color:red">\n                  *Ciudad es obligatorio\n                        </p>\n                        </ion-item>\n    \n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Estado" [disabled]="editar" type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="estado.hasError(\'required\') && estado.touched">\n                            <p style="color:red">\n                        *Estado es obligatorio\n                            </p>\n                            </ion-item>\n    \n                            <ion-item class="campo">\n                              <ion-input p class="entrada" placeholder="Codigo Postal" [disabled]="editar" type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>\n                            </ion-item>\n                                <ion-item *ngIf="(codigopostal.hasError(\'required\') && codigopostal.touched) || (codigopostal.hasError(\'maxLength\'))">\n                                  <p style="color:red">\n                          *Codigo Postal es obligatorio\n                              </p>\n                              </ion-item>\n                              <ion-item class="campo">\n                                  <ion-label>Hora Apertura</ion-label>\n                                  <ion-input class="entrada" placeholder="Hora Apertura" type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura"></ion-input>\n                                  <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->\n                                </ion-item>\n                                <ion-item *ngIf="horaapertura.hasError(\'required\') && horaapertura.touched">\n                                  <p style="color:red">\n                              *Hora Apertura es obligatorio\n                                  </p>\n                                  </ion-item>\n                                  <ion-item class="campo">\n                                      <ion-label>Hora Cierre</ion-label>\n                                      <!-- <ion-datetime display-format="HH:mm" formControlName="horacierre"></ion-datetime> -->\n                                      <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre"></ion-input>\n                                    </ion-item>\n                                    <ion-item *ngIf="horacierre.hasError(\'required\') && horacierre.touched">\n                                      <p style="color:red">\n                                  *Hora Cierre es obligatorio\n                                      </p>\n                                      </ion-item>\n                                      <ion-item class="campo">\n                                        <ion-label>Categoria</ion-label>\n                                        <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria"\n                                        onchange="getSubCatNegocio($event, cat)">\n                                          <ion-option (ionSelect)="getSubCatNegocio(this, cat)" value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>\n                                        </ion-select>\n                                      </ion-item>\n                                <!-- <ion-item>\n                                  <ion-label>\n                                    Categoria\n                                  </ion-label>\n                                  <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>\n                                </ion-item> -->\n                                <!-- <ion-item *ngIf="categoria.hasError(\'required\') && categoria.touched">\n                                  <p>\n                              *Categoria es obligatorio\n                                  </p>\n                                  </ion-item> -->\n    \n                                  <ion-item class="campo">\n                                      <ion-label>\n                                        Subcategoria\n                                      </ion-label>\n                                      <ion-select [disabled]="editar" [(ngModel)]="negocio.subcategoria" formControlName="subcategoria" placeholder="Selecciona una subcategoria">\n                                          <ion-option value="{{subcat.nombre}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>\n                                        </ion-select>\n                                    </ion-item>\n                                    <!-- <ion-item *ngIf="subcategoria.hasError(\'required\') && subcategoria.touched">\n                                      <p>\n                                  *Subcategoria es obligatorio\n                                      </p>\n                                      </ion-item> -->\n    \n                                      <ion-item class="campo">\n                                          <ion-input class="entrada" placeholder="Descripcion" [disabled]="editar" type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>\n                                        </ion-item>\n                                        <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                                          <p style="color:red">\n                                      *Descripcion es obligatorio\n                                          </p>\n                                          </ion-item>\n    \n    \n    \n    \n    \n          </ion-list>\n        <ion-grid>\n          <ion-row>\n                   <!-- [disabledd]="formGroup.invalid" -->\n            <button type="submit"  ion-button full color="light" (click)="editarNegocio($event, negocio)" >\n              Editar Negocio\n            </button>\n          </ion-row>\n        <ion-row>\n            <!-- [disabledd]="formGroup.invalid" -->\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button>\n        </ion-row>\n    \n        </ion-grid>\n    \n        </form>\n  </ion-item-group>  \n  <ion-fab left bottom (click)="back()">\n    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n\n    </ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/,
+            selector: 'page-negocio-detalle-editar',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/'<ion-header>    \n      <ion-title style="text-align: center">Editar Negocio</ion-title>\n  </ion-header>\n\n  <ion-content >\n      <ion-item-group>\n          <div class="contBanner">\n              <img class=banner [src]="fotografia" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n               <button [disabled]="editar" color="light" class="camaraBanner" ion-button icon-only (click)="presentActionSheetBanner()">\n                <ion-icon class="icono" name="camera"></ion-icon>\n              </button>\n              <div class="contLogo">\n                <img class=logo [src]="fotografia2" alt="" onError= "this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n                <button [disabled]="editar" color="light" class="camaraLogo" ion-button icon-only (click)="presentActionSheetLogo()">\n                    <ion-icon class="icono" name="camera"></ion-icon>\n                </button>\n              </div>\n          </div>\n      </ion-item-group>\n  <ion-item-group>\n      <form [formGroup]="formGroup">\n          <ion-list>\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Nombre del negocio" [disabled]="editar" type="text" [(ngModel)]="negocio.nombre" formControlName="nombre" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n            *Nombre del negocio es obligatorio\n            </p>\n            </ion-item>\n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Calle y Numero" [disabled]="editar" type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="callenumero.hasError(\'required\') && callenumero.touched ">\n                  <p style="color:red">\n          *Calle y numero es obligatorio\n                </p>\n                </ion-item>\n    \n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Colonia" [disabled]="editar" type="text" [(ngModel)]="negocio.colonia" formControlName="colonia" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="colonia.hasError(\'required\') && colonia.touched ">\n                      <p style="color:red">\n              *Colonia es obligatorio\n                    </p>\n                    </ion-item>\n    \n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Ciudad" [disabled]="editar" type="text" [(ngModel)]="negocio.ciudad" formControlName="ciudad" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="ciudad.hasError(\'required\') && ciudad.touched ">\n                          <p style="color:red">\n                  *Ciudad es obligatorio\n                        </p>\n                        </ion-item>\n    \n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Estado" [disabled]="editar" type="text" [(ngModel)]="negocio.estado" formControlName="estado"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="estado.hasError(\'required\') && estado.touched">\n                            <p style="color:red">\n                        *Estado es obligatorio\n                            </p>\n                            </ion-item>\n    \n                            <ion-item class="campo">\n                              <ion-input p class="entrada" placeholder="Codigo Postal" [disabled]="editar" type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>\n                            </ion-item>\n                                <ion-item *ngIf="(codigopostal.hasError(\'required\') && codigopostal.touched) || (codigopostal.hasError(\'maxLength\'))">\n                                  <p style="color:red">\n                                    *Codigo Postal es obligatorio / Maximo 5 digitos\n                              </p>\n                              </ion-item>\n                              <ion-item class="campo">\n                                  <ion-label>Hora Apertura</ion-label>\n                                  <ion-input class="entrada" placeholder="Hora Apertura" type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura">\n                                    0:00:00\n                                  </ion-input>\n                                  <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->\n                                </ion-item>\n                                <ion-item *ngIf="horaapertura.hasError(\'required\') && horaapertura.touched">\n                                  <p style="color:red">\n                              *Hora Apertura es obligatorio\n                                  </p>\n                                  </ion-item>\n                                  <ion-item class="campo">\n                                      <ion-label>Hora Cierre</ion-label>\n                                      <!-- <ion-datetime display-format="HH:mm" formControlName="horacierre"></ion-datetime> -->\n                                      <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre">\n                                        0:00:00\n                                      </ion-input>\n                                    </ion-item>\n                                    <ion-item *ngIf="horacierre.hasError(\'required\') && horacierre.touched">\n                                      <p style="color:red">\n                                  *Hora Cierre es obligatorio\n                                      </p>\n                                      </ion-item>\n                                      <ion-item class="campo">\n                                        <ion-label>Categoria</ion-label>\n                                        <ion-select  [(ngModel)]="negocio.categoria" formControlName="categoria" placeholder="Selecciona una cagetoria"\n                                        onchange="getSubCatNegocio($event, cat)">\n                                          <ion-option (ionSelect)="getSubCatNegocio(this, cat)" value="{{cat.nombre}}" *ngFor="let cat of catnegocio">{{cat.nombre}}</ion-option>\n                                        </ion-select>\n                                      </ion-item>\n                                <!-- <ion-item>\n                                  <ion-label>\n                                    Categoria\n                                  </ion-label>\n                                  <ion-input type="text" [(ngModel)]="negocio.categoria" formControlName="categoria"></ion-input>\n                                </ion-item> -->\n                                <!-- <ion-item *ngIf="categoria.hasError(\'required\') && categoria.touched">\n                                  <p>\n                              *Categoria es obligatorio\n                                  </p>\n                                  </ion-item> -->\n    \n                                  <ion-item class="campo">\n                                      <ion-label>\n                                        Subcategoria\n                                      </ion-label>\n                                      <ion-select [disabled]="editar" [(ngModel)]="negocio.subcategoria" formControlName="subcategoria" placeholder="Selecciona una subcategoria">\n                                          <ion-option value="{{subcat.nombre}}"  *ngFor="let subcat of subcatnegocio">{{subcat.nombre}}</ion-option>\n                                        </ion-select>\n                                    </ion-item>\n                                    <!-- <ion-item *ngIf="subcategoria.hasError(\'required\') && subcategoria.touched">\n                                      <p>\n                                  *Subcategoria es obligatorio\n                                      </p>\n                                      </ion-item> -->\n    \n                                      <ion-item class="campo">\n                                          <ion-input class="entrada" placeholder="Descripcion" [disabled]="editar" type="text" [(ngModel)]="negocio.descripcion" formControlName="descripcion"></ion-input>\n                                        </ion-item>\n                                        <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                                          <p style="color:red">\n                                      *Descripcion es obligatorio\n                                          </p>\n                                          </ion-item>\n    \n    \n    \n    \n    \n          </ion-list>\n        <ion-grid>\n          <ion-row>\n                   <!-- [disabledd]="formGroup.invalid" -->\n            <button type="submit"  ion-button full color="light" (click)="editarNegocio($event, negocio)" >\n              Editar Negocio\n            </button>\n          </ion-row>\n        <ion-row>\n            <!-- [disabledd]="formGroup.invalid" -->\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button>\n        </ion-row>\n        </ion-grid>\n        </form>\n  </ion-item-group>  \n  <ion-fab left bottom (click)="back()">\n    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n\n    </ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle-editar/negocio-detalle-editar.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_6__ionic_native_geolocation__["a" /* Geolocation */],
@@ -1540,13 +1550,13 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(22);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1614,6 +1624,9 @@ var RegisterPage = /** @class */ (function () {
         var loaderReg = this.loadingCtrl.create({
             content: 'Registrando usuario...'
         });
+        var loader = this.loadingCtrl.create({
+            content: 'Iniciando sesion...'
+        });
         loaderReg.present().then(function () {
             _this.api.registrarUsuario(usr).subscribe(function (data) {
                 loaderReg.dismiss();
@@ -1624,7 +1637,7 @@ var RegisterPage = /** @class */ (function () {
                         break;
                     case false:
                         title = 'Ocurrio un error';
-                        subTitle = 'Ocurrio un error';
+                        subTitle = 'Ya existe una cuenta asociada al correo electrònico ' + _this.userModel.email;
                         break;
                     default:
                         if (data === null) {
@@ -1633,9 +1646,6 @@ var RegisterPage = /** @class */ (function () {
                         }
                         break;
                 }
-                var loader = _this.loadingCtrl.create({
-                    content: 'Iniciando sesion...'
-                });
                 var alert = _this.alertCtrl.create({
                     title: title,
                     subTitle: subTitle,
@@ -1657,6 +1667,17 @@ var RegisterPage = /** @class */ (function () {
                 alert.present().then(function () {
                 });
             }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: 'Revise su conexion a internet.',
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                loader.dismiss();
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
             });
         });
     };
@@ -1713,13 +1734,13 @@ var RegisterPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'page-register',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Pagina de Registro</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia" onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n\n<form [formGroup]="formGroup">\n  <ion-list>\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Nombre" type="text" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n        </ion-item>\n          <ion-item  *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n          <p style="color:red">\n          *Nombre es requerido\n          </p>\n          </ion-item>\n\n          <ion-item class="campo">\n              <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n            </ion-item>\n              <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n            *Apellido Paterno es requerido\n              </p>\n              </ion-item>\n\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Apeliido Materno" type="text" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                </ion-item>\n                  <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n            *Apellido Materno es requerido\n                  </p>\n                  </ion-item>\n\n                  <ion-item class="campo">\n                      <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                    </ion-item>\n                      <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                *Nombre de Usuario es requerido\n                      </p>\n                      </ion-item>\n\n                      <ion-item class="campo">\n                          <ion-input class="entrada" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                          *Contraseña invalida\n                          </p>\n                          <p *ngIf="(password.touched && userModel?.password?.length < 8)" style="color:red">\n                            *Contraseña debe tener por lo menos 8 caracteres\n                          </p>\n                          </ion-item>\n\n                          <ion-item class="campo">\n                              <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                            </ion-item>\n                            <ion-item *ngIf="(confirmPassword.hasError(\'required\') && confirmPassword.touched)">\n                                <p style="color:red">\n                            *Contraseña invalida\n                              </p>\n                              <p *ngIf="(confirmPassword.touched && userModel?.confirmPassword?.length < 8)" style="color:red">\n                                *Contraseña debe tener por lo menos 8 caracteres\n                              </p>\n                            </ion-item>\n                              <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                              *Contraseñas no son iguales\n                                  </p>\n                                  </ion-item>\n\n    <ion-item class="campo">\n      <ion-input class="entrada" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n    </ion-item>\n      <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n          *Correo es requerido\n      </p>\n      </ion-item>\n\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Número Telefonico" type="number" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n        </ion-item>\n          <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n    *Telefono es requerido\n          </p>\n          </ion-item>\n\n  </ion-list>\n<ion-grid>\n<ion-row>\n<button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="crearCuenta($event, userModel)" >\n  Crear Cuenta\n</button>\n</ion-row>\n</ion-grid>\n\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
             __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]])
@@ -1827,12 +1848,12 @@ var RecuperarcuentaPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'page-recuperarcuenta',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/recuperarcuenta/recuperarcuenta.html"*/'  <ion-header>\n    <ion-navbar>\n      <ion-title>Recuperar Cuenta</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" src="/assets/imgs/user.png">\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list>\n      <ion-item class="campo">\n        <ion-input class="correo-input" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="email.hasError(\'required\') && email.touched ">\n          <p style="color:red">\n*Valid email is required\n        </p>\n        </ion-item>\n      <ion-item class="campo">\n        <ion-input class="contraseña-input" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n      </ion-item>\n      <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n        <p style="color:red">\n    *Valid password is required\n        </p>\n        </ion-item>\n        <ion-item class="campo">\n          <ion-input class="confirm-input" placeholder="Confirmar contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n          <p style="color:red">\n      *Valid password is required\n          </p>\n          </ion-item>\n          <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n            <p style="color:red">\n          *Passwords does not match\n              </p>\n              </ion-item>\n    </ion-list>\n<ion-grid>\n<ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full  color="light" (click)="guardaContrasena($event, userModel)" >\n    Guardar Contrasena\n</button>\n</ion-row>\n</ion-grid>\n\n  </form>\n</ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/recuperarcuenta/recuperarcuenta.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */]])
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */]])
     ], RecuperarcuentaPage);
     return RecuperarcuentaPage;
 }());
@@ -1850,11 +1871,11 @@ var RecuperarcuentaPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pedidos_entregados_pedidos_entregados__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pedidos_todos_pedidos_todos__ = __webpack_require__(361);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__inicio_inicio__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1934,10 +1955,10 @@ var PedidosPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
                             _this.pedidos = value;
-                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.clientid)).snapshotChanges().subscribe(function (data) {
+                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
                                 data.map(function (data) {
                                     var info = data.payload.val();
-                                    debugger;
+                                    _this.objPedidosTodos = info;
                                 });
                             });
                         })];
@@ -1951,10 +1972,10 @@ var PedidosPage = /** @class */ (function () {
     };
     PedidosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos/pedidos.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      Listado de pedidos : {{userModel.nombreUsuario}}\n    </ion-title>\n</ion-header>\n\n<ion-tabs>\n  <ion-tab title="Todos" [root]="pedidosTodos" tabIcon="podium">\n\n  </ion-tab>\n  <ion-tab title="Entregados" [root]="pedidosEntregados" tabIcon="podium">\n\n  </ion-tab>\n  <ion-tab title="No Entregados" [root]="pedidosNoEntregados" tabIcon="podium">\n\n  </ion-tab>\n</ion-tabs>\n<ion-fab left bottom (click)="back()">\n  <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos/pedidos.html"*/,
+            selector: 'page-pedidos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos/pedidos.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      Listado de pedidos : {{userModel.nombreUsuario}}\n    </ion-title>\n</ion-header>\n\n<ion-tabs>\n  <ion-tab title="Todos" [root]="pedidosTodos" tabIcon="podium">\n\n  </ion-tab>\n  <ion-tab title="Entregados" [root]="pedidosEntregados" tabIcon="podium">\n\n  </ion-tab>\n  <ion-tab title="No Entregados" [root]="pedidosNoEntregados" tabIcon="podium"> \n\n  </ion-tab>\n</ion-tabs>\n<ion-fab left bottom (click)="back()">\n  <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos/pedidos.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */],
             __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]])
     ], PedidosPage);
@@ -1972,7 +1993,7 @@ var PedidosPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosEntregadosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2022,6 +2043,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+// declare var objPedidosEntregados:any;
 // @IonicPage()
 var PedidosEntregadosPage = /** @class */ (function () {
     function PedidosEntregadosPage(navCtrl, navParams, afdb, storage) {
@@ -2042,9 +2064,14 @@ var PedidosEntregadosPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
                             _this.pedidos = value;
-                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.clientid)).snapshotChanges().subscribe(function (data) {
+                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
                                 data.map(function (data) {
                                     var info = data.payload.val();
+                                    // let prod = info.productos;
+                                    // prod.forEach(element => {
+                                    //   debugger
+                                    // this.objPedidosEntregados.push(element);
+                                    // });
                                     debugger;
                                 });
                             });
@@ -2056,10 +2083,10 @@ var PedidosEntregadosPage = /** @class */ (function () {
     };
     PedidosEntregadosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Pedidos Entregados\n              </label>\n          </ion-item>\n          <ion-item>\n            \n          </ion-item>\n        </ion-list>\n      </ion-item-divider>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/,
+            selector: 'page-pedidos-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n\n\n    <ion-list>\n        <ion-item>\n            <label style="text-align: center">\n              Pedidos Entregados\n            </label>\n        </ion-item>\n\n        <!-- <ion-item-sliding *ngFor="let pedido of objPedidosEntregados" class="contNeg">\n            <ion-item>\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">{{pedido.nombre}}</h2>\n              <div class="contenedorEstrellas">\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>\n                <button ion-button color="gray" (click)="editarProducto(prod)" > Editar</button>\n            </ion-item-options>\n          </ion-item-sliding> -->\n      </ion-list>\n\n        <ion-list>\n          <!-- <ion-item>\n              <label style="text-align: center">\n                Pedidos Entregados\n              </label>\n          </ion-item> -->\n          <ion-item>\n            \n          </ion-item>\n        </ion-list>\n      </ion-item-divider>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
     ], PedidosEntregadosPage);
@@ -2078,7 +2105,7 @@ var PedidosEntregadosPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(35);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2138,6 +2165,7 @@ var PedidosTodosPage = /** @class */ (function () {
         this.afdb = afdb;
         this.storage = storage;
     }
+    ;
     PedidosTodosPage.prototype.ionViewWillEnter = function () {
         var pedidos = this.get('usuario');
     };
@@ -2151,6 +2179,7 @@ var PedidosTodosPage = /** @class */ (function () {
                             _this.afdb.list("pedidos/" + ("" + _this.pedidos.clientid)).snapshotChanges().subscribe(function (data) {
                                 data.map(function (data) {
                                     var info = data.payload.val();
+                                    _this.objPedidosTodos = info;
                                     debugger;
                                 });
                             });
@@ -2162,10 +2191,10 @@ var PedidosTodosPage = /** @class */ (function () {
     };
     PedidosTodosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos-todos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de Pedidos en el Sistema\n              </label>\n          </ion-item>\n        </ion-list>\n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/,
+            selector: 'page-pedidos-todos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de Pedidos en el Sistema\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosEntregados " class="contNeg">\n            <ion-item>\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">{{pedido.nombreNeg}}</h2>\n              <div class="contenedorEstrellas">\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>\n                <button ion-button color="gray" (click)="editarProducto(prod)" > Editar</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["a" /* AngularFireDatabase */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]])
@@ -2182,13 +2211,13 @@ var PedidosTodosPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PerfilPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2432,17 +2461,17 @@ var PerfilPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'page-perfil',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/'<ion-header>\n    <ion-title style="text-align: center">Editar Perfil</ion-title>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia"  onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" [disabled]="isDisabled" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="lista">\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Nombre" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n      </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n      *Valid Name is required\n            </p>\n            </ion-item>\n\n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n          *Valid Name is required\n                </p>\n                </ion-item>\n\n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Apellido Materno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n              *Valid Name is required\n                    </p>\n                    </ion-item>\n\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                  *Valid User Name is required\n                        </p>\n                        </ion-item>\n\n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Contraseña" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                        *Type a valid password\n                            </p>\n                            </ion-item>\n\n                            <ion-item class="campo">\n                                <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                              </ion-item>\n                              <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n                                <p style="color:red">\n                            *Type a valid password\n                                </p>\n                                </ion-item>\n                                <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                                *Passwords does not match\n                                    </p>\n                                    </ion-item>\n\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Correo" type="email" disabled="true" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n  *Valid email is required\n        </p>\n        </ion-item>\n\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Numero Telefonico" type="number" disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n      *Valid phone number is required\n            </p>\n            </ion-item>\n            <br/>\n    </ion-list>\n  <ion-grid>\n    <ion-row>\n        <button ion-button full color="light" (click)="editarPerfil()" >\n            Editar Perfil\n        </button>\n    </ion-row>\n  <ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="guardarCambios($event, userModel)" >\n    Guardar cambios\n  </button>\n  </ion-row>\n  </ion-grid>\n\n  </form>\n\n  <ion-fab left bottom (click)="back()">\n    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n  </ion-fab> \n\n  </ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
             __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
             __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */]])
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]])
     ], PerfilPage);
     return PerfilPage;
 }());
@@ -2516,7 +2545,7 @@ var MapPage = /** @class */ (function () {
             selector: 'page-map',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Como llegar a : {{negocioModel.nombre}} </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<!-- <ion-content>\n    <agm-map [streetViewControl]="false" [disableDefaultUI]="true" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom">\n\n  </agm-map> -->\n  <ion-content>\n    <h4 class="titNeg">Horario : {{negocioModel.horaapertura}} - {{negocioModel.horacierre}}</h4>\n      <div #map id="map"></div>\n    </ion-content>\n\n<!-- </ion-content> -->\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/map/map.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__["a" /* Geolocation */]])
     ], MapPage);
     return MapPage;
@@ -2531,12 +2560,12 @@ var MapPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioAgregarProductoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(22);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2708,12 +2737,14 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
             buttons: [
                 {
                     text: 'Abrir galeria',
+                    icon: 'images',
                     handler: function () {
                         _this.capturarFotoProducto(_this.camera.PictureSourceType.PHOTOLIBRARY);
                     }
                 },
                 {
                     text: 'Usar Camera',
+                    icon: 'camera',
                     handler: function () {
                         _this.capturarFotoProducto(_this.camera.PictureSourceType.CAMERA);
                     }
@@ -2771,13 +2802,13 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
             selector: 'page-negocio-agregar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/'<ion-header>\n    <ion-title style="text-align: center">Agrega un producto</ion-title>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="fotografia" onError="this.src=\'/assets/imgs/producto.png\'">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <ion-select [(ngModel)]="producto.id_catProducto " formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Otra Categoria\n                        </ion-label>\n                        <ion-input class="entrada" placeholder="Otra Categoria" [disabled]="editar" type="text"  [(ngModel)]="producto.otracategoria" formControlName="otracategoria"></ion-input>\n                      </ion-item>\n                         <ion-item *ngIf="otracategoria.hasError(\'required\') && otracategoria.touched">\n                      <p style="color:red">\n                      *Falta Otra Categoria\n                      </p>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n      <ion-fab left bottom (click)="back()">\n        <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n    </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-agregar-producto/negocio-agregar-producto.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_5__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* ActionSheetController */],
             __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]])
     ], NegocioAgregarProductoPage);
@@ -2797,10 +2828,11 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common__ = __webpack_require__(49);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2818,8 +2850,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var NegocioEditarProductoPage = /** @class */ (function () {
-    function NegocioEditarProductoPage(formBuilder, loadingCtrl, toastController, alertCtrl, api, camera, navParams, _sanitizer, navCtrl, actionSheetCtrl) {
+    function NegocioEditarProductoPage(formBuilder, loadingCtrl, toastController, alertCtrl, api, camera, navParams, _sanitizer, navCtrl, actionSheetCtrl, currencyPipe) {
         this.formBuilder = formBuilder;
         this.loadingCtrl = loadingCtrl;
         this.toastController = toastController;
@@ -2830,6 +2863,7 @@ var NegocioEditarProductoPage = /** @class */ (function () {
         this._sanitizer = _sanitizer;
         this.navCtrl = navCtrl;
         this.actionSheetCtrl = actionSheetCtrl;
+        this.currencyPipe = currencyPipe;
         this.userModel = new __WEBPACK_IMPORTED_MODULE_2__models_model__["c" /* User */]();
         this.producto = new __WEBPACK_IMPORTED_MODULE_2__models_model__["b" /* Producto */]();
         this.imgSource = '/assets/imgs/producto.png';
@@ -2978,12 +3012,14 @@ var NegocioEditarProductoPage = /** @class */ (function () {
             buttons: [
                 {
                     text: 'Abrir galeria',
+                    icon: 'images',
                     handler: function () {
                         _this.capturarFotoProducto(_this.camera.PictureSourceType.PHOTOLIBRARY);
                     }
                 },
                 {
                     text: 'Usar Camera',
+                    icon: 'camera',
                     handler: function () {
                         _this.capturarFotoProducto(_this.camera.PictureSourceType.CAMERA);
                     }
@@ -3039,18 +3075,19 @@ var NegocioEditarProductoPage = /** @class */ (function () {
     };
     NegocioEditarProductoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-negocio-editar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      Editar Producto\n    </ion-title>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="fotografia" onError="this.src=\'/assets/imgs/producto.png\'">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="complemento"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <ion-select [(ngModel)]="producto.id_catProducto " formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Otra Categoria\n                        </ion-label>\n                        <ion-input class="entrada" placeholder="Otra Categoria" [disabled]="editar" type="text"  [(ngModel)]="producto.otracategoria" formControlName="otracategoria"></ion-input>\n                      </ion-item>\n                         <ion-item *ngIf="otracategoria.hasError(\'required\') && otracategoria.touched">\n                      <p style="color:red">\n                      *Falta Otra Categoria\n                      </p>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n\n      <ion-fab left bottom (click)="back()">\n        <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n      </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/,
+            selector: 'page-negocio-editar-producto',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      Editar Producto\n    </ion-title>\n</ion-header>\n\n<ion-content >\n      <img src="/assets/imgs/ElEstorLogoCuadroyAza.png" alt="" class="center">\n  \n  <h3>Datos del producto</h3>\n\n            <form [formGroup]="formGroup">\n                \n                <div class="producto">\n                    <img class="imgPro" [src]="fotografia" onError="this.src=\'/assets/imgs/producto.png\'">\n                    <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n                        <ion-icon class="icono" name="camera"></ion-icon>\n                    </button>\n                </div>\n              <ion-list>\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Nombre del Platillo" [disabled]="editar" type="text" [(ngModel)]="producto.nombre" formControlName="platillo" ></ion-input>\n                </ion-item>\n                <ion-item *ngIf="platillo.hasError(\'required\') && platillo.touched">\n                  <p style="color:red">\n              *Falta Nombre del platillo\n                  </p>\n                  </ion-item>\n                  <ion-item class="campo"> \n                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar"  type="number" [(ngModel)]="producto.precio" formControlName="precio">\n                         \n                      </ion-input>\n                    </ion-item>\n                    <ion-item *ngIf="precio.hasError(\'required\') && precio.touched">\n                      <p style="color:red">\n                *Falta Precio\n                    </p>\n                    </ion-item>\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Descripción" [disabled]="editar" type="text" [(ngModel)]="producto.descripcion" formControlName="descripcion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="descripcion.hasError(\'required\') && descripcion.touched">\n                        <p style="color:red">\n                    *Falta Descripcion\n                        </p>\n                        </ion-item>\n                        <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="complemento"></ion-input>\n                      </ion-item>\n                        <ion-item class="campo"> \n                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>\n                      </ion-item>\n                      <ion-item *ngIf="tiempopreparacion.hasError(\'required\') && tiempopreparacion.touched">\n                      <p style="color:red">\n                  *Falta Tiempo de Preparacion\n                      </p>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Categoria del Producto\n                        </ion-label>\n                        <ion-select [(ngModel)]="producto.id_catProducto " formControlName="catproducto" placeholder="Selecciona una Categoria">\n                            <ion-option value="{{cat.id_catProducto}}"  *ngFor="let cat of catProd">{{cat.nombre}}</ion-option>\n                          </ion-select>\n                      </ion-item>\n                      <ion-item class="campo">\n                        <ion-label>\n                          Otra Categoria\n                        </ion-label>\n                        <ion-input class="entrada" placeholder="Otra Categoria" [disabled]="editar" type="text"  [(ngModel)]="producto.otracategoria" formControlName="otracategoria"></ion-input>\n                      </ion-item>\n                         <ion-item *ngIf="otracategoria.hasError(\'required\') && otracategoria.touched">\n                      <p style="color:red">\n                      *Falta Otra Categoria\n                      </p>\n                      </ion-item>\n            </ion-list>\n          </form>\n\n        <ion-grid>\n  \n        <ion-row>\n              <!-- <ion-fab bottom right>\n        <button ion-fab (click)="agregarProducto($event)">+</button>\n    </ion-fab> -->\n    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed">\n        <ion-fab-button>\n          <ion-icon name="add"></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n<!-- <button ion-button full color="light" (click)="agregarProducto($event)" >\n    Agregar Producto\n  </button> -->\n            <!-- [disabledd]="formGroup.invalid"\n        <button [disabled]="editar" type="submit"  ion-button full color="light" (click)="guardarNegocio($event, negocio)" >\n          Guardar  Negocio\n        </button> -->\n            <!-- <button [disabled]="formGroup.invalid" type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" > -->\n                <button  type="submit" ion-button full color="light" (click)="agregarProducto(producto,$event)" >\n              Guardar Producto\n            </button>\n        </ion-row>\n      </ion-grid>\n\n      <ion-fab left bottom (click)="back()">\n        <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n      </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-editar-producto/negocio-editar-producto.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_8__angular_common__["c" /* CurrencyPipe */]])
     ], NegocioEditarProductoPage);
     return NegocioEditarProductoPage;
 }());
@@ -3063,146 +3100,9 @@ var NegocioEditarProductoPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalPedidoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(57);
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var ModalPedidoPage = /** @class */ (function () {
-    function ModalPedidoPage(navCtrl, navParams, afdb) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.afdb = afdb;
-        this.info = {
-            cliente: {
-                nombre: "",
-                apellidoPat: "",
-                apellidoMat: ""
-            },
-            subtotal: 0
-        };
-        this.productos = [];
-        this.rechazado = false;
-    }
-    ModalPedidoPage.prototype.ionViewDidLoad = function () {
-        var data = this.navParams.get('data');
-        this.info = data;
-        console.log(this.info);
-        this.productos = data['productos'];
-    };
-    ModalPedidoPage.prototype.rechazar = function () {
-        this.rechazado = true;
-    };
-    ModalPedidoPage.prototype.aceptar = function () {
-        var _this = this;
-        this.afdb.database.ref("ubicacion").once("value", function (ubicacion) {
-            var origen = {
-                lat: _this.productos[0]['latitud'],
-                lng: _this.productos[0]['longitud'],
-            };
-            var ubicaciones = [];
-            for (var key in ubicacion.val()) {
-                ubicaciones.push(__assign({}, ubicacion.val()[key], { id: key }));
-            }
-            var distancias = _this.getAllDistance(ubicaciones, origen);
-            distancias.then(function (data) {
-                var menor = 0;
-                var key = 0;
-                data.map(function (data, index) {
-                    if (data['response']['status'] == "OK") {
-                        if (index == 0) {
-                            menor = data['response']['distance']['value'];
-                            key = data['key'];
-                        }
-                        else {
-                            if (menor > data['response']['distance']['value']) {
-                                menor = data['response']['distance']['value'];
-                                key = data['key'];
-                            }
-                        }
-                    }
-                });
-                console.log(menor);
-                console.log(key);
-            });
-        });
-    };
-    ModalPedidoPage.prototype.getDistance = function (start, end) {
-        var origin = new google.maps.LatLng(start['lat'], start['lng']);
-        var final = new google.maps.LatLng(end['lat'], end['lng']);
-        var service = new google.maps.DistanceMatrixService();
-        return new Promise(function (resolve, reject) {
-            service.getDistanceMatrix({
-                origins: [origin],
-                destinations: [final],
-                travelMode: 'DRIVING',
-                unitSystem: google.maps.UnitSystem.METRIC
-            }, function (response, status) {
-                if (status === 'OK') {
-                    resolve({
-                        response: response.rows[0].elements[0],
-                        key: start['id']
-                    });
-                }
-                else {
-                    reject(new Error('Not OK'));
-                }
-            });
-        });
-    };
-    ModalPedidoPage.prototype.getAllDistance = function (starts, end) {
-        var _this = this;
-        var promisedDistances = starts.map(function (start) { return _this.getDistance(start, end); });
-        // Promise.all turns an array of promises into a promise
-        // that resolves to an array.
-        return Promise.all(promisedDistances);
-    };
-    ModalPedidoPage.prototype.enviarInfo = function () {
-    };
-    ModalPedidoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-modal-pedido',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/modal-pedido/modal-pedido.html"*/'<!--\n  Generated template for the ModalPedidoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title text-center>Nuevo Pedido</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <div *ngIf="!rechazado">\n\n    <h3 class="titulo">Pedido</h3>\n    <span class="parrafo" *ngFor="let producto of productos">{{producto.cantidadCarrito}} {{producto.nombre}}</span>\n    <h3 class="titulo2">Cliente</h3>\n    <span class="parrafo">{{info.cliente.apellidoPat}} {{info.cliente.apellidoMat}} {{info.cliente.nombre}}</span>\n    <h3 class="titulo">Costo</h3>\n    <span class="parrafo">$ {{info.subtotal}}</span>\n    \n    <div class="opcion">\n      <button ion-button color="light" (click)="rechazar()">Rechazar</button>\n      <button ion-button color="dark" (click)="aceptar()">Aceptar</button>\n    </div>\n\n  </div>\n\n\n<div *ngIf="rechazado">\n    <ion-item class="mensaje">\n        <ion-label color="primary" floating>¿Por cual motivo lo rechazo?</ion-label>\n        <ion-textarea clas></ion-textarea>\n      </ion-item>\n      <button class="enviar" ion-button color="dark" (click)="enviarInfo()">Enviar</button>\n</div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/modal-pedido/modal-pedido.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]])
-    ], ModalPedidoPage);
-    return ModalPedidoPage;
-}());
-
-//# sourceMappingURL=modal-pedido.js.map
-
-/***/ }),
-
-/***/ 379:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(380);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(379);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(504);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -3210,7 +3110,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 505:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3219,42 +3119,44 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_map_map__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_nuevonegocio_nuevonegocio__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_negocios_negocios__ = __webpack_require__(646);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_negocios_negocios__ = __webpack_require__(645);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_inicio_inicio__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common_http__ = __webpack_require__(356);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(366);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__ = __webpack_require__(367);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__agm_core__ = __webpack_require__(647);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__agm_core__ = __webpack_require__(646);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(651);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_home_home__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_login_login__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_register_register__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_recuperarcuenta_recuperarcuenta__ = __webpack_require__(358);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_password_validator__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_password_validator__ = __webpack_require__(652);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_perfil_perfil__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_pedidos_pedidos__ = __webpack_require__(359);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_pedidos_todos_pedidos_todos__ = __webpack_require__(361);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_pedidos_entregados_pedidos_entregados__ = __webpack_require__(360);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__ = __webpack_require__(378);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_fire__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_modal_pedido_modal_pedido__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_fire__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__config__ = __webpack_require__(654);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_storage__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_negocio_editar_producto_negocio_editar_producto__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_common__ = __webpack_require__(49);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -3320,9 +3222,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_11_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* MyApp */], {}, {
-                    links: [
-                        { loadChildren: '../pages/modal-pedido/modal-pedido.module#ModalPedidoPageModule', name: 'ModalPedidoPage', segment: 'modal-pedido', priority: 'low', defaultHistory: [] }
-                    ]
+                    links: []
                 }),
                 __WEBPACK_IMPORTED_MODULE_14__agm_core__["a" /* AgmCoreModule */].forRoot({ apiKey: 'AIzaSyC49V2M_OYaf8GfKsXN6_Nk-pf50Y5ulcA' }),
                 __WEBPACK_IMPORTED_MODULE_29__angular_fire__["a" /* AngularFireModule */].initializeApp(__WEBPACK_IMPORTED_MODULE_31__config__["a" /* fireBaseConfig */].fire),
@@ -3358,7 +3258,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_20__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
                 __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__["a" /* Geolocation */],
                 __WEBPACK_IMPORTED_MODULE_25__ionic_native_camera__["a" /* Camera */],
-                __WEBPACK_IMPORTED_MODULE_30__angular_fire_database__["a" /* AngularFireDatabase */]
+                __WEBPACK_IMPORTED_MODULE_30__angular_fire_database__["a" /* AngularFireDatabase */],
+                __WEBPACK_IMPORTED_MODULE_34__angular_common__["c" /* CurrencyPipe */]
             ],
             schemas: [__WEBPACK_IMPORTED_MODULE_10__angular_core__["i" /* CUSTOM_ELEMENTS_SCHEMA */]]
         })
@@ -3370,7 +3271,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 54:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3382,9 +3283,9 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3451,17 +3352,13 @@ var InicioPage = /** @class */ (function () {
         this.storage = storage;
         this.userModel = new __WEBPACK_IMPORTED_MODULE_1__models_model__["c" /* User */]();
         this.userModel = navParams.get('item');
-        // this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
-        //                   this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.fotografia): this.imgSource;
-        // // this.userModel.fotografia = this.userModel.fotografia !== ""? 'data:image/jpeg;base64,' + this.userModel.fotografia: this.userModel.fotografia; 
-        // // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
-        // console.log(this.userModel);
-        // this.afdb.list("pedidos/53").snapshotChanges().subscribe(data=>{
-        //   data.map(data=>{
-        //     let info = data.payload.val();
-        //     this.presentModal(info);
-        //   });
-        // });
+        // debugger
+        //       this.afdb.list("pedidos/"+ this.userModel).snapshotChanges().subscribe(data=>{
+        //         data.map(data=>{
+        //           let info = data.payload.val();
+        //           this.presentModal(info);
+        //         });
+        //       });
     }
     // presentModal(data) {
     //   const modal = this.modalCtrl.create(ModalPedidoPage,{
@@ -3506,11 +3403,11 @@ var InicioPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["n" /* Component */])({
             selector: 'page-inicio',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/inicio/inicio.html"*/'\n<ion-header>\n    <ion-title style="text-align: center">\n      Bienvenido  a tu perfil {{userModel.nombreUsuario}}\n    </ion-title>\n</ion-header>\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia" onError="this.src=\'/assets/imgs/user.png\'">\n        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>\n      </div>\n<h2>Opciones del Menú</h2>\n  <ion-list>\n      <ion-item class="opcion" (click)="verPerfil($event)">\n          <ion-thumbnail item-start>\n            <img  class="imgUser" [src]="fotografia" onError="this.src=\'/assets/imgs/user.png\'">\n          </ion-thumbnail>\n          <h2>Mi Perfil</h2>\n        </ion-item>\n        <ion-item class="opcion" (click)="verPedidos($event)">\n            <ion-thumbnail item-start>\n              <img  class="imgUser" src="/assets/imgs/tienda-online-icono-png.png">\n            </ion-thumbnail>\n            <h2>Mis Pedidos</h2>\n          </ion-item>\n          <ion-item class="opcion" (click)="verNegocios($event)" >\n              <ion-thumbnail item-start>\n                <img  class="imgUser" src="/assets/imgs/iconos-formas-de-envio-2.png" >\n              </ion-thumbnail>\n              <h2>Mi Negocio</h2>\n            </ion-item> \n            <ion-item class="opcion">\n              <button ion-button full color="danger" (click)="cerrarSesion()" >\n                  Cerrar sesion\n                </button>\n            </ion-item> \n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/inicio/inicio.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["c" /* DomSanitizer */],
             __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__["a" /* AngularFireDatabase */],
-            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["g" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]])
     ], InicioPage);
     return InicioPage;
@@ -3520,12 +3417,12 @@ var InicioPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 60:
+/***/ 61:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioDetallePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nuevonegocio_nuevonegocio__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__map_map__ = __webpack_require__(363);
@@ -3578,7 +3475,7 @@ var NegocioDetallePage = /** @class */ (function () {
     };
     NegocioDetallePage.prototype.ionViewWillEnter = function () {
         var _this = this;
-        if (this.userModel.negocio.length !== 0) {
+        if (this.userModel.negocio.length !== 0 && this.userModel.negocio !== undefined) {
             this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.negocio[0].fotografia);
             this.fotografia2 = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.negocio[0].fotografia2);
             this.cargarProducto();
@@ -3719,14 +3616,14 @@ var NegocioDetallePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_5__angular_core__["n" /* Component */])({
             selector: 'page-negocio-detalle',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle/negocio-detalle.html"*/'<ion-header>\n  <ion-title style="text-align: center">\n    {{userModel.negocio[0] !== undefined ? userModel.negocio[0].nombre: \'\'}}\n  </ion-title>\n</ion-header>\n\n<ion-content [scrollEvents]="true">\n\n    <div class="contBanner">\n        <img class=banner [src]="fotografia" alt="" onError="this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n        <div class="contLogo">\n          <img class=logo [src]="fotografia2" alt="" onError="this.src=\'/assets/imgs/tienda-online-icono-png.png\'">\n        </div>\n    </div>\n      <ion-item-divider >\n        <button ion-button full color="light" (click)="editarNegocio(userModel.negocio[0])" >\n            Editar Perfil del Negocio\n          </button>\n      </ion-item-divider>\n\n    <button ion-button clear (click)="verMapa(userModel.negocio[0])" >Ubicación y Horario</button>\n    <h2 class="titNeg">Mis Productos</h2> \n  \n    <ion-list [virtualScroll]="productos" [approxItemHeight]="\'132px\'">\n      <ion-item-sliding *virtualItem="let prod " class="contNeg">\n          <ion-item>\n            <ion-thumbnail item-start class="logoProd">\n              <img [src]="prod.fotografia" onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n            </ion-thumbnail>\n            <h2 class="nombreNeg">{{prod.nombre}}</h2>\n            <div class="contenedorEstrellas">\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n                <ion-icon class="estrella" name=\'star\'></ion-icon>\n              </div>\n          </ion-item>\n            <ion-item-options>\n              <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>\n              <button ion-button color="gray" (click)="editarProducto(prod)" > Editar</button>\n          </ion-item-options>\n        </ion-item-sliding>\n    </ion-list>\n\n  <ion-fab right bottom (click)="agregarProducto(userModel.negocio[0])">\n      <button ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n  <ion-fab left bottom (click)="back()">\n    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocio-detalle/negocio-detalle.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__["a" /* Geolocation */],
             __WEBPACK_IMPORTED_MODULE_9__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_10__angular_platform_browser__["c" /* DomSanitizer */],
             __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["g" /* LoadingController */]])
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_6_ionic_angular__["f" /* LoadingController */]])
     ], NegocioDetallePage);
     return NegocioDetallePage;
 }());
@@ -3735,7 +3632,7 @@ var NegocioDetallePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 646:
+/***/ 645:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3745,7 +3642,7 @@ var NegocioDetallePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(22);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3860,12 +3757,12 @@ var NegociosPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'page-negocios',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocios/negocios.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Listado de negocios : {{userModel.nombreUsuario}}</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content >\n    <div class="user">\n        <img class="imgUser" [src]="imgSource">\n        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>\n    </div>\n\n   <h2 class="titNeg">Mi Negocio</h2> \n  <ion-list>\n    <!-- <ion-item *ngFor="let biz of negocioModel" class="contNeg" (click)="negocioDetalle(biz)"> -->\n    <ion-item class="contNeg" (click)="negocioDetalle(negocioModel)">\n        <ion-thumbnail item-start class="logo">\n            <img [src]="imgSourceNeg">\n          </ion-thumbnail>\n          <h2 class="nombreNeg">{{negocioModel.nombre}}</h2>\n          <div class="contenedorEstrellas">\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n              <ion-icon class="estrella" name=\'star\'></ion-icon>\n            </div>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-fab right bottom (click)="agregarNegocio($event)">\n      <button *ngIf="enableButton" ion-fab ><ion-icon class="more" name="add"></ion-icon></button>\n  </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/negocios/negocios.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["j" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_4__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["c" /* DomSanitizer */]])
     ], NegociosPage);
     return NegociosPage;
@@ -3875,7 +3772,7 @@ var NegociosPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 652:
+/***/ 651:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3912,7 +3809,7 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());
@@ -3921,7 +3818,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 653:
+/***/ 652:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3972,6 +3869,144 @@ var ConfirmEqualValidatorDirective = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 653:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalPedidoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(58);
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+// @IonicPage()
+var ModalPedidoPage = /** @class */ (function () {
+    function ModalPedidoPage(navCtrl, navParams, afdb) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.afdb = afdb;
+        this.info = {
+            cliente: {
+                nombre: "",
+                apellidoPat: "",
+                apellidoMat: ""
+            },
+            subtotal: 0
+        };
+        this.productos = [];
+        this.rechazado = false;
+    }
+    ModalPedidoPage.prototype.ionViewDidLoad = function () {
+        var data = this.navParams.get('data');
+        this.info = data;
+        console.log(this.info);
+        this.productos = data['productos'];
+    };
+    ModalPedidoPage.prototype.rechazar = function () {
+        this.rechazado = true;
+    };
+    ModalPedidoPage.prototype.aceptar = function () {
+        var _this = this;
+        this.afdb.database.ref("ubicacion").once("value", function (ubicacion) {
+            var origen = {
+                lat: _this.productos[0]['latitud'],
+                lng: _this.productos[0]['longitud'],
+            };
+            var ubicaciones = [];
+            for (var key in ubicacion.val()) {
+                ubicaciones.push(__assign({}, ubicacion.val()[key], { id: key }));
+            }
+            var distancias = _this.getAllDistance(ubicaciones, origen);
+            distancias.then(function (data) {
+                var menor = 0;
+                var key = 0;
+                data.map(function (data, index) {
+                    if (data['response']['status'] == "OK") {
+                        if (index == 0) {
+                            menor = data['response']['distance']['value'];
+                            key = data['key'];
+                        }
+                        else {
+                            if (menor > data['response']['distance']['value']) {
+                                menor = data['response']['distance']['value'];
+                                key = data['key'];
+                            }
+                        }
+                    }
+                });
+                console.log(menor);
+                console.log(key);
+            });
+        });
+    };
+    ModalPedidoPage.prototype.getDistance = function (start, end) {
+        var origin = new google.maps.LatLng(start['lat'], start['lng']);
+        var final = new google.maps.LatLng(end['lat'], end['lng']);
+        var service = new google.maps.DistanceMatrixService();
+        return new Promise(function (resolve, reject) {
+            service.getDistanceMatrix({
+                origins: [origin],
+                destinations: [final],
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC
+            }, function (response, status) {
+                if (status === 'OK') {
+                    resolve({
+                        response: response.rows[0].elements[0],
+                        key: start['id']
+                    });
+                }
+                else {
+                    reject(new Error('Not OK'));
+                }
+            });
+        });
+    };
+    ModalPedidoPage.prototype.getAllDistance = function (starts, end) {
+        var _this = this;
+        var promisedDistances = starts.map(function (start) { return _this.getDistance(start, end); });
+        // Promise.all turns an array of promises into a promise
+        // that resolves to an array.
+        return Promise.all(promisedDistances);
+    };
+    ModalPedidoPage.prototype.enviarInfo = function () {
+    };
+    ModalPedidoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-modal-pedido',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/modal-pedido/modal-pedido.html"*/'<!--\n  Generated template for the ModalPedidoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title text-center>Nuevo Pedido</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <div *ngIf="!rechazado">\n\n    <h3 class="titulo">Pedido</h3>\n    <span class="parrafo" *ngFor="let producto of productos">{{producto.cantidadCarrito}} {{producto.nombre}}</span>\n    <h3 class="titulo2">Cliente</h3>\n    <span class="parrafo">{{info.cliente.apellidoPat}} {{info.cliente.apellidoMat}} {{info.cliente.nombre}}</span>\n    <h3 class="titulo">Costo</h3>\n    <span class="parrafo">$ {{info.subtotal}}</span>\n    \n    <div class="opcion">\n      <button ion-button color="light" (click)="rechazar()">Rechazar</button>\n      <button ion-button color="dark" (click)="aceptar()">Aceptar</button>\n    </div>\n\n  </div>\n\n\n<div *ngIf="rechazado">\n    <ion-item class="mensaje">\n        <ion-label color="primary" floating>¿Por cual motivo lo rechazo?</ion-label>\n        <ion-textarea clas></ion-textarea>\n      </ion-item>\n      <button class="enviar" ion-button color="dark" (click)="enviarInfo()">Enviar</button>\n</div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/modal-pedido/modal-pedido.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]])
+    ], ModalPedidoPage);
+    return ModalPedidoPage;
+}());
+
+//# sourceMappingURL=modal-pedido.js.map
+
+/***/ }),
+
 /***/ 654:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3992,5 +4027,5 @@ var fireBaseConfig = {
 
 /***/ })
 
-},[379]);
+},[378]);
 //# sourceMappingURL=main.js.map

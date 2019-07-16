@@ -25988,7 +25988,6 @@ page-negocio-detalle-editar .logo {
   width: 35%;
   margin: 0 auto;
   max-width: 100%;
-  height: auto;
 }
 
 page-negocio-detalle-editar .contLogo {
@@ -25997,7 +25996,7 @@ page-negocio-detalle-editar .contLogo {
 
 page-negocio-detalle-editar .camaraBanner {
   position: absolute;
-  bottom: -15%;
+  bottom: -8%;
   right: 4%;
   width: 65px;
   height: 65px;
@@ -26008,7 +26007,7 @@ page-negocio-detalle-editar .camaraBanner {
 
 page-negocio-detalle-editar .camaraLogo {
   position: absolute;
-  bottom: -45%;
+  bottom: -30%;
   right: 22%;
   width: 65px;
   height: 65px;

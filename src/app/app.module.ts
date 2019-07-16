@@ -37,6 +37,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { fireBaseConfig } from '../config';
 import { IonicStorageModule } from '@ionic/storage';
 import { NegocioEditarProductoPage } from '../pages/negocio-editar-producto/negocio-editar-producto';
+import { CurrencyPipe } from '@angular/common';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { NegocioEditarProductoPage } from '../pages/negocio-editar-producto/nego
     ElstorapiProvider,
     Geolocation,
     Camera,
-    AngularFireDatabase
+    AngularFireDatabase,
+    CurrencyPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -368,12 +368,14 @@ export class NuevonegocioPage {
       buttons: [
         {
           text: 'Abrir galeria',
+          icon: 'images',
           handler: () => {
             this.capturarFotoBanner(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: 'Usar Camera',
+          icon: 'camera',
           handler: () => {
             this.capturarFotoBanner(this.camera.PictureSourceType.CAMERA);
           }

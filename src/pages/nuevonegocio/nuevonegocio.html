@@ -28,7 +28,6 @@
           *Nombre del negocio es obligatorio
           </p>
           </ion-item>
-  
           <ion-item class="campo">
               <ion-input class="entrada" placeholder="Calle y Numero"  type="text" [(ngModel)]="negocio.callenumero" formControlName="callenumero" ></ion-input>
             </ion-item>
@@ -75,7 +74,9 @@
                             </ion-item>
                             <ion-item class="campo">
                                 <ion-label>Hora Apertura</ion-label>
-                                <ion-input class="entrada" placeholder="Hora Apertura"  type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura"></ion-input>
+                                <ion-input class="entrada" placeholder="Hora Apertura"  type="time" [(ngModel)]="negocio.horaapertura" formControlName="horaapertura">
+                                  0:00:00
+                                </ion-input>
                                 <!-- <ion-datetime display-format="HH:mm" formControlName="horaapertura"></ion-datetime> -->
                               </ion-item>
                               <ion-item *ngIf="horaapertura.hasError('required') && horaapertura.touched">
@@ -86,7 +87,9 @@
                                 <ion-item class="campo">
                                     <ion-label>Hora Cierre</ion-label>
                                     <!-- <ion-datetime display-format="HH:mm" formControlName="horacierre"></ion-datetime> -->
-                                    <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre"></ion-input>
+                                    <ion-input class="entrada" placeholder="Hora Cierre"  type="time" [(ngModel)]="negocio.horacierre" formControlName="horacierre">
+                                      0:00:00
+                                    </ion-input>
                                   </ion-item>
                                   <ion-item *ngIf="horacierre.hasError('required') && horacierre.touched">
                                     <p style="color:red">

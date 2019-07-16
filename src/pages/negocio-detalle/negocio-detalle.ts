@@ -54,7 +54,7 @@ export class NegocioDetallePage {
   
   ionViewWillEnter(){ 
     
-    if(this.userModel.negocio.length !== 0)
+    if(this.userModel.negocio.length !== 0 && this.userModel.negocio !== undefined)
     {
       this.fotografia = this._sanitizer.bypassSecurityTrustUrl(`${this.userModel.negocio[0].fotografia}`);
 

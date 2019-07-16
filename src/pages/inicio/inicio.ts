@@ -9,6 +9,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
+import { ModalPedidoPage } from '../modal-pedido/modal-pedido';
 
 
 declare function escape(s:string): string;
@@ -31,20 +32,13 @@ export class InicioPage {
     public storage: Storage)
   {
       this.userModel = navParams.get('item');
-
-      // this.imgSource = this.userModel.fotografia !=='/assets/imgs/user.png' ? 
-      //                   this._sanitizer.bypassSecurityTrustResourceUrl(this.userModel.fotografia): this.imgSource;
-
-      // // this.userModel.fotografia = this.userModel.fotografia !== ""? 'data:image/jpeg;base64,' + this.userModel.fotografia: this.userModel.fotografia; 
-      // // this.imgSource = this.userModel.fotografia != ""? this.userModel.fotografia : this.imgSource;
-      // console.log(this.userModel);
-
-      // this.afdb.list("pedidos/53").snapshotChanges().subscribe(data=>{
-      //   data.map(data=>{
-      //     let info = data.payload.val();
-      //     this.presentModal(info);
-      //   });
-      // });
+// debugger
+//       this.afdb.list("pedidos/"+ this.userModel).snapshotChanges().subscribe(data=>{
+//         data.map(data=>{
+//           let info = data.payload.val();
+//           this.presentModal(info);
+//         });
+//       });
   }
 
   // presentModal(data) {

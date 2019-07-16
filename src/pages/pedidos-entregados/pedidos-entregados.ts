@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
+import { ArrayType } from '@angular/compiler/src/output/output_ast';
 
+// declare var objPedidosEntregados:any;
 // @IonicPage()
 @Component({
   selector: 'page-pedidos-entregados',
@@ -11,11 +13,15 @@ import { Storage } from '@ionic/storage';
 export class PedidosEntregadosPage {
 
   pedidos:any;
+  objPedidosEntregados:any;
+
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private afdb: AngularFireDatabase,
-    public storage: Storage) {
+    public storage: Storage,) 
+    {
+
   }
 
   ionViewDidLoad() {
@@ -32,12 +38,20 @@ export class PedidosEntregadosPage {
     return await this.storage.get(`setting:${ settingName }`).then((value) =>
     {
       this.pedidos =value;
-      this.afdb.list("pedidos/" + `${this.pedidos.clientid}`).snapshotChanges().subscribe((data) =>
+    
+      this.afdb.list("pedidos/" + `${this.pedidos.negocio[0].id_negocio}`).snapshotChanges().subscribe((data) =>
       {
         data.map((data) =>
         {
           let info = data.payload.val();
-          debugger;
+          // let prod = info.productos;
+          
+          // prod.forEach(element => {
+          //   debugger
+          // this.objPedidosEntregados.push(element);
+          // });
+      
+          debugger
         });
       });
     });;
