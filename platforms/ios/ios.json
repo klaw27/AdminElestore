@@ -9,26 +9,26 @@
         "parents": {
           "NSLocationWhenInUseUsageDescription": [
             {
-              "xml": "<string>We use your location for full functionality of certain app features.</string>",
-              "count": 2,
-              "mode": "merge",
-              "id": "config.xml"
+              "xml": "<string>need location access to find things nearby</string>",
+              "count": 2
             },
             {
-              "xml": "<string>need location access to find things nearby</string>",
-              "count": 1
+              "xml": "<string>We use your location for full functionality of certain app features.</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
             }
           ],
           "NSCameraUsageDescription": [
             {
-              "xml": "<string>Necesitamos usar el acceso a la camara para poder tomar una foto de perfil</string>",
-              "count": 2,
-              "mode": "merge",
-              "id": "config.xml"
+              "xml": "<string>You can take photos</string>",
+              "count": 2
             },
             {
-              "xml": "<string>You can take photos</string>",
-              "count": 1
+              "xml": "<string>Necesitamos usar el acceso a la camara para poder tomar una foto de perfil</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
             }
           ],
           "NSPhotoLibraryUsageDescription": [
