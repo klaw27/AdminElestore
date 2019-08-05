@@ -25910,12 +25910,12 @@ page-negocio-agregar-producto .logo {
 
 page-negocio-detalle .contBanner {
   position: relative;
-  margin-top: 15px;
+  margin-top: -111px;
 }
 
 page-negocio-detalle .logo {
   position: absolute;
-  bottom: -30%;
+  bottom: -25%;
   left: 0;
   right: 0;
   width: 35%;
@@ -25923,7 +25923,7 @@ page-negocio-detalle .logo {
 }
 
 page-negocio-detalle .contLogo {
-  margin-bottom: 22%;
+  margin-bottom: 40%;
 }
 
 page-negocio-detalle .more {
