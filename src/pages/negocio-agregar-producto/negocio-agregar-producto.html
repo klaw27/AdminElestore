@@ -25,7 +25,7 @@
                   </p>
                   </ion-item>
                   <ion-item class="campo"> 
-                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number"  [(ngModel)]="producto.precio" formControlName="precio"></ion-input>
+                      <ion-input class="entrada" placeholder="Precio" [disabled]="editar" type="number" pattern="/^[0-9]+(\.[0-9]{1,2})?$/" [(ngModel)]="producto.precio" formControlName="precio"></ion-input>
                     </ion-item>
                     <ion-item *ngIf="precio.hasError('required') && precio.touched">
                       <p style="color:red">
@@ -44,7 +44,7 @@
                         <ion-input class="entrada" placeholder="Complementos" [disabled]="editar" type="text" [(ngModel)]="producto.complemento" formControlName="descripcion"></ion-input>
                       </ion-item>
                         <ion-item class="campo"> 
-                        <ion-input class="entrada" placeholder="Tiempo de preparacion" [disabled]="editar" type="number"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>
+                        <ion-input class="entrada" placeholder="Tiempo de preparacion en minutos" [disabled]="editar" type="number" pattern="[0-9]*"  [(ngModel)]="producto.tiempopreparacion" formControlName="tiempopreparacion"></ion-input>
                       </ion-item>
                       <ion-item *ngIf="tiempopreparacion.hasError('required') && tiempopreparacion.touched">
                       <p style="color:red">

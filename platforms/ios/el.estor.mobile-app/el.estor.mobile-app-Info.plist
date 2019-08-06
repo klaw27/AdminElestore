@@ -35,15 +35,12 @@
     <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
-      <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
     </array>
     <key>UISupportedInterfaceOrientations~ipad</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
       <string>UIInterfaceOrientationPortraitUpsideDown</string>
-      <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>UIRequiresFullScreen</key>
     <true/>
@@ -55,9 +52,13 @@
     <key>UILaunchStoryboardName</key>
     <string>CDVLaunchScreen</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>We use your location for full functionality of certain app features.</string>
+    <string>need location access to find things nearby</string>
     <key>NSCameraUsageDescription</key>
-    <string>Necesitamos usar el acceso a la camara para poder tomar una foto de perfil</string>
+    <string>You can take photos</string>
+    <key>UIInterfaceOrientation</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+    </array>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Necesitamos usar el acceso a la libreria de fotos para escoger una foto de perfil</string>
     <key>NSPhotoLibraryAddUsageDescription</key>

@@ -65,7 +65,7 @@
                             </ion-item>
     
                             <ion-item class="campo">
-                              <ion-input p class="entrada" placeholder="Codigo Postal" [disabled]="editar" type="number" [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>
+                              <ion-input p class="entrada" placeholder="Codigo Postal" [disabled]="editar" type="number" pattern="[0-9]*"  [(ngModel)]="negocio.codigopostal" formControlName="codigopostal"></ion-input>
                             </ion-item>
                                 <ion-item *ngIf="(codigopostal.hasError('required') && codigopostal.touched) || (codigopostal.hasError('maxLength'))">
                                   <p style="color:red">

@@ -81,7 +81,7 @@
         </ion-item>
 
         <ion-item class="campo">
-            <ion-input class="entrada" placeholder="Numero Telefonico" type="number" disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>
+            <ion-input class="entrada" placeholder="Numero Telefonico"  type="number" pattern="[0-9]*"  disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>
           </ion-item>
             <ion-item *ngIf="numeroTelefonico.hasError('required') && numeroTelefonico.touched ">
               <p style="color:red">
