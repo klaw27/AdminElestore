@@ -87,6 +87,7 @@ export class Producto
   otracategoria:string = "";
   precio: number = 0;
   tiempopreparacion:number; 
+  FK_idNegocio:number;
 }
 
 export class CatProducto

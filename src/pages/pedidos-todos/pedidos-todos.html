@@ -6,12 +6,13 @@
                 Listados de Pedidos en el Sistema
               </label>
           </ion-item>
-              <ion-item-sliding *ngFor="let pedido of objPedidosEntregados " class="contNeg">
-            <ion-item>
+              <ion-item-sliding *ngFor="let pedido of objPedidosTodos " class="contNeg">
+            <ion-item (click)="detallePedido(pedido, $event)">
               <ion-thumbnail item-start class="logoProd">
                 <img  onError="this.src='/assets/imgs/producto.png'" class="logimg">
               </ion-thumbnail>
-              <h2 class="nombreNeg">{{pedido.nombreNeg}}</h2>
+              <h2 class="nombreNeg">{{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>
+              <h2 class="nombreNeg">{{pedido.cliente.telefono}}</h2>
               <div class="contenedorEstrellas">
                   <ion-icon class="estrella" name='star'></ion-icon>
                   <ion-icon class="estrella" name='star'></ion-icon>
@@ -21,8 +22,7 @@
                 </div>
             </ion-item>
               <ion-item-options>
-                <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>
-                <button ion-button color="gray" (click)="editarProducto(prod)" > Editar</button>
+                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>
             </ion-item-options>
           </ion-item-sliding>
         </ion-list>

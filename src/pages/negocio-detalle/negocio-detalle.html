@@ -21,8 +21,8 @@
     <button ion-button clear (click)="verMapa(userModel.negocio[0])" >Ubicación y Horario</button>
     <h2 class="titNeg">Mis Productos</h2> 
   
-    <ion-list [virtualScroll]="productos" [approxItemHeight]="'132px'">
-      <ion-item-sliding *virtualItem="let prod " class="contNeg">
+    <ion-list>
+      <ion-item-sliding *ngFor="let prod of productos" class="contNeg">
           <ion-item>
             <ion-thumbnail item-start class="logoProd">
               <img [src]="prod.fotografia" onError="this.src='/assets/imgs/producto.png'" class="logimg">

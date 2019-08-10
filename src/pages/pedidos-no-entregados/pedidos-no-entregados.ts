@@ -11,9 +11,7 @@ import { Storage } from '@ionic/storage';
 export class PedidosNoEntregadosPage {
 
   pedidos:any;
-
-  
-  objPedidosNoEntregados:any;
+  objPedidosNoEntregados= [];
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -41,10 +39,9 @@ export class PedidosNoEntregadosPage {
         data.map((data) =>
         {
           let info = data.payload.val();
-          this.objPedidosNoEntregados = info;
+          this.objPedidosNoEntregados.push(info);
         });
       });
     });;
   }
-  
 }

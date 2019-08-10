@@ -13,7 +13,7 @@ import { ArrayType } from '@angular/compiler/src/output/output_ast';
 export class PedidosEntregadosPage {
 
   pedidos:any;
-  objPedidosEntregados:any;
+  objPedidosEntregados=[];
 
 
   constructor(public navCtrl: NavController, 
@@ -44,17 +44,9 @@ export class PedidosEntregadosPage {
         data.map((data) =>
         {
           let info = data.payload.val();
-          // let prod = info.productos;
-          
-          // prod.forEach(element => {
-          //   debugger
-          // this.objPedidosEntregados.push(element);
-          // });
-      
-          debugger
+          this.objPedidosEntregados.push(info);
         });
       });
     });;
   }
-
 }

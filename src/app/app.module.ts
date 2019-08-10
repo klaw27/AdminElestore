@@ -38,6 +38,7 @@ import { fireBaseConfig } from '../config';
 import { IonicStorageModule } from '@ionic/storage';
 import { NegocioEditarProductoPage } from '../pages/negocio-editar-producto/negocio-editar-producto';
 import { CurrencyPipe } from '@angular/common';
+import { DetallePedidoPage } from '../pages/detalle-pedido/detalle-pedido';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { CurrencyPipe } from '@angular/common';
     PedidosEntregadosPage,
     PedidosNoEntregadosPage,
     ModalPedidoPage,
-    NegocioEditarProductoPage
+    NegocioEditarProductoPage,
+    DetallePedidoPage
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,8 @@ import { CurrencyPipe } from '@angular/common';
     PedidosEntregadosPage,
     PedidosNoEntregadosPage,
     ModalPedidoPage,
-    NegocioEditarProductoPage
+    NegocioEditarProductoPage,
+    DetallePedidoPage
   ],
   providers: [
     StatusBar,

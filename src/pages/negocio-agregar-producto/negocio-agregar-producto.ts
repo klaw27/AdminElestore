@@ -110,6 +110,7 @@ export class NegocioAgregarProductoPage {
     // this.producto.fotografia = this.imgSource;
 
     prod = this.producto;
+    prod.FK_idNegocio = this.userModel.negocio[0].id_negocio;
     // prod.fotografia = this.fotografia;
 
      this.toast = this.toastController.create({

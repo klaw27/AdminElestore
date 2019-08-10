@@ -18,7 +18,7 @@ export class PedidosPage {
   userModel: User = new User();
   pedidos:any;
 
-  objPedidosTodos:any;
+  objPedidosTodos=[];
 
 
   public pedidosTodos = PedidosTodosPage;
@@ -52,7 +52,7 @@ export class PedidosPage {
         data.map((data) =>
         {
           let info = data.payload.val();
-          this.objPedidosTodos = info;
+          this.objPedidosTodos.push(info);
         });
       });
     });;
