@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
 
@@ -16,7 +16,8 @@ export class PedidosNoEntregadosPage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private afdb: AngularFireDatabase,
-    public storage: Storage) {
+    public storage: Storage,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -30,18 +31,32 @@ export class PedidosNoEntregadosPage {
 
   public async get(settingName)
   {
+    this.objPedidosNoEntregados = [];
+    
+    let message:string = "Obteniendo pedidos no entregados...";
+    let loader = this.loadingCtrl.create({
+      content: message
+    });
+
     return await this.storage.get(`setting:${ settingName }`).then((value) =>
     {
       this.pedidos =value;
-      debugger
       this.afdb.list("pedidos/" + `${this.pedidos.negocio[0].id_negocio}`).snapshotChanges().subscribe((data) =>
       {
-        data.map((data) =>
+        loader.present().then(() =>
         {
-          let info = data.payload.val();
-          this.objPedidosNoEntregados.push(info);
+          data.map((data) =>
+          {
+            let info = data.payload.val();
+            this.objPedidosNoEntregados.push(info);
+          });
+          loader.dismiss();
         });
       });
     });;
+  }
+  detallePedido(pedido, $event)
+  {
+
   }
 }

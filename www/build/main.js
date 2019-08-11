@@ -883,11 +883,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 // @IonicPage()
 var PedidosNoEntregadosPage = /** @class */ (function () {
-    function PedidosNoEntregadosPage(navCtrl, navParams, afdb, storage) {
+    function PedidosNoEntregadosPage(navCtrl, navParams, afdb, storage, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.afdb = afdb;
         this.storage = storage;
+        this.loadingCtrl = loadingCtrl;
         this.objPedidosNoEntregados = [];
     }
     PedidosNoEntregadosPage.prototype.ionViewDidLoad = function () {
@@ -897,32 +898,41 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
     };
     PedidosNoEntregadosPage.prototype.get = function (settingName) {
         return __awaiter(this, void 0, void 0, function () {
+            var message, loader;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
-                            _this.pedidos = value;
-                            debugger;
-                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
-                                data.map(function (data) {
-                                    var info = data.payload.val();
-                                    _this.objPedidosNoEntregados.push(info);
+                    case 0:
+                        this.objPedidosNoEntregados = [];
+                        message = "Obteniendo pedidos no entregados...";
+                        loader = this.loadingCtrl.create({
+                            content: message
+                        });
+                        return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
+                                _this.pedidos = value;
+                                _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
+                                    loader.present().then(function () {
+                                        data.map(function (data) {
+                                            var info = data.payload.val();
+                                            _this.objPedidosNoEntregados.push(info);
+                                        });
+                                        loader.dismiss();
+                                    });
                                 });
-                            });
-                        })];
+                            })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
+    PedidosNoEntregadosPage.prototype.detallePedido = function (pedido, $event) {
+    };
+    var _a, _b, _c, _d, _e;
     PedidosNoEntregadosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos-no-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-no-entregados/pedidos-no-entregados.html"*/'<ion-content padding>\n  <ion-item-divider>\n    <ion-list>\n      <ion-item>\n          <label style="text-align: center">\n            Pedidos no entregados\n          </label>\n      </ion-item>\n      <ion-item>\n        \n      </ion-item>\n    </ion-list>\n  </ion-item-divider>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-no-entregados/pedidos-no-entregados.html"*/,
+            selector: 'page-pedidos-no-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-no-entregados/pedidos-no-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de pedidos no entregados.\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosNoEntregados " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-no-entregados/pedidos-no-entregados.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" ? _e : Object])
     ], PedidosNoEntregadosPage);
     return PedidosNoEntregadosPage;
 }());
@@ -2001,6 +2011,8 @@ var RecuperarcuentaPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(660);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2049,14 +2061,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 // declare var objPedidosEntregados:any;
 // @IonicPage()
 var PedidosEntregadosPage = /** @class */ (function () {
-    function PedidosEntregadosPage(navCtrl, navParams, afdb, storage) {
+    function PedidosEntregadosPage(navCtrl, navParams, afdb, storage, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.afdb = afdb;
         this.storage = storage;
+        this.loadingCtrl = loadingCtrl;
         this.objPedidosEntregados = [];
     }
     PedidosEntregadosPage.prototype.ionViewDidLoad = function () {
@@ -2066,31 +2080,41 @@ var PedidosEntregadosPage = /** @class */ (function () {
     };
     PedidosEntregadosPage.prototype.get = function (settingName) {
         return __awaiter(this, void 0, void 0, function () {
+            var message, loader;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
-                            _this.pedidos = value;
-                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
-                                data.map(function (data) {
-                                    var info = data.payload.val();
-                                    _this.objPedidosEntregados.push(info);
+                    case 0:
+                        this.objPedidosEntregados = [];
+                        message = "Obteniendo pedidos entregados...";
+                        loader = this.loadingCtrl.create({
+                            content: message
+                        });
+                        return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
+                                _this.pedidos = value;
+                                _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
+                                    loader.present().then(function () {
+                                        data.map(function (data) {
+                                            var info = data.payload.val();
+                                            _this.objPedidosEntregados.push(info);
+                                        });
+                                        loader.dismiss();
+                                    });
                                 });
-                            });
-                        })];
+                            })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
+    PedidosEntregadosPage.prototype.detallePedido = function (pedido, $event) {
+    };
+    var _a, _b, _c, _d, _e;
     PedidosEntregadosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n\n\n    <ion-list>\n        <ion-item>\n            <label style="text-align: center">\n              Pedidos Entregados\n            </label>\n        </ion-item>\n\n        <!-- <ion-item-sliding *ngFor="let pedido of objPedidosEntregados" class="contNeg">\n            <ion-item>\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">{{pedido.nombre}}</h2>\n              <div class="contenedorEstrellas">\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="danger" (click)="borrarProducto(prod)" > Borrar</button>\n                <button ion-button color="gray" (click)="editarProducto(prod)" > Editar</button>\n            </ion-item-options>\n          </ion-item-sliding> -->\n      </ion-list>\n\n        <ion-list>\n          <!-- <ion-item>\n              <label style="text-align: center">\n                Pedidos Entregados\n              </label>\n          </ion-item> -->\n          <ion-item>\n            \n          </ion-item>\n        </ion-list>\n      </ion-item-divider>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/,
+            selector: 'page-pedidos-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de pedidos entregados\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosEntregados " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-entregados/pedidos-entregados.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" ? _e : Object])
     ], PedidosEntregadosPage);
     return PedidosEntregadosPage;
 }());
@@ -2162,7 +2186,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 // @IonicPage()
 var PedidosTodosPage = /** @class */ (function () {
-    function PedidosTodosPage(navCtrl, navParams, api, afdb, storage, viewCtrl, modalCtrl) {
+    function PedidosTodosPage(navCtrl, navParams, api, afdb, storage, viewCtrl, modalCtrl, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.api = api;
@@ -2170,6 +2194,7 @@ var PedidosTodosPage = /** @class */ (function () {
         this.storage = storage;
         this.viewCtrl = viewCtrl;
         this.modalCtrl = modalCtrl;
+        this.loadingCtrl = loadingCtrl;
         this.objPedidosTodos = [];
     }
     PedidosTodosPage.prototype.ionViewWillEnter = function () {
@@ -2177,17 +2202,25 @@ var PedidosTodosPage = /** @class */ (function () {
     };
     PedidosTodosPage.prototype.get = function (settingName) {
         return __awaiter(this, void 0, void 0, function () {
+            var message, loader;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         this.objPedidosTodos = [];
+                        message = "Obteniendo pedidos...";
+                        loader = this.loadingCtrl.create({
+                            content: message
+                        });
                         return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
                                 _this.pedidos = value;
                                 _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
-                                    data.map(function (data) {
-                                        var info = data.payload.val();
-                                        _this.objPedidosTodos.push(info);
+                                    loader.present().then(function () {
+                                        data.map(function (data) {
+                                            var info = data.payload.val();
+                                            _this.objPedidosTodos.push(info);
+                                        });
+                                        loader.dismiss();
                                     });
                                 });
                             })];
@@ -2203,12 +2236,12 @@ var PedidosTodosPage = /** @class */ (function () {
         });
         profileModal.present();
     };
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     PedidosTodosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos-todos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de Pedidos en el Sistema\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosTodos " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">{{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">{{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/,
+            selector: 'page-pedidos-todos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de Pedidos en el Sistema\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosTodos " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedidos-todos/pedidos-todos.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]) === "function" ? _g : Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]) === "function" ? _g : Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]) === "function" ? _h : Object])
     ], PedidosTodosPage);
     return PedidosTodosPage;
 }());
@@ -2248,12 +2281,12 @@ var DetallePedidoPage = /** @class */ (function () {
     DetallePedidoPage.prototype.back = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__pedidos_pedidos__["a" /* PedidosPage */]);
     };
-    var _a, _b;
     DetallePedidoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
             selector: 'page-detalle-pedido',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/detalle-pedido/detalle-pedido.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      Detalle del Pedido\n    </ion-title>\n  </ion-header>\n\n<ion-content>\n\n    <ion-fab left bottom (click)="back()">\n        <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n    </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/detalle-pedido/detalle-pedido.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]])
     ], DetallePedidoPage);
     return DetallePedidoPage;
 }());

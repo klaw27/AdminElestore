@@ -11,9 +11,10 @@
               <ion-thumbnail item-start class="logoProd">
                 <img  onError="this.src='/assets/imgs/producto.png'" class="logimg">
               </ion-thumbnail>
-              <h2 class="nombreNeg">{{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>
-              <h2 class="nombreNeg">{{pedido.cliente.telefono}}</h2>
+              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>
+              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>
               <div class="contenedorEstrellas">
+                  <h2 class="nombreNeg">Rate</h2>
                   <ion-icon class="estrella" name='star'></ion-icon>
                   <ion-icon class="estrella" name='star'></ion-icon>
                   <ion-icon class="estrella" name='star'></ion-icon>

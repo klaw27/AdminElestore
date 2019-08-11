@@ -26227,6 +26227,180 @@ page-nuevonegocio .text-input {
   text-align: center;
 }
 
+page-pedidos-entregados .user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+page-pedidos-entregados .imgUser {
+  width: 30%;
+  height: 30%;
+  margin: 20px auto 25px auto;
+}
+
+page-pedidos-entregados .nomCliente {
+  width: 50%;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  font-size: 2rem;
+}
+
+page-pedidos-entregados .titNeg {
+  padding: 0 0 10px 20px;
+  margin: 5px 0 10px 0;
+}
+
+page-pedidos-entregados .contNeg {
+  margin-bottom: 20px;
+  border: none !important;
+}
+
+page-pedidos-entregados .logo img {
+  width: 80px;
+  height: 80px;
+}
+
+page-pedidos-entregados .nombreNeg {
+  font-size: 1.7rem;
+}
+
+page-pedidos-entregados .item-inner {
+  border: none !important;
+}
+
+page-pedidos-entregados .contenedorEstrellas {
+  margin-top: 15px;
+}
+
+page-pedidos-entregados .estrella {
+  color: #FDC300;
+  font-size: 23px;
+}
+
+page-pedidos-entregados .more {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+page-pedidos-no-entregados .user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+page-pedidos-no-entregados .imgUser {
+  width: 30%;
+  height: 30%;
+  margin: 20px auto 25px auto;
+}
+
+page-pedidos-no-entregados .nomCliente {
+  width: 50%;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  font-size: 2rem;
+}
+
+page-pedidos-no-entregados .titNeg {
+  padding: 0 0 10px 20px;
+  margin: 5px 0 10px 0;
+}
+
+page-pedidos-no-entregados .contNeg {
+  margin-bottom: 20px;
+  border: none !important;
+}
+
+page-pedidos-no-entregados .logo img {
+  width: 80px;
+  height: 80px;
+}
+
+page-pedidos-no-entregados .nombreNeg {
+  font-size: 1.7rem;
+}
+
+page-pedidos-no-entregados .item-inner {
+  border: none !important;
+}
+
+page-pedidos-no-entregados .contenedorEstrellas {
+  margin-top: 15px;
+}
+
+page-pedidos-no-entregados .estrella {
+  color: #FDC300;
+  font-size: 23px;
+}
+
+page-pedidos-no-entregados .more {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+page-pedidos-todos .user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+page-pedidos-todos .imgUser {
+  width: 30%;
+  height: 30%;
+  margin: 20px auto 25px auto;
+}
+
+page-pedidos-todos .nomCliente {
+  width: 50%;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  font-size: 2rem;
+}
+
+page-pedidos-todos .titNeg {
+  padding: 0 0 10px 20px;
+  margin: 5px 0 10px 0;
+}
+
+page-pedidos-todos .contNeg {
+  margin-bottom: 20px;
+  border: none !important;
+}
+
+page-pedidos-todos .logo img {
+  width: 80px;
+  height: 80px;
+}
+
+page-pedidos-todos .nombreNeg {
+  font-size: 1.7rem;
+}
+
+page-pedidos-todos .item-inner {
+  border: none !important;
+}
+
+page-pedidos-todos .contenedorEstrellas {
+  margin-top: 15px;
+}
+
+page-pedidos-todos .estrella {
+  color: #FDC300;
+  font-size: 23px;
+}
+
+page-pedidos-todos .more {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
 page-perfil .user {
   position: relative;
 }
