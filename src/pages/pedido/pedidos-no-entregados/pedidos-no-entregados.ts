@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
+import { DetallePedidoPage } from '../detalle-pedido/detalle-pedido';
 
 // @IonicPage()
 @Component({
@@ -17,7 +18,8 @@ export class PedidosNoEntregadosPage {
     public navParams: NavParams,
     private afdb: AngularFireDatabase,
     public storage: Storage,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -43,20 +45,26 @@ export class PedidosNoEntregadosPage {
       this.pedidos =value;
       this.afdb.list("pedidos/" + `${this.pedidos.negocio[0].id_negocio}`).snapshotChanges().subscribe((data) =>
       {
-        loader.present().then(() =>
-        {
+        this.objPedidosNoEntregados = [];
+
+        // loader.present().then(() =>
+        // {
           data.map((data) =>
           {
             let info = data.payload.val();
             this.objPedidosNoEntregados.push(info);
           });
-          loader.dismiss();
-        });
+        //   loader.dismiss();
+        // });
       });
     });;
   }
   detallePedido(pedido, $event)
   {
-
+    let profileModal = this.modalCtrl.create(DetallePedidoPage, { pedido});
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+    });
+    profileModal.present();
   }
 }

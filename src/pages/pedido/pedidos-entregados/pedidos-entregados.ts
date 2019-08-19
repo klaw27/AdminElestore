@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/catch';
+import { DetallePedidoPage } from '../detalle-pedido/detalle-pedido';
 
 // declare var objPedidosEntregados:any;
 // @IonicPage()
@@ -20,7 +21,8 @@ export class PedidosEntregadosPage {
     public navParams: NavParams,
     private afdb: AngularFireDatabase,
     public storage: Storage,
-    public loadingCtrl: LoadingController) 
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController) 
     {
 
   }
@@ -48,21 +50,26 @@ export class PedidosEntregadosPage {
       this.pedidos =value;
       this.afdb.list("pedidos/" + `${this.pedidos.negocio[0].id_negocio}`).snapshotChanges().subscribe((data) =>
       {
-        loader.present().then(() => 
-        {
+        this.objPedidosEntregados =[];
+        // loader.present().then(() => 
+        // {
           data.map((data) =>
           {
             let info = data.payload.val();
             this.objPedidosEntregados.push(info);
           });
-          loader.dismiss();
-        });
+        //   loader.dismiss();
+        // });
       });
     });;
   }
 
   detallePedido(pedido, $event)
   {
-
+    let profileModal = this.modalCtrl.create(DetallePedidoPage, { pedido});
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+    });
+  profileModal.present();
   }
 }

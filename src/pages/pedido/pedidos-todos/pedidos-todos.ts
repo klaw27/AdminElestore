@@ -35,7 +35,7 @@ export class PedidosTodosPage {
 
   public async get(settingName)
   {
-    this.objPedidosTodos = [];
+    
     
     let message:string = "Obteniendo pedidos...";
     let loader = this.loadingCtrl.create({
@@ -45,14 +45,18 @@ export class PedidosTodosPage {
     return await this.storage.get(`setting:${ settingName }`).then((value) =>{
       this.pedidos =value;
       this.afdb.list("pedidos/" + `${this.pedidos.negocio[0].id_negocio}`).snapshotChanges().subscribe(data=>{
-        loader.present().then(() =>
-        {
-          data.map(data=>{
+
+        this.objPedidosTodos = [];
+        
+        // loader.present().then(() =>
+        // {
+          data.map(data=>
+          {
             let info = data.payload.val();
             this.objPedidosTodos.push(info);
           });
-          loader.dismiss();
-        });
+        //   loader.dismiss();
+        // });
       });
     });;
   }

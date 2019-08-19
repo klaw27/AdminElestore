@@ -9,6 +9,7 @@ import { Storage } from '@ionic/storage';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from '../../../models/model';
 import { ElstorapiProvider } from '../../../providers/elstorapi/elstorapi';
+import { InicioPage } from '../../inicio/inicio';
 
 declare function escape(s:string): string;
 

@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { DefaultKeyValueDiffer } from '@angular/core/src/change_detection/differs/default_keyvalue_differ';
 import { User } from '../../../models/model';
 import { InicioPage } from '../../inicio/inicio';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 // @IonicPage()
 @Component({
@@ -58,8 +59,18 @@ export class PedidosPage {
     });;
   }
 
-  back(){
-    this.navCtrl.push(InicioPage, {item:this.userModel});
+  back()
+  {
+    if(this.userModel === undefined)
+    {
+      this.storage.get(`setting:${ 'usuario' }`).then((value) =>
+      {
+        this.userModel = value;
+        this.navCtrl.push(InicioPage, {item:this.userModel});
+      });
+    }
+    else{
+      this.navCtrl.push(InicioPage, {item:this.userModel});
+    }
   }
-
 }

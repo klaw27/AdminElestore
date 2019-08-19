@@ -1,21 +1,64 @@
 webpackJsonp([0],{
 
+/***/ 127:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetallePedidoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pedidos_pedidos__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var DetallePedidoPage = /** @class */ (function () {
+    function DetallePedidoPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.pedido = navParams.data.pedido;
+    }
+    DetallePedidoPage.prototype.ionViewDidLoad = function () {
+    };
+    DetallePedidoPage.prototype.back = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__pedidos_pedidos__["a" /* PedidosPage */]);
+    };
+    DetallePedidoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
+            selector: 'page-detalle-pedido',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/detalle-pedido/detalle-pedido.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      Detalle del Pedido\n    </ion-title>\n  </ion-header>\n\n<ion-content>\n\n    <ion-fab left bottom (click)="back()">\n        <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n    </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/detalle-pedido/detalle-pedido.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]])
+    ], DetallePedidoPage);
+    return DetallePedidoPage;
+}());
+
+//# sourceMappingURL=detalle-pedido.js.map
+
+/***/ }),
+
 /***/ 206:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NuevonegocioPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_camera__ = __webpack_require__(59);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pedidos_no_entregados_pedidos_no_entregados__ = __webpack_require__(252);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pedidos_entregados_pedidos_entregados__ = __webpack_require__(358);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_platform_browser__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_elstorapi_elstorapi__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pedidos_todos_pedidos_todos__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__inicio_inicio__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,6 +103,510 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+
+
+
+
+
+
+
+
+
+// @IonicPage()
+var PedidosPage = /** @class */ (function () {
+    function PedidosPage(navCtrl, navParams, afdb, storage) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.afdb = afdb;
+        this.storage = storage;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_7__models_model__["c" /* User */]();
+        this.objPedidosTodos = [];
+        this.pedidosTodos = __WEBPACK_IMPORTED_MODULE_5__pedidos_todos_pedidos_todos__["a" /* PedidosTodosPage */];
+        this.pedidosEntregados = __WEBPACK_IMPORTED_MODULE_1__pedidos_entregados_pedidos_entregados__["a" /* PedidosEntregadosPage */];
+        this.pedidosNoEntregados = __WEBPACK_IMPORTED_MODULE_0__pedidos_no_entregados_pedidos_no_entregados__["a" /* PedidosNoEntregadosPage */];
+        this.userModel = navParams.get('item');
+    }
+    PedidosPage.prototype.ionViewDidLoad = function () { };
+    PedidosPage.prototype.ionViewWillEnter = function () {
+        this.get('usuario');
+    };
+    PedidosPage.prototype.ionViewWillLeave = function () { };
+    PedidosPage.prototype.ionViewWillUnload = function () { };
+    PedidosPage.prototype.get = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
+                            _this.pedidos = value;
+                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
+                                data.map(function (data) {
+                                    var info = data.payload.val();
+                                    _this.objPedidosTodos.push(info);
+                                });
+                            });
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    PedidosPage.prototype.back = function () {
+        var _this = this;
+        if (this.userModel === undefined) {
+            this.storage.get("setting:" + 'usuario').then(function (value) {
+                _this.userModel = value;
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
+            });
+        }
+        else {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__inicio_inicio__["a" /* InicioPage */], { item: this.userModel });
+        }
+    };
+    var _a, _b, _c, _d;
+    PedidosPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
+            selector: 'page-pedidos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos/pedidos.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      <!-- Listado de pedidos : {{userModel.nombreUsuario}} -->\n      Listado de pedidos \n    </ion-title>\n</ion-header>\n\n<ion-tabs>\n  <ion-tab title="Todos" [root]="pedidosTodos" tabIcon="podium">\n    \n  </ion-tab>\n  <ion-tab title="Entregados" [root]="pedidosEntregados" tabIcon="podium">\n\n  </ion-tab>\n  <ion-tab title="No Entregados" [root]="pedidosNoEntregados" tabIcon="podium"> \n\n  </ion-tab>\n</ion-tabs>\n<ion-fab left bottom (click)="back()">\n  <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos/pedidos.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]) === "function" ? _d : Object])
+    ], PedidosPage);
+    return PedidosPage;
+}());
+
+//# sourceMappingURL=pedidos.js.map
+
+/***/ }),
+
+/***/ 207:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__register_register__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_model__ = __webpack_require__(21);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+var usuario;
+var HomePage = /** @class */ (function () {
+    function HomePage(navCtrl, storage) {
+        this.navCtrl = navCtrl;
+        this.storage = storage;
+        this.usuario = new __WEBPACK_IMPORTED_MODULE_6__models_model__["c" /* User */]();
+    }
+    HomePage.prototype.ionViewDidLoad = function () {
+    };
+    HomePage.prototype.ionViewWillEnter = function () {
+        this.get('usuario');
+    };
+    HomePage.prototype.ionViewWillLeave = function () { };
+    HomePage.prototype.ionViewWillUnload = function () { };
+    HomePage.prototype.goToLoginPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__login_login__["a" /* LoginPage */]);
+    };
+    HomePage.prototype.goToRegisterPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_1__register_register__["a" /* RegisterPage */]);
+    };
+    HomePage.prototype.get = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
+                            usuario = value;
+                            if (usuario != null) {
+                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: usuario });
+                            }
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    HomePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["n" /* Component */])({
+            selector: 'page-home',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/home/home.html"*/'\n<ion-content padding>\n\n    <img class="logo" src="/assets/imgs/ElEstorLogoCuadroyAza.png" >\n\n<ion-grid>\n<ion-row>\n    <p >\n        Bienvenido, desde aqui podras administrar tu negocio\n    </p>\n</ion-row>\n<ion-row>\n  <ion-col >\n      <button clear ion-button full (click)="goToLoginPage()">\n          Inciar Sesion\n        </button>\n  </ion-col>\n  <ion-col>\n      <button ion-button full (click)="goToRegisterPage()">\n          Registrarse\n        </button>\n    </ion-col>\n</ion-row>\n<ion-row>\n    <ion-footer>\n      <!-- <p text-center>Powered by</p>\n      <p text-center>Lex Software S.A. de C.V. All Rights Reserved 2019</p> -->\n    </ion-footer>\n</ion-row>\n\n</ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/home/home.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]])
+    ], HomePage);
+    return HomePage;
+}());
+
+//# sourceMappingURL=home.js.map
+
+/***/ }),
+
+/***/ 209:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recuperarcuenta_recuperarcuenta__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__inicio_inicio__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(35);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+// @IonicPage()
+var LoginPage = /** @class */ (function () {
+    function LoginPage(navCtrl, navParams, formBuilder, api, alertCtrl, loadingCtrl, toastController, storage) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.api = api;
+        this.alertCtrl = alertCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.toastController = toastController;
+        this.storage = storage;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_5__models_model__["c" /* User */]();
+        this.imgSource = '/assets/imgs/user.png';
+        this.formGroup = formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].email]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(8)]]
+        });
+        this.email = this.formGroup.controls['email'];
+        this.password = this.formGroup.controls['password'];
+    }
+    LoginPage.prototype.ionViewDidLoad = function () { };
+    LoginPage.prototype.ionViewWillEnter = function () {
+    };
+    LoginPage.prototype.ionViewWillLeave = function () { };
+    LoginPage.prototype.ionViewWillUnload = function () { };
+    LoginPage.prototype.iniciarSesion = function ($event, usr) {
+        var _this = this;
+        var title = '';
+        var subTitle = '';
+        this.userModel = usr;
+        var loader = this.loadingCtrl.create({
+            content: 'Iniciando sesion...'
+        });
+        loader.present().then(function () {
+            _this.api.inicarSesion(usr).subscribe(function (data) {
+                switch (data) {
+                    case undefined:
+                        title = 'Ocurrio un error';
+                        subTitle = 'Usuario/password incorrecto';
+                        break;
+                    case null:
+                        title = 'Ocurrio un error';
+                        subTitle = 'Revise su conexion a internet!';
+                        break;
+                    default:
+                        // if(data[0] === undefined)
+                        // {
+                        //   title = 'Ocurrio un error';
+                        //   subTitle = 'Usuario no registrado!';
+                        // }
+                        if (data.length === 0) {
+                            title = 'Ocurrio un error';
+                            subTitle = 'Usuario no registrado/Password incorrectos';
+                        }
+                        else {
+                            title = 'Bienvenido';
+                            subTitle = 'Bienvenido ' + data[0].nombreUsuario;
+                        }
+                        break;
+                }
+                var alert = _this.alertCtrl.create({
+                    title: title,
+                    subTitle: subTitle,
+                    buttons: [{
+                            text: 'Ok',
+                            handler: function () {
+                                if (data.length > 0) {
+                                    _this.set('usuario', data[0]);
+                                    var loader_1 = _this.loadingCtrl.create({
+                                        content: 'Iniciando sesion...'
+                                    });
+                                    loader_1.present().then(function () {
+                                        loader_1.dismiss();
+                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__inicio_inicio__["a" /* InicioPage */], { item: data[0] });
+                                    });
+                                }
+                                else {
+                                    loader.dismiss();
+                                }
+                            }
+                        }]
+                });
+                alert.present().then(function () {
+                    loader.dismiss();
+                });
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: 'Revise su conexion a internet.',
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                loader.dismiss();
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
+            //loader.dismiss();
+        });
+    };
+    LoginPage.prototype.recuperarCuenta = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__recuperarcuenta_recuperarcuenta__["a" /* RecuperarcuentaPage */]);
+    };
+    LoginPage.prototype.set = function (settingName, value) {
+        return this.storage.set("setting:" + settingName, value);
+    };
+    LoginPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
+            selector: 'page-login',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Inicio de Sesion</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n      <img class="imgUser" [src]="imgSource">\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="list">\n      <ion-item class="correo">\n        <ion-input class="correo-input" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="email.hasError(\'required\') && email.touched ">\n        <p style="color:red">\n*Valid email is required\n        </p>\n        </ion-item>\n      <ion-item class="contraseña">\n        <ion-input class="contraseña-input" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n      </ion-item>\n      <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n        <p style="color:red">\n    *Type a valid password\n        </p>\n        </ion-item>\n\n    </ion-list>\n<ion-grid>\n<ion-row>\n  <button clear  type="submit"  [disabled]="formGroup.invalid" ion-button full (click)="iniciarSesion($event, userModel)" >\n    Iniciar Sesion\n</button>\n</ion-row>\n<ion-row>\n  <button clear ion-button full color="danger" (click)="recuperarCuenta()" >\n    Olvide Mi Contrasenia\n</button>\n</ion-row>\n</ion-grid>\n\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/login/login.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]])
+    ], LoginPage);
+    return LoginPage;
+}());
+
+//# sourceMappingURL=login.js.map
+
+/***/ }),
+
+/***/ 21:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return User; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Negocio; });
+/* unused harmony export CatNegocio */
+/* unused harmony export SubCatNegocio */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Producto; });
+/* unused harmony export CatProducto */
+var User = /** @class */ (function () {
+    function User() {
+        this.clientid = "";
+        this.nombre = "";
+        this.apellidoPaterno = "";
+        this.apellidoMaterno = "";
+        this.nombreUsuario = "";
+        this.password = "";
+        this.confirmPassword = "";
+        this.email = "";
+        this.numeroTelefonico = "";
+    }
+    return User;
+}());
+
+var Negocio = /** @class */ (function () {
+    function Negocio() {
+        this.clientid = "";
+        this.string = "";
+        this.nombre = "";
+        this.callenumero = "";
+        this.colonia = "";
+        this.ciudad = "";
+        this.estado = "";
+        this.codigopostal = "";
+        this.horaapertura = "";
+        this.horacierre = "";
+        this.categoria = "";
+        this.subcategoria = "";
+        this.FK_subcategoria = -1;
+        this.descripcion = "";
+        this.latitud = "";
+        this.longitud = "";
+        this.active = 1;
+        this.id_negocio = 0;
+    }
+    return Negocio;
+}());
+
+var CatNegocio = /** @class */ (function () {
+    function CatNegocio() {
+        this.id_catNegocio = -1;
+        this.nombre = "";
+        this.descripcion = "";
+    }
+    return CatNegocio;
+}());
+
+var SubCatNegocio = /** @class */ (function () {
+    function SubCatNegocio() {
+        this.nombre = "";
+        this.descripcion = "";
+        this.fK_CATNEGOCIO = -1;
+        this.id_catNegocio = -1;
+    }
+    return SubCatNegocio;
+}());
+
+var Producto = /** @class */ (function () {
+    function Producto() {
+        this.clave = "";
+        this.complemento = "";
+        this.descripcion = "";
+        this.estatus = 1;
+        this.id_producto = 0;
+        this.negocioid = "";
+        this.nombre = "";
+        this.otracategoria = "";
+        this.precio = 0;
+    }
+    return Producto;
+}());
+
+var CatProducto = /** @class */ (function () {
+    function CatProducto() {
+        this.id_catProducto = 0;
+        this.nombre = "";
+        this.descripcion = "";
+        this.clave = 0;
+        this.estatus = 0;
+    }
+    return CatProducto;
+}());
+
+//# sourceMappingURL=model.js.map
+
+/***/ }),
+
+/***/ 210:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NuevonegocioPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_camera__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_platform_browser__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_elstorapi_elstorapi__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__inicio_inicio__ = __webpack_require__(55);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
 
 
 
@@ -387,7 +934,7 @@ var NuevonegocioPage = /** @class */ (function () {
         });
     };
     NuevonegocioPage.prototype.back = function () {
-        this.navCtrl.push(InicioPage, { item: this.userModel });
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_11__inicio_inicio__["a" /* InicioPage */], { item: this.userModel });
     };
     NuevonegocioPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
@@ -412,494 +959,7 @@ var NuevonegocioPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 207:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__register_register__ = __webpack_require__(362);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_model__ = __webpack_require__(21);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-
-
-var usuario;
-var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, storage) {
-        this.navCtrl = navCtrl;
-        this.storage = storage;
-        this.usuario = new __WEBPACK_IMPORTED_MODULE_6__models_model__["c" /* User */]();
-    }
-    HomePage.prototype.ionViewDidLoad = function () {
-    };
-    HomePage.prototype.ionViewWillEnter = function () {
-        this.get('usuario');
-    };
-    HomePage.prototype.ionViewWillLeave = function () { };
-    HomePage.prototype.ionViewWillUnload = function () { };
-    HomePage.prototype.goToLoginPage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__login_login__["a" /* LoginPage */]);
-    };
-    HomePage.prototype.goToRegisterPage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_1__register_register__["a" /* RegisterPage */]);
-    };
-    HomePage.prototype.get = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
-                            usuario = value;
-                            if (usuario != null) {
-                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: usuario });
-                            }
-                        })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    HomePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["n" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/home/home.html"*/'\n<ion-content padding>\n\n    <img class="logo" src="/assets/imgs/ElEstorLogoCuadroyAza.png" >\n\n<ion-grid>\n<ion-row>\n    <p >\n        Bienvenido, desde aqui podras administrar tu negocio\n    </p>\n</ion-row>\n<ion-row>\n  <ion-col >\n      <button clear ion-button full (click)="goToLoginPage()">\n          Inciar Sesion\n        </button>\n  </ion-col>\n  <ion-col>\n      <button ion-button full (click)="goToRegisterPage()">\n          Registrarse\n        </button>\n    </ion-col>\n</ion-row>\n<ion-row>\n    <ion-footer>\n      <!-- <p text-center>Powered by</p>\n      <p text-center>Lex Software S.A. de C.V. All Rights Reserved 2019</p> -->\n    </ion-footer>\n</ion-row>\n\n</ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/home/home.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]])
-    ], HomePage);
-    return HomePage;
-}());
-
-//# sourceMappingURL=home.js.map
-
-/***/ }),
-
-/***/ 208:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recuperarcuenta_recuperarcuenta__ = __webpack_require__(363);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__inicio_inicio__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(35);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-// @IonicPage()
-var LoginPage = /** @class */ (function () {
-    function LoginPage(navCtrl, navParams, formBuilder, api, alertCtrl, loadingCtrl, toastController, storage) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.api = api;
-        this.alertCtrl = alertCtrl;
-        this.loadingCtrl = loadingCtrl;
-        this.toastController = toastController;
-        this.storage = storage;
-        this.userModel = new __WEBPACK_IMPORTED_MODULE_5__models_model__["c" /* User */]();
-        this.imgSource = '/assets/imgs/user.png';
-        this.formGroup = formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].email]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(8)]]
-        });
-        this.email = this.formGroup.controls['email'];
-        this.password = this.formGroup.controls['password'];
-    }
-    LoginPage.prototype.ionViewDidLoad = function () { };
-    LoginPage.prototype.ionViewWillEnter = function () {
-    };
-    LoginPage.prototype.ionViewWillLeave = function () { };
-    LoginPage.prototype.ionViewWillUnload = function () { };
-    LoginPage.prototype.iniciarSesion = function ($event, usr) {
-        var _this = this;
-        var title = '';
-        var subTitle = '';
-        this.userModel = usr;
-        var loader = this.loadingCtrl.create({
-            content: 'Iniciando sesion...'
-        });
-        loader.present().then(function () {
-            _this.api.inicarSesion(usr).subscribe(function (data) {
-                switch (data) {
-                    case undefined:
-                        title = 'Ocurrio un error';
-                        subTitle = 'Usuario/password incorrecto';
-                        break;
-                    case null:
-                        title = 'Ocurrio un error';
-                        subTitle = 'Revise su conexion a internet!';
-                        break;
-                    default:
-                        // if(data[0] === undefined)
-                        // {
-                        //   title = 'Ocurrio un error';
-                        //   subTitle = 'Usuario no registrado!';
-                        // }
-                        if (data.length === 0) {
-                            title = 'Ocurrio un error';
-                            subTitle = 'Usuario no registrado/Password incorrectos';
-                        }
-                        else {
-                            title = 'Bienvenido';
-                            subTitle = 'Bienvenido ' + data[0].nombreUsuario;
-                        }
-                        break;
-                }
-                var alert = _this.alertCtrl.create({
-                    title: title,
-                    subTitle: subTitle,
-                    buttons: [{
-                            text: 'Ok',
-                            handler: function () {
-                                if (data.length > 0) {
-                                    _this.set('usuario', data[0]);
-                                    var loader_1 = _this.loadingCtrl.create({
-                                        content: 'Iniciando sesion...'
-                                    });
-                                    loader_1.present().then(function () {
-                                        loader_1.dismiss();
-                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__inicio_inicio__["a" /* InicioPage */], { item: data[0] });
-                                    });
-                                }
-                                else {
-                                    loader.dismiss();
-                                }
-                            }
-                        }]
-                });
-                alert.present().then(function () {
-                    loader.dismiss();
-                });
-            }, function (error) {
-                _this.toast = _this.toastController.create({
-                    message: 'Revise su conexion a internet.',
-                    showCloseButton: true,
-                    position: 'bottom',
-                    closeButtonText: 'Ok'
-                });
-                loader.dismiss();
-                _this.toast.onDidDismiss(function () {
-                });
-                _this.toast.present().then(function () {
-                });
-            });
-            //loader.dismiss();
-        });
-    };
-    LoginPage.prototype.recuperarCuenta = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__recuperarcuenta_recuperarcuenta__["a" /* RecuperarcuentaPage */]);
-    };
-    LoginPage.prototype.set = function (settingName, value) {
-        return this.storage.set("setting:" + settingName, value);
-    };
-    var _a, _b, _c, _d, _e, _f, _g, _h;
-    LoginPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Inicio de Sesion</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n      <img class="imgUser" [src]="imgSource">\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="list">\n      <ion-item class="correo">\n        <ion-input class="correo-input" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="email.hasError(\'required\') && email.touched ">\n        <p style="color:red">\n*Valid email is required\n        </p>\n        </ion-item>\n      <ion-item class="contraseña">\n        <ion-input class="contraseña-input" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n      </ion-item>\n      <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n        <p style="color:red">\n    *Type a valid password\n        </p>\n        </ion-item>\n\n    </ion-list>\n<ion-grid>\n<ion-row>\n  <button clear  type="submit"  [disabled]="formGroup.invalid" ion-button full (click)="iniciarSesion($event, userModel)" >\n    Iniciar Sesion\n</button>\n</ion-row>\n<ion-row>\n  <button clear ion-button full color="danger" (click)="recuperarCuenta()" >\n    Olvide Mi Contrasenia\n</button>\n</ion-row>\n</ion-grid>\n\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/login/login.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */]) === "function" ? _g : Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" ? _h : Object])
-    ], LoginPage);
-    return LoginPage;
-}());
-
-//# sourceMappingURL=login.js.map
-
-/***/ }),
-
-/***/ 209:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pedidos_no_entregados_pedidos_no_entregados__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pedidos_entregados_pedidos_entregados__ = __webpack_require__(364);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pedidos_todos_pedidos_todos__ = __webpack_require__(365);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__inicio_inicio__ = __webpack_require__(61);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-
-
-
-
-// @IonicPage()
-var PedidosPage = /** @class */ (function () {
-    function PedidosPage(navCtrl, navParams, afdb, storage) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.afdb = afdb;
-        this.storage = storage;
-        this.userModel = new __WEBPACK_IMPORTED_MODULE_7__models_model__["c" /* User */]();
-        this.objPedidosTodos = [];
-        this.pedidosTodos = __WEBPACK_IMPORTED_MODULE_5__pedidos_todos_pedidos_todos__["a" /* PedidosTodosPage */];
-        this.pedidosEntregados = __WEBPACK_IMPORTED_MODULE_1__pedidos_entregados_pedidos_entregados__["a" /* PedidosEntregadosPage */];
-        this.pedidosNoEntregados = __WEBPACK_IMPORTED_MODULE_0__pedidos_no_entregados_pedidos_no_entregados__["a" /* PedidosNoEntregadosPage */];
-        this.userModel = navParams.get('item');
-    }
-    PedidosPage.prototype.ionViewDidLoad = function () { };
-    PedidosPage.prototype.ionViewWillEnter = function () {
-        this.get('usuario');
-    };
-    PedidosPage.prototype.ionViewWillLeave = function () { };
-    PedidosPage.prototype.ionViewWillUnload = function () { };
-    PedidosPage.prototype.get = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
-                            _this.pedidos = value;
-                            _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
-                                data.map(function (data) {
-                                    var info = data.payload.val();
-                                    _this.objPedidosTodos.push(info);
-                                });
-                            });
-                        })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    PedidosPage.prototype.back = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__inicio_inicio__["a" /* InicioPage */], { item: this.userModel });
-    };
-    PedidosPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos/pedidos.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      <!-- Listado de pedidos : {{userModel.nombreUsuario}} -->\n      Listado de pedidos \n    </ion-title>\n</ion-header>\n\n<ion-tabs>\n  <ion-tab title="Todos" [root]="pedidosTodos" tabIcon="podium">\n    \n  </ion-tab>\n  <ion-tab title="Entregados" [root]="pedidosEntregados" tabIcon="podium">\n\n  </ion-tab>\n  <ion-tab title="No Entregados" [root]="pedidosNoEntregados" tabIcon="podium"> \n\n  </ion-tab>\n</ion-tabs>\n<ion-fab left bottom (click)="back()">\n  <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n</ion-fab> \n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos/pedidos.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_fire_database__["a" /* AngularFireDatabase */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]])
-    ], PedidosPage);
-    return PedidosPage;
-}());
-
-//# sourceMappingURL=pedidos.js.map
-
-/***/ }),
-
-/***/ 21:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return User; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Negocio; });
-/* unused harmony export CatNegocio */
-/* unused harmony export SubCatNegocio */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Producto; });
-/* unused harmony export CatProducto */
-var User = /** @class */ (function () {
-    function User() {
-        this.clientid = "";
-        this.nombre = "";
-        this.apellidoPaterno = "";
-        this.apellidoMaterno = "";
-        this.nombreUsuario = "";
-        this.password = "";
-        this.confirmPassword = "";
-        this.email = "";
-        this.numeroTelefonico = "";
-    }
-    return User;
-}());
-
-var Negocio = /** @class */ (function () {
-    function Negocio() {
-        this.clientid = "";
-        this.string = "";
-        this.nombre = "";
-        this.callenumero = "";
-        this.colonia = "";
-        this.ciudad = "";
-        this.estado = "";
-        this.codigopostal = "";
-        this.horaapertura = "";
-        this.horacierre = "";
-        this.categoria = "";
-        this.subcategoria = "";
-        this.FK_subcategoria = -1;
-        this.descripcion = "";
-        this.latitud = "";
-        this.longitud = "";
-        this.active = 1;
-        this.id_negocio = 0;
-    }
-    return Negocio;
-}());
-
-var CatNegocio = /** @class */ (function () {
-    function CatNegocio() {
-        this.id_catNegocio = -1;
-        this.nombre = "";
-        this.descripcion = "";
-    }
-    return CatNegocio;
-}());
-
-var SubCatNegocio = /** @class */ (function () {
-    function SubCatNegocio() {
-        this.nombre = "";
-        this.descripcion = "";
-        this.fK_CATNEGOCIO = -1;
-        this.id_catNegocio = -1;
-    }
-    return SubCatNegocio;
-}());
-
-var Producto = /** @class */ (function () {
-    function Producto() {
-        this.clave = "";
-        this.complemento = "";
-        this.descripcion = "";
-        this.estatus = 1;
-        this.id_producto = 0;
-        this.negocioid = "";
-        this.nombre = "";
-        this.otracategoria = "";
-        this.precio = 0;
-    }
-    return Producto;
-}());
-
-var CatProducto = /** @class */ (function () {
-    function CatProducto() {
-        this.id_catProducto = 0;
-        this.nombre = "";
-        this.descripcion = "";
-        this.clave = 0;
-        this.estatus = 0;
-    }
-    return CatProducto;
-}());
-
-//# sourceMappingURL=model.js.map
-
-/***/ }),
-
-/***/ 250:
+/***/ 251:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -912,19 +972,20 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 250;
+webpackEmptyAsyncContext.id = 251;
 
 /***/ }),
 
-/***/ 251:
+/***/ 252:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosNoEntregadosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__detalle_pedido_detalle_pedido__ = __webpack_require__(127);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -973,14 +1034,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 // @IonicPage()
 var PedidosNoEntregadosPage = /** @class */ (function () {
-    function PedidosNoEntregadosPage(navCtrl, navParams, afdb, storage, loadingCtrl) {
+    function PedidosNoEntregadosPage(navCtrl, navParams, afdb, storage, loadingCtrl, modalCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.afdb = afdb;
         this.storage = storage;
         this.loadingCtrl = loadingCtrl;
+        this.modalCtrl = modalCtrl;
         this.objPedidosNoEntregados = [];
     }
     PedidosNoEntregadosPage.prototype.ionViewDidLoad = function () {
@@ -1003,14 +1066,15 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
                         return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
                                 _this.pedidos = value;
                                 _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
+                                    _this.objPedidosNoEntregados = [];
                                     // loader.present().then(() =>
                                     // {
                                     data.map(function (data) {
                                         var info = data.payload.val();
                                         _this.objPedidosNoEntregados.push(info);
-                                        // });
-                                        // loader.dismiss();
                                     });
+                                    //   loader.dismiss();
+                                    // });
                                 });
                             })];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -1019,13 +1083,18 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
         });
     };
     PedidosNoEntregadosPage.prototype.detallePedido = function (pedido, $event) {
+        var profileModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__detalle_pedido_detalle_pedido__["a" /* DetallePedidoPage */], { pedido: pedido });
+        profileModal.onDidDismiss(function (data) {
+            console.log(data);
+        });
+        profileModal.present();
     };
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f;
     PedidosNoEntregadosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'page-pedidos-no-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-no-entregados/pedidos-no-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de pedidos no entregados.\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosNoEntregados " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-no-entregados/pedidos-no-entregados.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" ? _e : Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]) === "function" ? _f : Object])
     ], PedidosNoEntregadosPage);
     return PedidosNoEntregadosPage;
 }());
@@ -1039,7 +1108,7 @@ var PedidosNoEntregadosPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ElstorapiProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_operators__ = __webpack_require__(23);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1229,7 +1298,7 @@ var ElstorapiProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 293:
+/***/ 294:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -1242,23 +1311,873 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 293;
+webpackEmptyAsyncContext.id = 294;
 
 /***/ }),
 
-/***/ 357:
+/***/ 358:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosEntregadosPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(637);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__detalle_pedido_detalle_pedido__ = __webpack_require__(127);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+// declare var objPedidosEntregados:any;
+// @IonicPage()
+var PedidosEntregadosPage = /** @class */ (function () {
+    function PedidosEntregadosPage(navCtrl, navParams, afdb, storage, loadingCtrl, modalCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.afdb = afdb;
+        this.storage = storage;
+        this.loadingCtrl = loadingCtrl;
+        this.modalCtrl = modalCtrl;
+        this.objPedidosEntregados = [];
+    }
+    PedidosEntregadosPage.prototype.ionViewDidLoad = function () {
+    };
+    PedidosEntregadosPage.prototype.ionViewWillEnter = function () {
+        var pedidos = this.get('usuario');
+    };
+    PedidosEntregadosPage.prototype.get = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var message, loader;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.objPedidosEntregados = [];
+                        message = "Obteniendo pedidos entregados...";
+                        loader = this.loadingCtrl.create({
+                            content: message
+                        });
+                        return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
+                                _this.pedidos = value;
+                                _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
+                                    _this.objPedidosEntregados = [];
+                                    // loader.present().then(() => 
+                                    // {
+                                    data.map(function (data) {
+                                        var info = data.payload.val();
+                                        _this.objPedidosEntregados.push(info);
+                                    });
+                                    //   loader.dismiss();
+                                    // });
+                                });
+                            })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    PedidosEntregadosPage.prototype.detallePedido = function (pedido, $event) {
+        var profileModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__detalle_pedido_detalle_pedido__["a" /* DetallePedidoPage */], { pedido: pedido });
+        profileModal.onDidDismiss(function (data) {
+            console.log(data);
+        });
+        profileModal.present();
+    };
+    var _a, _b, _c, _d, _e, _f;
+    PedidosEntregadosPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-pedidos-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-entregados/pedidos-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de pedidos entregados\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosEntregados " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-entregados/pedidos-entregados.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]) === "function" ? _f : Object])
+    ], PedidosEntregadosPage);
+    return PedidosEntregadosPage;
+}());
+
+//# sourceMappingURL=pedidos-entregados.js.map
+
+/***/ }),
+
+/***/ 359:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosTodosPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__detalle_pedido_detalle_pedido__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+// @IonicPage()
+var PedidosTodosPage = /** @class */ (function () {
+    function PedidosTodosPage(navCtrl, navParams, api, afdb, storage, viewCtrl, modalCtrl, loadingCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.api = api;
+        this.afdb = afdb;
+        this.storage = storage;
+        this.viewCtrl = viewCtrl;
+        this.modalCtrl = modalCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.objPedidosTodos = [];
+    }
+    PedidosTodosPage.prototype.ionViewWillEnter = function () {
+        var pedidos = this.get('usuario');
+    };
+    PedidosTodosPage.prototype.get = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var message, loader;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        message = "Obteniendo pedidos...";
+                        loader = this.loadingCtrl.create({
+                            content: message
+                        });
+                        return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
+                                _this.pedidos = value;
+                                _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
+                                    _this.objPedidosTodos = [];
+                                    // loader.present().then(() =>
+                                    // {
+                                    data.map(function (data) {
+                                        var info = data.payload.val();
+                                        _this.objPedidosTodos.push(info);
+                                    });
+                                    //   loader.dismiss();
+                                    // });
+                                });
+                            })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    PedidosTodosPage.prototype.detallePedido = function (pedido, $event) {
+        var profileModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_0__detalle_pedido_detalle_pedido__["a" /* DetallePedidoPage */], { pedido: pedido });
+        profileModal.onDidDismiss(function (data) {
+            console.log(data);
+        });
+        profileModal.present();
+    };
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    PedidosTodosPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
+            selector: 'page-pedidos-todos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-todos/pedidos-todos.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de Pedidos en el Sistema\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosTodos " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-todos/pedidos-todos.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]) === "function" ? _g : Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]) === "function" ? _h : Object])
+    ], PedidosTodosPage);
+    return PedidosTodosPage;
+}());
+
+//# sourceMappingURL=pedidos-todos.js.map
+
+/***/ }),
+
+/***/ 361:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(24);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+// @IonicPage()
+var RegisterPage = /** @class */ (function () {
+    function RegisterPage(navCtrl, navParams, formBuilder, api, alertCtrl, toastController, loadingCtrl, camera, actionSheetCtrl, _sanitizer) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.api = api;
+        this.alertCtrl = alertCtrl;
+        this.toastController = toastController;
+        this.loadingCtrl = loadingCtrl;
+        this.camera = camera;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this._sanitizer = _sanitizer;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_3__models_model__["c" /* User */]();
+        this.formGroup = formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].email]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].minLength(8)]],
+            nombre: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            apellidoPaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            apellidoMaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            nombreUsuario: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            confirmPassword: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            numeroTelefonico: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
+        });
+        this.email = this.formGroup.controls['email'];
+        this.password = this.formGroup.controls['password'];
+        this.nombre = this.formGroup.controls['nombre'];
+        this.apellidoPaterno = this.formGroup.controls['apellidoPaterno'];
+        this.apellidoMaterno = this.formGroup.controls['apellidoMaterno'];
+        this.nombreUsuario = this.formGroup.controls['nombreUsuario'];
+        this.confirmPassword = this.formGroup.controls['confirmPassword'];
+        this.numeroTelefonico = this.formGroup.controls['numeroTelefonico'];
+    }
+    RegisterPage.prototype.ionViewDidLoad = function () { };
+    RegisterPage.prototype.ionViewWillEnter = function () {
+    };
+    RegisterPage.prototype.ionViewWillLeave = function () { };
+    RegisterPage.prototype.ionViewWillUnload = function () { };
+    RegisterPage.prototype.crearCuenta = function ($event, usr) {
+        var _this = this;
+        var title = '';
+        var subTitle = '';
+        usr.fotografia = this.userModel.fotografia;
+        debugger;
+        // this.userModel = usr;
+        // this.userModel.fotografia = this.cameraImg;
+        var loaderReg = this.loadingCtrl.create({
+            content: 'Registrando usuario...'
+        });
+        var loader = this.loadingCtrl.create({
+            content: 'Iniciando sesion...'
+        });
+        loaderReg.present().then(function () {
+            _this.api.registrarUsuario(usr).subscribe(function (data) {
+                loaderReg.dismiss();
+                switch (data) {
+                    case true:
+                        title = 'Correo registrado exitosamente!';
+                        subTitle = 'Bienvenido';
+                        break;
+                    case false:
+                        title = 'Ocurrio un error';
+                        subTitle = 'Ya existe una cuenta asociada al correo electrònico ' + _this.userModel.email;
+                        break;
+                    default:
+                        if (data === null) {
+                            title = 'Ocurrio un error';
+                            subTitle = 'Ya existe una cuenta asociada al correo electrònico ' + _this.userModel.email;
+                        }
+                        break;
+                }
+                var alert = _this.alertCtrl.create({
+                    title: title,
+                    subTitle: subTitle,
+                    buttons: [{
+                            text: 'Ok',
+                            handler: function () {
+                                if (data === true) {
+                                    loader.present().then(function () {
+                                        loader.dismiss();
+                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
+                                    });
+                                }
+                                else {
+                                    loader.dismiss();
+                                }
+                            }
+                        }]
+                });
+                alert.present().then(function () {
+                });
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: 'Revise su conexion a internet.',
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                loader.dismiss();
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
+        });
+    };
+    RegisterPage.prototype.cancelar = function () {
+        this.navCtrl.pop();
+    };
+    RegisterPage.prototype.capturarFoto = function (source) {
+        var _this = this;
+        var options = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            sourceType: source,
+            allowEdit: true,
+            encodingType: this.camera.EncodingType.JPEG,
+            targetWidth: 600,
+            targetHeight: 600,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options)
+            .then(function (imageData) {
+            imageData = escape(imageData);
+            _this.userModel.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.fotografia);
+        }, function (err) {
+            // Handle error
+        });
+    };
+    RegisterPage.prototype.presentActionSheet = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: 'Select image source',
+            buttons: [
+                {
+                    text: 'Abrir galeria',
+                    handler: function () {
+                        _this.capturarFoto(_this.camera.PictureSourceType.PHOTOLIBRARY);
+                    }
+                },
+                {
+                    text: 'Usar Camera',
+                    handler: function () {
+                        _this.capturarFoto(_this.camera.PictureSourceType.CAMERA);
+                    }
+                },
+                {
+                    text: 'Cancelar',
+                    role: 'cancel'
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+    RegisterPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
+            selector: 'page-register',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Pagina de Registro</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia" onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n\n<form [formGroup]="formGroup">\n  <ion-list>\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Nombre" type="text" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n        </ion-item>\n          <ion-item  *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n          <p style="color:red">\n          *Nombre es requerido\n          </p>\n          </ion-item>\n\n          <ion-item class="campo">\n              <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n            </ion-item>\n              <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n            *Apellido Paterno es requerido\n              </p>\n              </ion-item>\n\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Apeliido Materno" type="text" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                </ion-item>\n                  <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n            *Apellido Materno es requerido\n                  </p>\n                  </ion-item>\n\n                  <ion-item class="campo">\n                      <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                    </ion-item>\n                      <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                *Nombre de Usuario es requerido\n                      </p>\n                      </ion-item>\n\n                      <ion-item class="campo">\n                          <ion-input class="entrada" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                          *Contraseña invalida\n                          </p>\n                          <p *ngIf="(password.touched && userModel?.password?.length < 8)" style="color:red">\n                            *Contraseña debe tener por lo menos 8 caracteres\n                          </p>\n                          </ion-item>\n\n                          <ion-item class="campo">\n                              <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                            </ion-item>\n                            <ion-item *ngIf="(confirmPassword.hasError(\'required\') && confirmPassword.touched)">\n                                <p style="color:red">\n                            *Contraseña invalida\n                              </p>\n                              <p *ngIf="(confirmPassword.touched && userModel?.confirmPassword?.length < 8)" style="color:red">\n                                *Contraseña debe tener por lo menos 8 caracteres\n                              </p>\n                            </ion-item>\n                              <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                              *Contraseñas no son iguales\n                                  </p>\n                                  </ion-item>\n\n    <ion-item class="campo">\n      <ion-input class="entrada" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n    </ion-item>\n      <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n          *Correo es requerido\n      </p>\n      </ion-item>\n\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Número Telefonico" type="number" pattern="[0-9]*" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n        </ion-item>\n          <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n    *Telefono es requerido\n          </p>\n          </ion-item>\n\n  </ion-list>\n<ion-grid>\n<ion-row>\n<button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="crearCuenta($event, userModel)" >\n  Crear Cuenta\n</button>\n</ion-row>\n</ion-grid>\n\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]])
+    ], RegisterPage);
+    return RegisterPage;
+}());
+
+//# sourceMappingURL=register.js.map
+
+/***/ }),
+
+/***/ 363:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RecuperarcuentaPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__login_login__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+// @IonicPage()
+var RecuperarcuentaPage = /** @class */ (function () {
+    function RecuperarcuentaPage(navCtrl, navParams, formBuilder, api, alertCtrl, toastController) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.api = api;
+        this.alertCtrl = alertCtrl;
+        this.toastController = toastController;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_4__models_model__["c" /* User */]();
+        this.formGroup = formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].email]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(8)]],
+            confirmPassword: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(8)]]
+        });
+        this.email = this.formGroup.controls['email'];
+        this.password = this.formGroup.controls['password'];
+        this.confirmPassword = this.formGroup.controls['confirmPassword'];
+    }
+    RecuperarcuentaPage.prototype.ionViewDidLoad = function () { };
+    RecuperarcuentaPage.prototype.ionViewWillEnter = function () {
+    };
+    RecuperarcuentaPage.prototype.ionViewWillLeave = function () { };
+    RecuperarcuentaPage.prototype.ionViewWillUnload = function () { };
+    RecuperarcuentaPage.prototype.guardaContrasena = function ($event, usr) {
+        var _this = this;
+        var title = '';
+        var subTitle = '';
+        this.userModel = usr;
+        this.api.recuperarCuenta(usr).subscribe(function (data) {
+            title = data.toString() === '1' ? 'Cuenta Recuperada' :
+                data.toString() === '0' ? 'El correo no existe' :
+                    'Ocurrio un error';
+            subTitle = data.toString() === '1' ? 'Se recupero correctamente su cuenta!' :
+                data.toString() === '0' ? 'El correo ' + _this.userModel.email + ' no existe' :
+                    data.toString();
+            var alert = _this.alertCtrl.create({
+                title: title,
+                subTitle: subTitle,
+                buttons: [{
+                        text: 'Ok',
+                        handler: function () {
+                            if (title == 'Cuenta Recuperada') {
+                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__login_login__["a" /* LoginPage */]);
+                            }
+                        }
+                    }]
+            });
+            alert.present().then(function () {
+            });
+        }, function (error) {
+            _this.toast = _this.toastController.create({
+                message: error,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
+        });
+    };
+    RecuperarcuentaPage.prototype.cancelar = function () {
+        this.navCtrl.pop();
+    };
+    RecuperarcuentaPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
+            selector: 'page-recuperarcuenta',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/recuperarcuenta/recuperarcuenta.html"*/'  <ion-header>\n    <ion-navbar>\n      <ion-title>Recuperar Cuenta</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" src="/assets/imgs/user.png">\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list>\n      <ion-item class="campo">\n        <ion-input class="correo-input" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="email.hasError(\'required\') && email.touched ">\n          <p style="color:red">\n*Valid email is required\n        </p>\n        </ion-item>\n      <ion-item class="campo">\n        <ion-input class="contraseña-input" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n      </ion-item>\n      <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n        <p style="color:red">\n    *Valid password is required\n        </p>\n        </ion-item>\n        <ion-item class="campo">\n          <ion-input class="confirm-input" placeholder="Confirmar contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n          <p style="color:red">\n      *Valid password is required\n          </p>\n          </ion-item>\n          <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n            <p style="color:red">\n          *Passwords does not match\n              </p>\n              </ion-item>\n    </ion-list>\n<ion-grid>\n<ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full  color="light" (click)="guardaContrasena($event, userModel)" >\n    Guardar Contrasena\n</button>\n</ion-row>\n</ion-grid>\n\n  </form>\n</ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/recuperarcuenta/recuperarcuenta.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */]])
+    ], RecuperarcuentaPage);
+    return RecuperarcuentaPage;
+}());
+
+//# sourceMappingURL=recuperarcuenta.js.map
+
+/***/ }),
+
+/***/ 364:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PerfilPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+
+
+// @IonicPage()
+var PerfilPage = /** @class */ (function () {
+    function PerfilPage(navCtrl, navParams, formBuilder, alertCtrl, api, toastController, camera, _sanitizer, actionSheetCtrl, storage, loadingCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.alertCtrl = alertCtrl;
+        this.api = api;
+        this.toastController = toastController;
+        this.camera = camera;
+        this._sanitizer = _sanitizer;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.storage = storage;
+        this.loadingCtrl = loadingCtrl;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_3__models_model__["c" /* User */]();
+        this.isDisabled = true;
+        this.formGroup = formBuilder.group({
+            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].email]],
+            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].minLength(8)]],
+            nombre: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            apellidoPaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            apellidoMaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            nombreUsuario: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            confirmPassword: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
+            numeroTelefonico: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
+        });
+        this.email = this.formGroup.controls['email'];
+        this.password = this.formGroup.controls['password'];
+        this.nombre = this.formGroup.controls['nombre'];
+        this.apellidoPaterno = this.formGroup.controls['apellidoPaterno'];
+        this.apellidoMaterno = this.formGroup.controls['apellidoMaterno'];
+        this.nombreUsuario = this.formGroup.controls['nombreUsuario'];
+        this.confirmPassword = this.formGroup.controls['confirmPassword'];
+        this.numeroTelefonico = this.formGroup.controls['numeroTelefonico'];
+        this.userModel = navParams.get('item');
+    }
+    PerfilPage.prototype.ionViewDidLoad = function () { };
+    PerfilPage.prototype.ionViewWillEnter = function () {
+        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.fotografia);
+    };
+    PerfilPage.prototype.ionViewWillLeave = function () { };
+    PerfilPage.prototype.ionViewWillUnload = function () { };
+    PerfilPage.prototype.editarPerfil = function () {
+        this.isDisabled = !this.isDisabled;
+    };
+    PerfilPage.prototype.guardarCambios = function ($event, usr) {
+        var _this = this;
+        debugger;
+        this.toast = this.toastController.create({
+            message: 'Connection error...',
+            showCloseButton: true,
+            position: 'bottom',
+            closeButtonText: 'Done'
+        });
+        var alert = this.alertCtrl.create({
+            title: 'Perfil Actualizado',
+            subTitle: 'Perfil Actualizado correctamente!',
+            buttons: ['Dismiss']
+        });
+        var loader = this.loadingCtrl.create({
+            content: 'Actualizando perfil...'
+        });
+        loader.present().then(function () {
+            _this.api.actualizarCuenta(usr).subscribe(function (data) {
+                if (data.toString() === '0') {
+                    _this.toast.present().then(function () {
+                        _this.toast.dismiss();
+                        loader.dismiss();
+                    });
+                }
+                if (data.toString() === '1') {
+                    alert.present().then(function () {
+                        _this.remove('usuario').then(function () {
+                            _this.set('usuario', _this.userModel).then(function () {
+                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
+                                loader.dismiss();
+                            });
+                        });
+                    });
+                }
+            }, function (error) {
+                _this.toast = _this.toastController.create({
+                    message: error,
+                    showCloseButton: true,
+                    position: 'bottom',
+                    closeButtonText: 'Ok'
+                });
+                loader.dismiss();
+                _this.toast.onDidDismiss(function () {
+                });
+                _this.toast.present().then(function () {
+                });
+            });
+        });
+    };
+    PerfilPage.prototype.cancelar = function () {
+        this.navCtrl.pop();
+    };
+    PerfilPage.prototype.capturarFoto = function (source) {
+        var _this = this;
+        var options = {
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            sourceType: source,
+            allowEdit: true,
+            encodingType: this.camera.EncodingType.JPEG,
+            targetWidth: 600,
+            targetHeight: 600,
+            saveToPhotoAlbum: true
+        };
+        this.camera.getPicture(options)
+            .then(function (imageData) {
+            console.log(imageData);
+            imageData = escape(imageData);
+            _this.userModel.fotografia = 'data:image/jpeg;base64,' + imageData;
+            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.fotografia);
+        }, function (err) {
+            _this.toast = _this.toastController.create({
+                message: err,
+                showCloseButton: true,
+                position: 'bottom',
+                closeButtonText: 'Ok'
+            });
+            _this.toast.onDidDismiss(function () {
+            });
+            _this.toast.present().then(function () {
+            });
+        });
+    };
+    PerfilPage.prototype.presentActionSheet = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var actionSheet;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        actionSheet = this.actionSheetCtrl.create({
+                            title: 'Select image source',
+                            buttons: [
+                                {
+                                    text: 'Abrir galeria',
+                                    icon: 'images',
+                                    handler: function () {
+                                        _this.capturarFoto(_this.camera.PictureSourceType.PHOTOLIBRARY);
+                                    }
+                                },
+                                {
+                                    text: 'Usar Camera',
+                                    icon: 'camera',
+                                    handler: function () {
+                                        _this.capturarFoto(_this.camera.PictureSourceType.CAMERA);
+                                    }
+                                },
+                                {
+                                    text: 'Cancelar',
+                                    role: 'cancel',
+                                    icon: 'close',
+                                }
+                            ]
+                        });
+                        return [4 /*yield*/, actionSheet.present()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PerfilPage.prototype.remove = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.storage.remove("setting:" + settingName)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    PerfilPage.prototype.set = function (settingName, value) {
+        return this.storage.set("setting:" + settingName, value);
+    };
+    PerfilPage.prototype.back = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: this.userModel });
+    };
+    PerfilPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
+            selector: 'page-perfil',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/'<ion-header>\n    <ion-title style="text-align: center">Editar Perfil</ion-title>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia"  onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" [disabled]="isDisabled" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="lista">\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Nombre" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n      </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n      *Valid Name is required\n            </p>\n            </ion-item>\n\n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n          *Valid Name is required\n                </p>\n                </ion-item>\n\n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Apellido Materno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n              *Valid Name is required\n                    </p>\n                    </ion-item>\n\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                  *Valid User Name is required\n                        </p>\n                        </ion-item>\n\n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Contraseña" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                        *Type a valid password\n                            </p>\n                            </ion-item>\n\n                            <ion-item class="campo">\n                                <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                              </ion-item>\n                              <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n                                <p style="color:red">\n                            *Type a valid password\n                                </p>\n                                </ion-item>\n                                <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                                *Passwords does not match\n                                    </p>\n                                    </ion-item>\n\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Correo" type="email" disabled="true" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n  *Valid email is required\n        </p>\n        </ion-item>\n\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Numero Telefonico"  type="number" pattern="[0-9]*"  disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n      *Valid phone number is required\n            </p>\n            </ion-item>\n            <br/>\n    </ion-list>\n  <ion-grid>\n    <ion-row>\n        <button ion-button full color="light" (click)="editarPerfil()" >\n            Editar Perfil\n        </button>\n    </ion-row>\n  <ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="guardarCambios($event, userModel)" >\n    Guardar cambios\n  </button>\n  </ion-row>\n  </ion-grid>\n\n  </form>\n\n  <ion-fab left bottom (click)="back()">\n    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n  </ion-fab> \n\n  </ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]])
+    ], PerfilPage);
+    return PerfilPage;
+}());
+
+//# sourceMappingURL=perfil.js.map
+
+/***/ }),
+
+/***/ 365:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioDetalleEditarPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__models_model__ = __webpack_require__(21);
@@ -1682,16 +2601,16 @@ var NegocioDetalleEditarPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 360:
+/***/ 366:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioAgregarProductoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_model__ = __webpack_require__(21);
@@ -1947,7 +2866,7 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 361:
+/***/ 367:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1956,8 +2875,8 @@ var NegocioAgregarProductoPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_common__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_elstorapi_elstorapi__ = __webpack_require__(29);
@@ -2224,890 +3143,6 @@ var NegocioEditarProductoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 362:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(24);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-// @IonicPage()
-var RegisterPage = /** @class */ (function () {
-    function RegisterPage(navCtrl, navParams, formBuilder, api, alertCtrl, toastController, loadingCtrl, camera, actionSheetCtrl, _sanitizer) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.api = api;
-        this.alertCtrl = alertCtrl;
-        this.toastController = toastController;
-        this.loadingCtrl = loadingCtrl;
-        this.camera = camera;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this._sanitizer = _sanitizer;
-        this.userModel = new __WEBPACK_IMPORTED_MODULE_3__models_model__["c" /* User */]();
-        this.formGroup = formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].email]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].minLength(8)]],
-            nombre: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            apellidoPaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            apellidoMaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            nombreUsuario: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            confirmPassword: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            numeroTelefonico: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
-        });
-        this.email = this.formGroup.controls['email'];
-        this.password = this.formGroup.controls['password'];
-        this.nombre = this.formGroup.controls['nombre'];
-        this.apellidoPaterno = this.formGroup.controls['apellidoPaterno'];
-        this.apellidoMaterno = this.formGroup.controls['apellidoMaterno'];
-        this.nombreUsuario = this.formGroup.controls['nombreUsuario'];
-        this.confirmPassword = this.formGroup.controls['confirmPassword'];
-        this.numeroTelefonico = this.formGroup.controls['numeroTelefonico'];
-    }
-    RegisterPage.prototype.ionViewDidLoad = function () { };
-    RegisterPage.prototype.ionViewWillEnter = function () {
-    };
-    RegisterPage.prototype.ionViewWillLeave = function () { };
-    RegisterPage.prototype.ionViewWillUnload = function () { };
-    RegisterPage.prototype.crearCuenta = function ($event, usr) {
-        var _this = this;
-        var title = '';
-        var subTitle = '';
-        usr.fotografia = this.userModel.fotografia;
-        debugger;
-        // this.userModel = usr;
-        // this.userModel.fotografia = this.cameraImg;
-        var loaderReg = this.loadingCtrl.create({
-            content: 'Registrando usuario...'
-        });
-        var loader = this.loadingCtrl.create({
-            content: 'Iniciando sesion...'
-        });
-        loaderReg.present().then(function () {
-            _this.api.registrarUsuario(usr).subscribe(function (data) {
-                loaderReg.dismiss();
-                switch (data) {
-                    case true:
-                        title = 'Correo registrado exitosamente!';
-                        subTitle = 'Bienvenido';
-                        break;
-                    case false:
-                        title = 'Ocurrio un error';
-                        subTitle = 'Ya existe una cuenta asociada al correo electrònico ' + _this.userModel.email;
-                        break;
-                    default:
-                        if (data === null) {
-                            title = 'Ocurrio un error';
-                            subTitle = 'Ya existe una cuenta asociada al correo electrònico ' + _this.userModel.email;
-                        }
-                        break;
-                }
-                var alert = _this.alertCtrl.create({
-                    title: title,
-                    subTitle: subTitle,
-                    buttons: [{
-                            text: 'Ok',
-                            handler: function () {
-                                if (data === true) {
-                                    loader.present().then(function () {
-                                        loader.dismiss();
-                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
-                                    });
-                                }
-                                else {
-                                    loader.dismiss();
-                                }
-                            }
-                        }]
-                });
-                alert.present().then(function () {
-                });
-            }, function (error) {
-                _this.toast = _this.toastController.create({
-                    message: 'Revise su conexion a internet.',
-                    showCloseButton: true,
-                    position: 'bottom',
-                    closeButtonText: 'Ok'
-                });
-                loader.dismiss();
-                _this.toast.onDidDismiss(function () {
-                });
-                _this.toast.present().then(function () {
-                });
-            });
-        });
-    };
-    RegisterPage.prototype.cancelar = function () {
-        this.navCtrl.pop();
-    };
-    RegisterPage.prototype.capturarFoto = function (source) {
-        var _this = this;
-        var options = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            sourceType: source,
-            allowEdit: true,
-            encodingType: this.camera.EncodingType.JPEG,
-            targetWidth: 600,
-            targetHeight: 600,
-            saveToPhotoAlbum: true
-        };
-        this.camera.getPicture(options)
-            .then(function (imageData) {
-            imageData = escape(imageData);
-            _this.userModel.fotografia = 'data:image/jpeg;base64,' + imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.fotografia);
-        }, function (err) {
-            // Handle error
-        });
-    };
-    RegisterPage.prototype.presentActionSheet = function () {
-        var _this = this;
-        var actionSheet = this.actionSheetCtrl.create({
-            title: 'Select image source',
-            buttons: [
-                {
-                    text: 'Abrir galeria',
-                    handler: function () {
-                        _this.capturarFoto(_this.camera.PictureSourceType.PHOTOLIBRARY);
-                    }
-                },
-                {
-                    text: 'Usar Camera',
-                    handler: function () {
-                        _this.capturarFoto(_this.camera.PictureSourceType.CAMERA);
-                    }
-                },
-                {
-                    text: 'Cancelar',
-                    role: 'cancel'
-                }
-            ]
-        });
-        actionSheet.present();
-    };
-    RegisterPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-register',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Pagina de Registro</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia" onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n\n<form [formGroup]="formGroup">\n  <ion-list>\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Nombre" type="text" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n        </ion-item>\n          <ion-item  *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n          <p style="color:red">\n          *Nombre es requerido\n          </p>\n          </ion-item>\n\n          <ion-item class="campo">\n              <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n            </ion-item>\n              <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n            *Apellido Paterno es requerido\n              </p>\n              </ion-item>\n\n              <ion-item class="campo">\n                  <ion-input class="entrada" placeholder="Apeliido Materno" type="text" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                </ion-item>\n                  <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n            *Apellido Materno es requerido\n                  </p>\n                  </ion-item>\n\n                  <ion-item class="campo">\n                      <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                    </ion-item>\n                      <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                *Nombre de Usuario es requerido\n                      </p>\n                      </ion-item>\n\n                      <ion-item class="campo">\n                          <ion-input class="entrada" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                        </ion-item>\n                        <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                          *Contraseña invalida\n                          </p>\n                          <p *ngIf="(password.touched && userModel?.password?.length < 8)" style="color:red">\n                            *Contraseña debe tener por lo menos 8 caracteres\n                          </p>\n                          </ion-item>\n\n                          <ion-item class="campo">\n                              <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                            </ion-item>\n                            <ion-item *ngIf="(confirmPassword.hasError(\'required\') && confirmPassword.touched)">\n                                <p style="color:red">\n                            *Contraseña invalida\n                              </p>\n                              <p *ngIf="(confirmPassword.touched && userModel?.confirmPassword?.length < 8)" style="color:red">\n                                *Contraseña debe tener por lo menos 8 caracteres\n                              </p>\n                            </ion-item>\n                              <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                              *Contraseñas no son iguales\n                                  </p>\n                                  </ion-item>\n\n    <ion-item class="campo">\n      <ion-input class="entrada" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n    </ion-item>\n      <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n          *Correo es requerido\n      </p>\n      </ion-item>\n\n      <ion-item class="campo">\n          <ion-input class="entrada" placeholder="Número Telefonico" type="number" pattern="[0-9]*" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n        </ion-item>\n          <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n    *Telefono es requerido\n          </p>\n          </ion-item>\n\n  </ion-list>\n<ion-grid>\n<ion-row>\n<button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="crearCuenta($event, userModel)" >\n  Crear Cuenta\n</button>\n</ion-row>\n</ion-grid>\n\n</form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/register/register.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */]])
-    ], RegisterPage);
-    return RegisterPage;
-}());
-
-//# sourceMappingURL=register.js.map
-
-/***/ }),
-
-/***/ 363:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RecuperarcuentaPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__login_login__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-// @IonicPage()
-var RecuperarcuentaPage = /** @class */ (function () {
-    function RecuperarcuentaPage(navCtrl, navParams, formBuilder, api, alertCtrl, toastController) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.api = api;
-        this.alertCtrl = alertCtrl;
-        this.toastController = toastController;
-        this.userModel = new __WEBPACK_IMPORTED_MODULE_4__models_model__["c" /* User */]();
-        this.formGroup = formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].email]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(8)]],
-            confirmPassword: ['', [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["g" /* Validators */].minLength(8)]]
-        });
-        this.email = this.formGroup.controls['email'];
-        this.password = this.formGroup.controls['password'];
-        this.confirmPassword = this.formGroup.controls['confirmPassword'];
-    }
-    RecuperarcuentaPage.prototype.ionViewDidLoad = function () { };
-    RecuperarcuentaPage.prototype.ionViewWillEnter = function () {
-    };
-    RecuperarcuentaPage.prototype.ionViewWillLeave = function () { };
-    RecuperarcuentaPage.prototype.ionViewWillUnload = function () { };
-    RecuperarcuentaPage.prototype.guardaContrasena = function ($event, usr) {
-        var _this = this;
-        var title = '';
-        var subTitle = '';
-        this.userModel = usr;
-        this.api.recuperarCuenta(usr).subscribe(function (data) {
-            title = data.toString() === '1' ? 'Cuenta Recuperada' :
-                data.toString() === '0' ? 'El correo no existe' :
-                    'Ocurrio un error';
-            subTitle = data.toString() === '1' ? 'Se recupero correctamente su cuenta!' :
-                data.toString() === '0' ? 'El correo ' + _this.userModel.email + ' no existe' :
-                    data.toString();
-            var alert = _this.alertCtrl.create({
-                title: title,
-                subTitle: subTitle,
-                buttons: [{
-                        text: 'Ok',
-                        handler: function () {
-                            if (title == 'Cuenta Recuperada') {
-                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__login_login__["a" /* LoginPage */]);
-                            }
-                        }
-                    }]
-            });
-            alert.present().then(function () {
-            });
-        }, function (error) {
-            _this.toast = _this.toastController.create({
-                message: error,
-                showCloseButton: true,
-                position: 'bottom',
-                closeButtonText: 'Ok'
-            });
-            _this.toast.onDidDismiss(function () {
-            });
-            _this.toast.present().then(function () {
-            });
-        });
-    };
-    RecuperarcuentaPage.prototype.cancelar = function () {
-        this.navCtrl.pop();
-    };
-    RecuperarcuentaPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-recuperarcuenta',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/recuperarcuenta/recuperarcuenta.html"*/'  <ion-header>\n    <ion-navbar>\n      <ion-title>Recuperar Cuenta</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" src="/assets/imgs/user.png">\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list>\n      <ion-item class="campo">\n        <ion-input class="correo-input" placeholder="Correo" type="email" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="email.hasError(\'required\') && email.touched ">\n          <p style="color:red">\n*Valid email is required\n        </p>\n        </ion-item>\n      <ion-item class="campo">\n        <ion-input class="contraseña-input" placeholder="Contraseña" type="password" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n      </ion-item>\n      <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n        <p style="color:red">\n    *Valid password is required\n        </p>\n        </ion-item>\n        <ion-item class="campo">\n          <ion-input class="confirm-input" placeholder="Confirmar contraseña" appConfirmEqualValidator="password" type="password" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n        </ion-item>\n        <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n          <p style="color:red">\n      *Valid password is required\n          </p>\n          </ion-item>\n          <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n            <p style="color:red">\n          *Passwords does not match\n              </p>\n              </ion-item>\n    </ion-list>\n<ion-grid>\n<ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full  color="light" (click)="guardaContrasena($event, userModel)" >\n    Guardar Contrasena\n</button>\n</ion-row>\n</ion-grid>\n\n  </form>\n</ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/recuperarcuenta/recuperarcuenta.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */]])
-    ], RecuperarcuentaPage);
-    return RecuperarcuentaPage;
-}());
-
-//# sourceMappingURL=recuperarcuenta.js.map
-
-/***/ }),
-
-/***/ 364:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosEntregadosPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(650);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-// declare var objPedidosEntregados:any;
-// @IonicPage()
-var PedidosEntregadosPage = /** @class */ (function () {
-    function PedidosEntregadosPage(navCtrl, navParams, afdb, storage, loadingCtrl) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.afdb = afdb;
-        this.storage = storage;
-        this.loadingCtrl = loadingCtrl;
-        this.objPedidosEntregados = [];
-    }
-    PedidosEntregadosPage.prototype.ionViewDidLoad = function () {
-    };
-    PedidosEntregadosPage.prototype.ionViewWillEnter = function () {
-        var pedidos = this.get('usuario');
-    };
-    PedidosEntregadosPage.prototype.get = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            var message, loader;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.objPedidosEntregados = [];
-                        message = "Obteniendo pedidos entregados...";
-                        loader = this.loadingCtrl.create({
-                            content: message
-                        });
-                        return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
-                                _this.pedidos = value;
-                                _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
-                                    // loader.present().then(() => {
-                                    data.map(function (data) {
-                                        var info = data.payload.val();
-                                        _this.objPedidosEntregados.push(info);
-                                    });
-                                    //   loader.dismiss();
-                                    // });
-                                });
-                            })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    PedidosEntregadosPage.prototype.detallePedido = function (pedido, $event) {
-    };
-    var _a, _b, _c, _d, _e;
-    PedidosEntregadosPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos-entregados',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-entregados/pedidos-entregados.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de pedidos entregados\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosEntregados " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-entregados/pedidos-entregados.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" ? _e : Object])
-    ], PedidosEntregadosPage);
-    return PedidosEntregadosPage;
-}());
-
-//# sourceMappingURL=pedidos-entregados.js.map
-
-/***/ }),
-
-/***/ 365:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosTodosPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__detalle_pedido_detalle_pedido__ = __webpack_require__(366);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-
-// @IonicPage()
-var PedidosTodosPage = /** @class */ (function () {
-    function PedidosTodosPage(navCtrl, navParams, api, afdb, storage, viewCtrl, modalCtrl, loadingCtrl) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.api = api;
-        this.afdb = afdb;
-        this.storage = storage;
-        this.viewCtrl = viewCtrl;
-        this.modalCtrl = modalCtrl;
-        this.loadingCtrl = loadingCtrl;
-        this.objPedidosTodos = [];
-    }
-    PedidosTodosPage.prototype.ionViewWillEnter = function () {
-        var pedidos = this.get('usuario');
-    };
-    PedidosTodosPage.prototype.get = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            var message, loader;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.objPedidosTodos = [];
-                        message = "Obteniendo pedidos...";
-                        loader = this.loadingCtrl.create({
-                            content: message
-                        });
-                        return [4 /*yield*/, this.storage.get("setting:" + settingName).then(function (value) {
-                                _this.pedidos = value;
-                                _this.afdb.list("pedidos/" + ("" + _this.pedidos.negocio[0].id_negocio)).snapshotChanges().subscribe(function (data) {
-                                    // loader.present().then(() =>{
-                                    data.map(function (data) {
-                                        var info = data.payload.val();
-                                        _this.objPedidosTodos.push(info);
-                                    });
-                                    //   loader.dismiss();
-                                    // });
-                                });
-                            })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    PedidosTodosPage.prototype.detallePedido = function (pedido, $event) {
-        var profileModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_0__detalle_pedido_detalle_pedido__["a" /* DetallePedidoPage */], { pedido: pedido });
-        profileModal.onDidDismiss(function (data) {
-            console.log(data);
-        });
-        profileModal.present();
-    };
-    var _a, _b, _c, _d, _e, _f, _g, _h;
-    PedidosTodosPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-pedidos-todos',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-todos/pedidos-todos.html"*/'<ion-content padding>\n    <ion-item-divider>\n        <ion-list>\n          <ion-item>\n              <label style="text-align: center">\n                Listados de Pedidos en el Sistema\n              </label>\n          </ion-item>\n              <ion-item-sliding *ngFor="let pedido of objPedidosTodos " class="contNeg">\n            <ion-item (click)="detallePedido(pedido, $event)">\n              <ion-thumbnail item-start class="logoProd">\n                <img  onError="this.src=\'/assets/imgs/producto.png\'" class="logimg">\n              </ion-thumbnail>\n              <h2 class="nombreNeg">Cliente: {{pedido.cliente.nombre}} {{pedido.cliente.apellidoPat}}</h2>\n              <h2 class="nombreNeg">Telefono: {{pedido.cliente.telefono}}</h2>\n              <div class="contenedorEstrellas">\n                  <h2 class="nombreNeg">Rate</h2>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                  <ion-icon class="estrella" name=\'star\'></ion-icon>\n                </div>\n            </ion-item>\n              <ion-item-options>\n                <button ion-button color="gray" (click)="detallePedido(pedido, $event)" > Detalle</button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n        \n      </ion-item-divider>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/pedidos-todos/pedidos-todos.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ViewController */]) === "function" ? _f : Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]) === "function" ? _g : Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]) === "function" ? _h : Object])
-    ], PedidosTodosPage);
-    return PedidosTodosPage;
-}());
-
-//# sourceMappingURL=pedidos-todos.js.map
-
-/***/ }),
-
-/***/ 366:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetallePedidoPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pedidos_pedidos__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var DetallePedidoPage = /** @class */ (function () {
-    function DetallePedidoPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.pedido = navParams.data.pedido;
-    }
-    DetallePedidoPage.prototype.ionViewDidLoad = function () {
-    };
-    DetallePedidoPage.prototype.back = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__pedidos_pedidos__["a" /* PedidosPage */]);
-    };
-    DetallePedidoPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-detalle-pedido',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/detalle-pedido/detalle-pedido.html"*/'<ion-header>\n    <ion-title style="text-align: center">\n      Detalle del Pedido\n    </ion-title>\n  </ion-header>\n\n<ion-content>\n\n    <ion-fab left bottom (click)="back()">\n        <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n    </ion-fab> \n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/pedido/detalle-pedido/detalle-pedido.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */]])
-    ], DetallePedidoPage);
-    return DetallePedidoPage;
-}());
-
-//# sourceMappingURL=detalle-pedido.js.map
-
-/***/ }),
-
-/***/ 367:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PerfilPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__inicio_inicio__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-
-
-
-
-// @IonicPage()
-var PerfilPage = /** @class */ (function () {
-    function PerfilPage(navCtrl, navParams, formBuilder, alertCtrl, api, toastController, camera, _sanitizer, actionSheetCtrl, storage, loadingCtrl) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.formBuilder = formBuilder;
-        this.alertCtrl = alertCtrl;
-        this.api = api;
-        this.toastController = toastController;
-        this.camera = camera;
-        this._sanitizer = _sanitizer;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.storage = storage;
-        this.loadingCtrl = loadingCtrl;
-        this.userModel = new __WEBPACK_IMPORTED_MODULE_3__models_model__["c" /* User */]();
-        this.isDisabled = true;
-        this.formGroup = formBuilder.group({
-            email: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].email]],
-            password: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].minLength(8)]],
-            nombre: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            apellidoPaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            apellidoMaterno: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            nombreUsuario: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            confirmPassword: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]],
-            numeroTelefonico: ['', [__WEBPACK_IMPORTED_MODULE_4__angular_forms__["g" /* Validators */].required]]
-        });
-        this.email = this.formGroup.controls['email'];
-        this.password = this.formGroup.controls['password'];
-        this.nombre = this.formGroup.controls['nombre'];
-        this.apellidoPaterno = this.formGroup.controls['apellidoPaterno'];
-        this.apellidoMaterno = this.formGroup.controls['apellidoMaterno'];
-        this.nombreUsuario = this.formGroup.controls['nombreUsuario'];
-        this.confirmPassword = this.formGroup.controls['confirmPassword'];
-        this.numeroTelefonico = this.formGroup.controls['numeroTelefonico'];
-        this.userModel = navParams.get('item');
-    }
-    PerfilPage.prototype.ionViewDidLoad = function () { };
-    PerfilPage.prototype.ionViewWillEnter = function () {
-        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.fotografia);
-    };
-    PerfilPage.prototype.ionViewWillLeave = function () { };
-    PerfilPage.prototype.ionViewWillUnload = function () { };
-    PerfilPage.prototype.editarPerfil = function () {
-        this.isDisabled = !this.isDisabled;
-    };
-    PerfilPage.prototype.guardarCambios = function ($event, usr) {
-        var _this = this;
-        debugger;
-        this.toast = this.toastController.create({
-            message: 'Connection error...',
-            showCloseButton: true,
-            position: 'bottom',
-            closeButtonText: 'Done'
-        });
-        var alert = this.alertCtrl.create({
-            title: 'Perfil Actualizado',
-            subTitle: 'Perfil Actualizado correctamente!',
-            buttons: ['Dismiss']
-        });
-        var loader = this.loadingCtrl.create({
-            content: 'Actualizando perfil...'
-        });
-        loader.present().then(function () {
-            _this.api.actualizarCuenta(usr).subscribe(function (data) {
-                if (data.toString() === '0') {
-                    _this.toast.present().then(function () {
-                        _this.toast.dismiss();
-                        loader.dismiss();
-                    });
-                }
-                if (data.toString() === '1') {
-                    alert.present().then(function () {
-                        _this.remove('usuario').then(function () {
-                            _this.set('usuario', _this.userModel).then(function () {
-                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: _this.userModel });
-                                loader.dismiss();
-                            });
-                        });
-                    });
-                }
-            }, function (error) {
-                _this.toast = _this.toastController.create({
-                    message: error,
-                    showCloseButton: true,
-                    position: 'bottom',
-                    closeButtonText: 'Ok'
-                });
-                loader.dismiss();
-                _this.toast.onDidDismiss(function () {
-                });
-                _this.toast.present().then(function () {
-                });
-            });
-        });
-    };
-    PerfilPage.prototype.cancelar = function () {
-        this.navCtrl.pop();
-    };
-    PerfilPage.prototype.capturarFoto = function (source) {
-        var _this = this;
-        var options = {
-            quality: 100,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            sourceType: source,
-            allowEdit: true,
-            encodingType: this.camera.EncodingType.JPEG,
-            targetWidth: 600,
-            targetHeight: 600,
-            saveToPhotoAlbum: true
-        };
-        this.camera.getPicture(options)
-            .then(function (imageData) {
-            console.log(imageData);
-            imageData = escape(imageData);
-            _this.userModel.fotografia = 'data:image/jpeg;base64,' + imageData;
-            _this.fotografia = _this._sanitizer.bypassSecurityTrustUrl("" + _this.userModel.fotografia);
-        }, function (err) {
-            _this.toast = _this.toastController.create({
-                message: err,
-                showCloseButton: true,
-                position: 'bottom',
-                closeButtonText: 'Ok'
-            });
-            _this.toast.onDidDismiss(function () {
-            });
-            _this.toast.present().then(function () {
-            });
-        });
-    };
-    PerfilPage.prototype.presentActionSheet = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var actionSheet;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        actionSheet = this.actionSheetCtrl.create({
-                            title: 'Select image source',
-                            buttons: [
-                                {
-                                    text: 'Abrir galeria',
-                                    icon: 'images',
-                                    handler: function () {
-                                        _this.capturarFoto(_this.camera.PictureSourceType.PHOTOLIBRARY);
-                                    }
-                                },
-                                {
-                                    text: 'Usar Camera',
-                                    icon: 'camera',
-                                    handler: function () {
-                                        _this.capturarFoto(_this.camera.PictureSourceType.CAMERA);
-                                    }
-                                },
-                                {
-                                    text: 'Cancelar',
-                                    role: 'cancel',
-                                    icon: 'close',
-                                }
-                            ]
-                        });
-                        return [4 /*yield*/, actionSheet.present()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    PerfilPage.prototype.remove = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.remove("setting:" + settingName)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    PerfilPage.prototype.set = function (settingName, value) {
-        return this.storage.set("setting:" + settingName, value);
-    };
-    PerfilPage.prototype.back = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__inicio_inicio__["a" /* InicioPage */], { item: this.userModel });
-    };
-    PerfilPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* Component */])({
-            selector: 'page-perfil',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/'<ion-header>\n    <ion-title style="text-align: center">Editar Perfil</ion-title>\n</ion-header>\n\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia"  onError= "this.src=\'/assets/imgs/user.png\'" >\n        <button color="light" class="camara" [disabled]="isDisabled" ion-button icon-only (click)="presentActionSheet()">\n            <ion-icon class="icono" name="camera"></ion-icon>\n        </button>\n    </div>\n  <form [formGroup]="formGroup">\n    <ion-list class="lista">\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Nombre" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombre" formControlName="nombre" ></ion-input>\n      </ion-item>\n            <ion-item *ngIf="nombre.hasError(\'required\') && nombre.touched ">\n              <p style="color:red">\n      *Valid Name is required\n            </p>\n            </ion-item>\n\n            <ion-item class="campo">\n                <ion-input class="entrada" placeholder="Apellido Paterno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoPaterno" formControlName="apellidoPaterno" ></ion-input>\n              </ion-item>\n                <ion-item *ngIf="apellidoPaterno.hasError(\'required\') && apellidoPaterno.touched ">\n                  <p style="color:red">\n          *Valid Name is required\n                </p>\n                </ion-item>\n\n                <ion-item class="campo">\n                    <ion-input class="entrada" placeholder="Apellido Materno" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.apellidoMaterno" formControlName="apellidoMaterno" ></ion-input>\n                  </ion-item>\n                    <ion-item *ngIf="apellidoMaterno.hasError(\'required\') && apellidoMaterno.touched ">\n                      <p style="color:red">\n              *Valid Name is required\n                    </p>\n                    </ion-item>\n\n                    <ion-item class="campo">\n                        <ion-input class="entrada" placeholder="Nombre de Usuario" type="text" [disabled]="isDisabled" [(ngModel)]="userModel.nombreUsuario" formControlName="nombreUsuario" ></ion-input>\n                      </ion-item>\n                        <ion-item *ngIf="nombreUsuario.hasError(\'required\') && nombreUsuario.touched ">\n                          <p style="color:red">\n                  *Valid User Name is required\n                        </p>\n                        </ion-item>\n\n                        <ion-item class="campo">\n                            <ion-input class="entrada" placeholder="Contraseña" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.password" formControlName="password"></ion-input>\n                          </ion-item>\n                          <ion-item *ngIf="password.hasError(\'required\') && password.touched">\n                            <p style="color:red">\n                        *Type a valid password\n                            </p>\n                            </ion-item>\n\n                            <ion-item class="campo">\n                                <ion-input class="entrada" placeholder="Confirmar Contraseña" appConfirmEqualValidator="password" type="password" [disabled]="isDisabled" [(ngModel)]="userModel.confirmPassword" formControlName="confirmPassword"></ion-input>\n                              </ion-item>\n                              <ion-item *ngIf="confirmPassword.hasError(\'required\') && confirmPassword.touched">\n                                <p style="color:red">\n                            *Type a valid password\n                                </p>\n                                </ion-item>\n                                <ion-item *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual">\n                                  <p style="color:red">\n                                *Passwords does not match\n                                    </p>\n                                    </ion-item>\n\n      <ion-item class="campo">\n        <ion-input class="entrada" placeholder="Correo" type="email" disabled="true" [(ngModel)]="userModel.email" formControlName="email" ></ion-input>\n      </ion-item>\n        <ion-item *ngIf="(email.hasError(\'required\') && email.touched)">\n          <p style="color:red">\n  *Valid email is required\n        </p>\n        </ion-item>\n\n        <ion-item class="campo">\n            <ion-input class="entrada" placeholder="Numero Telefonico"  type="number" pattern="[0-9]*"  disabled="true" [(ngModel)]="userModel.numeroTelefonico" formControlName="numeroTelefonico" ></ion-input>\n          </ion-item>\n            <ion-item *ngIf="numeroTelefonico.hasError(\'required\') && numeroTelefonico.touched ">\n              <p style="color:red">\n      *Valid phone number is required\n            </p>\n            </ion-item>\n            <br/>\n    </ion-list>\n  <ion-grid>\n    <ion-row>\n        <button ion-button full color="light" (click)="editarPerfil()" >\n            Editar Perfil\n        </button>\n    </ion-row>\n  <ion-row>\n  <button type="submit"  [disabled]="formGroup.invalid" ion-button full color="light" (click)="guardarCambios($event, userModel)" >\n    Guardar cambios\n  </button>\n  </ion-row>\n  </ion-grid>\n\n  </form>\n\n  <ion-fab left bottom (click)="back()">\n    <button ion-fab ><ion-icon class="more" name="arrow-round-back"></ion-icon></button>\n  </ion-fab> \n\n  </ion-content>\n\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/perfil/perfil.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_5__providers_elstorapi_elstorapi__["a" /* ElstorapiProvider */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */],
-            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["c" /* DomSanitizer */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* ActionSheetController */],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* LoadingController */]])
-    ], PerfilPage);
-    return PerfilPage;
-}());
-
-//# sourceMappingURL=perfil.js.map
-
-/***/ }),
-
 /***/ 368:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3202,15 +3237,15 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_pedido_pedidos_no_entregados_pedidos_no_entregados__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_negocio_negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(357);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_pedido_pedidos_no_entregados_pedidos_no_entregados__ = __webpack_require__(252);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pages_negocio_negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(365);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_map_map__ = __webpack_require__(368);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_negocio_negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(360);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_negocio_negocio_detalle_negocio_detalle__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_negocio_nuevonegocio_nuevonegocio__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_negocio_negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(366);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_negocio_negocio_detalle_negocio_detalle__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_negocio_nuevonegocio_nuevonegocio__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_negocio_negocios_negocios__ = __webpack_require__(653);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_inicio_inicio__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common_http__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_inicio_inicio__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common_http__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_platform_browser__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_angular__ = __webpack_require__(12);
@@ -3219,25 +3254,25 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__agm_core__ = __webpack_require__(654);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(659);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_home_home__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_login_login__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_register_register__ = __webpack_require__(362);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_login_login__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_register_register__ = __webpack_require__(361);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_recuperarcuenta_recuperarcuenta__ = __webpack_require__(363);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__shared_password_validator__ = __webpack_require__(660);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_perfil_perfil__ = __webpack_require__(367);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_pedido_pedidos_pedidos__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_perfil_perfil__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_pedido_pedidos_pedidos__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_geolocation__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_camera__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_pedido_pedidos_todos_pedidos_todos__ = __webpack_require__(365);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_pedido_pedidos_entregados_pedidos_entregados__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_camera__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_pedido_pedidos_todos_pedidos_todos__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_pedido_pedidos_entregados_pedidos_entregados__ = __webpack_require__(358);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_pedido_modal_pedido_modal_pedido__ = __webpack_require__(661);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_fire__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__angular_fire__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__angular_fire_database__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__config__ = __webpack_require__(662);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_negocio_negocio_editar_producto_negocio_editar_producto__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_negocio_negocio_editar_producto_negocio_editar_producto__ = __webpack_require__(367);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__angular_common__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_pedido_detalle_pedido_detalle_pedido__ = __webpack_require__(366);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_pedido_detalle_pedido_detalle_pedido__ = __webpack_require__(127);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3362,20 +3397,166 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 60:
+/***/ 55:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InicioPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_model__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pedido_pedidos_pedidos__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__perfil_perfil__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__negocio_negocio_detalle_negocio_detalle__ = __webpack_require__(61);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+// @IonicPage()
+var InicioPage = /** @class */ (function () {
+    function InicioPage(navCtrl, navParams, _sanitizer, afdb, modalCtrl, storage) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this._sanitizer = _sanitizer;
+        this.afdb = afdb;
+        this.modalCtrl = modalCtrl;
+        this.storage = storage;
+        this.userModel = new __WEBPACK_IMPORTED_MODULE_1__models_model__["c" /* User */]();
+        this.userModel = navParams.get('item');
+        // debugger
+        //       this.afdb.list("pedidos/"+ this.userModel).snapshotChanges().subscribe(data=>{
+        //         data.map(data=>{
+        //           let info = data.payload.val();
+        //           this.presentModal(info);
+        //         });
+        //       });
+    }
+    // presentModal(data) {
+    //   const modal = this.modalCtrl.create(ModalPedidoPage,{
+    //     data: data
+    //   },
+    //   {
+    //     cssClass: 'loading',
+    //     showBackdrop: true
+    //     });
+    //   modal.present();
+    // }
+    InicioPage.prototype.ionViewDidLoad = function () { };
+    InicioPage.prototype.ionViewWillEnter = function () {
+        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.fotografia);
+    };
+    InicioPage.prototype.ionViewWillLeave = function () { };
+    InicioPage.prototype.ionViewWillUnload = function () { };
+    InicioPage.prototype.verPerfil = function ($event) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__perfil_perfil__["a" /* PerfilPage */], { item: this.userModel });
+    };
+    InicioPage.prototype.verPedidos = function ($event) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__pedido_pedidos_pedidos__["a" /* PedidosPage */], { item: this.userModel });
+    };
+    InicioPage.prototype.verNegocios = function ($event) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__negocio_negocio_detalle_negocio_detalle__["a" /* NegocioDetallePage */], { item: this.userModel });
+    };
+    InicioPage.prototype.cerrarSesion = function ($event) {
+        this.remove('usuario');
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__home_home__["a" /* HomePage */]);
+    };
+    InicioPage.prototype.remove = function (settingName) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.storage.remove("setting:" + settingName)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    InicioPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["n" /* Component */])({
+            selector: 'page-inicio',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/inicio/inicio.html"*/'\n<ion-header>\n    <ion-title style="text-align: center">\n      Bienvenido  a tu perfil {{userModel.nombreUsuario}}\n    </ion-title>\n</ion-header>\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia" onError="this.src=\'/assets/imgs/user.png\'">\n        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>\n      </div>\n<h2>Opciones del Menú</h2>\n  <ion-list>\n      <ion-item class="opcion" (click)="verPerfil($event)">\n          <ion-thumbnail item-start>\n            <img  class="imgUser" [src]="fotografia" onError="this.src=\'/assets/imgs/user.png\'">\n          </ion-thumbnail>\n          <h2>Mi Perfil</h2>\n        </ion-item>\n        <ion-item class="opcion" (click)="verPedidos($event)">\n            <ion-thumbnail item-start>\n              <img  class="imgUser" src="/assets/imgs/tienda-online-icono-png.png">\n            </ion-thumbnail>\n            <h2>Mis Pedidos</h2>\n          </ion-item>\n          <ion-item class="opcion" (click)="verNegocios($event)" >\n              <ion-thumbnail item-start>\n                <img  class="imgUser" src="/assets/imgs/iconos-formas-de-envio-2.png" >\n              </ion-thumbnail>\n              <h2>Mi Negocio</h2>\n            </ion-item> \n            <ion-item class="opcion">\n              <button ion-button full color="danger" (click)="cerrarSesion()" >\n                  Cerrar sesion\n                </button>\n            </ion-item> \n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/inicio/inicio.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["c" /* DomSanitizer */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__["a" /* AngularFireDatabase */],
+            __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["g" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]])
+    ], InicioPage);
+    return InicioPage;
+}());
+
+//# sourceMappingURL=inicio.js.map
+
+/***/ }),
+
+/***/ 61:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegocioDetallePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nuevonegocio_nuevonegocio__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(357);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nuevonegocio_nuevonegocio__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__negocio_detalle_editar_negocio_detalle_editar__ = __webpack_require__(365);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__negocio_agregar_producto_negocio_agregar_producto__ = __webpack_require__(366);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_geolocation__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_editar_producto_negocio_editar_producto__ = __webpack_require__(361);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__inicio_inicio__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__negocio_editar_producto_negocio_editar_producto__ = __webpack_require__(367);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__inicio_inicio__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__map_map__ = __webpack_require__(368);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__models_model__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_elstorapi_elstorapi__ = __webpack_require__(29);
@@ -3577,158 +3758,16 @@ var NegocioDetallePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 61:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InicioPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__home_home__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pedido_pedidos_pedidos__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__perfil_perfil__ = __webpack_require__(367);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__negocio_negocio_detalle_negocio_detalle__ = __webpack_require__(60);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-// @IonicPage()
-var InicioPage = /** @class */ (function () {
-    function InicioPage(navCtrl, navParams, _sanitizer, afdb, modalCtrl, storage) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this._sanitizer = _sanitizer;
-        this.afdb = afdb;
-        this.modalCtrl = modalCtrl;
-        this.storage = storage;
-        this.userModel = new __WEBPACK_IMPORTED_MODULE_1__models_model__["c" /* User */]();
-        this.userModel = navParams.get('item');
-        // debugger
-        //       this.afdb.list("pedidos/"+ this.userModel).snapshotChanges().subscribe(data=>{
-        //         data.map(data=>{
-        //           let info = data.payload.val();
-        //           this.presentModal(info);
-        //         });
-        //       });
-    }
-    // presentModal(data) {
-    //   const modal = this.modalCtrl.create(ModalPedidoPage,{
-    //     data: data
-    //   },
-    //   {
-    //     cssClass: 'loading',
-    //     showBackdrop: true
-    //     });
-    //   modal.present();
-    // }
-    InicioPage.prototype.ionViewDidLoad = function () { };
-    InicioPage.prototype.ionViewWillEnter = function () {
-        this.fotografia = this._sanitizer.bypassSecurityTrustUrl("" + this.userModel.fotografia);
-    };
-    InicioPage.prototype.ionViewWillLeave = function () { };
-    InicioPage.prototype.ionViewWillUnload = function () { };
-    InicioPage.prototype.verPerfil = function ($event) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__perfil_perfil__["a" /* PerfilPage */], { item: this.userModel });
-    };
-    InicioPage.prototype.verPedidos = function ($event) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__pedido_pedidos_pedidos__["a" /* PedidosPage */], { item: this.userModel });
-    };
-    InicioPage.prototype.verNegocios = function ($event) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__negocio_negocio_detalle_negocio_detalle__["a" /* NegocioDetallePage */], { item: this.userModel });
-    };
-    InicioPage.prototype.cerrarSesion = function ($event) {
-        this.remove('usuario');
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__home_home__["a" /* HomePage */]);
-    };
-    InicioPage.prototype.remove = function (settingName) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.remove("setting:" + settingName)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    var _a, _b, _c, _d, _e, _f;
-    InicioPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["n" /* Component */])({
-            selector: 'page-inicio',template:/*ion-inline-start:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/inicio/inicio.html"*/'\n<ion-header>\n    <ion-title style="text-align: center">\n      Bienvenido  a tu perfil {{userModel.nombreUsuario}}\n    </ion-title>\n</ion-header>\n\n<ion-content padding>\n    <div class="user">\n        <img class="imgUser" [src]="fotografia" onError="this.src=\'/assets/imgs/user.png\'">\n        <h2 class="nomCliente">{{userModel.apellidoPaterno}} {{userModel.apellidoMaterno}} {{userModel.nombre}}</h2>\n      </div>\n<h2>Opciones del Menú</h2>\n  <ion-list>\n      <ion-item class="opcion" (click)="verPerfil($event)">\n          <ion-thumbnail item-start>\n            <img  class="imgUser" [src]="fotografia" onError="this.src=\'/assets/imgs/user.png\'">\n          </ion-thumbnail>\n          <h2>Mi Perfil</h2>\n        </ion-item>\n        <ion-item class="opcion" (click)="verPedidos($event)">\n            <ion-thumbnail item-start>\n              <img  class="imgUser" src="/assets/imgs/tienda-online-icono-png.png">\n            </ion-thumbnail>\n            <h2>Mis Pedidos</h2>\n          </ion-item>\n          <ion-item class="opcion" (click)="verNegocios($event)" >\n              <ion-thumbnail item-start>\n                <img  class="imgUser" src="/assets/imgs/iconos-formas-de-envio-2.png" >\n              </ion-thumbnail>\n              <h2>Mi Negocio</h2>\n            </ion-item> \n            <ion-item class="opcion">\n              <button ion-button full color="danger" (click)="cerrarSesion()" >\n                  Cerrar sesion\n                </button>\n            </ion-item> \n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/miguelvazquez/Documents/ELESTOR/el.estor.mobile-app/src/pages/inicio/inicio.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["h" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["i" /* NavParams */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["c" /* DomSanitizer */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__angular_fire_database__["a" /* AngularFireDatabase */]) === "function" ? _d : Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["g" /* ModalController */]) === "function" ? _e : Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]) === "function" ? _f : Object])
-    ], InicioPage);
-    return InicioPage;
-}());
-
-//# sourceMappingURL=inicio.js.map
-
-/***/ }),
-
 /***/ 653:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NegociosPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_model__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nuevonegocio_nuevonegocio__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nuevonegocio_nuevonegocio__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__negocio_detalle_negocio_detalle__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__negocio_detalle_negocio_detalle__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_elstorapi_elstorapi__ = __webpack_require__(29);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3963,7 +4002,7 @@ var ConfirmEqualValidatorDirective = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalPedidoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(58);
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
