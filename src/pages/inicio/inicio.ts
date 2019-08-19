@@ -1,6 +1,6 @@
 import { HomePage } from './../home/home';
 import { User } from '../../models/model';
-import { PedidosPage } from '../pedidos/pedidos';
+import { PedidosPage } from '../pedido/pedidos/pedidos';
 import { PerfilPage } from '../perfil/perfil';
 import { Component } from '@angular/core';
 import {  NavController, NavParams } from 'ionic-angular';
@@ -8,9 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { NegocioDetallePage } from '../negocio-detalle/negocio-detalle';
-import { ModalPedidoPage } from '../modal-pedido/modal-pedido';
-
+import { NegocioDetallePage } from '../negocio/negocio-detalle/negocio-detalle';
 
 declare function escape(s:string): string;
 

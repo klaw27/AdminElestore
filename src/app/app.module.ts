@@ -1,10 +1,10 @@
-import { PedidosNoEntregadosPage } from './../pages/pedidos-no-entregados/pedidos-no-entregados';
-import { NegocioDetalleEditarPage } from './../pages/negocio-detalle-editar/negocio-detalle-editar';
+import { PedidosNoEntregadosPage } from './../pages/pedido/pedidos-no-entregados/pedidos-no-entregados';
+import { NegocioDetalleEditarPage } from './../pages/negocio/negocio-detalle-editar/negocio-detalle-editar';
 import { MapPage } from './../pages/map/map';
-import { NegocioAgregarProductoPage } from './../pages/negocio-agregar-producto/negocio-agregar-producto';
-import { NegocioDetallePage } from './../pages/negocio-detalle/negocio-detalle';
-import { NuevonegocioPage } from './../pages/nuevonegocio/nuevonegocio';
-import { NegociosPage } from '../pages/negocios/negocios';
+import { NegocioAgregarProductoPage } from './../pages/negocio/negocio-agregar-producto/negocio-agregar-producto';
+import { NegocioDetallePage } from './../pages/negocio/negocio-detalle/negocio-detalle';
+import { NuevonegocioPage } from './../pages/negocio/nuevonegocio/nuevonegocio';
+import { NegociosPage } from '../pages/negocio/negocios/negocios';
 import { InicioPage } from './../pages/inicio/inicio';
 import {  HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,12 +23,12 @@ import { RecuperarcuentaPage } from '../pages/recuperarcuenta/recuperarcuenta';
 import { ElstorapiProvider } from '../providers/elstorapi/elstorapi';
 import { ConfirmEqualValidatorDirective } from '../shared/password-validator';
 import { PerfilPage } from '../pages/perfil/perfil';
-import { PedidosPage } from '../pages/pedidos/pedidos';
+import { PedidosPage } from '../pages/pedido/pedidos/pedidos';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { PedidosTodosPage } from '../pages/pedidos-todos/pedidos-todos';
-import { PedidosEntregadosPage } from '../pages/pedidos-entregados/pedidos-entregados';
-import { ModalPedidoPage } from '../pages/modal-pedido/modal-pedido';
+import { PedidosTodosPage } from '../pages/pedido/pedidos-todos/pedidos-todos';
+import { PedidosEntregadosPage } from '../pages/pedido/pedidos-entregados/pedidos-entregados';
+import { ModalPedidoPage } from '../pages/pedido/modal-pedido/modal-pedido';
 
 
 import { AngularFireModule } from '@angular/fire';
@@ -36,9 +36,9 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/da
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { fireBaseConfig } from '../config';
 import { IonicStorageModule } from '@ionic/storage';
-import { NegocioEditarProductoPage } from '../pages/negocio-editar-producto/negocio-editar-producto';
+import { NegocioEditarProductoPage } from '../pages/negocio/negocio-editar-producto/negocio-editar-producto';
 import { CurrencyPipe } from '@angular/common';
-import { DetallePedidoPage } from '../pages/detalle-pedido/detalle-pedido';
+import { DetallePedidoPage } from '../pages/pedido/detalle-pedido/detalle-pedido';
 
 
 @NgModule({

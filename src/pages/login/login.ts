@@ -5,7 +5,6 @@ import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/form
 import { InicioPage } from '../inicio/inicio';
 import { User } from '../../models/model';
 import { ElstorapiProvider } from '../../providers/elstorapi/elstorapi';
-import { timeInterval } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 
 // @IonicPage()
