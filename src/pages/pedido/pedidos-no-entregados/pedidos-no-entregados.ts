@@ -43,14 +43,14 @@ export class PedidosNoEntregadosPage {
       this.pedidos =value;
       this.afdb.list("pedidos/" + `${this.pedidos.negocio[0].id_negocio}`).snapshotChanges().subscribe((data) =>
       {
-        // loader.present().then(() =>
-        // {
+        loader.present().then(() =>
+        {
           data.map((data) =>
           {
             let info = data.payload.val();
             this.objPedidosNoEntregados.push(info);
-          // });
-          // loader.dismiss();
+          });
+          loader.dismiss();
         });
       });
     });;
