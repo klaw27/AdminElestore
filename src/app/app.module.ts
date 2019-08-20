@@ -105,7 +105,8 @@ import { DetallePedidoPage } from '../pages/pedido/detalle-pedido/detalle-pedido
     Geolocation,
     Camera,
     AngularFireDatabase,
-    CurrencyPipe
+    CurrencyPipe,
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

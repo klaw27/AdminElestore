@@ -30,25 +30,7 @@ export class InicioPage {
     public storage: Storage)
   {
       this.userModel = navParams.get('item');
-// debugger
-//       this.afdb.list("pedidos/"+ this.userModel).snapshotChanges().subscribe(data=>{
-//         data.map(data=>{
-//           let info = data.payload.val();
-//           this.presentModal(info);
-//         });
-//       });
   }
-
-  // presentModal(data) {
-  //   const modal = this.modalCtrl.create(ModalPedidoPage,{
-  //     data: data
-  //   },
-  //   {
-  //     cssClass: 'loading',
-  //     showBackdrop: true
-  //     });
-  //   modal.present();
-  // }
 
 
   ionViewDidLoad() {}
@@ -80,5 +62,9 @@ export class InicioPage {
 
   public async remove(settingName){
     return await this.storage.remove(`setting:${ settingName }`);
+  }
+
+  solicarRepartidor(){
+    
   }
 }
