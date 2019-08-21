@@ -16,6 +16,7 @@ import {AgmCoreModule} from '@agm/core';
 import { Navbar } from 'ionic-angular';
 
 import { MyApp } from './app.component';
+import { RepartoPage } from '../pages/reparto/reparto';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
@@ -63,7 +64,8 @@ import { DetallePedidoPage } from '../pages/pedido/detalle-pedido/detalle-pedido
     PedidosNoEntregadosPage,
     ModalPedidoPage,
     NegocioEditarProductoPage,
-    DetallePedidoPage
+    DetallePedidoPage,
+    RepartoPage
   ],
   imports: [
     BrowserModule,
@@ -95,7 +97,8 @@ import { DetallePedidoPage } from '../pages/pedido/detalle-pedido/detalle-pedido
     PedidosNoEntregadosPage,
     ModalPedidoPage,
     NegocioEditarProductoPage,
-    DetallePedidoPage
+    DetallePedidoPage,
+    RepartoPage
   ],
   providers: [
     StatusBar,

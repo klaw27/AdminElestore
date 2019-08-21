@@ -1,0 +1,122 @@
+  <ion-header>
+      <ion-title style="text-align: center">
+        Solicita a tu Repartidor
+      </ion-title>
+  </ion-header>
+
+  <ion-content padding>
+  
+      <div class="data principal">
+           
+           <div id="mapa3"></div>
+
+           <ion-card class="pedido">
+              <ion-card-header> 
+                  <div class="ubicacion">
+                      <div class="dirOpcion">
+                          <ion-label class="calle" >
+                              <h6 class="titori">ORIGEN:</h6>
+                             <!-- <ion-input class="titdest" disabled  [(ngModel)]='usuario.nombre + " " + usuario.apellidoPat + " " +  usuario.apellidoMat'></ion-input>  -->
+                             <!-- <ion-input class="titdest" disabled  [(ngModel)]='usuario.telefono'></ion-input>  -->
+                             <h6 class="titCalle"> Miguel Vazquez</h6>
+                             <h6 class="titCalle"> 4775658747</h6>
+                              <h6 class="titCalle">{{calle}}</h6>
+                              <p class="calleSec">{{calleSecundario}}</p>
+                            </ion-label> 
+                            <ion-button fill="clear" (click)="ubicacion()">
+                                <ion-icon slot="start" class="icono" name="pin"></ion-icon>
+                                Cambiar ubicación
+                            </ion-button>  
+                            <ion-button fill="clear" (click)="ubicacionActual()">
+                                <ion-icon slot="start" class="icono" name="navigate"></ion-icon>
+                                Ubicación actual
+                            </ion-button>     
+                      </div>
+                  </div>
+
+                  <div class="ubicacion">
+                        <div class="dirOpcion">
+                          <ion-label class="calle">
+                            <h6 class="titori">DESTINO: </h6>
+                            <ion-item>
+                            <ion-input class="titdest" type="text" placeholder="Nombre destino" [(ngModel)]='dest_nombre'></ion-input> 
+                          </ion-item>
+                            <ion-item>
+                              <ion-input class="titdest" type="number" placeholder="Telefono destino"[(ngModel)]='dest_tel'></ion-input> 
+                            </ion-item>  
+                             <!-- <h6 class="titCalle">{{nomDestino}}</h6>
+                            <h6 class="titCalle">{{telDestino}}</h6>-->
+                            <h6 class="titCalle">{{calleDest}}</h6>
+                            <p class="calleSec">{{calleSecundarioDest}}</p>
+                          </ion-label>
+                          <div class="direccion">
+                            <ion-button fill="clear" (click)="ubicacionDestino()">
+                              <ion-icon slot="start" class="icono" name="pin"></ion-icon>
+                              Indicar ubicación destino
+                            </ion-button>                    
+                          </div>
+                        </div>
+                      </div>
+              </ion-card-header> 
+
+              <ion-card-content>         
+                    <h6 class="titori">Resumen del pedido:</h6>
+                        Instrucciones: 
+                        <ion-item><ion-textarea rows="4" [(ngModel)]='instrucciones' class="input" placeholder="Captura tus indicaciones aqui..." type="text"></ion-textarea>
+                        </ion-item>
+                    <div class="costo">
+                        <div>
+                            <span>Distancia Total (Kilometros)</span>
+                            <span>{{distancia}} km</span>
+                          </div>
+                      <div>
+                        <span>Costo de envio (primeros 3 Kilometros)</span>
+                        <span>${{envio3km.toFixed(2)}}</span>
+                      </div>
+                      <div>
+                          <span>Kilometro adicional: {{Nokmextra}} km</span>
+                          <!--<span>${{subTotal.toFixed(2)}}.00</span>-->
+                          <span>${{kmextra.toFixed(2)}}</span>
+                        </div>
+                      <div class="total">
+                        <span>Total del Envio</span>
+                        <span>${{envioTotal.toFixed(2)}}</span>
+                      </div>
+                    </div>
+      
+                    <ion-item class="metPago">
+                      <ion-label>¿Quien Paga?</ion-label>
+                      <ion-select value="repartidor" [(ngModel)]="quienPaga" (ionChange)="pagoCliente()">
+                        <ion-option selected value="repartidor">Repartidor</ion-option>
+                        <ion-option value="cliente">Cliente</ion-option>           
+                      </ion-select>
+                    </ion-item>
+      
+                    <div class="cards" *ngIf="flagMetodos === 1">
+                      <ion-item class="metPago">
+                          <ion-label>Metodo de Pago</ion-label>
+                          <!--<ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="mostrarTarjetas($event)">-->
+                          <ion-select value="efectivo" [(ngModel)]="metPago" (ionChange)="getMetPago()">
+                            <ion-option selected value="efectivo">Efectivo</ion-option>
+                            <ion-option value="tarjeta">Terminal</ion-option>                  
+                            <ion-option value="Pagolinea">Pago en linea</ion-option>
+                          </ion-select>
+                        </ion-item>
+                    </div>
+      
+                        <div class="cards" *ngIf="flagCard === 1">
+                            <ion-item class="metPago"  >
+                                <ion-label>Tarjetas Registradas</ion-label>
+                             <!-- <ion-select value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >-->
+                                  <ion-select  #mySelect value="cardsList" [(ngModel)]="tarjetaSelect" (ionChange)="getCardSelect()" >
+                                <ion-select-option *ngFor="let tarjeta of tarjetas" value="{{tarjeta.id}}">{{tarjeta.card_number}}</ion-select-option>
+                              </ion-select>
+                            </ion-item>
+                         </div>
+                  
+                </ion-card-content>
+           </ion-card>
+        <ion-button expand ="block" (click)="validarDestino()">Solicitar Repartidor</ion-button>
+      </div>
+
+  </ion-content>
