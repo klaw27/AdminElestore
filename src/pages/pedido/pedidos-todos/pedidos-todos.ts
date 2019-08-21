@@ -35,8 +35,6 @@ export class PedidosTodosPage {
 
   public async get(settingName)
   {
-    
-    
     let message:string = "Obteniendo pedidos...";
     let loader = this.loadingCtrl.create({
       content: message
