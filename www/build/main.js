@@ -1129,7 +1129,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// const url = 'http://ec2-52-53-191-68.us-west-1.compute.amazonaws.com:5000';
+// const url = 'http://ec2-52-53-127-58.us-west-1.compute.amazonaws.com:5000';
 var url = 'https://localhost:5001';
 // const url = 'http://192.168.0.15:5000';
 // const url = 'http://192.168.100.46:5000'
